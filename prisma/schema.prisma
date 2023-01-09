@@ -28,8 +28,8 @@ model Listing {
   name      String
   address   String
   available Boolean @default(false)
-  agent     User   @relation(fields: [agentId], references: [id])
-  agentId   String @map(name: "agent_id")
+  agent     User?   @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  agentId   String? @map(name: "agent_id")
 
   @@map(name: "listings")
 }
