@@ -1,12 +1,10 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { NextApiRequest, NextApiResponse } from "next";
-import { invalidEmailResponse, invalidRequestMethod, isEmailValid, knownPrismaError, getUser } from "../../../lib";
+import {  isEmailValid, knownPrismaError, getUser } from "lib";
 import { use } from "next-api-route-middleware";
-import { allowMethods } from "../../../middleware/allowedMethods";
+import { allowMethods } from "middleware/allowedMethods";
 
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
-	invalidRequestMethod(req, res, "GET");
-
 	try {
 		const query = req.query;
 		let user = Array.isArray(query.user) ? query.user[0] : query.user
