@@ -1,4 +1,4 @@
-import { string, ValidationError } from "joi";
+import { ValidationError } from "joi";
 
 export function mapError(data: ValidationError) {
 	return data.details.map(({ message, context }) => {
