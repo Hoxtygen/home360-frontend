@@ -22,3 +22,17 @@ export async function getUser(email: string | undefined) {
 	})
 	return result;
 }
+
+
+export async function deleteUser(email: string | undefined) {
+	const result = await prisma.user.delete({
+		where: {
+			email: email
+		},
+		select: {
+			email: true,
+			name: true
+		}
+	})
+	return result
+}
