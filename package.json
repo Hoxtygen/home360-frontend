@@ -71,6 +71,18 @@
             {
               "type": "fix",
               "section": "Bug Fixes"
+            },
+            {
+              "type": "refactor",
+              "section": "Refactor"
+            },
+            {
+              "type": "test",
+              "section": "Test"
+            },
+            {
+              "type": "chore",
+              "section": "Chore"
             }
           ]
         }
