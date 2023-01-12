@@ -14,3 +14,11 @@ export async function getListing(id: string | undefined): Promise<IListings> {
   });
   return result;
 }
+
+export async function deleteListing(id: string | undefined) {
+  const result = await prisma.listing.delete({
+    where: {
+      id: id,
+    },
+  });
+}
