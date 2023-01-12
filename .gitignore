@@ -37,7 +37,3 @@ yarn-error.log*
 next-env.d.ts
 
 TODO
-/pages/api/listing
-/typedef
- pages/index.tsx
- pages/api/user/[email]/listings.ts
