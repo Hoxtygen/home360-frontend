@@ -1,3 +1,16 @@
+## [1.2.0](https://github.com/Hoxtygen/next-fullstack/compare/1.1.0...1.2.0) (2023-01-12)
+
+### Features
+
+- add endpoint to delete a listing by id ([ba0ec24](https://github.com/Hoxtygen/next-fullstack/commit/ba0ec24605879fce8770d43191bdb6dd800f2d7b))
+- add endpoint to get all listings ([f0f9dfb](https://github.com/Hoxtygen/next-fullstack/commit/f0f9dfb5a28211690b48658ef02b265a08726cf2))
+- add endpoint to get listing by id ([bbee5d7](https://github.com/Hoxtygen/next-fullstack/commit/bbee5d734354537d1d53c0f5a47e8ee701469f1f))
+
+### Chore
+
+- update gitignore file ([7e1f55a](https://github.com/Hoxtygen/next-fullstack/commit/7e1f55a3930ddc031134849a6aac64a135a84a51))
+- update package json with commit type ([1c12fbb](https://github.com/Hoxtygen/next-fullstack/commit/1c12fbb9a6f334b582025ff83b324064309d5e91))
+
 ## 1.1.0 (2023-01-12)
 
 ### Features
