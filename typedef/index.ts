@@ -14,3 +14,15 @@ export type UserWithListings = Omit<
   Prisma.UserGetPayload<typeof userWithListings>,
   "password" | "createdAt" | "updatedAt"
 >;
+export interface AuthPayload {
+  status: number;
+  message: string;
+  token: string;
+  name: string;
+  email: string;
+}
+
+export interface ILogin {
+  email: string;
+  password: string;
+}

@@ -1,34 +1,45 @@
 import Joi from "joi";
-import { NewUser } from "typedef";
+import { ILogin, NewUser } from "typedef";
 
 export const validateUserObject = (data: NewUser) => {
-	const schema = Joi.object({
-		name: Joi.string()
-			.min(3)
-			.max(30)
-			.message("Name is required")
-			.trim()
-			.required(),
-		email: Joi.string()
-			.email({ minDomainSegments: 2 })
-			.message("Must be a valid email")
-			.trim()
-			.required(),
+  const schema = Joi.object({
+    name: Joi.string()
+      .min(3)
+      .max(30)
+      .message("Name is required")
+      .trim()
+      .required(),
+    email: Joi.string()
+      .email({ minDomainSegments: 2 })
+      .message("Must be a valid email")
+      .trim()
+      .required(),
+    address: Joi.string().min(3).required().trim(),
+    phoneNumber: Joi.string()
+      .length(11)
+      .regex(/^\d+$/)
+      .message("Phone number must be 11 character long digits")
+      .required()
+      .trim(),
+    password: Joi.string()
+      .min(8)
+      .message("Password should be 8 or more characters long")
+      .required(),
+  }).options({ abortEarly: false });
+  return schema.validate(data);
+};
 
-		address: Joi.string()
-			.min(3)
-			.required()
-			.trim(),
-
-		phoneNumber: Joi.string()
-			.length(11)
-			.regex(/^\d+$/)
-			.message("Phone number must be 11 character long digits")
-			.required()
-			.trim(),
-
-	}).options({ abortEarly: false })
-	return schema.validate(data)
-}
-
-
+export const validateLoginData = (data: ILogin) => {
+  const schema = Joi.object({
+    email: Joi.string()
+      .email({ minDomainSegments: 2 })
+      .message("Must be a valid email")
+      .trim()
+      .required(),
+    password: Joi.string()
+      .min(8)
+      .message("Password should be 8 or more characters long")
+      .required(),
+  }).options({ abortEarly: false });
+  return schema.validate(data);
+};
