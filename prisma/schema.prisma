@@ -11,26 +11,29 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  name      String
-  email     String    @unique
-  password String
-  address String
-  createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  phoneNumber String @map(name:"phone_number")
-  listings  Listing[]
+  id          String    @id @default(cuid())
+  firstName   String    @map("first_name")
+  lastName    String    @map("last_name")
+  email       String    @unique
+  password    String
+  address     String
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  phoneNumber String    @map(name: "phone_number")
+  listings    Listing[]
 
   @@map(name: "users")
 }
 
 model Listing {
-  id        String  @id @default(cuid())
-  name      String
-  address   String
-  available Boolean @default(false)
-  agent     User?   @relation(fields: [agentId], references: [id], onDelete: Cascade)
-  agentId   String? @map(name: "agent_id")
+  address     String
+  agent       User?   @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  agentId     String? @map(name: "agent_id")
+  available   Boolean @default(false)
+  description String
+  id          String  @id @default(cuid())
+  name        String
+  state       String
 
   @@map(name: "listings")
 }
