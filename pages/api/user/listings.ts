@@ -4,7 +4,7 @@ import { use } from "next-api-route-middleware";
 import { allowMethods } from "middleware/allowedMethods";
 
 import { knownPrismaError, getUserListings } from "lib";
-import { verifyToken } from "lib/utils/auth";
+import { verifyAuth } from "lib/utils/auth";
 
 export async function fetchUserListings(
   req: NextApiRequest,
@@ -13,28 +13,13 @@ export async function fetchUserListings(
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
-    if (!token) {
-      return res.status(403).json({
-        status: 403,
-        message: "You must be logged in.",
-      });
-    }
-    const decodedToken = verifyToken(token);
-    if (decodedToken.exp < Date.now() / 1000) {
-      return res.status(403).json({
-        status: 403,
-        message: "Expired token. Please login again.",
-      });
-    }
-    if (!("id" in decodedToken)) {
-      return res.status(403).json({
-        status: 403,
-        message: "Malformed token. Login again to get a new token.",
-      });
-    }
+
+    const decodedToken = await verifyAuth(token!);
 
     const userListings = await getUserListings(decodedToken.id);
+
     return res.status(200).json({
+      status: 200,
       message: "User listings retrieved successfully",
       data: userListings,
     });
