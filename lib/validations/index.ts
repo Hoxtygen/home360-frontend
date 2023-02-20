@@ -49,3 +49,18 @@ export const validateLoginData = (data: ILogin) => {
   }).options({ abortEarly: false });
   return schema.validate(data);
 };
+
+export const validateNewListingObject = (data: INewListing) => {
+  const schema = Joi.object({
+    name: Joi.string()
+      // .message("Name is required")
+      .min(10)
+      .trim()
+      .required(),
+    address: Joi.string().min(10).required().trim(),
+    available: Joi.boolean().default(false),
+    state: Joi.string().required(),
+    description: Joi.string().required(),
+  }).options({ abortEarly: false });
+  return schema.validate(data);
+};

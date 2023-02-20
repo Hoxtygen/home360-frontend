@@ -4,7 +4,7 @@ export type NewUser = Omit<User, "createdAt" | "updatedAt" | "id">;
 
 export type IUser = Omit<User, "password">;
 
-export type IListings = Listing;
+export type IListing = Listing;
 
 const userWithListings = Prisma.validator<Prisma.UserArgs>()({
   include: { listings: true },
@@ -26,3 +26,5 @@ export interface ILogin {
   email: string;
   password: string;
 }
+
+export type INewListing = Omit<Listing, "id">;
