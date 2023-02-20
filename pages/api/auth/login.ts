@@ -2,15 +2,11 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { NextApiRequest, NextApiResponse } from "next";
 import { use } from "next-api-route-middleware";
 import { allowMethods } from "middleware/allowedMethods";
-import {
-  knownPrismaError,
-  mapError,
-  generateToken,
-  decryptPassword,
-} from "lib";
+import { knownPrismaError, mapError, decryptPassword } from "lib";
 import { findUser } from "lib/db/user";
-import { AuthPayload, ILogin } from "typedef";
+import { ILogin } from "typedef";
 import { validateLoginData } from "lib/validations";
+import { generateToken } from "lib/utils/auth";
 
 async function login(req: NextApiRequest, res: NextApiResponse) {
   let { email, password }: ILogin = req.body;
@@ -22,22 +18,28 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     });
   }
   email = email.toLowerCase();
+
   try {
     const user = await findUser(email);
-    if (user && !decryptPassword(password, user.password)) {
+    if (!user || !decryptPassword(password, user.password)) {
       return res.status(401).json({
         status: 401,
         message: "Incorrect email/password",
       });
     }
-    const token = generateToken(user.id, email);
+
+    const token = await generateToken({ id: user.id, email: user.email });
     return res.status(200).json({
       status: 200,
       message: "Logged in successfully",
-      token,
-      id: user.id,
-      email: user.email,
-      name: user.name,
+      data: {
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: `${user.firstName} ${user.lastName}`,
+        },
+      },
     });
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
@@ -45,7 +47,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     }
     return res
       .status(res.statusCode)
-      .json({ message: "Failed to create user", error });
+      .json({ message: "Failed to login user", error });
   }
 }
 

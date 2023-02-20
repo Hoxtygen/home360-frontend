@@ -9,11 +9,12 @@ import {
   encryptPassword,
   generateToken,
 } from "lib";
-import { createUser } from "lib/db/user";
-import { AuthPayload, NewUser } from "typedef";
+import { createUser, findUser } from "lib/db/user";
+import { NewUser } from "typedef";
 
 async function signup(req: NextApiRequest, res: NextApiResponse) {
-  let { name, email, address, phoneNumber, password }: NewUser = req.body;
+  let { firstName, lastName, email, address, phoneNumber, password }: NewUser =
+    req.body;
 
   const validation = validateUserObject(req.body);
   if (validation.error) {
@@ -23,21 +24,29 @@ async function signup(req: NextApiRequest, res: NextApiResponse) {
     });
   }
   email = email.toLowerCase();
+
   try {
     const result = await createUser({
       email,
-      name,
+      firstName,
+      lastName,
       address,
       phoneNumber,
       password: encryptPassword(password),
     });
-    const token = generateToken(result.id, email);
+
+    const token = await generateToken({ id: result.id, email: email });
+
     return res.status(201).json({
       status: 201,
       message: "User created successfully",
-      token,
-      email: result.email,
-      name: result.name,
+      data: {
+        token,
+        user: {
+          email: result.email,
+          name: `${result.firstName}  ${result.lastName}`,
+        },
+      },
     });
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {

@@ -1,12 +1,13 @@
 import { default as bcrypt } from "bcryptjs";
-import { default as jwt } from "jsonwebtoken";
+import { SignJWT, jwtVerify } from "jose";
 
-interface IToken {
+export interface IToken {
   id: string;
   email: string;
   iat: number;
   exp: number;
 }
+type Payload = { email: string; id: string };
 
 export function encryptPassword(password: string) {
   const saltRounds = bcrypt.genSaltSync(10);
@@ -17,24 +18,29 @@ export function decryptPassword(inputPassword: string, userPassword: string) {
   return bcrypt.compareSync(inputPassword, userPassword);
 }
 
-export function generateToken(id: string, email: string) {
-  const token = jwt.sign({ id, email }, process.env.SECRET as string, {
-    expiresIn: "3d",
-  });
-  return token;
+export class AuthError extends Error {}
+
+/**
+ * Verifies the user's JWT token and returns its payload if it's valid.
+ */
+export async function verifyAuth(token: string) {
+  try {
+    const verified = await jwtVerify(
+      token,
+      new TextEncoder().encode(process.env.SECRET)
+    );
+    return verified.payload as unknown as IToken;
+  } catch (err) {
+    throw new AuthError("Your token has expired.");
+  }
 }
 
-function verifyDecodedToken(data: unknown): asserts data is IToken {
-  if (!(data instanceof Object))
-    throw new Error("Decoded token error. Token must be an object");
-  if (!("userId" in data))
-    throw new Error('Decoded token error. Missing required field "userId"');
-}
-
-export function verifyToken(token: string) {
-  const decodedToken = jwt.verify(
-    token,
-    process.env.SECRET as string
-  ) as IToken;
-  return decodedToken;
+export async function generateToken(payload: Payload): Promise<string> {
+  const iat = Math.floor(Date.now() / 1000);
+  return new SignJWT({ ...payload })
+    .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+    .setExpirationTime("1d")
+    .setIssuedAt(iat)
+    .setNotBefore(iat)
+    .sign(new TextEncoder().encode(process.env.SECRET));
 }
