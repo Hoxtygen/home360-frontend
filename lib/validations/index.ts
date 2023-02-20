@@ -1,12 +1,18 @@
 import Joi from "joi";
-import { ILogin, NewUser } from "typedef";
+import { ILogin, INewListing, NewUser } from "typedef";
 
 export const validateUserObject = (data: NewUser) => {
   const schema = Joi.object({
-    name: Joi.string()
+    firstName: Joi.string()
       .min(3)
       .max(30)
-      .message("Name is required")
+      .message("First name is required")
+      .trim()
+      .required(),
+    lastName: Joi.string()
+      .min(3)
+      .max(30)
+      .message("Last name is required")
       .trim()
       .required(),
     email: Joi.string()

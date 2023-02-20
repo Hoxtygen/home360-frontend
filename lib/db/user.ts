@@ -5,7 +5,8 @@ export async function getUsers(): Promise<IUser[]> {
   const result: IUser[] = await prisma.user.findMany({
     select: {
       id: true,
-      name: true,
+      firstName: true,
+      lastName: true,
       email: true,
       address: true,
       phoneNumber: true,
@@ -23,7 +24,8 @@ export async function findUser(email: string | undefined) {
     },
     select: {
       id: true,
-      name: true,
+      firstName: true,
+      lastName: true,
       email: true,
       address: true,
       phoneNumber: true,
@@ -42,7 +44,8 @@ export async function getUserListings(
     },
     select: {
       id: true,
-      name: true,
+      firstName: true,
+      lastName: true,
       email: true,
       address: true,
       phoneNumber: true,
@@ -59,7 +62,8 @@ export async function deleteUser(email: string | undefined) {
     },
     select: {
       email: true,
-      name: true,
+      firstName: true,
+      lastName: true,
     },
   });
   return result;
