@@ -1,5 +1,5 @@
 export { deleteListing, getListing, getListings } from "./db/listing";
-export { deleteUser, getUserListings, getUsers } from "./db/user";
+export { deleteUser, getUserListings, getUsers, findUser } from "./db/user";
 export { knownPrismaError } from "./errorResponse/errorResponse";
 export {
   isCuid,

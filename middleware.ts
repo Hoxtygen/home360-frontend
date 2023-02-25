@@ -1,10 +1,11 @@
 import { verifyAuth } from "lib/utils/auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export class AuthError extends Error {}
 export default async function middleware(req: NextRequest, res: NextResponse) {
   const token = req.headers.get("authorization")?.split(" ")[1];
-  if (!token) throw new AuthError("Missing user token");
+  if (!token) {
+    return NextResponse.redirect(new URL("/api/auth/unauthorized", req.url));
+  }
   // validate the user is authenticated
   const verifiedToken = await verifyAuth(token).catch((err) => {
     console.error(err.message);
@@ -21,5 +22,9 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
 }
 
 export const config = {
-  matcher: ["/api/listing/create", "/api/user/listings", "/api/user/users"],
+  matcher: [
+    "/api/listing/create",
+    "/api/listing/delete/(.*)",
+    "/api/user/(.*)",
+  ],
 };
