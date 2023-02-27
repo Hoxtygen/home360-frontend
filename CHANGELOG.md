@@ -1,3 +1,30 @@
+## [1.3.0](https://github.com/Hoxtygen/next-fullstack/compare/1.2.0...1.3.0) (2023-02-27)
+
+### Features
+
+- add user authentication ([a96b22e](https://github.com/Hoxtygen/next-fullstack/commit/a96b22e3c9d5b1323697586ff2b846dd4214df9e))
+- create listing ([5f69c58](https://github.com/Hoxtygen/next-fullstack/commit/5f69c586d7566c93a8d9b27778a048dce89af026))
+- get user listings ([84f8343](https://github.com/Hoxtygen/next-fullstack/commit/84f8343d211e7ab5b4ffc9d7307a86283ee60719))
+- refactor listing delete api route ([9494050](https://github.com/Hoxtygen/next-fullstack/commit/9494050d9b4f6c5463d94b7dd5389bd99b12e15e))
+
+### Bug Fixes
+
+- add images column to listing table ([e597fc7](https://github.com/Hoxtygen/next-fullstack/commit/e597fc7ab57d66cc1953118340fdc40220a58ca2))
+- await next action ([d1aea48](https://github.com/Hoxtygen/next-fullstack/commit/d1aea48be5a204a7da6637e803063c8b7ecc1753))
+- fix seed compilation error ([c9e4f55](https://github.com/Hoxtygen/next-fullstack/commit/c9e4f554f477ac03c804b646057d47e66e0308d9))
+- update import ([2cd4b7c](https://github.com/Hoxtygen/next-fullstack/commit/2cd4b7c0559c2218fc9d93557a2d45b7c62540c3))
+
+### Chore
+
+- modify schema ([1b1da14](https://github.com/Hoxtygen/next-fullstack/commit/1b1da14bafe3d175c75b4bf91ba097a2194a7fcf))
+
+### Refactor
+
+- modify a given user listing ([508bc54](https://github.com/Hoxtygen/next-fullstack/commit/508bc548212e5b8aa3b3bc3094f31c949f40649d))
+- modify middleware ([3c9eb7d](https://github.com/Hoxtygen/next-fullstack/commit/3c9eb7d73a8511d1680df650788e9fea8ea54b5c))
+- refactor authentication ([4c3421c](https://github.com/Hoxtygen/next-fullstack/commit/4c3421c3246e75cca6351251a9f7f33424f21782))
+- refactor user and listings ([de41b9d](https://github.com/Hoxtygen/next-fullstack/commit/de41b9dd85a4c0904354ab1337c1a3cd78efcfd5))
+
 ## [1.2.0](https://github.com/Hoxtygen/next-fullstack/compare/1.1.0...1.2.0) (2023-01-12)
 
 ### Features
