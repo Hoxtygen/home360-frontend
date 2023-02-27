@@ -20,6 +20,8 @@ async function main() {
             available: true,
             state: "Kwara",
             description: "Lorem ipsum dolor sit amet consectettur adipscing",
+            images:
+              "https://res.cloudinary.com/dh3jxarvg/image/upload/v1551326198/Bill_Shankly_fm5qkx.jpg, https://res.cloudinary.com/dh3jxarvg/image/upload/v1550962500/sample.jpg",
           },
           {
             name: "ShopMore Shopping Complex",
@@ -27,6 +29,8 @@ async function main() {
             available: true,
             state: "Kwara",
             description: "Lorem ipsum dolor sit amet consectettur adipscing",
+            images:
+              "https://res.cloudinary.com/dh3jxarvg/image/upload/v1551326978/vlcsnap-2013-04-25-21h12m16s151_dhzhbf.png, https://res.cloudinary.com/dh3jxarvg/image/upload/v1551434174/scrn.png",
           },
           {
             name: "ShopRite Consumers Office",
@@ -34,6 +38,8 @@ async function main() {
             available: true,
             state: "Kwara",
             description: "Lorem ipsum dolor sit amet consectettur adipscing",
+            images:
+              "https://res.cloudinary.com/dh3jxarvg/image/upload/v1551434174/scrn.png, https://res.cloudinary.com/dh3jxarvg/image/upload/v1614037301/befit.png",
           },
         ],
       },
@@ -57,6 +63,8 @@ async function main() {
             available: true,
             state: "Kwara",
             description: "Lorem ipsum dolor sit amet consectettur adipscing",
+            images:
+              "https://res.cloudinary.com/dh3jxarvg/image/upload/v1551434174/scrn.png, https://res.cloudinary.com/dh3jxarvg/image/upload/v1614037301/befit.png",
           },
           {
             name: "HoneyWell hostel",
@@ -64,6 +72,8 @@ async function main() {
             available: true,
             description: "Lorem ipsum dolor sit amet consectettur adipscing",
             state: "Kwara",
+            images:
+              "https://res.cloudinary.com/dh3jxarvg/image/upload/v1551326198/Bill_Shankly_fm5qkx.jpg, https://res.cloudinary.com/dh3jxarvg/image/upload/v1550962500/sample.jpg",
           },
           {
             name: "Magaji Estate",
@@ -71,6 +81,8 @@ async function main() {
             available: true,
             description: "Lorem ipsum dolor sit amet consectettur adipscing",
             state: "Kwara",
+            images:
+              "https://res.cloudinary.com/dh3jxarvg/image/upload/v1551326978/vlcsnap-2013-04-25-21h12m16s151_dhzhbf.png, https://res.cloudinary.com/dh3jxarvg/image/upload/v1551434174/scrn.png",
           },
         ],
       },
