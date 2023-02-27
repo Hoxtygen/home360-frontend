@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/Hoxtygen/next-fullstack/compare/1.3.0...1.3.1) (2023-02-27)
+
+### Bug Fixes
+
+- add images field to the api ([1daaa10](https://github.com/Hoxtygen/next-fullstack/commit/1daaa10b11b4d0f15d3dc12ae6a05dfbdd1d21b1))
+
 ## [1.3.0](https://github.com/Hoxtygen/next-fullstack/compare/1.2.0...1.3.0) (2023-02-27)
 
 ### Features
