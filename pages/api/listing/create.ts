@@ -9,7 +9,8 @@ import { verifyAuth } from "lib/utils/auth";
 import { validateNewListingObject } from "lib/validations";
 
 async function createListing(req: NextApiRequest, res: NextApiResponse) {
-  let { name, address, available, description, state }: INewListing = req.body;
+  let { name, address, available, description, state, images }: INewListing =
+    req.body;
   const validation = validateNewListingObject(req.body);
 
   if (validation.error) {
@@ -33,6 +34,7 @@ async function createListing(req: NextApiRequest, res: NextApiResponse) {
       agentId,
       state,
       description,
+      images,
     });
     return res.status(201).json({
       status: 201,
