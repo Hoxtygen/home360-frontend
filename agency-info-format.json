@@ -1,0 +1,85 @@
+{
+  "statusCode": "REALTOR_FOUND",
+  "payload": {
+    "basicInfo": {
+      "encryptedRealtorId": "a2a27a52833791d9e",
+      "companyWideId": "001.35915",
+      "companyName": "Treubau Verwaltung GmbH",
+      "seoCompanyName": "treubau-verwaltung-gmbh",
+      "focusType": "VERWALTUNG",
+      "primaryMarketingType": "LIVING_RENT",
+      "logoUrl": "https://pictures.immobilienscout24.de/usercontent/51b9ae8b-9787-49b2-b286-3ef25074b4d8.PNG",
+      "backgroundImageUrl": "https://pictures.immobilienscout24.de/usercontent/305c2746-206d-440d-b41a-8db2b96ff396.JPG",
+      "detailsPageUrl": "/anbieter/treubau-verwaltung-gmbh/a2a27a52833791d9e",
+      "profilePageUrl": "https://www.immobilienscout24.de/anbieter/treubau-verwaltung-gmbh/a2a27a52833791d9e",
+      "profilePageContactUsSection": "",
+      "dedicatedContactFormPageUrl": "/anbieter/contact/treubau-verwaltung-gmbh/a2a27a52833791d9e",
+      "alliance": ""
+    },
+    "branchenbuchContactDetails": {
+      "phoneNumber": "+49 621 30981222",
+      "virtualPhoneNumber": null,
+      "mobilePhoneNumber": null,
+      "faxNumber": "+49 621 3005155",
+      "city": "Mannheim",
+      "hasEmail": true,
+      "postalCode": "68167",
+      "street": "Am Exerzierplatz",
+      "houseNumber": "6",
+      "firstName": "Marco",
+      "lastName": "Schöner",
+      "portraitUrl": null,
+      "salutation": "Herr",
+      "title": null
+    },
+    "evaluations": {
+      "evaluationsSwitchEnabled": true,
+      "overallAverageEvaluation": 3.6,
+      "overallNumberOfEvaluations": 351,
+      "ownerOverallNumberOfEvaluations": 0,
+      "seekerOverallNumberOfEvaluations": 351,
+      "rankValue": 2.6
+    },
+    "products": [
+      "REALTOR_PROFILE_PAGE",
+      "RESULT_LIST",
+      "CAMPUS_MY2",
+      "HIGHLIGHTING"
+    ],
+    "badges": [
+      {
+        "url": "https://pro-badge-images-bucket.s3.amazonaws.com/standard/PP2020.png",
+        "secureUrl": "https://pro-badge-images-bucket.s3.amazonaws.com/standard/PP2020.png",
+        "active": false,
+        "type": "PP2020",
+        "premiumPartnerDescriptionUrl": "/anbieten/gewerbliche-anbieter/lp/profis-leicht-erkennen.html"
+      },
+      {
+        "url": "https://pro-badge-images-bucket.s3.amazonaws.com/standard/PP2021.png",
+        "secureUrl": "https://pro-badge-images-bucket.s3.amazonaws.com/standard/PP2021.png",
+        "active": false,
+        "type": "PP2021",
+        "premiumPartnerDescriptionUrl": "/anbieten/gewerbliche-anbieter/lp/profis-leicht-erkennen.html"
+      }
+    ],
+    "virtualBadges": [
+      {
+        "secureUrl": "https://pro-badge-images-bucket.s3.amazonaws.com/range/PP2020-2021.svg",
+        "active": false,
+        "type": "RANGE_2020-2021",
+        "premiumPartnerDescriptionUrl": "/anbieten/gewerbliche-anbieter/lp/profis-leicht-erkennen.html"
+      },
+      {
+        "secureUrl": "https://pro-badge-images-bucket.s3.eu-west-1.amazonaws.com/standard/immoexpert_2002.svg",
+        "active": true,
+        "type": "ImmoExpert",
+        "premiumPartnerDescriptionUrl": "/anbieten/gewerbliche-anbieter/lp/profis-leicht-erkennen.html"
+      }
+    ],
+    "realtorSettings": {
+      "realtorId": 35915,
+      "branchenbuchSwitchValue": true,
+      "showSwitchInScoutManager": true
+    }
+  }
+}

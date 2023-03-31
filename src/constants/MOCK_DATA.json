@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "city": "Syracuse",
+    "state": "New York",
+    "price": "$1759.31",
+    "availableRooms": 9,
+    "name": "Kunze Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 2,
+    "city": "Pittsburgh",
+    "state": "Pennsylvania",
+    "price": "$1446.24",
+    "availableRooms": 2,
+    "name": "Murphy-Ernser",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 3,
+    "city": "Kansas City",
+    "state": "Missouri",
+    "price": "$875.03",
+    "availableRooms": 2,
+    "name": "Grady, Larkin and Volkman",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 4,
+    "city": "Raleigh",
+    "state": "North Carolina",
+    "price": "$1338.02",
+    "availableRooms": 16,
+    "name": "Dach, Jacobi and Muller",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 5,
+    "city": "Honolulu",
+    "state": "Hawaii",
+    "price": "$517.41",
+    "availableRooms": 12,
+    "name": "Rogahn-Christiansen",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 6,
+    "city": "Colorado Springs",
+    "state": "Colorado",
+    "price": "$1334.30",
+    "availableRooms": 3,
+    "name": "Durgan, Klocko and Hills",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 7,
+    "city": "Denver",
+    "state": "Colorado",
+    "price": "$512.88",
+    "availableRooms": 11,
+    "name": "Botsford, Gulgowski and Batz",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 8,
+    "city": "Boulder",
+    "state": "Colorado",
+    "price": "$1347.01",
+    "availableRooms": 9,
+    "name": "Krajcik, Bailey and O'Kon",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 9,
+    "city": "Charlotte",
+    "state": "North Carolina",
+    "price": "$980.75",
+    "availableRooms": 14,
+    "name": "Rodriguez, Robel and Harber",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 10,
+    "city": "Scottsdale",
+    "state": "Arizona",
+    "price": "$1982.31",
+    "availableRooms": 11,
+    "name": "Leannon LLC",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 11,
+    "city": "El Paso",
+    "state": "Texas",
+    "price": "$1123.83",
+    "availableRooms": 8,
+    "name": "Bode Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 12,
+    "city": "Vancouver",
+    "state": "Washington",
+    "price": "$1287.74",
+    "availableRooms": 13,
+    "name": "O'Connell-Raynor",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 13,
+    "city": "El Paso",
+    "state": "Texas",
+    "price": "$1762.63",
+    "availableRooms": 4,
+    "name": "Mertz, Cronin and Ratke",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 14,
+    "city": "Houston",
+    "state": "Texas",
+    "price": "$987.42",
+    "availableRooms": 20,
+    "name": "Stiedemann-Nienow",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 15,
+    "city": "Newton",
+    "state": "Massachusetts",
+    "price": "$1410.53",
+    "availableRooms": 2,
+    "name": "Kemmer Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 16,
+    "city": "Pasadena",
+    "state": "California",
+    "price": "$1297.43",
+    "availableRooms": 14,
+    "name": "Schroeder Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 17,
+    "city": "Clearwater",
+    "state": "Florida",
+    "price": "$692.36",
+    "availableRooms": 14,
+    "name": "Tremblay-Luettgen",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 18,
+    "city": "Miami",
+    "state": "Florida",
+    "price": "$784.86",
+    "availableRooms": 14,
+    "name": "Hettinger, Halvorson and Bergstrom",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 19,
+    "city": "South Bend",
+    "state": "Indiana",
+    "price": "$831.71",
+    "availableRooms": 8,
+    "name": "Purdy, Lowe and Marks",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 20,
+    "city": "Savannah",
+    "state": "Georgia",
+    "price": "$1272.19",
+    "availableRooms": 15,
+    "name": "Keeling-Morar",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 21,
+    "city": "Raleigh",
+    "state": "North Carolina",
+    "price": "$1683.56",
+    "availableRooms": 8,
+    "name": "Dickens-Wisoky",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 22,
+    "city": "Las Cruces",
+    "state": "New Mexico",
+    "price": "$886.13",
+    "availableRooms": 16,
+    "name": "Tillman, Miller and Larson",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 23,
+    "city": "Orange",
+    "state": "California",
+    "price": "$1236.55",
+    "availableRooms": 8,
+    "name": "Wintheiser, Jacobson and Miller",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 24,
+    "city": "Las Vegas",
+    "state": "Nevada",
+    "price": "$1682.88",
+    "availableRooms": 18,
+    "name": "Romaguera Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 25,
+    "city": "Fredericksburg",
+    "state": "Virginia",
+    "price": "$573.19",
+    "availableRooms": 11,
+    "name": "Rath, Kris and Oberbrunner",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 26,
+    "city": "Philadelphia",
+    "state": "Pennsylvania",
+    "price": "$1753.31",
+    "availableRooms": 2,
+    "name": "Douglas-Gutmann",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 27,
+    "city": "Waco",
+    "state": "Texas",
+    "price": "$1548.48",
+    "availableRooms": 12,
+    "name": "Monahan-Emmerich",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 28,
+    "city": "Jacksonville",
+    "state": "Florida",
+    "price": "$1110.78",
+    "availableRooms": 20,
+    "name": "Labadie, Spencer and Smitham",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 29,
+    "city": "Indianapolis",
+    "state": "Indiana",
+    "price": "$864.68",
+    "availableRooms": 3,
+    "name": "Connelly-Anderson",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 30,
+    "city": "Irving",
+    "state": "Texas",
+    "price": "$1465.91",
+    "availableRooms": 9,
+    "name": "Kerluke, Fisher and Beier",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 31,
+    "city": "Shawnee Mission",
+    "state": "Kansas",
+    "price": "$1788.62",
+    "availableRooms": 16,
+    "name": "Grimes, McCullough and Wisozk",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 32,
+    "city": "El Paso",
+    "state": "Texas",
+    "price": "$738.78",
+    "availableRooms": 1,
+    "name": "Reilly, Jacobson and Klocko",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 33,
+    "city": "Schenectady",
+    "state": "New York",
+    "price": "$1537.38",
+    "availableRooms": 3,
+    "name": "Nader, Hintz and Schultz",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 34,
+    "city": "Carol Stream",
+    "state": "Illinois",
+    "price": "$1322.01",
+    "availableRooms": 18,
+    "name": "Moen LLC",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 35,
+    "city": "Portland",
+    "state": "Oregon",
+    "price": "$1273.48",
+    "availableRooms": 8,
+    "name": "Hills, Krajcik and Morar",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 36,
+    "city": "Louisville",
+    "state": "Kentucky",
+    "price": "$1163.94",
+    "availableRooms": 10,
+    "name": "Walter-Johns",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 37,
+    "city": "El Paso",
+    "state": "Texas",
+    "price": "$545.88",
+    "availableRooms": 7,
+    "name": "Fahey, Kilback and Wiegand",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 38,
+    "city": "Albany",
+    "state": "New York",
+    "price": "$814.36",
+    "availableRooms": 9,
+    "name": "Trantow Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 39,
+    "city": "Charleston",
+    "state": "West Virginia",
+    "price": "$1222.54",
+    "availableRooms": 9,
+    "name": "Lebsack, Funk and Konopelski",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 40,
+    "city": "San Francisco",
+    "state": "California",
+    "price": "$1506.77",
+    "availableRooms": 19,
+    "name": "Orn, Halvorson and Graham",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 41,
+    "city": "San Bernardino",
+    "state": "California",
+    "price": "$864.99",
+    "availableRooms": 20,
+    "name": "Rau LLC",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 42,
+    "city": "Young America",
+    "state": "Minnesota",
+    "price": "$1356.70",
+    "availableRooms": 10,
+    "name": "Emard-Boyer",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 43,
+    "city": "Chicago",
+    "state": "Illinois",
+    "price": "$1992.98",
+    "availableRooms": 3,
+    "name": "Reynolds-Olson",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 44,
+    "city": "Waterbury",
+    "state": "Connecticut",
+    "price": "$957.17",
+    "availableRooms": 9,
+    "name": "Kassulke and Sons",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 45,
+    "city": "Pittsburgh",
+    "state": "Pennsylvania",
+    "price": "$1415.49",
+    "availableRooms": 9,
+    "name": "White, Kuhn and Hessel",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 46,
+    "city": "Sioux Falls",
+    "state": "South Dakota",
+    "price": "$547.92",
+    "availableRooms": 20,
+    "name": "Olson, Pacocha and Friesen",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 47,
+    "city": "Huntington",
+    "state": "West Virginia",
+    "price": "$1277.06",
+    "availableRooms": 12,
+    "name": "Stokes Inc",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 48,
+    "city": "Philadelphia",
+    "state": "Pennsylvania",
+    "price": "$1974.11",
+    "availableRooms": 1,
+    "name": "Von-Marvin",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 49,
+    "city": "Kansas City",
+    "state": "Missouri",
+    "price": "$1992.23",
+    "availableRooms": 3,
+    "name": "O'Connell-Rodriguez",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 50,
+    "city": "Lancaster",
+    "state": "Pennsylvania",
+    "price": "$1305.62",
+    "availableRooms": 8,
+    "name": "Durgan, Kuhlman and Goodwin",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 51,
+    "city": "Roanoke",
+    "state": "Virginia",
+    "price": "$1769.72",
+    "availableRooms": 16,
+    "name": "Mraz, Nicolas and Kozey",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 52,
+    "city": "Shreveport",
+    "state": "Louisiana",
+    "price": "$1204.28",
+    "availableRooms": 12,
+    "name": "Cummings-Koss",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 53,
+    "city": "New Bedford",
+    "state": "Massachusetts",
+    "price": "$1851.48",
+    "availableRooms": 2,
+    "name": "Ebert LLC",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 54,
+    "city": "Dallas",
+    "state": "Texas",
+    "price": "$1166.85",
+    "availableRooms": 17,
+    "name": "Howell-Ratke",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 55,
+    "city": "Shawnee Mission",
+    "state": "Kansas",
+    "price": "$665.65",
+    "availableRooms": 15,
+    "name": "Schaefer and Sons",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 56,
+    "city": "Moreno Valley",
+    "state": "California",
+    "price": "$990.79",
+    "availableRooms": 17,
+    "name": "Prohaska, Maggio and Wolf",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 57,
+    "city": "Washington",
+    "state": "District of Columbia",
+    "price": "$1158.60",
+    "availableRooms": 8,
+    "name": "O'Keefe-Schmidt",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 58,
+    "city": "New York City",
+    "state": "New York",
+    "price": "$1162.07",
+    "availableRooms": 6,
+    "name": "Cormier, Conroy and Mayer",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 59,
+    "city": "Tacoma",
+    "state": "Washington",
+    "price": "$734.35",
+    "availableRooms": 7,
+    "name": "Schoen, Macejkovic and Pollich",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 60,
+    "city": "Atlanta",
+    "state": "Georgia",
+    "price": "$1298.00",
+    "availableRooms": 19,
+    "name": "Leannon-Heidenreich",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 61,
+    "city": "Santa Fe",
+    "state": "New Mexico",
+    "price": "$726.63",
+    "availableRooms": 12,
+    "name": "Torp Inc",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 62,
+    "city": "Minneapolis",
+    "state": "Minnesota",
+    "price": "$1242.12",
+    "availableRooms": 1,
+    "name": "Stiedemann and Sons",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 63,
+    "city": "Providence",
+    "state": "Rhode Island",
+    "price": "$1535.68",
+    "availableRooms": 19,
+    "name": "Schaefer Inc",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 64,
+    "city": "Seattle",
+    "state": "Washington",
+    "price": "$1371.99",
+    "availableRooms": 17,
+    "name": "Konopelski-Davis",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 65,
+    "city": "New York City",
+    "state": "New York",
+    "price": "$1839.67",
+    "availableRooms": 17,
+    "name": "Bode Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 66,
+    "city": "Arlington",
+    "state": "Texas",
+    "price": "$1077.12",
+    "availableRooms": 5,
+    "name": "Cummings, Schinner and Rogahn",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 67,
+    "city": "Sioux Falls",
+    "state": "South Dakota",
+    "price": "$1969.07",
+    "availableRooms": 19,
+    "name": "Kunde-Mohr",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 68,
+    "city": "Milwaukee",
+    "state": "Wisconsin",
+    "price": "$620.31",
+    "availableRooms": 6,
+    "name": "Frami-Roberts",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 69,
+    "city": "Hartford",
+    "state": "Connecticut",
+    "price": "$1453.07",
+    "availableRooms": 6,
+    "name": "Braun-Hackett",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 70,
+    "city": "Seattle",
+    "state": "Washington",
+    "price": "$1502.73",
+    "availableRooms": 1,
+    "name": "Stracke-Bechtelar",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 71,
+    "city": "El Paso",
+    "state": "Texas",
+    "price": "$1905.41",
+    "availableRooms": 14,
+    "name": "Hermiston Inc",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 72,
+    "city": "Memphis",
+    "state": "Tennessee",
+    "price": "$1782.73",
+    "availableRooms": 15,
+    "name": "Bernhard-Zboncak",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 73,
+    "city": "Winston Salem",
+    "state": "North Carolina",
+    "price": "$1769.04",
+    "availableRooms": 15,
+    "name": "Beahan Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 74,
+    "city": "Chicago",
+    "state": "Illinois",
+    "price": "$1926.09",
+    "availableRooms": 10,
+    "name": "Leannon-Beatty",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 75,
+    "city": "Port Charlotte",
+    "state": "Florida",
+    "price": "$753.71",
+    "availableRooms": 6,
+    "name": "Will, Dach and Hansen",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 76,
+    "city": "Nashville",
+    "state": "Tennessee",
+    "price": "$957.90",
+    "availableRooms": 9,
+    "name": "Bruen, Schiller and Huel",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 77,
+    "city": "Amarillo",
+    "state": "Texas",
+    "price": "$742.56",
+    "availableRooms": 3,
+    "name": "Cummerata and Sons",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 78,
+    "city": "Fresno",
+    "state": "California",
+    "price": "$1024.09",
+    "availableRooms": 12,
+    "name": "Thompson LLC",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 79,
+    "city": "Roanoke",
+    "state": "Virginia",
+    "price": "$1021.04",
+    "availableRooms": 16,
+    "name": "Homenick, Ruecker and Gaylord",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 80,
+    "city": "Southfield",
+    "state": "Michigan",
+    "price": "$1976.00",
+    "availableRooms": 12,
+    "name": "Larkin LLC",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 81,
+    "city": "East Saint Louis",
+    "state": "Illinois",
+    "price": "$561.27",
+    "availableRooms": 16,
+    "name": "O'Kon, Klein and O'Keefe",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 82,
+    "city": "New Haven",
+    "state": "Connecticut",
+    "price": "$682.87",
+    "availableRooms": 10,
+    "name": "Pagac-Schumm",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 83,
+    "city": "Ventura",
+    "state": "California",
+    "price": "$908.56",
+    "availableRooms": 6,
+    "name": "Kirlin, Schuster and Kunze",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 84,
+    "city": "Houston",
+    "state": "Texas",
+    "price": "$1900.80",
+    "availableRooms": 8,
+    "name": "D'Amore, Roob and DuBuque",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 85,
+    "city": "Boston",
+    "state": "Massachusetts",
+    "price": "$1052.38",
+    "availableRooms": 2,
+    "name": "Flatley Inc",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 86,
+    "city": "Cumming",
+    "state": "Georgia",
+    "price": "$744.51",
+    "availableRooms": 16,
+    "name": "Harris and Sons",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 87,
+    "city": "Portsmouth",
+    "state": "New Hampshire",
+    "price": "$901.77",
+    "availableRooms": 10,
+    "name": "Crona-Fisher",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 88,
+    "city": "New Haven",
+    "state": "Connecticut",
+    "price": "$1516.66",
+    "availableRooms": 7,
+    "name": "Leffler-Nader",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 89,
+    "city": "Sioux City",
+    "state": "Iowa",
+    "price": "$895.15",
+    "availableRooms": 12,
+    "name": "Schoen Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 90,
+    "city": "West Palm Beach",
+    "state": "Florida",
+    "price": "$1165.82",
+    "availableRooms": 9,
+    "name": "Ryan, Ferry and Erdman",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 91,
+    "city": "Colorado Springs",
+    "state": "Colorado",
+    "price": "$1230.64",
+    "availableRooms": 13,
+    "name": "Zulauf, Koch and Brekke",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 92,
+    "city": "Washington",
+    "state": "District of Columbia",
+    "price": "$1209.65",
+    "availableRooms": 4,
+    "name": "Hickle-Purdy",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 93,
+    "city": "Brooklyn",
+    "state": "New York",
+    "price": "$1782.70",
+    "availableRooms": 15,
+    "name": "Schaden-Jacobi",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 94,
+    "city": "Washington",
+    "state": "District of Columbia",
+    "price": "$624.33",
+    "availableRooms": 8,
+    "name": "Bartell-Borer",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 95,
+    "city": "Bridgeport",
+    "state": "Connecticut",
+    "price": "$1754.21",
+    "availableRooms": 16,
+    "name": "Rau LLC",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 96,
+    "city": "Santa Ana",
+    "state": "California",
+    "price": "$842.03",
+    "availableRooms": 20,
+    "name": "Bashirian-Hammes",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 97,
+    "city": "Albany",
+    "state": "New York",
+    "price": "$751.21",
+    "availableRooms": 7,
+    "name": "Jacobs, Bergstrom and Feil",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 98,
+    "city": "Buffalo",
+    "state": "New York",
+    "price": "$1828.71",
+    "availableRooms": 3,
+    "name": "Windler-Kreiger",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 99,
+    "city": "Orlando",
+    "state": "Florida",
+    "price": "$535.57",
+    "availableRooms": 14,
+    "name": "Kreiger and Sons",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 100,
+    "city": "Philadelphia",
+    "state": "Pennsylvania",
+    "price": "$1942.73",
+    "availableRooms": 20,
+    "name": "Reilly Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  }
+]
