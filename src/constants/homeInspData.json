@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "city": "Syracuse",
+    "state": "New York",
+    "price": "$1759.31",
+    "availableRooms": 9,
+    "name": "Kunze Group",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 2,
+    "city": "Pittsburgh",
+    "state": "Pennsylvania",
+    "price": "$1446.24",
+    "availableRooms": 2,
+    "name": "Murphy-Ernser",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 3,
+    "city": "Kansas City",
+    "state": "Missouri",
+    "price": "$875.03",
+    "availableRooms": 2,
+    "name": "Grady, Larkin and Volkman",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 4,
+    "city": "Raleigh",
+    "state": "North Carolina",
+    "price": "$1338.02",
+    "availableRooms": 16,
+    "name": "Dach, Jacobi and Muller",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 5,
+    "city": "Honolulu",
+    "state": "Hawaii",
+    "price": "$517.41",
+    "availableRooms": 12,
+    "name": "Rogahn-Christiansen",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 6,
+    "city": "Colorado Springs",
+    "state": "Colorado",
+    "price": "$1334.30",
+    "availableRooms": 3,
+    "name": "Durgan, Klocko and Hills",
+    "imgSrc": "http://dummyimage.com/248x180.png/ff4444/ffffff"
+  },
+  {
+    "id": 7,
+    "city": "Denver",
+    "state": "Colorado",
+    "price": "$512.88",
+    "availableRooms": 11,
+    "name": "Botsford, Gulgowski and Batz",
+    "imgSrc": "http://dummyimage.com/248x180.png/cc0000/ffffff"
+  },
+  {
+    "id": 8,
+    "city": "Boulder",
+    "state": "Colorado",
+    "price": "$1347.01",
+    "availableRooms": 9,
+    "name": "Krajcik, Bailey and O'Kon",
+    "imgSrc": "http://dummyimage.com/248x180.png/dddddd/000000"
+  },
+  {
+    "id": 9,
+    "city": "Charlotte",
+    "state": "North Carolina",
+    "price": "$980.75",
+    "availableRooms": 14,
+    "name": "Rodriguez, Robel and Harber",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 10,
+    "city": "Scottsdale",
+    "state": "Arizona",
+    "price": "$1982.31",
+    "availableRooms": 11,
+    "name": "Leannon LLC",
+    "imgSrc": "http://dummyimage.com/248x180.png/5fa2dd/ffffff"
+  }
+]
