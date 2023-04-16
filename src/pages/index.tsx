@@ -1,11 +1,11 @@
 import styles from "../styles/Home.module.css";
-import SearchForm from "src/components/SearchForm";
-import AdBanner from "src/components/AdBanner";
-import PropertyAssessment from "src/components/PropertyAssessment";
+import SearchForm from "../components/SearchForm";
+import AdBanner from "../components/AdBanner";
+import PropertyAssessment from "../components/PropertyAssessment";
 import {
   AdviceCarousel,
   HomeInspirationCarousel,
-} from "src/components/Carousel";
+} from "../components/Carousel";
 
 export default function Home() {
   return (

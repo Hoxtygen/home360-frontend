@@ -1,4 +1,4 @@
-import { footerNavList } from "src/constants/staticData";
+import { footerNavList } from "constants/staticData";
 import { Button } from "../Button";
 import Slogan from "./Slogan";
 
@@ -25,7 +25,7 @@ export default function Footer() {
           </nav>
         </div>
         <div className="">
-          <h3 className="font-semibold">HomieScout</h3>
+          <h3 className="font-semibold">Home365</h3>
           <nav>
             <ul>
               {footerNavList.map((footerlist) => (

@@ -1,4 +1,6 @@
-import { mockData } from "src/constants";
+// import { mockData } from "constants";
+
+import mockData from "constants/MOCK_DATA.json";
 
 interface DotProps {
   activeIndex: number;

@@ -1,4 +1,4 @@
-import { homeInspirationData } from "src/constants";
+import homeInspirationData from "constants/homeInspData.json";
 import HouseCard from "../HouseCard";
 import Carousel from "./Carousel";
 
