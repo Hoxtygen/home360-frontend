@@ -1,6 +1,6 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { findUser, isEmailValid, knownPrismaError } from "lib";
-import { allowMethods } from "middleware/allowedMethods";
+import allowMethods from "middleware/allowedMethods";
 import { NextApiRequest, NextApiResponse } from "next";
 import { use } from "next-api-route-middleware";
 

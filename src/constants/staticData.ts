@@ -1,4 +1,4 @@
-import { SelectOption } from "src/typedef";
+import { SelectOption } from "typedef";
 
 export interface AdviceProps {
   url: string;

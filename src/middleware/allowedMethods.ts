@@ -1,6 +1,6 @@
 import { Middleware } from "next-api-route-middleware";
 
-export const allowMethods = (allowedMethods: string[]): Middleware => {
+const allowMethods = (allowedMethods: string[]): Middleware => {
   return async function (req, res, next) {
     if (allowedMethods.includes(req.method!) || req.method == "OPTIONS") {
       await next();
@@ -9,3 +9,5 @@ export const allowMethods = (allowedMethods: string[]): Middleware => {
     }
   };
 };
+
+export default allowMethods;

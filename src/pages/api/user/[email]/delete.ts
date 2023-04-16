@@ -1,9 +1,9 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { NextApiRequest, NextApiResponse } from "next";
-import { isEmailValid, knownPrismaError } from "../../../../../lib";
-import { deleteUser } from "../../../../../lib";
+import { isEmailValid, knownPrismaError } from "lib";
+import { deleteUser } from "lib";
 import { use } from "next-api-route-middleware";
-import { allowMethods } from "../../../../../middleware/allowedMethods";
+import allowMethods from "middleware/allowedMethods";
 
 export async function removeUser(req: NextApiRequest, res: NextApiResponse) {
   const query = req.query;

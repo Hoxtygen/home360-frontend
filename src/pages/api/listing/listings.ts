@@ -1,8 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import { getListings, knownPrismaError } from "lib";
+import { Prisma } from "@prisma/client";
 import { use } from "next-api-route-middleware";
-import { allowMethods } from "middleware/allowedMethods";
+import { NextApiRequest, NextApiResponse } from "next";
+
+import { getListings } from "lib";
+import allowMethods from "middleware/allowedMethods";
+import { knownPrismaError } from "lib";
 
 export async function getAllListings(
   req: NextApiRequest,
@@ -16,7 +18,7 @@ export async function getAllListings(
       data: listings,
     });
   } catch (error) {
-    if (error instanceof PrismaClientKnownRequestError) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
       knownPrismaError(res, error);
     }
     return res.status(500).json({

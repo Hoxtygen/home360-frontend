@@ -17,7 +17,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/lib": ["lib"],
-      "@/middleware": ["middleware/*"]
+      "@/middleware": ["middleware"],
+      "@/clients": ["clients"]
     },
     "plugins": [
       {

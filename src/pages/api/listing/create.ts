@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { use } from "next-api-route-middleware";
-import { allowMethods } from "middleware/allowedMethods";
+import allowMethods from "middleware/allowedMethods";
 import { INewListing } from "typedef";
-import { create } from "lib/db/listing";
+import { createNewListing } from "lib/db/listing";
 import { knownPrismaError, mapError } from "lib";
 import { verifyAuth } from "lib/utils/auth";
 import { validateNewListingObject } from "lib/validations";
@@ -23,11 +23,10 @@ async function createListing(req: NextApiRequest, res: NextApiResponse) {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
-
     const decodedToken = await verifyAuth(token!);
 
     const agentId = decodedToken.id;
-    const newListing = await create({
+    const newListing = await createNewListing({
       name,
       address,
       available,
