@@ -14,10 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/lib": ["/lib"],
-      "@/middleware": ["/middleware/*"]
+      "@/lib": ["lib"],
+      "@/middleware": ["middleware"],
+      "@/clients": ["clients"]
     },
     "plugins": [
       {

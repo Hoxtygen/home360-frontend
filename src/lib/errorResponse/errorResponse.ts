@@ -1,9 +1,9 @@
+import { Prisma } from "@prisma/client";
 import { NextApiResponse } from "next";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 
 export function knownPrismaError(
   res: NextApiResponse,
-  error: PrismaClientKnownRequestError
+  error: Prisma.PrismaClientKnownRequestError
 ) {
   if (error.code === "P2002") {
     return res.status(400).json({

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { use } from "next-api-route-middleware";
-import { allowMethods } from "middleware/allowedMethods";
+import allowMethods from "middleware/allowedMethods";
 
 import { knownPrismaError, getUserListings } from "lib";
 import { verifyAuth } from "lib/utils/auth";

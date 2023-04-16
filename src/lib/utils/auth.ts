@@ -27,7 +27,7 @@ export async function verifyAuth(token: string) {
   try {
     const verified = await jwtVerify(
       token,
-      new TextEncoder().encode(process.env.SECRET)
+      new TextEncoder().encode(process.env.NEXTAUTH_SECRET)
     );
     return verified.payload as unknown as IToken;
   } catch (err) {
@@ -42,5 +42,5 @@ export async function generateToken(payload: Payload): Promise<string> {
     .setExpirationTime("1d")
     .setIssuedAt(iat)
     .setNotBefore(iat)
-    .sign(new TextEncoder().encode(process.env.SECRET));
+    .sign(new TextEncoder().encode(process.env.NEXTAUTH_SECRET));
 }

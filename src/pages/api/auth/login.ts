@@ -1,12 +1,12 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { NextApiRequest, NextApiResponse } from "next";
 import { use } from "next-api-route-middleware";
-import { allowMethods } from "middleware/allowedMethods";
+import allowMethods from "middleware/allowedMethods";
 import { knownPrismaError, mapError, decryptPassword } from "lib";
 import { findUser } from "lib/db/user";
 import { ILogin } from "typedef";
-import { validateLoginData } from "lib/validations";
-import { generateToken } from "lib/utils/auth";
+import { validateLoginData } from "lib";
+import { generateToken } from "lib";
 
 async function login(req: NextApiRequest, res: NextApiResponse) {
   let { email, password }: ILogin = req.body;

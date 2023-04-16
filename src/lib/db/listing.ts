@@ -1,8 +1,7 @@
-// import { IListing, INewListing } from "typedef";
-import { IListing, INewListing } from "src/typedef";
-import { prisma } from "../prisma";
+import { IListing, INewListing } from "typedef";
+import { prisma } from "clients/prisma";
 
-type BuildingType =
+export type BuildingType =
   | "Apartment"
   | "House"
   | "Temporary Living"
@@ -28,15 +27,18 @@ export async function getListing(id: string | undefined): Promise<IListing> {
   return result;
 }
 
-export async function deleteListing(id: string | undefined) {
+export async function deleteListing(id: string) {
   const result = await prisma.listing.delete({
     where: {
       id: id,
     },
   });
+  return result;
 }
 
-export async function create(listing: INewListing): Promise<IListing> {
+export async function createNewListing(
+  listing: INewListing
+): Promise<IListing> {
   const result = await prisma.listing.create({
     data: listing,
   });

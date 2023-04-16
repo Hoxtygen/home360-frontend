@@ -1,5 +1,5 @@
 import { IUser, NewUser, UserWithListings } from "typedef";
-import { prisma } from "../prisma";
+import { prisma } from "clients/prisma";
 
 export async function getUsers(): Promise<IUser[]> {
   const result: IUser[] = await prisma.user.findMany({
@@ -69,9 +69,14 @@ export async function deleteUser(email: string | undefined) {
   return result;
 }
 
-export async function createUser(user: NewUser): Promise<IUser> {
-  const newUser: IUser = await prisma.user.create({
+export async function createUser(user: NewUser) {
+  const newUser = await prisma.user.create({
     data: user,
   });
-  return newUser;
+  return {
+    email: newUser.email,
+    firstName: newUser.firstName,
+    id: newUser.id,
+    lastName: newUser.lastName,
+  };
 }

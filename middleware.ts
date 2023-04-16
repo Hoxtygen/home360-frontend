@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyAuth } from "src/lib";
+import { verifyAuth } from "lib";
 
 export default async function middleware(req: NextRequest, res: NextResponse) {
   const token = req.headers.get("authorization")?.split(" ")[1];

@@ -2,7 +2,7 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { NextApiRequest, NextApiResponse } from "next";
 import { use } from "next-api-route-middleware";
 import { knownPrismaError, deleteListing, isCuid } from "lib";
-import { allowMethods } from "middleware/allowedMethods";
+import allowMethods from "middleware/allowedMethods";
 
 export async function removeListing(req: NextApiRequest, res: NextApiResponse) {
   const query = req.query;
