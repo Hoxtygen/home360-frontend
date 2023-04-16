@@ -1,6 +1,6 @@
 import { forwardRef, SelectHTMLAttributes } from "react";
-import { mergeClass } from "src/lib/utils/utils";
-import { OptionValue, SelectOption } from "src/typedef";
+import { mergeClass } from "../lib/utils/utils";
+import { OptionValue, SelectOption } from "typedef";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: SelectOption<OptionValue>[];

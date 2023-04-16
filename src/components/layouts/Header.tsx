@@ -1,5 +1,5 @@
-import { navList } from "src/constants/staticData";
-import useWindowSize from "src/hooks/useWindowSize";
+import { navList } from "constants/staticData";
+import useWindowSize from "hooks/useWindowSize";
 import { Button, ButtonSizes } from "../Button";
 import Logo from "../Logo";
 

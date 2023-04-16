@@ -1,5 +1,5 @@
+import { buildingType, buildingPurpose } from "../constants";
 import { useState } from "react";
-import { buildingPurpose, buildingType } from "src/constants";
 import { Button } from "./Button";
 import { CustomSelect } from "./CustomSelect";
 import { Input } from "./Input";

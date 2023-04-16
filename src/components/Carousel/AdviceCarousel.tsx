@@ -1,4 +1,4 @@
-import { advice } from "src/constants/staticData";
+import { advice } from "constants/staticData";
 import AdviceCard from "../AdviceCard";
 import Carousel from "./Carousel";
 
