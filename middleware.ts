@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuth } from "lib";
 
-export default async function middleware(req: NextRequest, res: NextResponse) {
-  const token = req.headers.get("authorization")?.split(" ")[1];
+export default async function middleware(req: NextRequest) {
+  const token = req.cookies.get("token")?.value;
   if (!token) {
     return NextResponse.redirect(new URL("/api/auth/unauthorized", req.url));
   }
@@ -26,6 +26,5 @@ export const config = {
     "/api/listing/create",
     "/api/listing/delete/(.*)",
     "/api/user/(.*)",
-    // "/api/user/:path*"
   ],
 };
