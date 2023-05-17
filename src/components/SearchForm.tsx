@@ -46,7 +46,7 @@ export default function SearchForm() {
           </div>
           <Button
             type="submit"
-            className="h-12 sm:ml-5 ml-0 mt-4 sm:mt-0 dark:bg-accent-background font-Open-Sans font-semibold"
+            className="h-12 sm:ml-5 ml-0 mt-4 sm:mt-0 dark:bg-black dark:text-white font-Open-Sans font-semibold"
             size="lg"
           >
             Search

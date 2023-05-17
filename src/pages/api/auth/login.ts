@@ -4,13 +4,13 @@ import { use } from "next-api-route-middleware";
 import allowMethods from "middleware/allowedMethods";
 import { knownPrismaError, mapError, decryptPassword } from "lib";
 import { findUser } from "lib/db/user";
-import { ILogin } from "typedef";
+import { LoginData } from "typedef";
 import { validateLoginData } from "lib";
 import { generateToken } from "lib";
 import cookie from "cookie";
 
 async function login(req: NextApiRequest, res: NextApiResponse) {
-  let { email, password }: ILogin = req.body;
+  let { email, password }: LoginData = req.body;
   const validation = validateLoginData(req.body);
   if (validation.error) {
     return res.status(400).json({

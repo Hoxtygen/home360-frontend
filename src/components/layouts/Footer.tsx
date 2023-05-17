@@ -14,8 +14,9 @@ export default function Footer() {
               {footerNavList.map((footerlist) => (
                 <li key={footerlist.id}>
                   <Button
-                    className="dark:bg-transparent"
+                    className="dark:bg-transparent dark:hover:bg-transparent dark:hover:text-neutral-500"
                     href={footerlist.href}
+                    variant="link"
                   >
                     {footerlist.title}
                   </Button>
@@ -31,8 +32,9 @@ export default function Footer() {
               {footerNavList.map((footerlist) => (
                 <li key={footerlist.id}>
                   <Button
-                    className="dark:bg-transparent"
+                    className="dark:bg-transparent dark:hover:bg-transparent dark:hover:text-neutral-500"
                     href={footerlist.href}
+                    variant="link"
                   >
                     {footerlist.title}
                   </Button>

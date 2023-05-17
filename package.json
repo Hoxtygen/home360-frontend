@@ -12,7 +12,8 @@
     "release": "release-it",
     "test:integration": "dotenv -e .env.test.local -- jest -i",
     "test:unit": "jest --watch",
-    "migrate:test": "dotenv -e .env.test.local -- npx prisma migrate deploy"
+    "migrate:test": "dotenv -e .env.test.local -- npx prisma migrate deploy",
+    "find-deadcode": "ts-prune"
   },
   "dependencies": {
     "-": "^0.0.1",
@@ -82,6 +83,7 @@
     "tailwindcss": "^3.2.7",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
+    "ts-prune": "^0.10.3",
     "typescript": "^4.9.5"
   },
   "prisma": {

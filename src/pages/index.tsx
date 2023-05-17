@@ -6,15 +6,18 @@ import {
   AdviceCarousel,
   HomeInspirationCarousel,
 } from "../components/Carousel";
+import Layout from "components/layouts/Layout";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <SearchForm />
-      <AdBanner />
-      <PropertyAssessment />
-      <HomeInspirationCarousel />
-      <AdviceCarousel />
+      <Layout>
+        <SearchForm />
+        <AdBanner />
+        <PropertyAssessment />
+        <HomeInspirationCarousel />
+        <AdviceCarousel />
+      </Layout>
     </main>
   );
 }

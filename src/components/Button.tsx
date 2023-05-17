@@ -4,12 +4,12 @@ import { ButtonHTMLAttributes, forwardRef } from "react";
 import { mergeClass } from "../lib/utils/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none  focus:ring-slate-400  dark:hover:bg-slate-800 dark:hover:text-slate-100 disabled:opacity-50  disabled:pointer-events-none  data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800",
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none  focus:ring-slate-400  dark:hover:bg-slate-800 dark:hover:text-slate-100 disabled:bg-gray-300  disabled:pointer-events-none  data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800",
   {
     variants: {
       variant: {
         default:
-          "bg-slate-900 text-white hover:bg-slate-700 dark:bg-slate-50 dark:text-slate-900",
+          "bg-black text-white hover:bg-slate-700 dark:bg-black  dark:text-slate-900 uppercase font-medium",
         destructive:
           "bg-red-500 text-white hover:bg-red-600 dark:hover:bg-red-600",
         outline:
@@ -43,12 +43,13 @@ type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 export type ButtonSizes = ButtonVariantProps["size"];
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, children, href, size, variant, ...props }, ref) => {
+  ({ className, children, href, size, variant, title, ...props }, ref) => {
     if (href) {
       return (
         <Link
           href={href}
           className={mergeClass(buttonVariants({ variant, size, className }))}
+          title={title}
         >
           {children}
         </Link>

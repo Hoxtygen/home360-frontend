@@ -14,17 +14,41 @@ export default function Slogan() {
         <p>Anywhere</p>
       </div>
       <div className="mt-16">
-        <Button href="/" className="mr-1">
-          <Youtube />
+        <Button
+          title="Home365 on Youtube"
+          aria-label="Home365 on Youtube"
+          variant="link"
+          href="/"
+          className="mr-1 dark:bg-transparent dark:hover:bg-transparent dark:hover:text-neutral-500 pr-2 pl-2"
+        >
+          <Youtube color="red" />
         </Button>
-        <Button href="/">
-          <Facebook />
+        <Button
+          title="Home365 on Facebook"
+          aria-label="Home365 on Facebook"
+          variant="link"
+          href="/"
+          className="mr-1 dark:bg-transparent dark:hover:bg-transparent dark:hover:text-neutral-500 pr-2 pl-2"
+        >
+          <Facebook color="blue" />
         </Button>
-        <Button href="/">
-          <Linkedin />
+        <Button
+          title="Home365 on Linkedin"
+          aria-label="Home365 on Linkedin"
+          variant="link"
+          href="/"
+          className="mr-1 dark:bg-transparent dark:hover:bg-transparent dark:hover:text-neutral-500 pr-2 pl-2"
+        >
+          <Linkedin color="#2267E8" />
         </Button>
-        <Button href="/">
-          <Twitter />
+        <Button
+          title="Home365 on Twitter"
+          aria-label="Home365 on Twitter"
+          variant="link"
+          href="/"
+          className="mr-1 dark:bg-transparent dark:hover:bg-transparent dark:hover:text-neutral-500 pr-2 pl-2"
+        >
+          <Twitter color="#00ACEE" />
         </Button>
       </div>
     </div>

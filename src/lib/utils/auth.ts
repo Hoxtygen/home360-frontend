@@ -1,7 +1,7 @@
 import { default as bcrypt } from "bcryptjs";
 import { SignJWT, jwtVerify } from "jose";
 
-export interface IToken {
+interface IToken {
   id: string;
   email: string;
   iat: number;

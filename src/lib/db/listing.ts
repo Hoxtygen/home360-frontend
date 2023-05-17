@@ -1,14 +1,6 @@
 import { IListing, INewListing } from "typedef";
 import { prisma } from "clients/prisma";
 
-export type BuildingType =
-  | "Apartment"
-  | "House"
-  | "Temporary Living"
-  | "Shared Room"
-  | "Office"
-  | "Hall"
-  | "Nursing Home";
 export async function getListings(): Promise<IListing[]> {
   const result = await prisma.listing.findMany({
     where: {

@@ -13,7 +13,7 @@ export default function PropertyAssessment() {
         <h4 className="text-xl">Count on the best</h4>
         <Button
           href="/"
-          className="dark:bg-black dark:text-white mt-2.5"
+          className="dark:bg-black dark:text-white bg-black text-white mt-2.5"
           variant="link"
         >
           For a free assessment
