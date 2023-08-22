@@ -1,0 +1,49 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../../node_modules/@prisma/mongo/client"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("MONGO_DATABASE_URL")
+}
+
+model Listing {
+    id              String        @id @default(auto()) @map("_id") @db.ObjectId
+    agentId         String
+    description     String
+    furnishing      String
+    position        String
+    miscellaneous   String
+    address         Address
+    availableFrom   DateTime
+    cost            ListingCost
+    details         String[]
+    facilityQuality String
+    petsAllowed     String
+    apartmentInfo   ApartmentInfo
+    applicationDocs String[]
+    apartmentImages String[]
+}
+
+type Address {
+    streetName  String
+    houseNumber String
+    city        String
+    state       String
+    lga         String
+}
+
+type ListingCost {
+    annualRent   String
+    agentFee     String?
+    cautionFee   String
+    agreementFee String
+}
+
+type ApartmentInfo {
+    roomNums      String
+    bathroomNums  String
+    bedroomNums   String
+    apartmentType String
+}

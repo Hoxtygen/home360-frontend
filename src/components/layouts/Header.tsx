@@ -1,9 +1,7 @@
 import { authLinks, navList } from "constants/staticData";
 import useWindowSize from "hooks/useWindowSize";
-import { Button, ButtonSizes } from "../Button";
-import Logo from "../Logo";
-import useLocalStorage from "hooks/useLocalStorage";
-import { AuthenticationSuccessResponse } from "typedef";
+import { Button, ButtonSizes } from "../buttons/Button";
+import Logo from "../shared/Logo";
 
 export default function Header() {
   const { width } = useWindowSize();

@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+## Scripts
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+`postgres:migrate:dev`: this would be used to create and execute migrations on our postgres database.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`postgres:migrate:dev:create`: this would create a postgres migration file which you can edit before executing.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+`prisma`: this is the prisma cli so we can run commands straight from prisma-cli.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+`postgres:migrate:deploy`: this applies pending migrations to staging, testing, or production environments to your postgres database.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+`prisma:postgres:dbpush`: this syncs the prisma/postgres/shema.prisma with the postgres database.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`prisma:mongo:dbpush`: this syncs the prisma/mongo/shema.prisma with the mongo database.
 
-## Learn More
+`prisma:generate:mongo_client`: this would generate the prima client for mongo.
 
-To learn more about Next.js, take a look at the following resources:
+`prisma:generate:postgres_client`: this would generate the prisma client for postgres.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`prisma:generate:db_clients`: this would generate the prisma client for postgres and mongo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`prisma:postgres:seed`: this would seed the postgres database
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<!-- https://github.com/jquense/yup/issues/312#issuecomment-442854307 -->
+<!-- https://github.com/jquense/yup/issues/1183 -->

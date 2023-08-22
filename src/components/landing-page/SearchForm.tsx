@@ -1,13 +1,30 @@
-import { buildingType, buildingPurpose } from "../constants";
-import { useState } from "react";
-import { Button } from "./Button";
-import { CustomSelect } from "./CustomSelect";
-import { Input } from "./Input";
+import { ChangeEvent, useState } from "react";
+import { BuildingPurpose, BuildingType } from "typedef";
+import { buildingPurpose, buildingType } from "../../constants";
+import { Button } from "../buttons/Button";
+import { CustomSelect } from "../inputs/CustomSelect";
+import { Input } from "../inputs/Input";
 
 export default function SearchForm() {
-  const [buildinP, setBuildinP] = useState("");
-  const [buildingT, setBuildingT] = useState("");
-  const [location, setLocation] = useState("");
+  interface Search {
+    buildingType: BuildingType;
+    buildingPurpose: BuildingPurpose;
+    location: string;
+  }
+
+  const [searchData, setSearchData] = useState<Search>({
+    buildingPurpose: "rent",
+    buildingType: "house",
+    location: "",
+  });
+
+  function handleChange(
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    let value: (typeof searchData)[keyof typeof searchData] =
+      event.target.value;
+    setSearchData({ ...searchData, [event.target.name]: value });
+  }
 
   return (
     <div className="max-w-4xl rounded-md container mx-auto p-10 border shadow-lg mt-5">
@@ -19,27 +36,27 @@ export default function SearchForm() {
               name="location"
               id=""
               placeholder="Where:town,city"
-              onChange={(e) => setLocation(e.target.value)}
+              onChange={handleChange}
               className="w-full rounded-md sm:rounded-r-none dark:text-black text-base"
-              value={location}
+              value={searchData.location}
             />
           </div>
           <div className="flex grow sm:w-2/4 sm:mt-0 mt-4">
             <div className="grow w-2/4">
               <CustomSelect
-                name="building-purpose"
-                value={buildinP}
+                name="buildingPurpose"
+                value={searchData["buildingPurpose"]}
                 options={buildingPurpose}
-                onChange={(e) => setBuildinP(e.currentTarget.value)}
+                onChange={handleChange}
                 className="w-full dark:text-black rounded-l-md sm:rounded-none"
               />
             </div>
             <div className="grow w-2/4">
               <CustomSelect
-                name="building-type"
-                value={buildingT}
+                name="buildingType"
+                value={searchData["buildingType"]}
                 options={buildingType}
-                onChange={(e) => setBuildingT(e.currentTarget.value)}
+                onChange={handleChange}
                 className="w-full rounded-r-md dark:text-black"
               />
             </div>

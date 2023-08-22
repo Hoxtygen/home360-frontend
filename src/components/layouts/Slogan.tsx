@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { Facebook, Linkedin, Twitter, Youtube } from "lucide-react";
+import Image from "next/image";
 
 import Home365 from "../../../public/images/home356.jpg";
-import { Button } from "../Button";
+import { Button } from "../buttons/Button";
 
 export default function Slogan() {
   return (

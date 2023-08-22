@@ -13,7 +13,19 @@
     "test:integration": "dotenv -e .env.test.local -- jest -i",
     "test:unit": "jest --watch",
     "migrate:test": "dotenv -e .env.test.local -- npx prisma migrate deploy",
-    "find-deadcode": "ts-prune"
+    "find-deadcode": "ts-prune",
+    "prisma": "prisma",
+    "postgres:migrate:dev": "prisma migrate dev --schema prisma/postgres/schema.prisma --name ",
+    "postgres:migrate:dev:create": "prisma migrate dev --schema prisma/postgres/schema.prisma --create-only",
+    "postgres:migrate:deploy": "npx prisma migrate deploy --schema prisma/postgres/schema.prisma --preview-feature",
+    "prisma:mongo:studio": "npx prisma studio --schema prisma/mongo/schema.prisma",
+    "prisma:postgres:studio": "npx prisma studio --schema prisma/postgres/schema.prisma",
+    "prisma:mongo:dbpush": "npx prisma db push --schema prisma/mongo/schema.prisma",
+    "prisma:postgres:dbpush": "npx prisma db push --schema prisma/postgres/schema.prisma",
+    "prisma:generate:postgres_client": "prisma generate --schema prisma/postgres/schema.prisma",
+    "prisma:generate:mongo_client": "prisma generate --schema prisma/mongo/schema.prisma",
+    "prisma:generate:db_clients": "prisma generate --schema prisma/postgres/schema.prisma && prisma generate --schema prisma/mongo/schema.prisma",
+    "prisma:postgres:seed": "npx prisma db seed"
   },
   "dependencies": {
     "-": "^0.0.1",
