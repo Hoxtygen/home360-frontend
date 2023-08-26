@@ -1,14 +1,18 @@
 import { authLinks, navList } from "constants/staticData";
-import { useAuth } from "context/AuthContext";
 import useWindowSize from "hooks/useWindowSize";
 import { Button, ButtonSizes } from "../Button";
 import Logo from "../Logo";
+import useLocalStorage from "hooks/useLocalStorage";
+import { LoginSuccessResponse } from "typedef";
 
 export default function Header() {
-  const { state, logout } = useAuth();
-  const { user } = state;
   const { width } = useWindowSize();
   const buttonSize: ButtonSizes = width > 748 ? "lg" : "sm";
+  const [user, setUser] = useLocalStorage<LoginSuccessResponse | null>(
+    "user",
+    null
+  );
+  console.log("localstorage:", user);
 
   return (
     <header className="py-10 text-white border-b-2 sticky top-0 z-50">
@@ -39,13 +43,13 @@ export default function Header() {
           <div className="">
             {user && user.token ? (
               <div className="flex items-center">
-                <p className="text-black pr-5 font-semibold">
-                  {user.user.name.split(" ")[1]}
-                </p>
-                <div className="">
-                  <Button variant="destructive" onClick={() => logout()}>
-                    Log out
-                  </Button>
+                <div className="flex items-center">
+                  <p className="text-black pr-5 font-semibold">
+                    {user && user.firstName}
+                  </p>
+                  <div className="">
+                    <Button variant="destructive">Log out</Button>
+                  </div>
                 </div>
               </div>
             ) : (

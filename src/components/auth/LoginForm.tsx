@@ -1,27 +1,48 @@
+import { useFormik } from "formik";
+import { useEffect } from "react";
+import { setCookie } from "cookies-next";
+
 import BackButton from "components/BackButton";
 import { Button } from "components/Button";
-import { Input } from "components/Input";
-import React from "react";
-import { useFormik } from "formik";
-import { userLoginValidationSchema } from "lib/validations";
 import Error from "components/Error";
-import { useAuth } from "context/AuthContext";
-import { LoginData } from "typedef";
+import { Input } from "components/Input";
+import { userLoginValidationSchema } from "lib/validations";
+import { useRouter } from "next/router";
+import { LoginData, LoginSuccessResponse } from "typedef";
+import { useLogin } from "../../hooks/useAuth";
+import useLocalStorage from "hooks/useLocalStorage";
 
 export default function LoginForm() {
+  const router = useRouter();
+  const { isLoadingLogin, mutateLogin, userData, userLoginError } = useLogin();
+  const [user, setUser] = useLocalStorage<LoginSuccessResponse | null>(
+    "user",
+    null
+  );
   const loginFormValues: LoginData = {
     email: "",
     password: "",
   };
 
-  const { state, login } = useAuth();
-  const { error } = state;
+  useEffect(() => {
+    if (userData && userData.token) {
+      setCookie("token", userData.token, {
+        path: "/",
+        httpOnly: false,
+      });
+    }
+    if (userData && userData.status === 200) {
+      setUser(userData);
+      router.push("/dashboard");
+      return;
+    }
+  }, [router, setUser, userData]);
 
   const formik = useFormik({
     initialValues: loginFormValues,
     validationSchema: userLoginValidationSchema,
     onSubmit: (values) => {
-      login(values);
+      mutateLogin(values);
     },
   });
 
@@ -37,7 +58,9 @@ export default function LoginForm() {
           />
           <h3>Login Form</h3>
         </div>
-        {error && <Error error={error} className="text-center mb-4" />}
+        {userLoginError && (
+          <Error error={userLoginError.message} className="text-center mb-4" />
+        )}
         <div className="mb-5">
           <Input
             name="email"

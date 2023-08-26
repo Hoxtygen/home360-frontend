@@ -1,11 +1,13 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { AuthProvider } from "context/AuthContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const client = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider>
+    <QueryClientProvider client={client}>
       <Component {...pageProps} />
-    </AuthProvider>
+    </QueryClientProvider>
   );
 }

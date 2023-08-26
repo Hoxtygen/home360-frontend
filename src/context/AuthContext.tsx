@@ -1,18 +1,18 @@
-import { LOGIN_URL, LOGOUT_URL } from "constants/urls";
+import { isAxiosError } from "axios";
 import { userInitialData } from "constants/staticData";
+import { LOGIN_URL, LOGOUT_URL } from "constants/urls";
 import useLocalStorage from "hooks/useLocalStorage";
-import fetcher from "lib/utils/fetcher";
+import requestHandler from "lib/utils/requestHandler";
 import { useRouter } from "next/router";
 import React, {
-  createContext,
   ReactNode,
+  createContext,
   useContext,
   useEffect,
   useReducer,
 } from "react";
 import { AuthState, LoginData } from "typedef";
 import authReducer, { Action } from "./authReducer";
-import { isAxiosError } from "axios";
 
 type Dispatch = React.Dispatch<Action>;
 type AuthProviderProps = { children: ReactNode };
@@ -48,12 +48,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   async function login(loginData: LoginData) {
     try {
       dispatch({ type: "LOGIN" });
-      const response = await fetcher(LOGIN_URL, {
+      const response = await requestHandler<any>(LOGIN_URL, {
         method: "POST",
         data: loginData,
       });
-      setUser(response.data.data);
-      dispatch({ type: "LOGIN_SUCCESS", payload: response.data.data });
+      setUser(response.data);
+      dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
       router.push("/dashboard");
       return response;
     } catch (error) {
@@ -71,7 +71,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
   async function logout() {
-    await fetcher(LOGOUT_URL);
+    await requestHandler(LOGOUT_URL);
     localStorage.clear();
     router.replace("/");
     dispatch({ type: "LOGOUT" });

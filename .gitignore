@@ -44,3 +44,5 @@ TODO
 #mocks for integration testing
 __mocks__
 mocks.ts
+
+recycle-bin

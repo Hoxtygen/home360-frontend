@@ -1,20 +1,14 @@
 import { Button } from "components/Button";
-import { useAuth } from "context/AuthContext";
 import { useRouter } from "next/router";
 import React from "react";
 
 export default function Dashboard() {
   const router = useRouter();
-  const { logout } = useAuth();
-  const handleLogout = () => {
-    logout();
-    router.replace("/");
-  };
 
   return (
     <div>
       <div className="">
-        <Button onClick={handleLogout} variant="destructive">
+        <Button onClick={() => console.log("logout")} variant="destructive">
           Log out
         </Button>
       </div>
