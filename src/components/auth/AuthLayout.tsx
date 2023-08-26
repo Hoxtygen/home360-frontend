@@ -32,10 +32,10 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       </main>
       <footer className="py-10 px-8">
         <div className="max-w-5xl  mx-auto text-center">
-          {authFooterLinks.map((link) => (
+          {authFooterLinks.map((link, index) => (
             <Button
               variant="link"
-              key={link.href}
+              key={index}
               className="dark:hover:bg-transparent dark:hover:text-neutral-500"
             >
               {link.title}

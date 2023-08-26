@@ -1,16 +1,16 @@
+import { isAxiosError } from "axios";
 import BackButton from "components/BackButton";
 import { Button } from "components/Button";
-import { Input } from "../Input";
-import { useFormik } from "formik";
-import { userSignupValidationSchema } from "lib/validations";
 import Error from "components/Error";
-import fetcher from "lib/utils/fetcher";
-import { SIGNUP_URL } from "constants/urls";
-import useLocalStorage from "hooks/useLocalStorage";
 import { userInitialData } from "constants/staticData";
+import { SIGNUP_URL } from "constants/urls";
+import { useFormik } from "formik";
+import useLocalStorage from "hooks/useLocalStorage";
+import fetcher from "lib/utils/requestHandler";
+import { userSignupValidationSchema } from "lib/validations";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { isAxiosError } from "axios";
+import { Input } from "../Input";
 
 type RegError = {
   field: string;
@@ -43,7 +43,7 @@ export default function SignupForm() {
         method: "POST",
         data: data,
       });
-      setUser(response.data.data);
+      // setUser(response.data.data);
       router.push("/dashboard");
     } catch (error) {
       if (isAxiosError(error)) {

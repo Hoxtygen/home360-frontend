@@ -72,3 +72,21 @@ export interface AdviceProps {
   lesson: string;
   backgroundImage: string;
 }
+
+export type LoginSuccessResponse = {
+  status: number;
+  token: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  message: string;
+};
+
+export type LoginFailureResponse = {
+  status?: string;
+  timestamp?: Date;
+  message?: string;
+  errors: string[] | null;
+};
+
+export type LoginApiResponse = LoginSuccessResponse | LoginFailureResponse;

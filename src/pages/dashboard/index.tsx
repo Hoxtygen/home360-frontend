@@ -8,7 +8,6 @@ export default function dashboard() {
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const token = req.cookies.token;
-  console.log(token);
   if (!token) {
     return {
       redirect: {
