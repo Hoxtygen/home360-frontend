@@ -3,12 +3,16 @@ import { AxiosResponse, AxiosError } from "axios";
 import { HOME_360_LOGIN_API } from "lib/endpoints";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
-import { LoginData, LoginFailureResponse, LoginSuccessResponse } from "typedef";
+import {
+  LoginData,
+  ApiErrorResponse,
+  AuthenticationSuccessResponse,
+} from "typedef";
 
 export function useLogin() {
   const { data, error, isLoading, mutate } = useMutation<
-    AxiosResponse<LoginSuccessResponse>,
-    AxiosError<LoginFailureResponse> | Error,
+    AxiosResponse<AuthenticationSuccessResponse>,
+    AxiosError<ApiErrorResponse> | Error,
     LoginData
   >((loginData) =>
     requestHandler(HOME_360_LOGIN_API, {

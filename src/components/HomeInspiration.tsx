@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { mockData } from "src/constants";
+import { mockData } from "../constants/index";
 import Dot from "./Carousel/Dot";
 import HouseCard from "./HouseCard";
 
@@ -7,7 +7,6 @@ export default function HomeInspiration() {
   const data = mockData.slice(0, 10);
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log("currentIndex; ", currentIndex);
   const carousel = useRef<HTMLDivElement | null>(null);
   const movePrev = () => {
     if (currentIndex > 0) {
