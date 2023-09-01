@@ -1,76 +1,51 @@
-import { isAxiosError } from "axios";
 import BackButton from "components/BackButton";
 import { Button } from "components/Button";
 import Error from "components/Error";
-import { userInitialData } from "constants/staticData";
-import { SIGNUP_URL } from "constants/urls";
 import { useFormik } from "formik";
-import useLocalStorage from "hooks/useLocalStorage";
-import fetcher from "lib/utils/requestHandler";
-import { userSignupValidationSchema } from "lib/validations";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { Input } from "../Input";
+import toast from "react-hot-toast";
 
-type RegError = {
-  field: string;
-  errorMessage: string;
-};
+import { userSignupValidationSchema, userSignupValues } from "lib/validations";
+import { useRouter } from "next/router";
+import { Input } from "../Input";
+import useSignup from "hooks/useSignup";
+import Spinner from "components/loaders/Spinner";
+import { useEffect } from "react";
 
 export default function SignupForm() {
-  const [_, setUser] = useLocalStorage("user", userInitialData);
-  const [error, setError] = useState<RegError[] | null | string>(null);
   const router = useRouter();
-  const formValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    address: "",
-    phoneNumber: "",
-    password: "",
-  };
+
+  const { isLoadingUserSignup, mutateSignup, userSignupData, userSignupError } =
+    useSignup();
+
   const formik = useFormik({
-    initialValues: formValues,
+    initialValues: userSignupValues,
     validationSchema: userSignupValidationSchema,
     onSubmit: (values) => {
-      handleRegister(values);
+      mutateSignup(values);
     },
   });
 
-  async function handleRegister(data: any) {
-    try {
-      const response = await fetcher(SIGNUP_URL, {
-        method: "POST",
-        data: data,
-      });
-      // setUser(response.data.data);
-      router.push("/dashboard");
-    } catch (error) {
-      if (isAxiosError(error)) {
-        setError(error?.response?.data.error);
-      } else {
-        setError("something went wrong");
-      }
+  useEffect(() => {
+    if (userSignupData?.status === 201) {
+      toast.success(userSignupData.message);
+      router.push("/login");
     }
-  }
-  const { errors, touched, handleBlur } = formik;
+  }, [router, userSignupData?.message, userSignupData?.status]);
 
-  function displayError(signupError: RegError[] | string) {
+  const { errors, touched, handleBlur, handleSubmit } = formik;
+
+  function displayError(signupError: string[] | string) {
     if (typeof signupError === "string") {
       return <Error error={signupError} className="text-center mb-2" />;
     } else {
-      return signupError.map((err) => (
-        <Error
-          key={err.field}
-          error={err.errorMessage}
-          className="text-center mb-1"
-        />
+      return signupError.map((err, index) => (
+        <Error key={index} error={err} className="text-center mb-2" />
       ));
     }
   }
 
   return (
-    <form onSubmit={formik.handleSubmit} className="border p-4 bg-white">
+    <form onSubmit={handleSubmit} className="border p-4 bg-white">
       <div className="flex items-center mb-8">
         <BackButton
           className="pr-14"
@@ -78,7 +53,10 @@ export default function SignupForm() {
         />
         <h3 className="align-middle">Registration Form</h3>
       </div>
-      {error && displayError(error)}
+      {userSignupError?.errors && displayError(userSignupError?.errors)}
+      {userSignupError?.message && (
+        <Error error={userSignupError.message} className="text-center mb-2" />
+      )}
       <div className=" mb-5">
         <Input
           placeholder="Enter first name"
@@ -163,10 +141,10 @@ export default function SignupForm() {
         <Button
           size="xl"
           type="submit"
-          disabled={!(formik.isValid && formik.dirty)}
+          disabled={!(formik.isValid && formik.dirty) || isLoadingUserSignup}
           className="dark:text-white"
         >
-          Submit
+          {isLoadingUserSignup ? <Spinner /> : "Submit"}
         </Button>
       </div>
       <p className="text-center">

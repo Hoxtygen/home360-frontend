@@ -1,29 +1,3 @@
-import { Prisma, User, Listing } from "@prisma/client";
-
-export type NewUser = Omit<User, "createdAt" | "updatedAt" | "id">;
-
-export type IUser = Omit<User, "password">;
-
-export type IListing = Listing;
-
-const userWithListings = Prisma.validator<Prisma.UserArgs>()({
-  include: { listings: true },
-});
-
-export type UserWithListings = Omit<
-  Prisma.UserGetPayload<typeof userWithListings>,
-  "password" | "createdAt" | "updatedAt"
->;
-export interface AuthPayload {
-  status: number;
-  message: string;
-  token: string;
-  name: string;
-  email: string;
-}
-
-export type INewListing = Omit<Listing, "id">;
-
 export type OptionValue = string | number;
 export type BuildingType =
   | "Apartment"
@@ -73,7 +47,7 @@ export interface AdviceProps {
   backgroundImage: string;
 }
 
-export type LoginSuccessResponse = {
+export type AuthenticationSuccessResponse = {
   status: number;
   token: string;
   email: string;
@@ -82,11 +56,22 @@ export type LoginSuccessResponse = {
   message: string;
 };
 
-export type LoginFailureResponse = {
+export type ApiErrorResponse = {
   status?: string;
   timestamp?: Date;
   message?: string;
   errors: string[] | null;
 };
 
-export type LoginApiResponse = LoginSuccessResponse | LoginFailureResponse;
+export type LoginApiResponse = AuthenticationSuccessResponse | ApiErrorResponse;
+
+export type NewUserSignup = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  phoneNumber: string;
+  password: string;
+};
+
+export type EventHandlers = Record<string, React.EventHandler<any>>;

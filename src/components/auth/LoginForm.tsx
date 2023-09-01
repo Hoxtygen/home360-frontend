@@ -1,28 +1,25 @@
-import { useFormik } from "formik";
-import { useEffect } from "react";
 import { setCookie } from "cookies-next";
+import { useFormik } from "formik";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import BackButton from "components/BackButton";
 import { Button } from "components/Button";
 import Error from "components/Error";
 import { Input } from "components/Input";
-import { userLoginValidationSchema } from "lib/validations";
-import { useRouter } from "next/router";
-import { LoginData, LoginSuccessResponse } from "typedef";
-import { useLogin } from "../../hooks/useAuth";
+import Spinner from "components/loaders/Spinner";
 import useLocalStorage from "hooks/useLocalStorage";
+import { loginValues, userLoginValidationSchema } from "lib/validations";
+import { AuthenticationSuccessResponse } from "typedef";
+import { useLogin } from "../../hooks/useLogin";
 
 export default function LoginForm() {
   const router = useRouter();
   const { isLoadingLogin, mutateLogin, userData, userLoginError } = useLogin();
-  const [user, setUser] = useLocalStorage<LoginSuccessResponse | null>(
+  const [user, setUser] = useLocalStorage<AuthenticationSuccessResponse | null>(
     "user",
     null
   );
-  const loginFormValues: LoginData = {
-    email: "",
-    password: "",
-  };
 
   useEffect(() => {
     if (userData && userData.token) {
@@ -39,7 +36,7 @@ export default function LoginForm() {
   }, [router, setUser, userData]);
 
   const formik = useFormik({
-    initialValues: loginFormValues,
+    initialValues: loginValues,
     validationSchema: userLoginValidationSchema,
     onSubmit: (values) => {
       mutateLogin(values);
@@ -94,7 +91,7 @@ export default function LoginForm() {
             disabled={!(formik.isValid && formik.dirty)}
             className="dark:text-white"
           >
-            Submit
+            {isLoadingLogin ? <Spinner /> : "Submit"}
           </Button>
         </div>
         <p className="text-center">
