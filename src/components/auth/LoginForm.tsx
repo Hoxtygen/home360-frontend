@@ -1,28 +1,26 @@
-import { useFormik } from "formik";
-import { useEffect } from "react";
 import { setCookie } from "cookies-next";
-
-import BackButton from "components/BackButton";
-import { Button } from "components/Button";
-import Error from "components/Error";
-import { Input } from "components/Input";
-import { userLoginValidationSchema } from "lib/validations";
+import { useFormik } from "formik";
 import { useRouter } from "next/router";
-import { LoginData, LoginSuccessResponse } from "typedef";
-import { useLogin } from "../../hooks/useAuth";
+import { useEffect } from "react";
+
+import BackButton from "components/buttons/BackButton";
+import { Button } from "components/buttons/Button";
+import { Input } from "components/inputs/Input";
+import Spinner from "components/loaders/Spinner";
+import ErrorMessage from "components/shared/ErrorMessage";
 import useLocalStorage from "hooks/useLocalStorage";
+import { useLogin } from "hooks/useLogin";
+import { loginValues, userLoginValidationSchema } from "lib/validations";
+import { toast } from "react-hot-toast";
+import { AuthenticationSuccessResponse } from "typedef";
 
 export default function LoginForm() {
   const router = useRouter();
   const { isLoadingLogin, mutateLogin, userData, userLoginError } = useLogin();
-  const [user, setUser] = useLocalStorage<LoginSuccessResponse | null>(
+  const [user, setUser] = useLocalStorage<AuthenticationSuccessResponse | null>(
     "user",
     null
   );
-  const loginFormValues: LoginData = {
-    email: "",
-    password: "",
-  };
 
   useEffect(() => {
     if (userData && userData.token) {
@@ -33,13 +31,14 @@ export default function LoginForm() {
     }
     if (userData && userData.status === 200) {
       setUser(userData);
+      toast.success(userData.message);
       router.push("/dashboard");
       return;
     }
   }, [router, setUser, userData]);
 
   const formik = useFormik({
-    initialValues: loginFormValues,
+    initialValues: loginValues,
     validationSchema: userLoginValidationSchema,
     onSubmit: (values) => {
       mutateLogin(values);
@@ -59,7 +58,10 @@ export default function LoginForm() {
           <h3>Login Form</h3>
         </div>
         {userLoginError && (
-          <Error error={userLoginError.message} className="text-center mb-4" />
+          <ErrorMessage
+            error={userLoginError.message}
+            className="text-center mb-4"
+          />
         )}
         <div className="mb-5">
           <Input
@@ -71,7 +73,9 @@ export default function LoginForm() {
             onChange={formik.handleChange}
             onBlur={handleBlur}
           />
-          {touched.email && errors.email && <Error error={errors.email!} />}
+          {touched.email && errors.email && (
+            <ErrorMessage error={errors.email!} />
+          )}
         </div>
         <div className="mb-5">
           <Input
@@ -84,7 +88,7 @@ export default function LoginForm() {
             onBlur={handleBlur}
           />
           {touched.password && errors.password && (
-            <Error error={errors.password!} />
+            <ErrorMessage error={errors.password!} />
           )}
         </div>
         <div className="text-center">
@@ -94,7 +98,7 @@ export default function LoginForm() {
             disabled={!(formik.isValid && formik.dirty)}
             className="dark:text-white"
           >
-            Submit
+            {isLoadingLogin ? <Spinner /> : "Submit"}
           </Button>
         </div>
         <p className="text-center">
