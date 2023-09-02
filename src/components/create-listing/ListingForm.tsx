@@ -42,8 +42,6 @@ export default function ListingForm() {
     isLoadingNewListing,
     mutateNewListing,
   } = useCreateListing();
-  console.log("newListingData:", newListingData);
-  console.log("newListingError:", newListingError);
 
   useEffect(() => {
     if (newListingData && newListingData.status === "CREATED") {

@@ -1,26 +1,11 @@
-## Getting Started
+# Home360
 
-## Scripts
+This app is to be used by home seekers to search for accommodation in various part of the country.
 
-`postgres:migrate:dev`: this would be used to create and execute migrations on our postgres database.
+## Getting Started and Installation
 
-`postgres:migrate:dev:create`: this would create a postgres migration file which you can edit before executing.
+Download or clone a copy of this repository to your local machine and do `npm install` or `yarn install`. After that, do `npm run dev` or `yarn dev` to get the repo running.
 
-`prisma`: this is the prisma cli so we can run commands straight from prisma-cli.
+## Status
 
-`postgres:migrate:deploy`: this applies pending migrations to staging, testing, or production environments to your postgres database.
-
-`prisma:postgres:dbpush`: this syncs the prisma/postgres/shema.prisma with the postgres database.
-
-`prisma:mongo:dbpush`: this syncs the prisma/mongo/shema.prisma with the mongo database.
-
-`prisma:generate:mongo_client`: this would generate the prima client for mongo.
-
-`prisma:generate:postgres_client`: this would generate the prisma client for postgres.
-
-`prisma:generate:db_clients`: this would generate the prisma client for postgres and mongo.
-
-`prisma:postgres:seed`: this would seed the postgres database
-
-<!-- https://github.com/jquense/yup/issues/312#issuecomment-442854307 -->
-<!-- https://github.com/jquense/yup/issues/1183 -->
+Still under development.
