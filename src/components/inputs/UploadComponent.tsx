@@ -28,8 +28,6 @@ export default function UploadComponent(props: Props) {
         }
         setUploadedFiles(acceptedFiles);
         const result = await uploadImages(acceptedFiles);
-        console.log("result:", acceptedFiles);
-        console.log("result:", result);
         setFieldValue(name, result);
       },
     });

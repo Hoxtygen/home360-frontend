@@ -45,11 +45,7 @@ export default function DashboardLayout({
         </div>
         <div className="bg-[#FBFBFB] h-screen lg:max-h-screen w-full overflow-y-auto pt-[15%] sm:pt-0 sm:mt-0">
           <div className="">
-            <DashboardHeader
-              title={title}
-              // backTitle={backTitle}
-              // handleTourStart={handleTourStart}
-            />
+            <DashboardHeader title={title} />
           </div>
           <div className="max-h-full px-5 sm:px-10 pt-[25%] sm:pt-28">
             {isLoading ? (

@@ -1,4 +1,5 @@
-import axios, { isAxiosError } from "axios";
+import axios from "axios";
+import errorHandler from "./errorHandler";
 
 export async function uploadImages(files: File[]) {
   if (!files) return;
@@ -22,12 +23,7 @@ export async function uploadImages(files: File[]) {
       responses.forEach((response) => myImages.push(response));
     })
     .catch((error) => {
-      if (error instanceof Error) {
-        return error.message;
-      }
-      if (isAxiosError(error)) {
-        return error.message;
-      }
+      errorHandler(error);
     });
   return myImages;
 }

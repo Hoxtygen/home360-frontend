@@ -88,7 +88,7 @@ export function formatDate(selectedDate: Date) {
   const date = new Date(selectedDate);
   const formatDay = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
   const formatMonth =
-    date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
+    date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth();
   const result = [date.getFullYear(), formatMonth, formatDay].join("-");
   return result;
 }

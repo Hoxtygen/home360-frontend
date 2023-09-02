@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode } from "react";
 import Image from "next/image";
 
 import { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import clsx from "clsx";
 export interface DashboardHeaderProps {
   backTitle?: ReactNode;
   title?: string;
+  // eslint-disable-next-line unused-imports/no-unused-vars
   handleTourStart?: (e: React.MouseEvent<HTMLElement>) => void;
   accounts?: any[];
   membershipNumber?: any;
@@ -18,12 +19,7 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
   title,
   handleTourStart,
 }) => {
-  const [isWindowLoaded, setIsWindowLoaded] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    window.document && setIsWindowLoaded(true);
-  }, []);
 
   return (
     <>
@@ -68,9 +64,9 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
             </span>
           )}
           <span
-            className={`font-Open-Sans ${
+            className={`font-Open-Sans text-lg ${
               backTitle && "underline"
-            } truncate lg:w-[inherit] w-56`}
+            } truncate lg:w-[inherit] w-56 text-lg font-semibold`}
           >
             {title}
           </span>

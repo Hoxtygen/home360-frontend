@@ -39,7 +39,7 @@ export default function RadioGroup({
             id={optionId}
             name={name}
             disabled={disabled}
-            defaultChecked={index === 0}
+            // defaultChecked={index === 0}
             onChange={onChange}
             className={className}
             labelClassName={labelClassName}

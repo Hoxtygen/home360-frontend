@@ -1,6 +1,5 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { Button } from "components/buttons/Button";
-import { useAuth } from "context/AuthContext";
 import { mergeClass } from "lib/utils/utils";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -44,7 +43,6 @@ export default function DashboardSidebar({
   showMobileNav,
   accounts,
 }: MobileHeaderProps) {
-  const { logout } = useAuth();
   const router = useRouter();
   const listingOptions: OptionProps[] = [
     {
@@ -62,7 +60,7 @@ export default function DashboardSidebar({
   ];
 
   const handleLogout = () => {
-    logout();
+    // logout();
     router.replace("/");
   };
   const sidebarLinks: Array<SidebarLinkProps | SidebarOptionProps> = [
@@ -218,7 +216,8 @@ export default function DashboardSidebar({
         <div className="">
           <div className="sm:flex justify-center mb-[50.34px] hidden ">
             <Image
-              src="/icons/arm-dashboard-logo.svg"
+              // src="/icons/arm-dashboard-logo.svg"
+              src="/images/home356.jpg"
               width={102.48}
               height={48.11}
               alt="ARM Logo"
@@ -250,7 +249,7 @@ export default function DashboardSidebar({
           <Button
             variant="destructive"
             className="flex justify-start  w-full h-11 px-[18.5px] rounded-md mb-5 text-16 hover:bg-primary-disabled text-white font-semibold"
-            onClick={() => handleLogout()}
+            onClick={() => console.log("Logging out")}
           >
             <>
               <span className="flex items-center">

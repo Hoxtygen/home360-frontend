@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { Formik } from "formik";
+import { toast } from "react-hot-toast";
+
 import { Button } from "components/buttons/Button";
 import AutoTextArea from "components/inputs/AutoTextArea";
 import { ButtonAroundInput } from "components/inputs/ButtonAroundInput";
@@ -6,7 +10,7 @@ import { CustomSelect } from "components/inputs/CustomSelect";
 import InputLabel from "components/inputs/InputLabel";
 import RadioGroup from "components/inputs/RadioGroup";
 import UploadComponent from "components/inputs/UploadComponent";
-import Error from "components/shared/Error";
+import ErrorMessage from "components/shared/ErrorMessage";
 import NigerianStates from "constants/nigeria-states";
 import {
   apartmentDetails,
@@ -15,30 +19,58 @@ import {
   facilityQuality,
   petsAllowed,
 } from "constants/staticData";
-import { Formik } from "formik";
 import {
   addValues,
   formatCurrency,
-  formatDate,
   getRemainingCharacter,
 } from "lib/utils/utils";
 import {
   initialValues,
   newListingValidationSchema,
 } from "lib/validations/listingValidation";
-import { useState } from "react";
 import { Input } from "../inputs/Input";
+import useCreateListing from "hooks/useCreateListing";
+import LoadingScreen from "../shared/LoadingScreen";
+import { displayError } from "components/auth/SignupForm";
 
 export default function ListingForm() {
   const [lgas, setLgas] = useState<string[] | undefined>([]);
   const maxCharacter = 2000;
+  const {
+    newListingData,
+    newListingError,
+    isLoadingNewListing,
+    mutateNewListing,
+  } = useCreateListing();
+  console.log("newListingData:", newListingData);
+  console.log("newListingError:", newListingError);
 
+  useEffect(() => {
+    if (newListingData && newListingData.status === "CREATED") {
+      toast.success(newListingData.message);
+    }
+  });
+  if (isLoadingNewListing) {
+    return (
+      <div>
+        <LoadingScreen />
+        <span className="block text-center font-Open-Sans">
+          Submitting your new listing, please wait...
+        </span>
+      </div>
+    );
+  }
   return (
     <div className=" border-slate-300 border m-auto md:w-3/4 lg:w-3/4 p-4 max-w-xl">
       <Formik
         initialValues={initialValues}
         validationSchema={newListingValidationSchema}
-        onSubmit={(values) => console.log("form values: ", values)}
+        onSubmit={(values, actions) => {
+          mutateNewListing(values);
+          if (newListingData && newListingData.status === "CREATED") {
+            actions.resetForm();
+          }
+        }}
       >
         {({
           values,
@@ -52,6 +84,10 @@ export default function ListingForm() {
           dirty,
         }) => (
           <form onSubmit={handleSubmit}>
+            {newListingError?.message && (
+              <ErrorMessage error={newListingError.message} />
+            )}
+            {newListingError?.errors && displayError(newListingError.errors)}
             <div className="">
               <h2 className="mb-4 font-semibold">Description</h2>
               <div className="mb-4">
@@ -67,7 +103,7 @@ export default function ListingForm() {
                   id="title"
                 />
                 {touched.title && errors.title && (
-                  <Error error={errors.title} />
+                  <ErrorMessage error={errors.title} />
                 )}
               </div>
               <div className="mb-4">
@@ -91,7 +127,7 @@ export default function ListingForm() {
                   characters remaining
                 </p>
                 {touched.description && errors.description && (
-                  <Error error={errors.description} />
+                  <ErrorMessage error={errors.description} />
                 )}
               </div>
               <div className="mb-5">
@@ -115,7 +151,7 @@ export default function ListingForm() {
                   characters remaining
                 </p>
                 {touched.furnishing && errors.furnishing && (
-                  <Error error={errors.furnishing} />
+                  <ErrorMessage error={errors.furnishing} />
                 )}
               </div>
               <div className="mb-5">
@@ -139,7 +175,7 @@ export default function ListingForm() {
                   characters remaining
                 </p>
                 {touched.position && errors.position && (
-                  <Error error={errors.position} />
+                  <ErrorMessage error={errors.position} />
                 )}
               </div>
               <div className="mb-5">
@@ -163,7 +199,7 @@ export default function ListingForm() {
                   characters remaining
                 </p>
                 {touched.miscellaneous && errors.miscellaneous && (
-                  <Error error={errors.miscellaneous} />
+                  <ErrorMessage error={errors.miscellaneous} />
                 )}
               </div>
             </div>
@@ -184,7 +220,7 @@ export default function ListingForm() {
                   />
                   {touched.address?.streetName &&
                     errors.address?.streetName && (
-                      <Error error={errors.address?.streetName} />
+                      <ErrorMessage error={errors.address?.streetName} />
                     )}
                 </div>
                 <div className="basis-2/12">
@@ -200,7 +236,7 @@ export default function ListingForm() {
                     id="houseNumber"
                   />
                   {errors.address?.houseNumber && (
-                    <Error error={errors.address?.houseNumber} />
+                    <ErrorMessage error={errors.address?.houseNumber} />
                   )}
                 </div>
               </div>
@@ -234,7 +270,7 @@ export default function ListingForm() {
                       ))}
                     </select>
                     {touched.address?.state && errors.address?.state && (
-                      <Error error={errors.address.state} />
+                      <ErrorMessage error={errors.address.state} />
                     )}
                   </div>
                   <div className="lg:w-5/12 mb-4">
@@ -259,7 +295,7 @@ export default function ListingForm() {
                         ))}
                     </select>
                     {touched.address?.lga && errors.address?.lga && (
-                      <Error error={errors.address.lga} />
+                      <ErrorMessage error={errors.address.lga} />
                     )}
                   </div>
                 </div>
@@ -276,7 +312,7 @@ export default function ListingForm() {
                     id="city"
                   />
                   {touched.address?.city && errors.address?.city && (
-                    <Error error={errors.address?.city} />
+                    <ErrorMessage error={errors.address?.city} />
                   )}
                 </div>
               </div>
@@ -293,12 +329,13 @@ export default function ListingForm() {
                     className="rounded-md dark:text-black text-base w-full"
                     label="Available from"
                     onChange={handleChange}
-                    value={formatDate(values.availableFrom)}
+                    // value={formatDate(values.availableFrom)}
+                    value={values.availableFrom}
                     onBlur={handleBlur}
                     id="availableFrom"
                   />
                   {touched.availableFrom && errors.availableFrom && (
-                    <Error error={String(errors.availableFrom)} />
+                    <ErrorMessage error={String(errors.availableFrom)} />
                   )}
                 </div>
                 <div className="basis-5/12">
@@ -330,7 +367,7 @@ export default function ListingForm() {
                   />
                   {touched.apartmentInfo?.roomNums &&
                     errors.apartmentInfo?.roomNums && (
-                      <Error error={errors.apartmentInfo?.roomNums} />
+                      <ErrorMessage error={errors.apartmentInfo?.roomNums} />
                     )}
                 </div>
               </div>
@@ -350,7 +387,7 @@ export default function ListingForm() {
                       value={values.cost.annualRent}
                     />
                     {touched.cost?.annualRent && errors.cost?.annualRent && (
-                      <Error error={errors.cost?.annualRent} />
+                      <ErrorMessage error={errors.cost?.annualRent} />
                     )}
                   </div>
 
@@ -368,7 +405,7 @@ export default function ListingForm() {
                       value={values.cost?.agentFee}
                     />
                     {touched.cost?.agentFee && errors.cost?.agentFee && (
-                      <Error error={errors.cost?.agentFee} />
+                      <ErrorMessage error={errors.cost?.agentFee} />
                     )}
                   </div>
                   <div className="mb-4">
@@ -385,7 +422,7 @@ export default function ListingForm() {
                       value={values.cost.cautionFee}
                     />
                     {touched.cost?.cautionFee && errors.cost?.cautionFee && (
-                      <Error error={errors.cost?.cautionFee} />
+                      <ErrorMessage error={errors.cost?.cautionFee} />
                     )}
                   </div>
                   <div className="mb-4">
@@ -403,7 +440,7 @@ export default function ListingForm() {
                     />
                     {touched.cost?.agreementFee &&
                       errors.cost?.agreementFee && (
-                        <Error error={errors.cost?.agreementFee} />
+                        <ErrorMessage error={errors.cost?.agreementFee} />
                       )}
                   </div>
                 </div>
@@ -458,7 +495,7 @@ export default function ListingForm() {
                 name="facilityQuality"
               />
               {touched.facilityQuality && errors.facilityQuality && (
-                <Error error={errors.facilityQuality} />
+                <ErrorMessage error={errors.facilityQuality} />
               )}
               <RadioGroup
                 options={petsAllowed}
@@ -468,7 +505,7 @@ export default function ListingForm() {
                 name="petsAllowed"
               />
               {touched.petsAllowed && errors.petsAllowed && (
-                <Error error={errors.petsAllowed} />
+                <ErrorMessage error={errors.petsAllowed} />
               )}
               <div className="sm:flex flex-wrap justify-between">
                 <div className="basis-5/12 mb-4">
@@ -484,7 +521,9 @@ export default function ListingForm() {
                   />
                   {touched.apartmentInfo?.apartmentType &&
                     errors.apartmentInfo?.apartmentType && (
-                      <Error error={errors.apartmentInfo?.apartmentType} />
+                      <ErrorMessage
+                        error={errors.apartmentInfo?.apartmentType}
+                      />
                     )}
                 </div>
                 <div className="basis-5/12 mb-4">
@@ -516,7 +555,9 @@ export default function ListingForm() {
                   />
                   {touched.apartmentInfo?.bathroomNums &&
                     errors.apartmentInfo?.bathroomNums && (
-                      <Error error={errors.apartmentInfo?.bathroomNums} />
+                      <ErrorMessage
+                        error={errors.apartmentInfo?.bathroomNums}
+                      />
                     )}
                 </div>
                 <div className="mb-4">
@@ -548,7 +589,7 @@ export default function ListingForm() {
                   />
                   {touched.apartmentInfo?.bedroomNums &&
                     errors.apartmentInfo?.bedroomNums && (
-                      <Error error={errors.apartmentInfo?.bedroomNums} />
+                      <ErrorMessage error={errors.apartmentInfo?.bedroomNums} />
                     )}
                 </div>
               </div>
@@ -581,7 +622,7 @@ export default function ListingForm() {
                 setFieldValue={setFieldValue}
               />
               {touched.apartmentImages && errors.apartmentImages && (
-                <Error error={errors.apartmentImages.toString()} />
+                <ErrorMessage error={errors.apartmentImages.toString()} />
               )}
             </div>
             <div className="">

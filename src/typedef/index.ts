@@ -1,20 +1,3 @@
-import { Listing } from "@prisma/mongo/client";
-import { Prisma, User } from "@prisma/postgres/client";
-
-export type NewUser = Omit<User, "createdAt" | "updatedAt" | "id">;
-
-export type IUser = Omit<User, "password">;
-
-export type IListing = Listing;
-
-const userWithListings = Prisma.validator<Prisma.UserArgs>()({
-  // include: { listings: true },
-});
-
-export type UserWithListings = Omit<
-  Prisma.UserGetPayload<typeof userWithListings>,
-  "password" | "createdAt" | "updatedAt"
->;
 export type AuthPayload = {
   status: number;
   message: string;
@@ -22,8 +5,6 @@ export type AuthPayload = {
   name: string;
   email: string;
 };
-
-export type INewListing = Omit<Listing, "id">;
 
 export type BuildingType =
   | "apartment"
@@ -78,7 +59,7 @@ export type AdviceProps = {
   title: string;
   lesson: string;
   backgroundImage: string;
-}
+};
 
 export type AuthenticationSuccessResponse = {
   status: number;
@@ -109,7 +90,6 @@ export type NewUserSignup = {
 
 export type EventHandlers = Record<string, React.EventHandler<any>>;
 
-
 type Address = {
   streetName: string;
   houseNumber?: string;
@@ -132,14 +112,14 @@ type ApartmentInfo = {
   apartmentType: string;
 };
 
-export type CreateListingProps = {
+export type ListingProps = {
   title: string;
   description: string;
   furnishing: string;
   position?: string;
   miscellaneous?: string;
   address: Address;
-  availableFrom: Date;
+  availableFrom: any;
   cost: ListingCost;
   details: string[];
   facilityQuality: string;
@@ -148,3 +128,11 @@ export type CreateListingProps = {
   applicationDocs: string[];
   apartmentImages: string[];
 };
+
+export type ListingResponse = {
+  status: string;
+  message: string;
+  data: ListingData;
+};
+
+export type ListingData = { id: string } & ListingProps;

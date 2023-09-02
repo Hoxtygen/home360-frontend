@@ -3,15 +3,16 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import BackButton from "components/BackButton";
-import { Button } from "components/Button";
-import Error from "components/Error";
-import { Input } from "components/Input";
+import BackButton from "components/buttons/BackButton";
+import { Button } from "components/buttons/Button";
+import { Input } from "components/inputs/Input";
 import Spinner from "components/loaders/Spinner";
+import ErrorMessage from "components/shared/ErrorMessage";
 import useLocalStorage from "hooks/useLocalStorage";
+import { useLogin } from "hooks/useLogin";
 import { loginValues, userLoginValidationSchema } from "lib/validations";
+import { toast } from "react-hot-toast";
 import { AuthenticationSuccessResponse } from "typedef";
-import { useLogin } from "../../hooks/useLogin";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function LoginForm() {
     }
     if (userData && userData.status === 200) {
       setUser(userData);
+      toast.success(userData.message);
       router.push("/dashboard");
       return;
     }
@@ -56,7 +58,10 @@ export default function LoginForm() {
           <h3>Login Form</h3>
         </div>
         {userLoginError && (
-          <Error error={userLoginError.message} className="text-center mb-4" />
+          <ErrorMessage
+            error={userLoginError.message}
+            className="text-center mb-4"
+          />
         )}
         <div className="mb-5">
           <Input
@@ -68,7 +73,9 @@ export default function LoginForm() {
             onChange={formik.handleChange}
             onBlur={handleBlur}
           />
-          {touched.email && errors.email && <Error error={errors.email!} />}
+          {touched.email && errors.email && (
+            <ErrorMessage error={errors.email!} />
+          )}
         </div>
         <div className="mb-5">
           <Input
@@ -81,7 +88,7 @@ export default function LoginForm() {
             onBlur={handleBlur}
           />
           {touched.password && errors.password && (
-            <Error error={errors.password!} />
+            <ErrorMessage error={errors.password!} />
           )}
         </div>
         <div className="text-center">
