@@ -35,7 +35,7 @@ export default function useLocalStorage<T>(
   }, [initialValue, key]);
 
   // State to store our value
-  // Pass initial state funtion to useState so login is only executed once
+  // Pass initial state function to useState so login is only executed once
   const [storedValue, setStoredValue] = useState<T>(readValue);
   // Return a wrapped version of useState's setter function that persists the new value to localStorage
   const setValue: SetValue<T> = useEventCallback((value) => {

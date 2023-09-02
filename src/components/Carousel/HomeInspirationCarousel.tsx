@@ -1,5 +1,5 @@
 import homeInspirationData from "constants/homeInspData.json";
-import HouseCard from "../HouseCard";
+import HouseCard from "../landing-page/HouseCard";
 import Carousel from "./Carousel";
 
 export default function HomeInspirationCarousel() {
