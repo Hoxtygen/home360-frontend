@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Home365 from "../../public/images/home356.jpg";
+import Home365 from "../../../public/images/home356.jpg";
 
 type LogoSizes = "lg" | "md" | "sm" | "xs";
 type LogoDimensions = {

@@ -1,7 +1,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 import Link from "next/link";
 import { ButtonHTMLAttributes, forwardRef } from "react";
-import { mergeClass } from "../lib/utils/utils";
+import { mergeClass } from "../../lib/utils/utils";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none  focus:ring-slate-400  dark:hover:bg-slate-800 dark:hover:text-slate-100 disabled:bg-gray-300  disabled:pointer-events-none  data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800",

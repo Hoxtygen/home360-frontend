@@ -1,15 +1,15 @@
-import BackButton from "components/BackButton";
-import { Button } from "components/Button";
-import Error from "components/Error";
 import { useFormik } from "formik";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 
+import BackButton from "components/buttons/BackButton";
+import { Button } from "components/buttons/Button";
+import { Input } from "components/inputs/Input";
+import Spinner from "components/loaders/Spinner";
+import useSignup from "hooks/useSignup";
 import { userSignupValidationSchema, userSignupValues } from "lib/validations";
 import { useRouter } from "next/router";
-import { Input } from "../Input";
-import useSignup from "hooks/useSignup";
-import Spinner from "components/loaders/Spinner";
-import { useEffect } from "react";
+import ErrorMessage from "../shared/ErrorMessage";
 
 export default function SignupForm() {
   const router = useRouter();
@@ -34,16 +34,6 @@ export default function SignupForm() {
 
   const { errors, touched, handleBlur, handleSubmit } = formik;
 
-  function displayError(signupError: string[] | string) {
-    if (typeof signupError === "string") {
-      return <Error error={signupError} className="text-center mb-2" />;
-    } else {
-      return signupError.map((err, index) => (
-        <Error key={index} error={err} className="text-center mb-2" />
-      ));
-    }
-  }
-
   return (
     <form onSubmit={handleSubmit} className="border p-4 bg-white">
       <div className="flex items-center mb-8">
@@ -55,7 +45,10 @@ export default function SignupForm() {
       </div>
       {userSignupError?.errors && displayError(userSignupError?.errors)}
       {userSignupError?.message && (
-        <Error error={userSignupError.message} className="text-center mb-2" />
+        <ErrorMessage
+          error={userSignupError.message}
+          className="text-center mb-2"
+        />
       )}
       <div className=" mb-5">
         <Input
@@ -68,7 +61,7 @@ export default function SignupForm() {
           onBlur={handleBlur}
         />
         {touched.firstName && errors.firstName && (
-          <Error error={errors.firstName!} />
+          <ErrorMessage error={errors.firstName!} />
         )}
       </div>
       <div className=" mb-5">
@@ -82,7 +75,7 @@ export default function SignupForm() {
           onBlur={handleBlur}
         />
         {touched.lastName && errors.lastName && (
-          <Error error={errors.lastName!} />
+          <ErrorMessage error={errors.lastName!} />
         )}
       </div>
       <div className=" mb-5">
@@ -95,7 +88,9 @@ export default function SignupForm() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {touched.email && errors.email && <Error error={errors.email!} />}
+        {touched.email && errors.email && (
+          <ErrorMessage error={errors.email!} />
+        )}
       </div>
       <div className=" mb-5">
         <Input
@@ -107,7 +102,9 @@ export default function SignupForm() {
           onChange={formik.handleChange}
           onBlur={handleBlur}
         />
-        {touched.address && errors.address && <Error error={errors.address!} />}
+        {touched.address && errors.address && (
+          <ErrorMessage error={errors.address!} />
+        )}
       </div>
       <div className=" mb-5">
         <Input
@@ -120,7 +117,7 @@ export default function SignupForm() {
           onBlur={handleBlur}
         />
         {touched.phoneNumber && errors.phoneNumber && (
-          <Error error={errors.phoneNumber!} />
+          <ErrorMessage error={errors.phoneNumber!} />
         )}
       </div>
       <div className=" mb-5">
@@ -134,7 +131,7 @@ export default function SignupForm() {
           onBlur={handleBlur}
         />
         {touched.password && errors.password && (
-          <Error error={errors.password!} />
+          <ErrorMessage error={errors.password!} />
         )}
       </div>
       <div className="text-center">
@@ -161,4 +158,14 @@ export default function SignupForm() {
       </p>
     </form>
   );
+}
+
+export function displayError(signupError: string[] | string) {
+  if (typeof signupError === "string") {
+    return <ErrorMessage error={signupError} className="text-center mb-2" />;
+  } else {
+    return signupError.map((err, index) => (
+      <ErrorMessage key={index} error={err} className="text-center mb-2" />
+    ));
+  }
 }

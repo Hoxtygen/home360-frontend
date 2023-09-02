@@ -10,9 +10,6 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "release": "release-it",
-    "test:integration": "dotenv -e .env.test.local -- jest -i",
-    "test:unit": "jest --watch",
-    "migrate:test": "dotenv -e .env.test.local -- npx prisma migrate deploy",
     "find-deadcode": "ts-prune"
   },
   "dependencies": {
@@ -32,11 +29,13 @@
     "formik": "^2.2.9",
     "jest": "^29.5.0",
     "jose": "^4.12.2",
+    "lottie-web": "^5.12.2",
     "lucide-react": "^0.118.0",
     "next": "13.2.1",
     "next-auth": "^4.19.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^1.10.0",
     "yup": "^1.1.1"

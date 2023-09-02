@@ -6,7 +6,7 @@ interface ErrorProps {
   className?: string;
 }
 
-export default function Error({ error, className }: ErrorProps) {
+export default function ErrorMessage({ error, className }: ErrorProps) {
   return (
     <p className={mergeClass("text-red-500 text-[12px]", className)}>{error}</p>
   );

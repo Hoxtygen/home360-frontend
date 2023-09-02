@@ -1,5 +1,22 @@
-export type OptionValue = string | number;
+export type AuthPayload = {
+  status: number;
+  message: string;
+  token: string;
+  name: string;
+  email: string;
+};
+
 export type BuildingType =
+  | "apartment"
+  | "house"
+  | "shared-room"
+  | "temp-living"
+  | "office"
+  | "hall"
+  | "nursing-home";
+
+export type BuildingPurposeLabels = "Rent" | "Buy" | "Build";
+export type BuildingTypeLabels =
   | "Apartment"
   | "House"
   | "Temporary Living"
@@ -8,27 +25,24 @@ export type BuildingType =
   | "Hall"
   | "Nursing Home";
 
-export type BuildingPurpose = "Rent" | "Buy" | "Build";
+export type BuildingPurpose = "rent" | "buy" | "build";
 
-export type SelectOption<T> = {
-  label: T;
-  value: string;
-};
+export type OptionValue = string;
 
-export type MyType<T, P extends keyof T> = {
-  label: P;
-  value: T[P];
+export type SelectOption<T extends OptionValue> = {
+  label: string;
+  value: T;
 };
 
 type LocalStorageUserData = {
-  name: string;
-  id: string;
   email: string;
+  id: string;
+  name: string;
 };
-export interface LocalStorageUserInfo {
+export type LocalStorageUserInfo = {
   token: string;
   user: LocalStorageUserData;
-}
+};
 
 export type AuthState = {
   user: LocalStorageUserInfo | null;
@@ -40,12 +54,12 @@ export type LoginData = {
   email: string;
   password: string;
 };
-export interface AdviceProps {
+export type AdviceProps = {
   href: string;
   title: string;
   lesson: string;
   backgroundImage: string;
-}
+};
 
 export type AuthenticationSuccessResponse = {
   status: number;
@@ -75,3 +89,50 @@ export type NewUserSignup = {
 };
 
 export type EventHandlers = Record<string, React.EventHandler<any>>;
+
+type Address = {
+  streetName: string;
+  houseNumber?: string;
+  city: string;
+  state: string;
+  lga: string;
+};
+
+type ListingCost = {
+  annualRent: string;
+  agentFee?: string;
+  cautionFee?: string;
+  agreementFee?: string;
+};
+
+type ApartmentInfo = {
+  roomNums: string;
+  bathroomNums: string;
+  bedroomNums: string;
+  apartmentType: string;
+};
+
+export type ListingProps = {
+  title: string;
+  description: string;
+  furnishing: string;
+  position?: string;
+  miscellaneous?: string;
+  address: Address;
+  availableFrom: any;
+  cost: ListingCost;
+  details: string[];
+  facilityQuality: string;
+  petsAllowed: string;
+  apartmentInfo: ApartmentInfo;
+  applicationDocs: string[];
+  apartmentImages: string[];
+};
+
+export type ListingResponse = {
+  status: string;
+  message: string;
+  data: ListingData;
+};
+
+export type ListingData = { id: string } & ListingProps;
