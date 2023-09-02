@@ -1,17 +1,18 @@
 import { authLinks, navList } from "constants/staticData";
-import useLocalStorage from "hooks/useLocalStorage";
 import useWindowSize from "hooks/useWindowSize";
-import { AuthenticationSuccessResponse } from "typedef";
-import { Button, ButtonSizes } from "../buttons/Button";
-import Logo from "../shared/Logo";
+import { Button, ButtonSizes } from "../Button";
+import Logo from "../Logo";
+import useLocalStorage from "hooks/useLocalStorage";
+import { LoginSuccessResponse } from "typedef";
 
 export default function Header() {
   const { width } = useWindowSize();
   const buttonSize: ButtonSizes = width > 748 ? "lg" : "sm";
-  const [user, setUser] = useLocalStorage<AuthenticationSuccessResponse | null>(
+  const [user, setUser] = useLocalStorage<LoginSuccessResponse | null>(
     "user",
     null
   );
+  console.log("localstorage:", user);
 
   return (
     <header className="py-10 text-white border-b-2 sticky top-0 z-50">
