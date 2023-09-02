@@ -1,5 +1,5 @@
 import { footerNavList } from "constants/staticData";
-import { Button } from "../buttons/Button";
+import { Button } from "../Button";
 import Slogan from "./Slogan";
 
 export default function Footer() {

@@ -12,6 +12,7 @@ function useEventListener<K extends keyof MediaQueryListEventMap>(
 ): void;
 
 // Window Event based useEventListener interface
+
 function useEventListener<K extends keyof WindowEventMap>(
   eventName: K,
   handler: (event: WindowEventMap[K]) => void,

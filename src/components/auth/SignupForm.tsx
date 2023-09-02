@@ -1,41 +1,76 @@
+import { isAxiosError } from "axios";
+import BackButton from "components/BackButton";
+import { Button } from "components/Button";
+import Error from "components/Error";
+import { userInitialData } from "constants/staticData";
+import { SIGNUP_URL } from "constants/urls";
 import { useFormik } from "formik";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-
-import BackButton from "components/buttons/BackButton";
-import { Button } from "components/buttons/Button";
-import { Input } from "components/inputs/Input";
-import Spinner from "components/loaders/Spinner";
-import useSignup from "hooks/useSignup";
-import { userSignupValidationSchema, userSignupValues } from "lib/validations";
+import useLocalStorage from "hooks/useLocalStorage";
+import fetcher from "lib/utils/requestHandler";
+import { userSignupValidationSchema } from "lib/validations";
 import { useRouter } from "next/router";
-import ErrorMessage from "../shared/ErrorMessage";
+import { useState } from "react";
+import { Input } from "../Input";
+
+type RegError = {
+  field: string;
+  errorMessage: string;
+};
 
 export default function SignupForm() {
+  const [_, setUser] = useLocalStorage("user", userInitialData);
+  const [error, setError] = useState<RegError[] | null | string>(null);
   const router = useRouter();
-
-  const { isLoadingUserSignup, mutateSignup, userSignupData, userSignupError } =
-    useSignup();
-
+  const formValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    phoneNumber: "",
+    password: "",
+  };
   const formik = useFormik({
-    initialValues: userSignupValues,
+    initialValues: formValues,
     validationSchema: userSignupValidationSchema,
     onSubmit: (values) => {
-      mutateSignup(values);
+      handleRegister(values);
     },
   });
 
-  useEffect(() => {
-    if (userSignupData?.status === 201) {
-      toast.success(userSignupData.message);
-      router.push("/login");
+  async function handleRegister(data: any) {
+    try {
+      const response = await fetcher(SIGNUP_URL, {
+        method: "POST",
+        data: data,
+      });
+      // setUser(response.data.data);
+      router.push("/dashboard");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        setError(error?.response?.data.error);
+      } else {
+        setError("something went wrong");
+      }
     }
-  }, [router, userSignupData?.message, userSignupData?.status]);
+  }
+  const { errors, touched, handleBlur } = formik;
 
-  const { errors, touched, handleBlur, handleSubmit } = formik;
+  function displayError(signupError: RegError[] | string) {
+    if (typeof signupError === "string") {
+      return <Error error={signupError} className="text-center mb-2" />;
+    } else {
+      return signupError.map((err) => (
+        <Error
+          key={err.field}
+          error={err.errorMessage}
+          className="text-center mb-1"
+        />
+      ));
+    }
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="border p-4 bg-white">
+    <form onSubmit={formik.handleSubmit} className="border p-4 bg-white">
       <div className="flex items-center mb-8">
         <BackButton
           className="pr-14"
@@ -43,13 +78,7 @@ export default function SignupForm() {
         />
         <h3 className="align-middle">Registration Form</h3>
       </div>
-      {userSignupError?.errors && displayError(userSignupError?.errors)}
-      {userSignupError?.message && (
-        <ErrorMessage
-          error={userSignupError.message}
-          className="text-center mb-2"
-        />
-      )}
+      {error && displayError(error)}
       <div className=" mb-5">
         <Input
           placeholder="Enter first name"
@@ -61,7 +90,7 @@ export default function SignupForm() {
           onBlur={handleBlur}
         />
         {touched.firstName && errors.firstName && (
-          <ErrorMessage error={errors.firstName!} />
+          <Error error={errors.firstName!} />
         )}
       </div>
       <div className=" mb-5">
@@ -75,7 +104,7 @@ export default function SignupForm() {
           onBlur={handleBlur}
         />
         {touched.lastName && errors.lastName && (
-          <ErrorMessage error={errors.lastName!} />
+          <Error error={errors.lastName!} />
         )}
       </div>
       <div className=" mb-5">
@@ -88,9 +117,7 @@ export default function SignupForm() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {touched.email && errors.email && (
-          <ErrorMessage error={errors.email!} />
-        )}
+        {touched.email && errors.email && <Error error={errors.email!} />}
       </div>
       <div className=" mb-5">
         <Input
@@ -102,9 +129,7 @@ export default function SignupForm() {
           onChange={formik.handleChange}
           onBlur={handleBlur}
         />
-        {touched.address && errors.address && (
-          <ErrorMessage error={errors.address!} />
-        )}
+        {touched.address && errors.address && <Error error={errors.address!} />}
       </div>
       <div className=" mb-5">
         <Input
@@ -117,7 +142,7 @@ export default function SignupForm() {
           onBlur={handleBlur}
         />
         {touched.phoneNumber && errors.phoneNumber && (
-          <ErrorMessage error={errors.phoneNumber!} />
+          <Error error={errors.phoneNumber!} />
         )}
       </div>
       <div className=" mb-5">
@@ -131,17 +156,17 @@ export default function SignupForm() {
           onBlur={handleBlur}
         />
         {touched.password && errors.password && (
-          <ErrorMessage error={errors.password!} />
+          <Error error={errors.password!} />
         )}
       </div>
       <div className="text-center">
         <Button
           size="xl"
           type="submit"
-          disabled={!(formik.isValid && formik.dirty) || isLoadingUserSignup}
+          disabled={!(formik.isValid && formik.dirty)}
           className="dark:text-white"
         >
-          {isLoadingUserSignup ? <Spinner /> : "Submit"}
+          Submit
         </Button>
       </div>
       <p className="text-center">
@@ -158,14 +183,4 @@ export default function SignupForm() {
       </p>
     </form>
   );
-}
-
-export function displayError(signupError: string[] | string) {
-  if (typeof signupError === "string") {
-    return <ErrorMessage error={signupError} className="text-center mb-2" />;
-  } else {
-    return signupError.map((err, index) => (
-      <ErrorMessage key={index} error={err} className="text-center mb-2" />
-    ));
-  }
 }
