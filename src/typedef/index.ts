@@ -1,22 +1,31 @@
-export type AuthPayload = {
+import { Prisma, User, Listing } from "@prisma/client";
+
+export type NewUser = Omit<User, "createdAt" | "updatedAt" | "id">;
+
+export type IUser = Omit<User, "password">;
+
+export type IListing = Listing;
+
+const userWithListings = Prisma.validator<Prisma.UserArgs>()({
+  include: { listings: true },
+});
+
+export type UserWithListings = Omit<
+  Prisma.UserGetPayload<typeof userWithListings>,
+  "password" | "createdAt" | "updatedAt"
+>;
+export interface AuthPayload {
   status: number;
   message: string;
   token: string;
   name: string;
   email: string;
-};
+}
 
+export type INewListing = Omit<Listing, "id">;
+
+export type OptionValue = string | number;
 export type BuildingType =
-  | "apartment"
-  | "house"
-  | "shared-room"
-  | "temp-living"
-  | "office"
-  | "hall"
-  | "nursing-home";
-
-export type BuildingPurposeLabels = "Rent" | "Buy" | "Build";
-export type BuildingTypeLabels =
   | "Apartment"
   | "House"
   | "Temporary Living"
@@ -25,24 +34,27 @@ export type BuildingTypeLabels =
   | "Hall"
   | "Nursing Home";
 
-export type BuildingPurpose = "rent" | "buy" | "build";
+export type BuildingPurpose = "Rent" | "Buy" | "Build";
 
-export type OptionValue = string;
+export type SelectOption<T> = {
+  label: T;
+  value: string;
+};
 
-export type SelectOption<T extends OptionValue> = {
-  label: string;
-  value: T;
+export type MyType<T, P extends keyof T> = {
+  label: P;
+  value: T[P];
 };
 
 type LocalStorageUserData = {
-  email: string;
-  id: string;
   name: string;
+  id: string;
+  email: string;
 };
-export type LocalStorageUserInfo = {
+export interface LocalStorageUserInfo {
   token: string;
   user: LocalStorageUserData;
-};
+}
 
 export type AuthState = {
   user: LocalStorageUserInfo | null;
@@ -54,14 +66,14 @@ export type LoginData = {
   email: string;
   password: string;
 };
-export type AdviceProps = {
+export interface AdviceProps {
   href: string;
   title: string;
   lesson: string;
   backgroundImage: string;
-};
+}
 
-export type AuthenticationSuccessResponse = {
+export type LoginSuccessResponse = {
   status: number;
   token: string;
   email: string;
@@ -70,69 +82,11 @@ export type AuthenticationSuccessResponse = {
   message: string;
 };
 
-export type ApiErrorResponse = {
+export type LoginFailureResponse = {
   status?: string;
   timestamp?: Date;
   message?: string;
   errors: string[] | null;
 };
 
-export type LoginApiResponse = AuthenticationSuccessResponse | ApiErrorResponse;
-
-export type NewUserSignup = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  address: string;
-  phoneNumber: string;
-  password: string;
-};
-
-export type EventHandlers = Record<string, React.EventHandler<any>>;
-
-type Address = {
-  streetName: string;
-  houseNumber?: string;
-  city: string;
-  state: string;
-  lga: string;
-};
-
-type ListingCost = {
-  annualRent: string;
-  agentFee?: string;
-  cautionFee?: string;
-  agreementFee?: string;
-};
-
-type ApartmentInfo = {
-  roomNums: string;
-  bathroomNums: string;
-  bedroomNums: string;
-  apartmentType: string;
-};
-
-export type ListingProps = {
-  title: string;
-  description: string;
-  furnishing: string;
-  position?: string;
-  miscellaneous?: string;
-  address: Address;
-  availableFrom: any;
-  cost: ListingCost;
-  details: string[];
-  facilityQuality: string;
-  petsAllowed: string;
-  apartmentInfo: ApartmentInfo;
-  applicationDocs: string[];
-  apartmentImages: string[];
-};
-
-export type ListingResponse = {
-  status: string;
-  message: string;
-  data: ListingData;
-};
-
-export type ListingData = { id: string } & ListingProps;
+export type LoginApiResponse = LoginSuccessResponse | LoginFailureResponse;

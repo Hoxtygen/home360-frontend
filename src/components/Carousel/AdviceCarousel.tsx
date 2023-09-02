@@ -1,5 +1,5 @@
 import { advice } from "constants/staticData";
-import AdviceCard from "../landing-page/AdviceCard";
+import AdviceCard from "../AdviceCard";
 import Carousel from "./Carousel";
 
 export default function AdviceCarousel() {

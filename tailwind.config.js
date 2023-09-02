@@ -11,11 +11,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        "accent-background": "#82DF4E",
-        "secondary-light-stone": "#D3BCA6",
-        "primary-active": "#A41857",
         "primary-background": "#F5F5F5",
-        "primary-disabled": "#D391AF",
+        "accent-background": "#82DF4E",
       },
     },
   },
