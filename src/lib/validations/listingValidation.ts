@@ -1,5 +1,5 @@
 import { ListingProps } from "typedef";
-import { object, string, date, array, Schema } from "yup";
+import { object, string, date, array, Schema, number } from "yup";
 
 export const initialValues: ListingProps = {
   title: "",
@@ -16,10 +16,10 @@ export const initialValues: ListingProps = {
   },
   availableFrom: new Date(""),
   cost: {
-    annualRent: "",
-    agentFee: "",
-    cautionFee: "",
-    agreementFee: "",
+    annualRent: 0,
+    agentFee: 0,
+    cautionFee: 0,
+    agreementFee: 0,
   },
   details: [],
   facilityQuality: "SIMPLE",
@@ -53,10 +53,14 @@ export const newListingValidationSchema: Schema<ListingProps> = object().shape({
     )
     .required("Date apartment will be available is required"),
   cost: object().shape({
-    annualRent: string().required("Annual rent is required"),
-    agentFee: string(),
-    cautionFee: string(),
-    agreementFee: string(),
+    annualRent: number()
+      .integer()
+      .positive("Must be a postive number")
+      .min(1, "Annual rent must be greater than 0")
+      .required("Annual rent is required"),
+    agentFee: number().integer(),
+    cautionFee: number().integer(),
+    agreementFee: number().integer(),
   }),
   details: array().default([]),
   facilityQuality: string().required("Quality of the facility is required"),

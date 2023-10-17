@@ -215,13 +215,19 @@ export default function DashboardSidebar({
       >
         <div className="">
           <div className="sm:flex justify-center mb-[50.34px] hidden ">
-            <Image
-              // src="/icons/arm-dashboard-logo.svg"
-              src="/images/home356.jpg"
-              width={102.48}
-              height={48.11}
-              alt="ARM Logo"
-            />
+            <Button
+              className="dark:hover:bg-transparent"
+              variant="link"
+              href="/"
+            >
+              <Image
+                // src="/icons/arm-dashboard-logo.svg"
+                src="/images/home356.jpg"
+                width={102.48}
+                height={48.11}
+                alt="ARM Logo"
+              />
+            </Button>
           </div>
           <div className="flex flex-col justify-between lg:mb-1 !h-[73vh] overflow-y-auto overflow-x-hidden sidebar-scrollbar">
             <div>

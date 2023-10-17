@@ -15,7 +15,15 @@ export type BuildingType =
   | "hall"
   | "nursing-home";
 
-export type BuildingPurposeLabels = "Rent" | "Buy" | "Build";
+export type BuildingTypeToBuy =
+  | "Apartment"
+  | "House"
+  | "Office"
+  | "Hall"
+  | "Hotel";
+
+export type BuildingPurposeLabels = "Rent" | "Buy";
+
 export type BuildingTypeLabels =
   | "Apartment"
   | "House"
@@ -25,7 +33,7 @@ export type BuildingTypeLabels =
   | "Hall"
   | "Nursing Home";
 
-export type BuildingPurpose = "rent" | "buy" | "build";
+export type BuildingPurpose = "rent" | "buy";
 
 export type OptionValue = string;
 
@@ -99,10 +107,10 @@ type Address = {
 };
 
 type ListingCost = {
-  annualRent: string;
-  agentFee?: string;
-  cautionFee?: string;
-  agreementFee?: string;
+  annualRent: number;
+  agentFee?: number;
+  cautionFee?: number;
+  agreementFee?: number;
 };
 
 type ApartmentInfo = {
@@ -136,3 +144,29 @@ export type ListingResponse = {
 };
 
 export type ListingData = { id: string } & ListingProps;
+
+export type ListingSearchResponse = {
+  status: string;
+  message: string;
+  data: ListingSearchData;
+};
+
+type ListingSearchData = {
+  currentPage: number;
+  totalItems: number;
+  totalPages: number;
+  items: ListingData[];
+};
+
+export type ListingType =
+  | "not-specified"
+  | "apartment"
+  | "attic"
+  | "basement"
+  | "duplex"
+  | "mezzanine"
+  | "ground-floor-apartment"
+  | "loft"
+  | "penthouse"
+  | "terrace-apartment"
+  | "other";

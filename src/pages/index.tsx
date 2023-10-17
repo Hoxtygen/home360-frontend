@@ -1,4 +1,8 @@
 import Layout from "components/layouts/Layout";
+import { Search } from "components/searchResult/SearchResult";
+import { useSearch } from "hooks/useSearch";
+import { useRouter } from "next/router";
+import { useState, ChangeEvent, FormEvent } from "react";
 import {
   AdviceCarousel,
   HomeInspirationCarousel,
@@ -9,10 +13,37 @@ import SearchForm from "../components/landing-page/SearchForm";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const { mutateSearch } = useSearch();
+  const router = useRouter();
+  const [searchData, setSearchData] = useState<Search>({
+    apartmentType: "not-specified",
+    location: "",
+    price: "",
+  });
+
+  function handleChange(
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    let value: (typeof searchData)[keyof typeof searchData] =
+      event.target.value;
+    setSearchData({ ...searchData, [event.target.name]: value });
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    mutateSearch(searchData);
+    router.push(
+      `/search/?city=${searchData.location}&apartmentType=${searchData.apartmentType}&price=${searchData.price}`
+    );
+  }
   return (
     <main className={styles.main}>
       <Layout>
-        <SearchForm />
+        <SearchForm
+          searchData={searchData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
         <AdBanner />
         <PropertyAssessment />
         <HomeInspirationCarousel />

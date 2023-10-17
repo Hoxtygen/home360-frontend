@@ -2,6 +2,7 @@ import {
   AdviceProps,
   BuildingPurpose,
   BuildingType,
+  BuildingTypeToBuy,
   SelectOption,
 } from "typedef";
 
@@ -35,10 +36,32 @@ export const buildingType: SelectOption<BuildingType>[] = [
     value: "nursing-home",
   },
 ];
+
+export const buildingTypeToBuy: SelectOption<BuildingTypeToBuy>[] = [
+  {
+    label: "Apartment",
+    value: "Apartment",
+  },
+  {
+    label: "Hall",
+    value: "Hall",
+  },
+  {
+    label: "Hotel",
+    value: "Hotel",
+  },
+  {
+    label: "House",
+    value: "House",
+  },
+  {
+    label: "Office",
+    value: "Office",
+  },
+];
 export const buildingPurpose: SelectOption<BuildingPurpose>[] = [
   { label: "Rent", value: "rent" },
   { label: "Buy", value: "buy" },
-  { label: "Build", value: "build" },
 ];
 
 export const advice: AdviceProps[] = [
@@ -98,10 +121,8 @@ export const footerNavList = [
   { id: 1, href: "/", title: "About Us" },
   { id: 2, href: "/", title: "Contact Us" },
   { id: 3, href: "/", title: "Career" },
-  { id: 4, href: "/", title: "Sitemap" },
-  { id: 5, href: "/", title: "Developer" },
-  { id: 6, href: "/", title: "Press Service" },
-  { id: 7, href: "/", title: "Subscribe to Newsletter" },
+  // { id: 4, href: "/", title: "Sitemap" },
+  // { id: 5, href: "/", title: "Developer" },
 ];
 
 export const userInitialData = {
