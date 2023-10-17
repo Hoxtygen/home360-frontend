@@ -221,7 +221,6 @@ export default function DashboardSidebar({
               href="/"
             >
               <Image
-                // src="/icons/arm-dashboard-logo.svg"
                 src="/images/home356.jpg"
                 width={102.48}
                 height={48.11}

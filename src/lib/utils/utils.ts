@@ -59,9 +59,6 @@ export function formatString(str: string): string {
 }
 
 export function formatCurrency(value?: number | string) {
-  // if (value === undefined) {
-  //   return "0.00";
-  // }
   return new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency: "NGN",

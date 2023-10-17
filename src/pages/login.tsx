@@ -1,9 +1,8 @@
+import React from "react";
+import { GetServerSideProps } from "next";
+
 import AuthLayout from "components/auth/AuthLayout";
 import LoginForm from "components/auth/LoginForm";
-// import ErrorMessage from "components/shared/ErrorMessage";
-// import useSearch from "hooks/useSearch";
-import { GetServerSideProps } from "next";
-import React from "react";
 
 export default function Login() {
   return (

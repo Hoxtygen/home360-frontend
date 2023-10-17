@@ -3,7 +3,7 @@ import Image from "next/image";
 import Slider from "react-slick";
 import LocationIcon from "../../../public/icons/location-icon.svg";
 
-type ImageCardProps = {
+type ListingItemProps = {
   imagesUrl?: string[];
   title: string;
   location: string;
@@ -18,7 +18,7 @@ export default function ListingItem({
   annualRent,
   numberOfRooms,
   details,
-}: ImageCardProps) {
+}: ListingItemProps) {
   const slickSettings = {
     infinite: true,
     speed: 1000,

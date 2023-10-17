@@ -121,8 +121,6 @@ export const footerNavList = [
   { id: 1, href: "/", title: "About Us" },
   { id: 2, href: "/", title: "Contact Us" },
   { id: 3, href: "/", title: "Career" },
-  // { id: 4, href: "/", title: "Sitemap" },
-  // { id: 5, href: "/", title: "Developer" },
 ];
 
 export const userInitialData = {
