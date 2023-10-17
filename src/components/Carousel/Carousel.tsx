@@ -16,7 +16,6 @@ const Carousel = <T extends unknown>({
   const maxScrollWidth = useRef<HTMLElement | number>(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef<HTMLDivElement | null>(null);
-  const len = items.length;
   const movePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prevState) => prevState - 1);

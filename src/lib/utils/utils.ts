@@ -59,9 +59,6 @@ export function formatString(str: string): string {
 }
 
 export function formatCurrency(value?: number | string) {
-  if (value === undefined) {
-    return "0.00";
-  }
   return new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency: "NGN",
@@ -102,4 +99,27 @@ export function checkFileSize(file: File) {
     };
   }
   return null;
+}
+
+export function sortByProperty<T>(array: T[], property: string): T[] {
+  return array.sort((a, b) => {
+    const valueA = getProperty(a, property);
+    const valueB = getProperty(b, property);
+
+    if (valueA < valueB) {
+      return -1;
+    }
+    if (valueA > valueB) {
+      return 1;
+    }
+    return 0;
+  });
+}
+
+function getProperty(obj: any, path: string): any {
+  const keys = path.split(".");
+  return keys.reduce(
+    (o, key) => (o && o[key] !== undefined ? o[key] : undefined),
+    obj
+  );
 }

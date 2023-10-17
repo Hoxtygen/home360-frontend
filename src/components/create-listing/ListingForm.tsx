@@ -327,7 +327,6 @@ export default function ListingForm() {
                     className="rounded-md dark:text-black text-base w-full"
                     label="Available from"
                     onChange={handleChange}
-                    // value={formatDate(values.availableFrom)}
                     value={values.availableFrom}
                     onBlur={handleBlur}
                     id="availableFrom"

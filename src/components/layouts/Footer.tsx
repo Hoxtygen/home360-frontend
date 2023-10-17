@@ -4,7 +4,7 @@ import Slogan from "./Slogan";
 
 export default function Footer() {
   return (
-    <footer className="border bg-primary-background py-10 px-8">
+    <footer className="border bg-primary-background py-5 px-8">
       <div className="max-w-5xl md:flex mx-auto justify-between">
         <Slogan />
         <div className="mb-5">

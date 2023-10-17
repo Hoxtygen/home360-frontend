@@ -13,7 +13,7 @@ export default function Slogan() {
         <p>Monthly and Yearly stays</p>
         <p>Anywhere</p>
       </div>
-      <div className="mt-16">
+      <div className="mt-10">
         <Button
           title="Home365 on Youtube"
           aria-label="Home365 on Youtube"

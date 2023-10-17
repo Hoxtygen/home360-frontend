@@ -47,7 +47,13 @@ export default function Header() {
                     {user && user.firstName}
                   </p>
                   <div className="">
-                    <Button variant="destructive">Log out</Button>
+                    <Button
+                      className="dark:hover:bg-transparent dark:hover:text-black"
+                      variant="link"
+                      href="/dashboard"
+                    >
+                      Dashboard
+                    </Button>
                   </div>
                 </div>
               </div>
