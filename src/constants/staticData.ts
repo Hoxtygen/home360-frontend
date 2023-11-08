@@ -110,7 +110,7 @@ export const advice: AdviceProps[] = [
 ];
 type NavLinks = Omit<AdviceProps, "lesson" | "backgroundImage">;
 export const navList: NavLinks[] = [
-  { href: "/", title: "Search" },
+  { href: "/search", title: "Search" },
   { href: "/", title: "Sell" },
   { href: "/", title: "Rent" },
   { href: "/", title: "Finance" },

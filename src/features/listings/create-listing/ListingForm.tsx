@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { Formik } from "formik";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { Button } from "components/buttons/Button";
@@ -19,6 +19,8 @@ import {
   facilityQuality,
   petsAllowed,
 } from "constants/staticData";
+import { displayError } from "features/auth/SignupForm";
+import useCreateListing from "hooks/useCreateListing";
 import {
   addValues,
   formatCurrency,
@@ -28,10 +30,8 @@ import {
   initialValues,
   newListingValidationSchema,
 } from "lib/validations/listingValidation";
-import { Input } from "../inputs/Input";
-import useCreateListing from "hooks/useCreateListing";
-import LoadingScreen from "../shared/LoadingScreen";
-import { displayError } from "components/auth/SignupForm";
+import { Input } from "../../../components/inputs/Input";
+import LoadingScreen from "../../../components/shared/LoadingScreen";
 
 export default function ListingForm() {
   const [lgas, setLgas] = useState<string[] | undefined>([]);

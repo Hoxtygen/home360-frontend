@@ -1,6 +1,6 @@
 import { ListingData } from "@/typedef";
 import SkeletonCard from "components/shared/SkeletonCard";
-import React from "react";
+import Link from "next/link";
 import ListingItem from "./ListingItem";
 
 type ListingProps = {
@@ -16,16 +16,18 @@ export default function Listings({ listings, isLoading }: ListingProps) {
         listings.map((listing) => {
           return (
             <div className="mb-4 bg-[white]" key={listing.id}>
-              <ListingItem
-                imagesUrl={listing.apartmentImages || randomImages}
-                title={listing.title}
-                location={`${listing.address.houseNumber || ""} ${
-                  listing.address.streetName
-                } ${listing.address.city}`}
-                annualRent={listing.cost.annualRent}
-                numberOfRooms={listing.apartmentInfo.roomNums}
-                details={listing.details}
-              />
+              <Link href={`/listing/${listing.id}`}>
+                <ListingItem
+                  imagesUrl={listing.apartmentImages || randomImages}
+                  title={listing.title}
+                  location={`${listing.address.houseNumber || ""} ${
+                    listing.address.streetName
+                  } ${listing.address.city}`}
+                  annualRent={listing.cost.annualRent}
+                  numberOfRooms={listing.apartmentInfo.roomNums}
+                  details={listing.details}
+                />
+              </Link>
             </div>
           );
         })}

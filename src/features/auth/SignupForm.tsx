@@ -9,7 +9,7 @@ import Spinner from "components/loaders/Spinner";
 import useSignup from "hooks/useSignup";
 import { userSignupValidationSchema, userSignupValues } from "lib/validations";
 import { useRouter } from "next/router";
-import ErrorMessage from "../shared/ErrorMessage";
+import ErrorMessage from "../../components/shared/ErrorMessage";
 
 export default function SignupForm() {
   const router = useRouter();

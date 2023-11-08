@@ -7,28 +7,26 @@ import "slick-carousel/slick/slick.css";
 import { ListingType } from "@/typedef";
 import SearchForm from "components/landing-page/SearchForm";
 import Layout from "components/layouts/Layout";
+import SkeletonCard from "components/shared/SkeletonCard";
 import useLocalStorage from "hooks/useLocalStorage";
 import { SearchData, useSearch } from "hooks/useSearch";
-import Listings from "./Listings";
-import SkeletonCard from "components/shared/SkeletonCard";
+import Listings from "../../features/listings/Listings";
+import { QueryParams } from "pages/search";
 
 export type Search = {
   apartmentType: ListingType;
   location: string;
   price: string;
 };
-export default function SearchResult() {
+export default function SearchResult({ searchQueryParams }: QueryParams) {
   const { mutateSearch, listingSearchResult, isListingSearchLoading } =
     useSearch();
   const router = useRouter();
 
-  const { city, apartmentType, price } = router.query;
-  const raw = router.query;
-
   const [searchData, setSearchData] = useState<Search>({
-    apartmentType: apartmentType as ListingType,
-    location: city as string,
-    price: price as string,
+    apartmentType: searchQueryParams.apartmentType,
+    location: searchQueryParams.city,
+    price: searchQueryParams.price,
   });
 
   const [searchedListing, setSearchListing] =
@@ -55,7 +53,7 @@ export default function SearchResult() {
     if (searchedListing !== null) {
       mutateSearch(searchedListing);
     }
-  }, [mutateSearch, raw, searchedListing]);
+  }, [mutateSearch, searchedListing]);
 
   return (
     <main>

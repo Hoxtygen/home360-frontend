@@ -1,6 +1,5 @@
-import CreateListing from "components/create-listing/CreateListing";
+import CreateListing from "features/listings/create-listing/CreateListing";
 import { GetServerSideProps } from "next";
-import React from "react";
 
 export default function NewListing() {
   return <CreateListing />;
