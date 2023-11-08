@@ -3,7 +3,37 @@
 @tailwind utilities;
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+@layer base {
+  @font-face {
+    font-family: "hanken-black";
+    src: url("/fonts/Hanken_Grotesk/HankenGrotesk-Black.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "hanken-regular";
+    src: url("/fonts/Hanken_Grotesk/HankenGrotesk-Regular.ttf")
+      format("truetype");
+  }
+
+  @font-face {
+    font-family: "hanken-medium";
+    src: url("/fonts/Hanken_Grotesk/HankenGrotesk-Medium.ttf")
+      format("truetype");
+  }
+
+  @font-face {
+    font-family: "hanken-semibold";
+    src: url("/fonts/Hanken_Grotesk/HankenGrotesk-SemiBold.ttf")
+      format("truetype");
+  }
+
+  @font-face {
+    font-family: "hanken-light";
+    src: url("/fonts/Hanken_Grotesk/HankenGrotesk-Light.ttf") format("truetype");
+  }
 }
 
 header {

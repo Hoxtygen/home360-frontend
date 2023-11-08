@@ -1,6 +1,6 @@
 import { formatCurrency } from "lib/utils/utils";
 import Image from "next/image";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import LocationIcon from "../../../public/icons/location-icon.svg";
 
 type ListingItemProps = {
@@ -29,7 +29,7 @@ export default function ListingItem({
   return (
     <div className="flex p-3">
       <div className="w-2/5 relative">
-        <Slider {...slickSettings}>
+        {/* <Slider {...slickSettings}>
           {imagesUrl?.map((image, index) => (
             <div className="" key={index}>
               <Image
@@ -47,7 +47,7 @@ export default function ListingItem({
               />
             </div>
           ))}
-        </Slider>
+        </Slider> */}
       </div>
       <div className="pl-7">
         <h3 className="font-semibold text-lg">{title}</h3>

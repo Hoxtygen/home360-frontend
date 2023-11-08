@@ -145,11 +145,18 @@ export type ListingResponse = {
 
 export type ListingData = { id: string } & ListingProps;
 
-export type ListingSearchResponse = {
+export interface ListingBaseResponse {
   status: string;
   message: string;
+}
+
+export interface ListingSearchResponse extends ListingBaseResponse {
   data: ListingSearchData;
-};
+}
+
+export interface ListingDetailResponse extends ListingBaseResponse {
+  data: ListingData;
+}
 
 type ListingSearchData = {
   currentPage: number;

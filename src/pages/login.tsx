@@ -1,8 +1,7 @@
-import React from "react";
 import { GetServerSideProps } from "next";
 
-import AuthLayout from "components/auth/AuthLayout";
-import LoginForm from "components/auth/LoginForm";
+import AuthLayout from "features/auth/AuthLayout";
+import LoginForm from "features/auth/LoginForm";
 
 export default function Login() {
   return (

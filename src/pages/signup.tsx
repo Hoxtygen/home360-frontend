@@ -1,5 +1,5 @@
-import AuthLayout from "components/auth/AuthLayout";
-import SignupForm from "components/auth/SignupForm";
+import AuthLayout from "features/auth/AuthLayout";
+import SignupForm from "features/auth/SignupForm";
 import { GetServerSideProps } from "next";
 
 export default function signup() {

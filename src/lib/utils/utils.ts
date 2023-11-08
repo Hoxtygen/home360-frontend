@@ -83,10 +83,11 @@ export function getRemainingCharacter(
 
 export function formatDate(selectedDate: Date) {
   const date = new Date(selectedDate);
-  const formatDay = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-  const formatMonth =
+  const formattedDay =
+    date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  const formattedMonth =
     date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth();
-  const result = [date.getFullYear(), formatMonth, formatDay].join("-");
+  const result = [formattedDay, formattedMonth, date.getFullYear()].join("-");
   return result;
 }
 
@@ -122,4 +123,12 @@ function getProperty(obj: any, path: string): any {
     (o, key) => (o && o[key] !== undefined ? o[key] : undefined),
     obj
   );
+}
+export function capitalizeFirstCharacter(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+export function replaceSpecialCharactersWithSpace(str: string): string {
+  const specialChars = /[`~!@#$%^&*()_+-=\{\}\|:;"'<>,.?\/\\ ]/g;
+  return str.replace(specialChars, " ");
 }
