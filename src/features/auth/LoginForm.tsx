@@ -90,6 +90,18 @@ export default function LoginForm() {
           {touched.password && errors.password && (
             <ErrorMessage error={errors.password!} />
           )}
+          <p>
+            <small>
+              Forgot Password?click{" "}
+              <Button
+                variant="link"
+                className="dark:bg-transparent dark:hover:underline dark:hover:bg-transparent p-0 dark:hover:text-black"
+                href="/auth/password-reset"
+              >
+                here to reset
+              </Button>
+            </small>
+          </p>
         </div>
         <div className="text-center">
           <Button
@@ -106,7 +118,7 @@ export default function LoginForm() {
             Not registered yet? signup{" "}
             <Button
               className="dark:bg-transparent dark:hover:underline dark:hover:bg-transparent p-0 dark:hover:text-black "
-              href="/signup"
+              href="/auth/signup"
               variant="link"
             >
               here

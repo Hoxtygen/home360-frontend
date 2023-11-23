@@ -149,7 +149,7 @@ export default function SignupForm() {
           Already registered? Login{" "}
           <Button
             variant="link"
-            href="/login"
+            href="/auth/login"
             className="dark:bg-transparent dark:hover:underline dark:hover:bg-transparent p-0 dark:hover:text-black dark:disabled:bg-green-300"
           >
             here
