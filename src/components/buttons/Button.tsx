@@ -1,4 +1,5 @@
 import { cva, VariantProps } from "class-variance-authority";
+import Spinner from "components/loaders/Spinner";
 import Link from "next/link";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { mergeClass } from "../../lib/utils/utils";
@@ -37,13 +38,17 @@ interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   href?: string;
+  isLoading?: boolean;
 }
 
 type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 export type ButtonSizes = ButtonVariantProps["size"];
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, children, href, size, variant, title, ...props }, ref) => {
+  (
+    { className, children, href, size, variant, title, isLoading, ...props },
+    ref
+  ) => {
     if (href) {
       return (
         <Link
@@ -61,7 +66,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={mergeClass(buttonVariants({ variant, size, className }))}
         {...props}
       >
-        {children}
+        {isLoading ? <Spinner /> : children}
       </button>
     );
   }
