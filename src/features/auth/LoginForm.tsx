@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import BackButton from "components/buttons/BackButton";
 import { Button } from "components/buttons/Button";
 import { Input } from "components/inputs/Input";
-import Spinner from "components/loaders/Spinner";
 import ErrorMessage from "components/shared/ErrorMessage";
 import useLocalStorage from "hooks/useLocalStorage";
 import { useLogin } from "hooks/useLogin";
@@ -109,8 +108,9 @@ export default function LoginForm() {
             type="submit"
             disabled={!(formik.isValid && formik.dirty)}
             className="dark:text-white"
+            isLoading={isLoadingLogin}
           >
-            {isLoadingLogin ? <Spinner /> : "Submit"}
+            Submit
           </Button>
         </div>
         <p className="text-center">
