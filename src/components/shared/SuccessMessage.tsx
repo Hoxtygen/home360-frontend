@@ -5,7 +5,13 @@ import React from "react";
 export default function SuccessMessage({ className, message }: MessageProps) {
   return (
     <div>
-      <p className={mergeClass("text-green-500 text-14", className)}>
+      <p
+        aria-label="success message"
+        className={mergeClass(
+          "font-hanken-medium text-14 text-green-800 p-2",
+          className
+        )}
+      >
         {message}
       </p>
     </div>

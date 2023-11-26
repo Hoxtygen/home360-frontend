@@ -95,7 +95,7 @@ export default function LoginForm() {
               <Button
                 variant="link"
                 className="dark:bg-transparent dark:hover:underline dark:hover:bg-transparent p-0 dark:hover:text-black"
-                href="/auth/password-reset"
+                href="/auth/password-reset-request"
               >
                 here to reset
               </Button>

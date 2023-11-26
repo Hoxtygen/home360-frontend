@@ -62,6 +62,7 @@ export type LoginData = {
   email: string;
   password: string;
 };
+
 export type AdviceProps = {
   href: string;
   title: string;
@@ -177,3 +178,23 @@ export type ListingType =
   | "penthouse"
   | "terrace-apartment"
   | "other";
+export type PasswordRequestResetResponse = {
+  status: string;
+  message: string;
+  data: string;
+};
+
+export type MessageProps = {
+  error?: string;
+  message?: string;
+  className?: string;
+};
+
+export type PasswordResetRequest = Omit<LoginData, "password">;
+
+export type ResetPassword = {
+  newPassword: string;
+  confirmPassword: string;
+};
+
+export type ResetPasswordApiProp = Omit<ResetPassword, "confirmPassword">;
