@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import BackButton from "components/buttons/BackButton";
 import { Button } from "components/buttons/Button";
 import { Input } from "components/inputs/Input";
-import Spinner from "components/loaders/Spinner";
 import ErrorMessage from "components/shared/ErrorMessage";
 import useLocalStorage from "hooks/useLocalStorage";
 import { useLogin } from "hooks/useLogin";
@@ -90,6 +89,18 @@ export default function LoginForm() {
           {touched.password && errors.password && (
             <ErrorMessage error={errors.password!} />
           )}
+          <p>
+            <small>
+              Forgot Password?click{" "}
+              <Button
+                variant="link"
+                className="dark:bg-transparent dark:hover:underline dark:hover:bg-transparent p-0 dark:hover:text-black"
+                href="/auth/password-reset-request"
+              >
+                here to reset
+              </Button>
+            </small>
+          </p>
         </div>
         <div className="text-center">
           <Button
@@ -97,8 +108,9 @@ export default function LoginForm() {
             type="submit"
             disabled={!(formik.isValid && formik.dirty)}
             className="dark:text-white"
+            isLoading={isLoadingLogin}
           >
-            {isLoadingLogin ? <Spinner /> : "Submit"}
+            Submit
           </Button>
         </div>
         <p className="text-center">
@@ -106,7 +118,7 @@ export default function LoginForm() {
             Not registered yet? signup{" "}
             <Button
               className="dark:bg-transparent dark:hover:underline dark:hover:bg-transparent p-0 dark:hover:text-black "
-              href="/signup"
+              href="/auth/signup"
               variant="link"
             >
               here

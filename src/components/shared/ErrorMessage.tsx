@@ -1,13 +1,17 @@
 import { mergeClass } from "lib/utils/utils";
 import React from "react";
+import { MessageProps } from "@/typedef";
 
-interface ErrorProps {
-  error?: string;
-  className?: string;
-}
-
-export default function ErrorMessage({ error, className }: ErrorProps) {
+export default function ErrorMessage({ error, className }: MessageProps) {
   return (
-    <p className={mergeClass("text-red-500 text-[12px]", className)}>{error}</p>
+    <p
+      aria-label="error message"
+      className={mergeClass(
+        "font-hanken-regular text-14 text-red-800 p-2",
+        className
+      )}
+    >
+      {error}
+    </p>
   );
 }

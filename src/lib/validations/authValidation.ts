@@ -1,5 +1,5 @@
-import { LoginData, NewUserSignup } from "typedef";
-import { Schema, object, string } from "yup";
+import { LoginData, NewUserSignup, ResetPassword } from "typedef";
+import { Schema, object, string, ref } from "yup";
 
 export const userSignupValues: NewUserSignup = {
   firstName: "",
@@ -18,6 +18,7 @@ export const userSignupValidationSchema: Schema<NewUserSignup> = object().shape(
     lastName: string().required("Last name cannot be blank").min(2),
     email: string()
       .email("Enter a valid email address")
+      .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)
       .required("Email is required"),
     address: string().min(10).required("Address cannot be blank"),
     phoneNumber: string()
@@ -29,9 +30,13 @@ export const userSignupValidationSchema: Schema<NewUserSignup> = object().shape(
         "Phone number must be a valid Nigerian number. E.g 09023456789"
       ),
     password: string()
-      .required("Password field cannot be blank")
-      .min(10, "Password must be at least 8 characters long")
-      .max(25, "Password must not be more than 25 characters in length"),
+      .min(8, "Password must be at least 8 characters long")
+      .matches(
+        /^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,25}$/,
+        "Password must contain one uppercase. one lowercase, one number and one special character"
+      )
+      .max(25, "Password must not be more than 25 characters in length")
+      .required("Password field cannot be blank"),
   }
 );
 
@@ -43,10 +48,41 @@ export const loginValues: LoginData = {
 export const userLoginValidationSchema: Schema<LoginData> = object().shape({
   email: string()
     .email("Enter a valid email address")
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)
     .required("Email is required"),
   password: string()
     .required("Password field cannot be blank")
-    .matches(/^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{10,25}$/)
-    .min(10, "Password must be at least 8 characters long")
+    .min(8, "Password must be at least 8 characters long")
     .max(25, "Password must not be more than 25 characters in length"),
 });
+
+export const passwordResetValues = {
+  email: "",
+};
+
+export const passwordResetValidationSchema = object().shape({
+  email: string()
+    .email("Enter a valid email address")
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "Enter a valid email address")
+    .required("Email is required"),
+});
+
+export const resetPasswordValues: ResetPassword = {
+  newPassword: "",
+  confirmPassword: "",
+};
+
+export const resetPasswordValidationSchema: Schema<ResetPassword> =
+  object().shape({
+    newPassword: string()
+      .required("Password field cannot be blank")
+      .matches(
+        /^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,25}$/,
+        "Password must contain one uppercase. one lowercase, one number and one special character"
+      )
+      .min(8, "Password must be at least 8 characters long")
+      .max(25, "Password must not be more than 25 characters in length"),
+    confirmPassword: string()
+      .oneOf([ref("newPassword")], "Passwords must match")
+      .required("Confirm password cannot be blank"),
+  });

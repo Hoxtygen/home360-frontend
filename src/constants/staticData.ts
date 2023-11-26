@@ -134,11 +134,11 @@ export const userInitialData = {
 
 export const authLinks: NavLinks[] = [
   {
-    href: "/login",
+    href: "/auth/login",
     title: "Login",
   },
   {
-    href: "/signup",
+    href: "/auth/signup",
     title: "Signup",
   },
 ];
