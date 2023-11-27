@@ -1,6 +1,6 @@
 import {
   ApiErrorResponse,
-  PasswordRequestResetResponse,
+  TokenResponse,
   PasswordResetRequest,
 } from "@/typedef";
 import { useMutation } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ import requestHandler from "lib/utils/requestHandler";
 
 export function usePasswordResetRequest() {
   const { data, error, isLoading, mutate } = useMutation<
-    AxiosResponse<PasswordRequestResetResponse>,
+    AxiosResponse<TokenResponse>,
     AxiosError<ApiErrorResponse> | Error,
     PasswordResetRequest
   >((email) =>
