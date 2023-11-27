@@ -18,6 +18,5 @@ export function useVerifyEmail(token: string) {
   return {
     emailVerificationResponse: data?.data,
     emailVerificationError: errorHandler(error),
-    isEmailVerificationLoading: isLoading,
   };
 }

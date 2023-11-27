@@ -1,14 +1,13 @@
+import React from "react";
 import ErrorMessage from "components/shared/ErrorMessage";
 import SuccessMessage from "components/shared/SuccessMessage";
 import { useVerifyEmail } from "hooks/useVerifyEmail";
-import React from "react";
 import AuthLayout from "../AuthLayout";
 
 export default function VerifyEmail({ token }: { token: string }) {
   const { emailVerificationError, emailVerificationResponse } =
     useVerifyEmail(token);
-  console.log("emailVerificationResponse:", emailVerificationResponse);
-  console.log("emailVerificationError:", emailVerificationError);
+
   return (
     <AuthLayout>
       <div className="p-4 text-white">
