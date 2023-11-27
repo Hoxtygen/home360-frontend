@@ -178,7 +178,7 @@ export type ListingType =
   | "penthouse"
   | "terrace-apartment"
   | "other";
-export type PasswordRequestResetResponse = {
+export type TokenResponse = {
   status: string;
   message: string;
   data: string;
