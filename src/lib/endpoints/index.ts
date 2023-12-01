@@ -9,3 +9,4 @@ export const HOME_360_LISTING_DETAIL_API = `${SERVER_BASE_URL}/listings`;
 export const HOME_360_PASSWORD_RESET_REQUEST = `${SERVER_BASE_URL}/auth/password-reset-request`;
 export const HOME_360__RESET_PASSWORD = `${SERVER_BASE_URL}/auth/reset-password`;
 export const HOME_360_VERIFY_EMAIL = `${SERVER_BASE_URL}/auth/verifyEmail`;
+export const HOME_360_RESEND_VERIFICATION_TOKEN = `${SERVER_BASE_URL}/auth/resend-verification-token`;
