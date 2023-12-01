@@ -30,7 +30,7 @@ export const userSignupValidationSchema: Schema<NewUserSignup> = object().shape(
         "Phone number must be a valid Nigerian number. E.g 09023456789"
       ),
     password: string()
-      .min(8, "Password must be at least 8 characters long")
+      .min(10, "Password must be at least 10 characters long")
       .matches(
         /^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,25}$/,
         "Password must contain one uppercase. one lowercase, one number and one special character"
