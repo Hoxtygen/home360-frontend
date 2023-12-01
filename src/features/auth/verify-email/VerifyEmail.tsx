@@ -15,8 +15,6 @@ export default function VerifyEmail({ token }: { token: string }) {
     resendVerificationTokenData,
     resendVerificationTokenError,
   } = useResendVerificationToken(token);
-  console.log("resendVerificationTokenData:", resendVerificationTokenData);
-  console.log("resendVerificationTokenError:", resendVerificationTokenError);
 
   function handleFetchVerificationToken() {
     refetchVerificationToken();
