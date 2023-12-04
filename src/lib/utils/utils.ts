@@ -1,3 +1,7 @@
+import {
+  AuthenticationSuccessResponse,
+  MappedSuccessLoginResponse,
+} from "@/typedef";
 import clsx, { ClassValue } from "clsx";
 import { SUPPORTED_FILE_FORMATS } from "constants/staticData";
 import { twMerge } from "tailwind-merge";
@@ -131,4 +135,16 @@ export function capitalizeFirstCharacter(str: string) {
 export function replaceSpecialCharactersWithSpace(str: string): string {
   const specialChars = /[`~!@#$%^&*()_+-=\{\}\|:;"'<>,.?\/\\ ]/g;
   return str.replace(specialChars, " ");
+}
+
+export function mapLoginResponse(
+  loginResponse: AuthenticationSuccessResponse
+): MappedSuccessLoginResponse {
+  return {
+    email: loginResponse.email,
+    firstName: loginResponse.firstName,
+    lastName: loginResponse.lastName,
+    refreshToken: loginResponse.token.refreshToken,
+    status: loginResponse.status,
+  };
 }

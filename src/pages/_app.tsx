@@ -7,6 +7,10 @@ import {
 } from "@tanstack/react-query";
 import { toast, Toaster } from "react-hot-toast";
 import errorHandler from "lib/utils/errorHandler";
+import { useIdleTimer } from "react-idle-timer";
+import { useRouter } from "next/router";
+import { deleteCookie, hasCookie } from "cookies-next";
+import requestHandler from "lib/utils/requestHandler";
 
 const client = new QueryClient({
   queryCache: new QueryCache({
@@ -18,6 +22,22 @@ const client = new QueryClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  const onIdle = () => {
+    if (hasCookie("token")) {
+      deleteCookie("token");
+      const logout = async () => await requestHandler("/api/auth/logout");
+      logout();
+      localStorage.clear();
+      router.push("/");
+    }
+  };
+
+  useIdleTimer({
+    onIdle,
+    timeout: 1000 * 60 * 5,
+  });
   return (
     <QueryClientProvider client={client}>
       <Component {...pageProps} />

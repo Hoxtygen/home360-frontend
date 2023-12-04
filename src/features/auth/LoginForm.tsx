@@ -1,4 +1,3 @@
-import { setCookie } from "cookies-next";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -11,25 +10,20 @@ import useLocalStorage from "hooks/useLocalStorage";
 import { useLogin } from "hooks/useLogin";
 import { loginValues, userLoginValidationSchema } from "lib/validations";
 import { toast } from "react-hot-toast";
-import { AuthenticationSuccessResponse } from "typedef";
+import { MappedSuccessLoginResponse } from "typedef";
+import { mapLoginResponse } from "lib/utils/utils";
 
 export default function LoginForm() {
   const router = useRouter();
   const { isLoadingLogin, mutateLogin, userData, userLoginError } = useLogin();
-  const [user, setUser] = useLocalStorage<AuthenticationSuccessResponse | null>(
+  const [_, setUser] = useLocalStorage<MappedSuccessLoginResponse | null>(
     "user",
     null
   );
 
   useEffect(() => {
-    if (userData && userData.token) {
-      setCookie("token", userData.token, {
-        path: "/",
-        httpOnly: false,
-      });
-    }
     if (userData && userData.status === 200) {
-      setUser(userData);
+      setUser(mapLoginResponse(userData));
       toast.success(userData.message);
       router.push("/dashboard");
       return;

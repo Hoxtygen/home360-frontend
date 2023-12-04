@@ -1,5 +1,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { Button } from "components/buttons/Button";
+import { useLogout } from "hooks/useLogout";
 import { mergeClass } from "lib/utils/utils";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -44,6 +45,7 @@ export default function DashboardSidebar({
   accounts,
 }: MobileHeaderProps) {
   const router = useRouter();
+  const { mutateLogout } = useLogout();
   const listingOptions: OptionProps[] = [
     {
       label: "Published Listings",
@@ -60,7 +62,11 @@ export default function DashboardSidebar({
   ];
 
   const handleLogout = () => {
-    // logout();
+    if (typeof window !== "undefined") {
+      window.location.replace("/");
+      localStorage.clear();
+    }
+    mutateLogout();
     router.replace("/");
   };
   const sidebarLinks: Array<SidebarLinkProps | SidebarOptionProps> = [
@@ -254,7 +260,7 @@ export default function DashboardSidebar({
           <Button
             variant="destructive"
             className="flex justify-start  w-full h-11 px-[18.5px] rounded-md mb-5 text-16 hover:bg-primary-disabled text-white font-semibold"
-            onClick={() => console.log("Logging out")}
+            onClick={() => handleLogout()}
           >
             <>
               <span className="flex items-center">

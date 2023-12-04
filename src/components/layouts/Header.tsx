@@ -1,14 +1,14 @@
 import { authLinks, navList } from "constants/staticData";
 import useLocalStorage from "hooks/useLocalStorage";
 import useWindowSize from "hooks/useWindowSize";
-import { AuthenticationSuccessResponse } from "typedef";
+import { MappedSuccessLoginResponse } from "typedef";
 import { Button, ButtonSizes } from "../buttons/Button";
 import Logo from "../shared/Logo";
 
 export default function Header() {
   const { width } = useWindowSize();
   const buttonSize: ButtonSizes = width > 748 ? "lg" : "sm";
-  const [user, setUser] = useLocalStorage<AuthenticationSuccessResponse | null>(
+  const [user, setUser] = useLocalStorage<MappedSuccessLoginResponse | null>(
     "user",
     null
   );
