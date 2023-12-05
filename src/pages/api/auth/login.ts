@@ -29,8 +29,11 @@ export default async function loginHandler(
           })
         )
         .json(result.data);
+    } else {
+      return res.json(result.data);
     }
   } catch (error) {
+    // return error;
     throw error;
   }
 }
