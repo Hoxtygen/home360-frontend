@@ -10,3 +10,7 @@ export const HOME_360_PASSWORD_RESET_REQUEST = `${SERVER_BASE_URL}/auth/password
 export const HOME_360__RESET_PASSWORD = `${SERVER_BASE_URL}/auth/reset-password`;
 export const HOME_360_VERIFY_EMAIL = `${SERVER_BASE_URL}/auth/verifyEmail`;
 export const HOME_360_RESEND_VERIFICATION_TOKEN = `${SERVER_BASE_URL}/auth/resend-verification-token`;
+
+//================================INTERNALL ENDPOINTS================
+export const INTERNAL_LOGIN_API = "/api/auth/login";
+export const INTERNAL_LOGOUT_API = "/api/auth/logout";

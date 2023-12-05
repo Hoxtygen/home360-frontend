@@ -72,11 +72,24 @@ export type AdviceProps = {
 
 export type AuthenticationSuccessResponse = {
   status: number;
-  token: string;
+  token: Token;
   email: string;
   firstName: string;
   lastName: string;
   message: string;
+};
+
+export type MappedSuccessLoginResponse = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  refreshToken: string;
+  status: number;
+};
+
+type Token = {
+  accessToken: string;
+  refreshToken: string;
 };
 
 export type ApiErrorResponse = {

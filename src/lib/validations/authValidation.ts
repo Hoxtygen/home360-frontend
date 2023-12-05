@@ -48,7 +48,7 @@ export const loginValues: LoginData = {
 export const userLoginValidationSchema: Schema<LoginData> = object().shape({
   email: string()
     .email("Enter a valid email address")
-    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "Enter a valid email address")
     .required("Email is required"),
   password: string()
     .required("Password field cannot be blank")

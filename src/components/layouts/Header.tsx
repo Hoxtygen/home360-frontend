@@ -1,14 +1,16 @@
 import { authLinks, navList } from "constants/staticData";
+import { getCookie } from "cookies-next";
 import useLocalStorage from "hooks/useLocalStorage";
 import useWindowSize from "hooks/useWindowSize";
-import { AuthenticationSuccessResponse } from "typedef";
+import { MappedSuccessLoginResponse } from "typedef";
 import { Button, ButtonSizes } from "../buttons/Button";
 import Logo from "../shared/Logo";
 
 export default function Header() {
+  const token = getCookie("token");
   const { width } = useWindowSize();
   const buttonSize: ButtonSizes = width > 748 ? "lg" : "sm";
-  const [user, setUser] = useLocalStorage<AuthenticationSuccessResponse | null>(
+  const [user, setUser] = useLocalStorage<MappedSuccessLoginResponse | null>(
     "user",
     null
   );
@@ -40,7 +42,7 @@ export default function Header() {
             </ul>
           </nav>
           <div className="">
-            {user && user.token ? (
+            {token && token ? (
               <div className="flex items-center">
                 <div className="flex items-center">
                   <p className="text-black pr-5 font-semibold">
