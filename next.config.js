@@ -10,6 +10,7 @@ const nextConfig = {
       "pixabay.com",
     ],
   },
+  output: "standalone",
 };
 
 module.exports = nextConfig;
