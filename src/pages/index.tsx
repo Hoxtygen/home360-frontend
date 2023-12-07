@@ -1,5 +1,6 @@
 import Layout from "components/layouts/Layout";
 import { Search } from "components/searchResult/SearchResult";
+import { useDebounce } from "hooks/useDebounce";
 import { useSearch } from "hooks/useSearch";
 import { useRouter } from "next/router";
 import { useState, ChangeEvent, FormEvent } from "react";
@@ -13,7 +14,6 @@ import SearchForm from "../components/landing-page/SearchForm";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const { mutateSearch } = useSearch();
   const router = useRouter();
   const [searchData, setSearchData] = useState<Search>({
     apartmentType: "not-specified",
@@ -29,9 +29,11 @@ export default function Home() {
     setSearchData({ ...searchData, [event.target.name]: value });
   }
 
+  const { refetchSearchResult } = useSearch(useDebounce(searchData, 2000));
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    mutateSearch(searchData);
+    refetchSearchResult();
     router.push(
       `/search/?city=${searchData.location}&apartmentType=${searchData.apartmentType}&price=${searchData.price}`
     );
