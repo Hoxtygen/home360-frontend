@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -8,10 +8,11 @@ import { ListingType } from "@/typedef";
 import SearchForm from "components/landing-page/SearchForm";
 import Layout from "components/layouts/Layout";
 import SkeletonCard from "components/shared/SkeletonCard";
-import useLocalStorage from "hooks/useLocalStorage";
-import { SearchData, useSearch } from "hooks/useSearch";
+import { useSearch } from "hooks/useSearch";
 import Listings from "../../features/listings/Listings";
 import { QueryParams } from "pages/search";
+import { useDebounce } from "hooks/useDebounce";
+import ErrorMessage from "components/shared/ErrorMessage";
 
 export type Search = {
   apartmentType: ListingType;
@@ -19,8 +20,6 @@ export type Search = {
   price: string;
 };
 export default function SearchResult({ searchQueryParams }: QueryParams) {
-  const { mutateSearch, listingSearchResult, isListingSearchLoading } =
-    useSearch();
   const router = useRouter();
 
   const [searchData, setSearchData] = useState<Search>({
@@ -28,9 +27,6 @@ export default function SearchResult({ searchQueryParams }: QueryParams) {
     location: searchQueryParams.city,
     price: searchQueryParams.price,
   });
-
-  const [searchedListing, setSearchListing] =
-    useLocalStorage<SearchData | null>("searchedListing", null);
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -40,20 +36,20 @@ export default function SearchResult({ searchQueryParams }: QueryParams) {
     setSearchData({ ...searchData, [event.target.name]: value });
   }
 
+  const {
+    listingSearchError,
+    listingSearchResult,
+    isListingSearchLoading,
+    refetchSearchResult,
+  } = useSearch(useDebounce(searchData, 2000));
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    mutateSearch(searchData);
+    refetchSearchResult();
     router.replace(
       `/search/?city=${searchData.location}&apartmentType=${searchData.apartmentType}&price=${searchData.price}`
     );
-    setSearchListing(searchData);
   }
-
-  useEffect(() => {
-    if (searchedListing !== null) {
-      mutateSearch(searchedListing);
-    }
-  }, [mutateSearch, searchedListing]);
 
   return (
     <main>
@@ -65,6 +61,9 @@ export default function SearchResult({ searchQueryParams }: QueryParams) {
         />
         <div className="max-w-4xl rounded-md container mx-auto p-10 border mt-5 bg-[#F7F7F7] min-h-[600px]">
           {isListingSearchLoading && <SkeletonCard />}
+          {listingSearchError && (
+            <ErrorMessage error={listingSearchError.message} />
+          )}
           {listingSearchResult?.data &&
             listingSearchResult?.data.items.length > 0 && (
               <Listings
@@ -75,7 +74,9 @@ export default function SearchResult({ searchQueryParams }: QueryParams) {
           {listingSearchResult?.data &&
             listingSearchResult?.data.items.length <= 0 && (
               <div>
-                <h1>No result found</h1>
+                <h1 className="font-hanken-semibold text-24">
+                  No result found
+                </h1>
               </div>
             )}
         </div>
