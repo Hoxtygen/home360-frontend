@@ -10,7 +10,9 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "release": "release-it",
-    "find-deadcode": "ts-prune"
+    "find-deadcode": "ts-prune",
+    "docker-build": "docker build -t home360-client .",
+    "docker-run": "docker run -p 3000:3000 home360-client"
   },
   "dependencies": {
     "-": "^0.0.1",
