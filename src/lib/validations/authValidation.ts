@@ -18,7 +18,10 @@ export const userSignupValidationSchema: Schema<NewUserSignup> = object().shape(
     lastName: string().required("Last name cannot be blank").min(2),
     email: string()
       .email("Enter a valid email address")
-      .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)
+      .matches(
+        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+        "Enter a valid email address"
+      )
       .required("Email is required"),
     address: string().min(10).required("Address cannot be blank"),
     phoneNumber: string()
