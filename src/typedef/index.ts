@@ -79,6 +79,11 @@ export type AuthenticationSuccessResponse = {
   message: string;
 };
 
+export type RegisterSuccessResponse = {
+  status: string;
+  message: string;
+  data: string;
+};
 export type MappedSuccessLoginResponse = {
   email: string;
   firstName: string;

@@ -5,14 +5,14 @@ import requestHandler from "lib/utils/requestHandler";
 import {
   NewUserSignup,
   ApiErrorResponse,
-  AuthenticationSuccessResponse,
+  RegisterSuccessResponse,
 } from "./../typedef/index";
 import { HOME_360_SIGNUP_API } from "lib/endpoints";
 import errorHandler from "lib/utils/errorHandler";
 
 export default function useSignup() {
   const { data, error, isLoading, mutate } = useMutation<
-    AxiosResponse<AuthenticationSuccessResponse>,
+    AxiosResponse<RegisterSuccessResponse>,
     AxiosError<ApiErrorResponse> | Error,
     NewUserSignup
   >({
