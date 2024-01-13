@@ -46,6 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
           success: {
             style: {
               background: "#4BB543",
+              color: "white",
             },
           },
           error: {
