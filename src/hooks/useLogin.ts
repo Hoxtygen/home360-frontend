@@ -18,6 +18,7 @@ export function useLogin() {
     LoginData
   >({
     mutationKey: ["login"],
+    networkMode: "always",
     mutationFn: (loginData) =>
       requestHandler(HOME_360_LOGIN_API, {
         method: "POST",
