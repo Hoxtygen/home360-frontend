@@ -4,7 +4,7 @@ import useGetListingDetail from "hooks/useGetListingDetail";
 import ListingDetail from "./ListingDetail";
 import ErrorMessage from "components/shared/ErrorMessage";
 
-type ListingInfoProps = { listingId: string };
+export type ListingInfoProps = { listingId: string };
 
 export default function ListingDetailContainer({
   listingId,
