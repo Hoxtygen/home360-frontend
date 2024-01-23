@@ -66,7 +66,7 @@ export default function ListingDetail({ listingData }: ListingDetailProps) {
               <div className="">
                 <Image alt="location icon" src={LocationIcon} />
               </div>
-              <div className="text-14 font-hanken-regular ml-3">
+              <div className="text-16 text-secondary-light-gray font-hanken-regular ml-3">
                 <p>
                   {listingData?.address?.streetName &&
                     listingData.address.streetName}{" "}
@@ -135,13 +135,17 @@ export default function ListingDetail({ listingData }: ListingDetailProps) {
         <hr className="my-6" />
         <div className="">
           <h3 className="text-20 font-hanken-semibold">Description</h3>
-          <p>{listingData.description}</p>
+          <p className="text-secondary-light-gray text-16">
+            {listingData.description}
+          </p>
         </div>
         <hr className="my-6" />
         {listingData.position && (
           <div className="">
             <h3 className="text-20 font-hanken-semibold">Position</h3>
-            <p>{listingData.position}</p>
+            <p className="text-secondary-light-gray text-16">
+              {listingData.position}
+            </p>
           </div>
         )}
       </div>

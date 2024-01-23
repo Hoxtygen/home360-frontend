@@ -7,9 +7,11 @@ export default async function userListingsHandler(
   res: NextApiResponse
 ) {
   const token = req.cookies.token;
+  const { page } = req.query;
+
   try {
     const result = await requestHandler<ListingSearchResponse>(
-      "http://localhost:8080/api/v1/userListings",
+      `http://localhost:8080/api/v1/userListings?page=${page}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

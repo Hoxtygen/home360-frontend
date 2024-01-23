@@ -16,7 +16,7 @@ export default function ApartmentCost({ cost }: Cost) {
     <div className="">
       <h2 className="font-hanken-semibold text-20">Cost</h2>
       <div className="grid grid-cols-2">
-        <div className="text-14">
+        <div className="text-16">
           <div className="flex">
             <h3 className="w-2/4 text-secondary-light-gray">Annual Rent:</h3>
             <h4 className="w-2/4">{formatCurrency(cost?.annualRent)}</h4>

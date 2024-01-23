@@ -3,12 +3,12 @@ import SkeletonCard from "components/shared/SkeletonCard";
 import Link from "next/link";
 import ListingItem from "./ListingItem";
 
-type ListingProps = {
+export type UserListingProps = {
   listings: ListingData[];
   isLoading: boolean;
 };
 
-export default function Listings({ listings, isLoading }: ListingProps) {
+export default function Listings({ listings, isLoading }: UserListingProps) {
   return (
     <>
       {isLoading && <SkeletonCard />}
@@ -16,7 +16,7 @@ export default function Listings({ listings, isLoading }: ListingProps) {
         listings.map((listing) => {
           return (
             <div className="mb-4 bg-[white]" key={listing.id}>
-              <Link href={`/listing/${listing.id}`}>
+              <Link href={`/listings/${listing.id}`}>
                 <ListingItem
                   imagesUrl={listing.apartmentImages || randomImages}
                   title={listing.title}
