@@ -1,12 +1,10 @@
-import React from "react";
-
-import useGetListingDetail from "hooks/useGetListingDetail";
-import ListingDetail from "./ListingDetail";
 import ErrorMessage from "components/shared/ErrorMessage";
+import useGetListingDetail from "hooks/useGetListingDetail";
+import React from "react";
+import { ListingInfoProps } from "../listingDetails/ListingDetailContainer";
+import UserListingDetails from "./UserListingDetails";
 
-export type ListingInfoProps = { listingId: string };
-
-export default function ListingDetailContainer({
+export default function UserListingDetailsContainer({
   listingId,
 }: ListingInfoProps) {
   const { listingDetailData, listingDetailError, isLoadingListingDetail } =
@@ -20,11 +18,11 @@ export default function ListingDetailContainer({
     return <h1>Loading.......</h1>;
   }
   return (
-    <>
-      <ListingDetail
+    <div>
+      <UserListingDetails
         listingData={listingDetailData?.data!}
         isLoading={isLoadingListingDetail}
       />
-    </>
+    </div>
   );
 }

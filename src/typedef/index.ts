@@ -127,7 +127,7 @@ type ListingCost = {
   agreementFee?: number;
 };
 
-type ApartmentInfo = {
+export type ApartmentInfo = {
   roomNums: string;
   bathroomNums: string;
   bedroomNums: string;
@@ -177,6 +177,7 @@ type ListingSearchData = {
   totalItems: number;
   totalPages: number;
   items: ListingData[];
+  hasNext: boolean;
 };
 
 export type ListingType =
