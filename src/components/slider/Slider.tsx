@@ -3,7 +3,7 @@ import Arrows from "./Arrrows";
 import SliderContent from "./SliderContent";
 
 export default function Slider({ imagesUrl }: { imagesUrl: string[] }) {
-  const imagesLength = imagesUrl.length - 1;
+  const imagesLength = imagesUrl?.length - 1;
   const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {

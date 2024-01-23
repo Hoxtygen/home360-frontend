@@ -6,7 +6,7 @@ export default function Details({
   listingDetails: string[];
 }) {
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap mt-[4px]">
       {listingDetails &&
         listingDetails.map((detail, index) => (
           <p

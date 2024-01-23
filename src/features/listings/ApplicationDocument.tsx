@@ -7,7 +7,7 @@ export default function ApplicationDocument({
   applicationDocs,
 }: ApplicationDocs) {
   return (
-    <div className="flex">
+    <div className="flex mt-1">
       {applicationDocs.length > 0 &&
         applicationDocs.map((detail, index) => (
           <p

@@ -21,7 +21,6 @@ export default function ListingImagesCarousel({
     <div className="border border-red-600 mx-auto my-0">
       <Slider {...slickSettings}>
         {imagesUrl?.map((image, index) => (
-          //   <div className="w-full" key={index}>
           <Image
             key={index}
             alt="building imag"
@@ -38,19 +37,6 @@ export default function ListingImagesCarousel({
           />
         ))}
       </Slider>
-
-      {/* <div className="flex">
-        {imagesUrl.map((imageUrl) => (
-          <div className="w-[300]" key={imageUrl}>
-            <Image
-              src={imageUrl}
-              alt="listing image"
-              width={150}
-              height={150}
-            />
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 }

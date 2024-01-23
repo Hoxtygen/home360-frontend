@@ -19,25 +19,25 @@ export default function ApartmentDescription({
   apartmentInfo,
 }: ApartmentInfoProps) {
   return (
-    <div className="grid grid-cols-2 text-14">
+    <div className="grid grid-cols-2 text-16">
       <div className="">
-        <div className="flex text-[#747474]">
+        <div className="flex text-secondary-light-gray">
           <p className="w-2/4">Type:</p>
           <p className="w-2/4">
             {capitalizeFirstCharacter(apartmentInfo?.apartmentType)}
           </p>
         </div>
-        <div className="flex text-[#747474]">
+        <div className="flex text-secondary-light-gray">
           <p className="w-2/4">Vacant From:</p>
           <p className="w-2/4">{formatDate(availableFrom)}</p>
         </div>
         {facilityQuality && (
-          <div className="flex text-[#747474]">
+          <div className="flex text-secondary-light-gray">
             <p className="w-2/4">Facility Quality:</p>
             <p className="w-2/4">{capitalizeFirstCharacter(facilityQuality)}</p>
           </div>
         )}
-        <div className="flex text-[#747474]">
+        <div className="flex text-secondary-light-gray">
           <p className="w-2/4">Pets Allowed:</p>
           <p className="w-2/4">
             {replaceSpecialCharactersWithSpace(
@@ -47,15 +47,15 @@ export default function ApartmentDescription({
         </div>
       </div>
       <div className="">
-        <div className="flex text-[#747474]">
+        <div className="flex text-secondary-light-gray">
           <p className="w-2/4">Room:</p>
           <p className="w-2/4">{apartmentInfo.roomNums}</p>
         </div>
-        <div className="flex text-[#747474]">
+        <div className="flex text-secondary-light-gray">
           <p className="w-2/4">Bedroom:</p>
           <p className="w-2/4">{apartmentInfo?.bedroomNums}</p>
         </div>
-        <div className="flex text-[#747474]">
+        <div className="flex text-secondary-light-gray">
           <p className="w-2/4">Bathroom:</p>
           <p className="w-2/4">{apartmentInfo?.bathroomNums}</p>
         </div>
