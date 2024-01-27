@@ -164,16 +164,16 @@ export type ListingResponse = {
 
 export type ListingData = { id: string } & ListingProps;
 
-export interface ListingBaseResponse {
+export interface BaseResponse {
   status: string;
   message: string;
 }
 
-export interface ListingSearchResponse extends ListingBaseResponse {
+export interface ListingSearchResponse extends BaseResponse {
   data: ListingSearchData;
 }
 
-export interface ListingDetailResponse extends ListingBaseResponse {
+export interface ListingDetailResponse extends BaseResponse {
   data: ListingData;
 }
 
@@ -217,3 +217,12 @@ export type ResetPassword = {
 };
 
 export type ResetPasswordApiProp = Omit<ResetPassword, "confirmPassword">;
+
+export interface RefreshTokenTokenResponse extends BaseResponse {
+  data: RefreshTokenData;
+}
+
+type RefreshTokenData = {
+  accessToken: string;
+  refreshToken: string;
+};
