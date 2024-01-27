@@ -1,4 +1,6 @@
 import ControlButtons from "components/shared/ControlButtons";
+import ErrorMessage from "components/shared/ErrorMessage";
+
 import useGetUserListings from "hooks/useGetUserListings";
 import { useState } from "react";
 import UserListingsContainer from "./UserListingsContainer";
@@ -24,6 +26,11 @@ export default function UserListings() {
 
   return (
     <div>
+      <div className="">
+        {userListingsError && (
+          <ErrorMessage error={userListingsError.message} />
+        )}
+      </div>
       <UserListingsContainer
         listings={userListings?.data.items!}
         isLoading={isUserListingsLoading}

@@ -26,11 +26,11 @@ export default function SignupForm() {
   });
 
   useEffect(() => {
-    if (userSignupData?.status === 201) {
-      toast.success(userSignupData.message);
-      router.push("/login");
+    if (userSignupData?.status === "CREATED") {
+      toast.success(userSignupData.data);
+      router.push("/auth/login");
     }
-  }, [router, userSignupData?.message, userSignupData?.status]);
+  }, [router, userSignupData]);
 
   const { errors, touched, handleBlur, handleSubmit } = formik;
 

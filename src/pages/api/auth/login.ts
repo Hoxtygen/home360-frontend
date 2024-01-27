@@ -25,7 +25,7 @@ export default async function loginHandler(
           "Set-Cookie",
           cookie.serialize("token", accessToken, {
             path: "/",
-            httpOnly: false,
+            httpOnly: true,
           })
         )
         .json(result.data);

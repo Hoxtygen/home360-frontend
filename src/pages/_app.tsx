@@ -1,16 +1,18 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import {
   QueryCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { toast, Toaster } from "react-hot-toast";
-import errorHandler from "lib/utils/errorHandler";
-import { useIdleTimer } from "react-idle-timer";
-import { useRouter } from "next/router";
 import { deleteCookie, hasCookie } from "cookies-next";
+import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import { toast, Toaster } from "react-hot-toast";
+import { useIdleTimer } from "react-idle-timer";
+
+import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
+import "../styles/globals.css";
+import ErrorBoundary from "components/error-boundary/ErrorBoundary";
 
 const client = new QueryClient({
   queryCache: new QueryCache({
@@ -40,12 +42,15 @@ export default function App({ Component, pageProps }: AppProps) {
   });
   return (
     <QueryClientProvider client={client}>
-      <Component {...pageProps} />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
       <Toaster
         toastOptions={{
           success: {
             style: {
               background: "#4BB543",
+              color: "white",
             },
           },
           error: {
