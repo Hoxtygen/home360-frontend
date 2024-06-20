@@ -12,7 +12,7 @@ import { useIdleTimer } from "react-idle-timer";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 import "../styles/globals.css";
-import ErrorBoundary from "components/error-boundary/ErrorBoundary";
+import { ErrorBoundary } from "components/error-boundary";
 
 const client = new QueryClient({
   queryCache: new QueryCache({
