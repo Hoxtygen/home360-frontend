@@ -129,6 +129,7 @@ function getProperty(obj: any, path: string): any {
   );
 }
 export function capitalizeFirstCharacter(str: string) {
+  if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
