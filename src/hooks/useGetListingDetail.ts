@@ -8,6 +8,7 @@ export default function useGetListingDetail(listingId: string) {
   const { data, error, isLoading } = useQuery({
     queryKey: ["listing details"],
     networkMode: "always",
+    refetchOnWindowFocus: false,
     queryFn: () =>
       requestHandler<ListingDetailResponse>(
         `${HOME_360_LISTING_DETAIL_API}/${listingId}`,
