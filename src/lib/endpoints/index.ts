@@ -11,7 +11,9 @@ export const HOME_360__RESET_PASSWORD = `${SERVER_BASE_URL}/auth/reset-password`
 export const HOME_360_VERIFY_EMAIL = `${SERVER_BASE_URL}/auth/verifyEmail`;
 export const HOME_360_RESEND_VERIFICATION_TOKEN = `${SERVER_BASE_URL}/auth/resend-verification-token`;
 export const HOME_360_FETCH_USERLISTINGS = `${SERVER_BASE_URL}/userListings`;
+export const HOME_360__DELETE_LISTING = `${SERVER_BASE_URL}/listings`;
 
 //================================INTERNALL ENDPOINTS================
 export const INTERNAL_LOGIN_API = "/api/auth/login";
 export const INTERNAL_LOGOUT_API = "/api/auth/logout";
+export const INTERNAL_DELETE_LISTING = "/api/deleteListing";

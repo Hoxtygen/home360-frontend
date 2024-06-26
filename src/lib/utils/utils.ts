@@ -70,6 +70,7 @@ export function formatCurrency(value?: number | string) {
 }
 
 export function addValues(values: Object): number {
+  if (!values) return 0;
   return Object.values(values).reduce((acc, currVal) => {
     if (currVal !== undefined) {
       acc = +currVal + acc;

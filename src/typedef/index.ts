@@ -226,3 +226,17 @@ type RefreshTokenData = {
   accessToken: string;
   refreshToken: string;
 };
+
+export type DeleteListingResponse = BaseResponse & { data: null };
+
+export type ListingDetailProps = {
+  listingData: ListingProps;
+  isLoading: boolean;
+};
+
+export type UserListingDetailsProps = ListingDetailProps & {
+  handleDeleteListing: () => void;
+  handleShowDialog: () => void;
+  handleCloseDialog: () => void;
+  showDialog: boolean;
+};

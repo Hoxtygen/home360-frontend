@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 // import CameraIcon from "../../../../public/icons/camera.svg";
-import { ListingProps } from "@/typedef";
 import LocationIcon from "../../../../public/icons/location-icon.svg";
 import { addValues, formatCurrency } from "lib/utils/utils";
 // import { Button } from "components/buttons/Button";
@@ -11,11 +10,8 @@ import ListingImagesCarousel from "./ListingImagesCarousel";
 import ApartmentCost from "../ApartmentCost";
 import ApartmentDescription from "../ApartmentInfo";
 import ApplicationDocument from "../ApplicationDocument";
+import { ListingDetailProps } from "@/typedef";
 
-export type ListingDetailProps = {
-  listingData: ListingProps;
-  isLoading: boolean;
-};
 export default function ListingDetail({ listingData }: ListingDetailProps) {
   const [showListingImagesDialog, setShowListingImagesDialog] = useState(false);
 

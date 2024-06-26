@@ -1,16 +1,21 @@
 import { Button } from "components/buttons/Button";
 import Slider from "components/slider/Slider";
 import { capitalizeFirstCharacter } from "lib/utils/utils";
-import React from "react";
 import ApartmentCost from "../ApartmentCost";
 import ApartmentDescription from "../ApartmentInfo";
 import ApplicationDocument from "../ApplicationDocument";
 import Details from "../Details";
-import { ListingDetailProps } from "../listingDetails/ListingDetail";
+import DialogFooter from "components/Dialog/DialogFooter";
+import { UserListingDetailsProps } from "@/typedef";
+import { Dialog } from "components/Dialog";
 
 export default function UserListingDetails({
   listingData,
-}: ListingDetailProps) {
+  handleDeleteListing,
+  handleCloseDialog,
+  handleShowDialog,
+  showDialog,
+}: UserListingDetailsProps) {
   return (
     <div>
       <div className="mb-3">
@@ -97,10 +102,33 @@ export default function UserListingDetails({
         <Button size="lg" variant="subtle">
           Update
         </Button>
-        <Button size="lg" variant="destructive" className="">
+        <Button
+          onClick={() => handleShowDialog()}
+          size="lg"
+          variant="destructive"
+          className=""
+        >
           Delete
         </Button>
       </div>
+      {showDialog && (
+        <Dialog
+          handleClose={handleCloseDialog}
+          show={showDialog}
+          title="Delete listing"
+          maxWidth={500}
+        >
+          <p className="text-18 font-hanken-medium">
+            Are you sure you want to delete this listing? This operation cannot
+            be reversed.
+          </p>
+          <hr className="bg-[#E6E2DD] h-[1px] border-0 my-[14px]" />
+          <DialogFooter
+            handleCancel={handleCloseDialog}
+            handleSubmit={() => handleDeleteListing()}
+          />
+        </Dialog>
+      )}
     </div>
   );
 }
