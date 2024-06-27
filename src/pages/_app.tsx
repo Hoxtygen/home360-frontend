@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useIdleTimer({
     onIdle,
-    timeout: 1000 * 60 * 5 * 60,
+    timeout: 1000 * 60 * 5,
   });
   return (
     <QueryClientProvider client={client}>

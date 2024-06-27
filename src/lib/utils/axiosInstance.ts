@@ -64,7 +64,6 @@ axiosClient.interceptors.response.use(
           toast.error("Session time out. Please login again.", {
             id: "sessionTimeOut",
           });
-          console.log("timeout error: ", error);
           deleteCookie("token");
           const logout = async () => await axios("/api/auth/logout");
           logout();
