@@ -87,7 +87,7 @@ export default function useLocalStorage<T>(
  * @param {(string | null)} value
  * @return {*}  {(T | undefined)}
  */
-function parseJSON<T>(value: string | null): T | undefined {
+export function parseJSON<T>(value: string | null): T | undefined {
   try {
     return value === "undefined" ? undefined : JSON.parse(value ?? "");
   } catch (error) {

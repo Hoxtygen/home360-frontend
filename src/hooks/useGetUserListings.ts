@@ -3,13 +3,11 @@ import { getCookie } from "cookies-next";
 
 import { ListingSearchResponse } from "@/typedef";
 import errorHandler from "lib/utils/errorHandler";
-import requestHandler from "lib/utils/requestHandler"; 
+import requestHandler from "lib/utils/requestHandler";
 import { HOME_360_FETCH_USERLISTINGS } from "lib/endpoints";
 
 export default function useGetUserListings(page: number) {
   const token = getCookie("token");
-
-export default function useGetUserListings(page: number) {
   const { data, error, isLoading, isPreviousData } = useQuery({
     queryKey: ["user listings", page],
     networkMode: "always",

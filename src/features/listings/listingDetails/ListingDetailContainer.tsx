@@ -8,7 +8,9 @@ export type ListingInfoProps = { listingId: string };
 
 export default function ListingDetailContainer({
   listingId,
-}: ListingInfoProps) {
+}: {
+  listingId: string;
+}) {
   const { listingDetailData, listingDetailError, isLoadingListingDetail } =
     useGetListingDetail(listingId);
 

@@ -70,6 +70,7 @@ export function formatCurrency(value?: number | string) {
 }
 
 export function addValues(values: Object): number {
+  if (!values) return 0;
   return Object.values(values).reduce((acc, currVal) => {
     if (currVal !== undefined) {
       acc = +currVal + acc;
@@ -129,6 +130,7 @@ function getProperty(obj: any, path: string): any {
   );
 }
 export function capitalizeFirstCharacter(str: string) {
+  if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
