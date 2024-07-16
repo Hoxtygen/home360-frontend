@@ -1,8 +1,8 @@
 import { Button } from "components/buttons/Button";
-import Logo from "components/shared/Logo";
 import { authFooterLinks } from "constants/staticData";
 import useWindowSize from "hooks/useWindowSize";
 import { ReactNode } from "react";
+import Logo from "shared/Logo";
 import SignupBg from "../../../public/images/signupbg.jpg";
 
 interface AuthLayoutProps {
