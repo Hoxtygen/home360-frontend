@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import ErrorMessage from "components/shared/ErrorMessage";
 import useDeleteListing from "hooks/useDeleteListing";
 import useGetListingDetail from "hooks/useGetListingDetail";
+import { toast } from "react-hot-toast";
+import ErrorMessage from "shared/ErrorMessage";
 import { ListingInfoProps } from "../listingDetails/ListingDetailContainer";
 import UserListingDetails from "./UserListingDetails";
-import { toast } from "react-hot-toast";
 
 export default function UserListingDetailsContainer({
   listingId,
@@ -52,7 +52,7 @@ export default function UserListingDetailsContainer({
   return (
     <div>
       <UserListingDetails
-        listingData={listingDetailData?.data!}
+        listingData={listingDetailData?.data.listing!}
         isLoading={isLoadingListingDetail}
         handleDeleteListing={handleDeleteListing}
         handleCloseDialog={handleCloseDialog}
