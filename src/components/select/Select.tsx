@@ -1,29 +1,7 @@
 import { mergeClass } from "lib/utils/utils";
-import React, { useRef, useState, useEffect, ElementRef } from "react";
-import InputLabel from "./InputLabel";
-
-export type SelectOption = {
-  label: string;
-  value: string | number;
-};
-type MultipleSelectProps = {
-  multiple: true;
-  value: SelectOption[];
-  onChange: (value: SelectOption[]) => void;
-};
-
-type SingleSelectProps = {
-  multiple?: false;
-  value?: SelectOption;
-  onChange: (value: SelectOption | undefined) => void;
-};
-
-type SelectProps = {
-  options: SelectOption[];
-  classname?: string;
-  label?: string;
-  id: string;
-} & (SingleSelectProps | MultipleSelectProps);
+import { useEffect, useRef, useState } from "react";
+import InputLabel from "../inputs/InputLabel";
+import { SelectOption, SelectProps } from "./type";
 
 export default function Select({
   multiple,
@@ -36,12 +14,12 @@ export default function Select({
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
-  // const containerRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<ElementRef<"div">>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   function clearOptions() {
     multiple ? onChange([]) : onChange(undefined);
   }
+
   function selectOption(option: SelectOption) {
     if (multiple) {
       if (value.includes(option)) {
