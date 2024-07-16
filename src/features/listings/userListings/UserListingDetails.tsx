@@ -6,8 +6,8 @@ import ApartmentDescription from "../ApartmentInfo";
 import ApplicationDocument from "../ApplicationDocument";
 import Details from "../Details";
 import DialogFooter from "components/Dialog/DialogFooter";
-import { UserListingDetailsProps } from "@/typedef";
 import { Dialog } from "components/Dialog";
+import { UserListingDetailsProps } from "../types";
 
 export default function UserListingDetails({
   listingData,

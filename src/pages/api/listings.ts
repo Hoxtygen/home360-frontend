@@ -1,4 +1,4 @@
-import { ListingResponse } from "@/typedef";
+import { ListingResponse } from "features/listings/types";
 import requestHandler from "lib/utils/requestHandler";
 import { NextApiRequest, NextApiResponse } from "next";
 

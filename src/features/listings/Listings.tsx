@@ -1,7 +1,7 @@
-import { ListingData } from "@/typedef";
-import SkeletonCard from "components/shared/SkeletonCard";
 import Link from "next/link";
+import SkeletonCard from "shared/SkeletonCard";
 import ListingItem from "./ListingItem";
+import { ListingData } from "./types";
 
 export type UserListingProps = {
   listings: ListingData[];

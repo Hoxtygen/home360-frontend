@@ -1,14 +1,13 @@
 import { SelectHTMLAttributes } from "react";
-import { OptionValue, SelectOption } from "typedef";
 import { formatString, mergeClass } from "../../lib/utils/utils";
 import InputLabel from "./InputLabel";
+import { SelectOption } from "features/listings/types";
 
-interface SelectProps<Type extends OptionValue>
-  extends SelectHTMLAttributes<HTMLSelectElement> {
-  options: SelectOption<Type>[];
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  options: SelectOption[];
   label?: string;
 }
-export function CustomSelect<Type extends OptionValue>({
+export function CustomSelect({
   className,
   value,
   onChange,
@@ -17,7 +16,7 @@ export function CustomSelect<Type extends OptionValue>({
   label,
   id,
   ...props
-}: SelectProps<Type>) {
+}: SelectProps) {
   return (
     <div>
       {label && (
@@ -37,7 +36,10 @@ export function CustomSelect<Type extends OptionValue>({
         )}
       >
         {options.map((option) => (
-          <option key={option.value} value={formatString(option.value)}>
+          <option
+            key={option.value}
+            value={formatString(option.value as string)}
+          >
             {option.label}
           </option>
         ))}

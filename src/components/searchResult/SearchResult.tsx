@@ -7,12 +7,12 @@ import "slick-carousel/slick/slick.css";
 import { ListingType } from "@/typedef";
 import SearchForm from "components/landing-page/SearchForm";
 import Layout from "components/layouts/Layout";
-import SkeletonCard from "components/shared/SkeletonCard";
-import { useSearch } from "hooks/useSearch";
-import Listings from "../../features/listings/Listings";
-import { QueryParams } from "pages/search";
 import { useDebounce } from "hooks/useDebounce";
-import ErrorMessage from "components/shared/ErrorMessage";
+import { useSearch } from "hooks/useSearch";
+import { QueryParams } from "pages/search";
+import ErrorMessage from "shared/ErrorMessage";
+import SkeletonCard from "shared/SkeletonCard";
+import Listings from "../../features/listings/Listings";
 
 export type Search = {
   apartmentType: ListingType;

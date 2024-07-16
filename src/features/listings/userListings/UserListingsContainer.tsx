@@ -1,6 +1,5 @@
-import SkeletonCard from "components/shared/SkeletonCard";
 import Link from "next/link";
-import React from "react";
+import SkeletonCard from "shared/SkeletonCard";
 import ListingItem from "../ListingItem";
 import { UserListingProps } from "../Listings";
 

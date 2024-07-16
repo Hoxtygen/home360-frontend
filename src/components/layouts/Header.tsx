@@ -3,8 +3,8 @@ import { getCookie } from "cookies-next";
 import useLocalStorage from "hooks/useLocalStorage";
 import useWindowSize from "hooks/useWindowSize";
 import { MappedSuccessLoginResponse } from "typedef";
+import Logo from "../../shared/Logo";
 import { Button, ButtonSizes } from "../buttons/Button";
-import Logo from "../shared/Logo";
 
 export default function Header() {
   const token = getCookie("token");

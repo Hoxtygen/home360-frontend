@@ -1,7 +1,7 @@
-import LoadingScreen from "components/shared/LoadingScreen";
 import useWindowSize from "hooks/useWindowSize";
 import { mergeClass } from "lib/utils/utils";
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
+import LoadingScreen from "shared/LoadingScreen";
 import DashboardHeader, { DashboardHeaderProps } from "./DashboardHeader";
 import DashboardSidebar from "./DashboardSidebar";
 import MobileHeader from "./MobileHeader";
