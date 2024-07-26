@@ -22,7 +22,7 @@ export default function Dialog({
     <div
       className={clsx(
         isOpen &&
-          "top-0 left-0 z-[99999999]  absolute bg-opacity-20 bg-black h-screen w-screen font-avenir overflow-y-scroll overflow-x-hidden"
+          "top-0 left-0 z-[99999999]  fixed bg-opacity-80 bg-black h-screen w-screen font-avenir overflow-y-auto overflow-x-hidden"
       )}
     >
       <div className="flex items-center justify-center h-screen ">
@@ -30,7 +30,7 @@ export default function Dialog({
           className={clsx(
             contentBlockClass || "",
             isOpen &&
-              "transition-all duration-150 px-4 sm:px-6 mx-2 sm:mx-0 pt-7 pb-4 bg-white rounded-[10px] overflow-y-auto custom-scrollbar"
+              "transition-all duration-150 px-4 sm:px-6 mx-2 sm:mx-0 pt-7 pb-4 bg-white rounded-[10px] overflow-y-auto custom-scrollbar w-[500px]"
           )}
           style={{
             maxHeight:
