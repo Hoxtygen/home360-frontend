@@ -57,7 +57,7 @@ export default function DashboardSidebarItem({
       ) : (
         <Link href={`/${formatedNameToSlug}`}>
           <div
-            className={`flex items-center h-11 px-[18.5px] w-full min-w-max rounded-md mb-5 text-16 
+            className={`flex items-center h-11 px-[18.5px] w-full min-w-max rounded-md mb-5 text-16
           hover:bg-primary-disabled ${
             isActive
               ? "bg-primary-disabled bg-opacity-25 text-white"
@@ -72,4 +72,3 @@ export default function DashboardSidebarItem({
     </>
   );
 }
-// Sh3710(kh01m3$
