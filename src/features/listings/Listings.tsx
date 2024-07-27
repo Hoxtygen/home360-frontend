@@ -16,7 +16,7 @@ export default function Listings({ listings, isLoading }: UserListingProps) {
         listings.map((listing) => {
           return (
             <div className="mb-4 bg-[white]" key={listing.id}>
-              <Link href={`/listings/${listing.id}`}>
+              <Link href={`/search-result/listings/${listing.id}`}>
                 <ListingItem
                   imagesUrl={listing.apartmentImages || randomImages}
                   title={listing.title}

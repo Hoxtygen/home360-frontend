@@ -12,7 +12,7 @@ export default function UserListingsContainer({
       {isLoading && <SkeletonCard />}
       {listings.map((listing) => (
         <div className="mb-4 bg-[white]" key={listing.id}>
-          <Link href={`/listings/userlistings/${listing.id}`}>
+          <Link href={`/listings/user-listings/${listing.id}`}>
             <ListingItem
               imagesUrl={listing.apartmentImages || randomImages}
               title={listing.title}
