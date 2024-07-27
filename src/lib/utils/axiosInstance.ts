@@ -41,7 +41,10 @@ axiosClient.interceptors.response.use(
   },
   async (err) => {
     const originalConfig = err.config;
-    if (originalConfig.url !== "/auth/login" && err.response) {
+    if (
+      originalConfig.url !== "http://localhost:8080/api/v1/auth/login" &&
+      err.response
+    ) {
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         try {
