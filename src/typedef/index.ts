@@ -37,11 +37,6 @@ export type BuildingPurpose = "rent" | "buy";
 
 export type OptionValue = string;
 
-export type SelectOption<T extends OptionValue> = {
-  label: string;
-  value: T;
-};
-
 type LocalStorageUserData = {
   email: string;
   id: string;
@@ -117,73 +112,10 @@ export type NewUserSignup = {
 
 export type EventHandlers = Record<string, React.EventHandler<any>>;
 
-type Address = {
-  streetName: string;
-  houseNumber?: string;
-  city: string;
-  state: string;
-  lga: string;
-};
-
-type ListingCost = {
-  annualRent: number;
-  agentFee?: number;
-  cautionFee?: number;
-  agreementFee?: number;
-};
-
-export type ApartmentInfo = {
-  roomNums: string;
-  bathroomNums: string;
-  bedroomNums: string;
-  apartmentType: string;
-};
-
-export type ListingProps = {
-  title: string;
-  description: string;
-  furnishing: string;
-  position?: string;
-  miscellaneous?: string;
-  address: Address;
-  availableFrom: any;
-  cost: ListingCost;
-  details: string[];
-  facilityQuality: string;
-  petsAllowed: string;
-  apartmentInfo: ApartmentInfo;
-  applicationDocs: string[];
-  apartmentImages: string[];
-};
-
-export type ListingResponse = {
-  status: string;
-  message: string;
-  data: ListingData;
-};
-
-export type ListingData = { id: string } & ListingProps;
-
 export interface BaseResponse {
   status: string;
   message: string;
 }
-
-export interface ListingSearchResponse extends BaseResponse {
-  data: ListingSearchData;
-}
-
-export interface ListingDetailResponse extends BaseResponse {
-  data: ListingData;
-}
-
-type ListingSearchData = {
-  currentPage: number;
-  totalItems: number;
-  totalPages: number;
-  items: ListingData[];
-  hasNext: boolean;
-};
 
 export type ListingType =
   | "not-specified"
@@ -229,14 +161,9 @@ type RefreshTokenData = {
 
 export type DeleteListingResponse = BaseResponse & { data: null };
 
-export type ListingDetailProps = {
-  listingData: ListingProps;
-  isLoading: boolean;
-};
-
-export type UserListingDetailsProps = ListingDetailProps & {
-  handleDeleteListing: () => void;
-  handleShowDialog: () => void;
-  handleCloseDialog: () => void;
-  showDialog: boolean;
+export type Nigeria = {
+  name: string;
+  code: string;
+  capital: string;
+  lgs: string[];
 };

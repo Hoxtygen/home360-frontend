@@ -1,12 +1,7 @@
-import {
-  AdviceProps,
-  BuildingPurpose,
-  BuildingType,
-  BuildingTypeToBuy,
-  SelectOption,
-} from "typedef";
+import { SelectOption } from "features/listings/types";
+import { AdviceProps } from "typedef";
 
-export const buildingType: SelectOption<BuildingType>[] = [
+export const buildingType: SelectOption[] = [
   {
     label: "Apartment",
     value: "apartment",
@@ -37,7 +32,7 @@ export const buildingType: SelectOption<BuildingType>[] = [
   },
 ];
 
-export const buildingTypeToBuy: SelectOption<BuildingTypeToBuy>[] = [
+export const buildingTypeToBuy: SelectOption[] = [
   {
     label: "Apartment",
     value: "Apartment",
@@ -59,7 +54,7 @@ export const buildingTypeToBuy: SelectOption<BuildingTypeToBuy>[] = [
     value: "Office",
   },
 ];
-export const buildingPurpose: SelectOption<BuildingPurpose>[] = [
+export const buildingPurpose: SelectOption[] = [
   { label: "Rent", value: "rent" },
   { label: "Buy", value: "buy" },
 ];
@@ -360,3 +355,63 @@ export const SUPPORTED_FILE_FORMATS = [
   "image/png",
   "image/webp",
 ];
+
+export const salutation = [
+  {
+    label: "Mister",
+    value: "Mr.",
+  },
+  {
+    label: "Miss",
+    value: "Ms.",
+  },
+  {
+    label: "Mrs",
+    value: "Mrs",
+  },
+  {
+    label: "Doctor",
+    value: "Dr.",
+  },
+];
+
+export const employmentType = [
+  {
+    label: "Employee",
+    value: "employee",
+  },
+  {
+    label: "Worker",
+    value: "worker",
+  },
+  {
+    label: "Self Employed",
+    value: "self-employed",
+  },
+  {
+    label: "Apprentice",
+    value: "apprentice",
+  },
+  {
+    label: "Student",
+    value: "student",
+  },
+  {
+    label: "Doctoral Student",
+    value: "doctoral-student",
+  },
+  {
+    label: "Job Seeker",
+    value: "job-seeker",
+  },
+  {
+    label: "Pensioner",
+    value: "pensioner",
+  },
+  {
+    label: "Others",
+    value: "others",
+  },
+];
+
+export const maxCharacter = 2000;

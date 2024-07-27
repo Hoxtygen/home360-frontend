@@ -1,5 +1,7 @@
-import { ListingProps } from "typedef";
-import { object, string, date, array, Schema, number } from "yup";
+import { employmentType, maxCharacter } from "constants/staticData";
+import { ListingEnquiryData, ListingProps } from "features/listings/types";
+import { formatString } from "lib/utils/utils";
+import { array, date, number, object, Schema, string } from "yup";
 
 export const initialValues: ListingProps = {
   title: "",
@@ -33,6 +35,7 @@ export const initialValues: ListingProps = {
   applicationDocs: [],
   apartmentImages: [],
 };
+
 export const newListingValidationSchema: Schema<ListingProps> = object().shape({
   title: string().required("Advert title is required"),
   description: string().required("description  is required").max(2000),
@@ -74,3 +77,41 @@ export const newListingValidationSchema: Schema<ListingProps> = object().shape({
   applicationDocs: array().default([]),
   apartmentImages: array().min(1).required(),
 });
+
+export const listingEnquiryValidationSchema: Schema<ListingEnquiryData> =
+  object().shape({
+    message: string()
+      .required("Message is required")
+      .max(maxCharacter, `Maximum of ${maxCharacter} characters allowed`),
+    salutation: string().required("Salutation is required").min(2),
+    firstName: string()
+      .required("First name is required")
+      .min(2, "First name must be a least 2 characters in length"),
+    lastName: string().required("Last name is required").min(2),
+    email: string()
+      .email("Enter a valid email address")
+      .matches(
+        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+        "Enter a valid email address"
+      )
+      .required("Email is required"),
+    phoneNumber: string()
+      .required("Phone number is required")
+      .min(11, "Phone number must be at least 11 characters")
+      .max(11, "Phone number cannot be more than 11 characters")
+      .matches(
+        /^([0]{1})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7,8})$/,
+        "Phone number must be a valid Nigerian number. E.g 09023456789"
+      ),
+    location: string().required("location is required"),
+    pets: string().required("Indicate if you  have pet"),
+    commercialPurpose: string().required(
+      "Indicate if you  want to use this apartment for commercial purposes"
+    ),
+    employmentStatus: string()
+      .required("Employment type is required")
+      .oneOf(
+        employmentType.map((option) => formatString(option.value).toUpperCase())
+      )
+      .label("Employment Type"),
+  });

@@ -43,7 +43,7 @@ const Dropdown = ({
   });
 
   const dropdownClass = classNames(
-    "absolute bg-gray-100 w-max max-h-52 overflow-y-auto py-3 rounded shadow-md z-10",
+    "absolute bg-gray-100 max-h-52 overflow-y-auto py-3 rounded shadow-md z-10 w-full",
     {
       "top-full right-0 mt-2": position === "bottom-right",
       "top-full left-0 mt-2": position === "bottom-left",
@@ -63,7 +63,7 @@ const Dropdown = ({
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={classNames(
-          "flex justify-between items-center gap-5 rounded w-full py-2 px-4 bg-blue-500 text-white h-full",
+          "flex justify-between items-center gap-5 rounded w-full py-2 px-4  border border-black text-black h-full",
           style
         )}
       >
