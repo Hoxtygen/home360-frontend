@@ -24,7 +24,10 @@ export type ApartmentInfo = {
 
 export type ListingAgentInfo = Omit<NewUserSignup, "address" | "password">;
 
-export type ListingData = { id: string } & ListingProps;
+export type ListingData = {
+  id: string;
+  agentId: number;
+} & ListingProps;
 
 export type ListingProps = {
   title: string;
@@ -71,7 +74,7 @@ type ListingSearchData = {
 };
 
 export type ListingDetailProps = {
-  listingData: ListingProps;
+  listingData: ListingData;
   listingAgent: ListingAgentInfo;
   isLoading: boolean;
 };
@@ -101,20 +104,46 @@ export type ListingAgentAndListingImagesProps = {
   handleListingEnquiryFormDialog(): void;
 };
 
-export type ListingEnquiryProps = {
-  message: string;
-  salutation: string;
+export type ListingEnquiryData = {
+  commercialPurpose: string;
+  email: string;
+  employmentStatus: string;
   firstName: string;
   lastName: string;
-  email: string;
-  phoneNumber: string;
   location: string;
-  employmentType: string;
-  commercialPurposes: string;
+  message: string;
   pets: string;
+  phoneNumber: string;
+  salutation: string;
 };
+
+export type ListingEnquiryProps = {
+  listingId: string;
+  agentId: number;
+  handleListingEnquiryFormDialog: () => void;
+};
+
+export type ListingEnquiryFormData = ListingEnquiryData &
+  Omit<ListingEnquiryProps, "handleListingEnquiryFormDialog">;
 
 export type SelectOption = {
   label: string;
   value: string | number;
+};
+
+type ListingEnquiryResponseR = {
+  listingId: string;
+  createdAt: string;
+} & ListingEnquiryData;
+
+export interface ListingEnquiryResponse extends BaseResponse {
+  data: ListingEnquiryResponseR;
+}
+
+export type ListingEnquiryFormProps = {
+  listingEnquiryInitialValues: ListingEnquiryData;
+  listingId: string;
+  agentId: number;
+  handleSubmitEnquiryForm(enquiryData: ListingEnquiryFormData): void;
+  isLoading?: boolean;
 };

@@ -1,8 +1,6 @@
-import React from "react";
-
 import useGetListingDetail from "hooks/useGetListingDetail";
+import ErrorMessage from "shared/ErrorMessage";
 import ListingDetail from "./ListingDetail";
-import ErrorMessage from "components/shared/ErrorMessage";
 
 export type ListingInfoProps = { listingId: string };
 
@@ -22,11 +20,14 @@ export default function ListingDetailContainer({
     return <h1>Loading.......</h1>;
   }
   return (
-    <>
-      <ListingDetail
-        listingData={listingDetailData?.data!}
-        isLoading={isLoadingListingDetail}
-      />
-    </>
+    <div className="">
+      <div className="basis-2/3">
+        <ListingDetail
+          listingData={listingDetailData?.data.listing!}
+          listingAgent={listingDetailData?.data.agentInfo!}
+          isLoading={isLoadingListingDetail}
+        />
+      </div>
+    </div>
   );
 }
