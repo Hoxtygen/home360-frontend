@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCookie } from "cookies-next";
 
-import { ListingSearchResponse } from "@/typedef";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 import { HOME_360_FETCH_USERLISTINGS } from "lib/endpoints";
+import { ListingSearchResponse } from "features/listings/types";
 
 export default function useGetUserListings(page: number) {
   const token = getCookie("token");

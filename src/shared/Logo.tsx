@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Home365 from "../../../public/images/home356.jpg";
 
 type LogoSizes = "lg" | "md" | "sm" | "xs";
 type LogoDimensions = {
@@ -19,7 +18,7 @@ export default function Logo({ size }: SizeProps) {
   };
   return (
     <Image
-      src={Home365}
+      src="/images/home356.jpg"
       alt="Logo"
       width={logoVariations[size].width}
       height={logoVariations[size].height}

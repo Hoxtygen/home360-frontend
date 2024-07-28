@@ -9,7 +9,7 @@ import Spinner from "components/loaders/Spinner";
 import useSignup from "hooks/useSignup";
 import { userSignupValidationSchema, userSignupValues } from "lib/validations";
 import { useRouter } from "next/router";
-import ErrorMessage from "../../components/shared/ErrorMessage";
+import ErrorMessage from "../../shared/ErrorMessage";
 
 export default function SignupForm() {
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function SignupForm() {
   useEffect(() => {
     if (userSignupData?.status === "CREATED") {
       toast.success(userSignupData.data);
-      router.push("/auth/login");
+      router.push("/auth/signupRedirect");
     }
   }, [router, userSignupData]);
 

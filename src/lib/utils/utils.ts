@@ -1,10 +1,12 @@
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 import {
   AuthenticationSuccessResponse,
   MappedSuccessLoginResponse,
+  Nigeria,
 } from "@/typedef";
-import clsx, { ClassValue } from "clsx";
 import { SUPPORTED_FILE_FORMATS } from "constants/staticData";
-import { twMerge } from "tailwind-merge";
+import { SelectOption } from "features/listings/types";
 
 export function mergeClass(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -129,6 +131,7 @@ function getProperty(obj: any, path: string): any {
     obj
   );
 }
+
 export function capitalizeFirstCharacter(str: string) {
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -149,4 +152,12 @@ export function mapLoginResponse(
     refreshToken: loginResponse.token.refreshToken,
     status: loginResponse.status,
   };
+}
+
+export function getStateNames(country: Nigeria[]): SelectOption[] {
+  if (!country) return [];
+  return country.map((state) => ({
+    label: state.name,
+    value: state.name,
+  }));
 }

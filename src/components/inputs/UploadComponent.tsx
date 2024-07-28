@@ -1,8 +1,8 @@
-import { useDropzone } from "react-dropzone";
-import ImagePreview from "components/shared/ImagePreview";
-import { uploadImages } from "lib/utils/uploadImages";
 import { useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { uploadImages } from "lib/utils/uploadImages";
 import { checkFileSize } from "lib/utils/utils";
+import ImagePreview from "shared/ImagePreview";
 
 type Props = {
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;

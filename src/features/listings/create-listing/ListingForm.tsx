@@ -10,7 +10,6 @@ import { CustomSelect } from "components/inputs/CustomSelect";
 import InputLabel from "components/inputs/InputLabel";
 import RadioGroup from "components/inputs/RadioGroup";
 import UploadComponent from "components/inputs/UploadComponent";
-import ErrorMessage from "components/shared/ErrorMessage";
 import NigerianStates from "constants/nigeria-states";
 import {
   apartmentDetails,
@@ -30,8 +29,9 @@ import {
   initialValues,
   newListingValidationSchema,
 } from "lib/validations/listingValidation";
+import ErrorMessage from "shared/ErrorMessage";
 import { Input } from "../../../components/inputs/Input";
-import LoadingScreen from "../../../components/shared/LoadingScreen";
+import LoadingScreen from "../../../shared/LoadingScreen";
 
 export default function ListingForm() {
   const [lgas, setLgas] = useState<string[] | undefined>([]);

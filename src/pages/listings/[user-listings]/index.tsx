@@ -1,8 +1,9 @@
 import DashboardLayout from "components/dashboard/DashboardLayout";
 import UserListings from "features/listings/userListings/UserListings";
 import { GetServerSideProps } from "next";
+import React from "react";
 
-export default function Listings() {
+export default function AgentListings() {
   return (
     <DashboardLayout title="Listings" isLoading={false}>
       <UserListings />

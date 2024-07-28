@@ -1,6 +1,5 @@
 import { Button } from "components/buttons/Button";
 import { Input } from "components/inputs/Input";
-import ErrorMessage from "components/shared/ErrorMessage";
 import AuthLayout from "features/auth/AuthLayout";
 import { useFormik } from "formik";
 import { usePasswordResetRequest } from "hooks/usePasswordResetRequest";
@@ -8,8 +7,8 @@ import {
   passwordResetValidationSchema,
   passwordResetValues,
 } from "lib/validations/authValidation";
-import React from "react";
-import SuccessMessage from "components/shared/SuccessMessage";
+import ErrorMessage from "shared/ErrorMessage";
+import SuccessMessage from "shared/SuccessMessage";
 
 export default function PasswordResetRequest() {
   const {

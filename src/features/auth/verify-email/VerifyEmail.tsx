@@ -1,10 +1,9 @@
-import React from "react";
-import ErrorMessage from "components/shared/ErrorMessage";
-import SuccessMessage from "components/shared/SuccessMessage";
-import { useVerifyEmail } from "hooks/useVerifyEmail";
-import AuthLayout from "../AuthLayout";
 import { Button } from "components/buttons/Button";
 import { useResendVerificationToken } from "hooks/useResendVerificationToken";
+import { useVerifyEmail } from "hooks/useVerifyEmail";
+import ErrorMessage from "shared/ErrorMessage";
+import SuccessMessage from "shared/SuccessMessage";
+import AuthLayout from "../AuthLayout";
 
 export default function VerifyEmail({ token }: { token: string }) {
   const { emailVerificationError, emailVerificationResponse } =

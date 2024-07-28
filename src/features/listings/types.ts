@@ -1,0 +1,149 @@
+import { BaseResponse, NewUserSignup } from "@/typedef";
+
+type Address = {
+  streetName: string;
+  houseNumber?: string;
+  city: string;
+  state: string;
+  lga: string;
+};
+
+type ListingCost = {
+  annualRent: number;
+  agentFee?: number;
+  cautionFee?: number;
+  agreementFee?: number;
+};
+
+export type ApartmentInfo = {
+  roomNums: string;
+  bathroomNums: string;
+  bedroomNums: string;
+  apartmentType: string;
+};
+
+export type ListingAgentInfo = Omit<NewUserSignup, "address" | "password">;
+
+export type ListingData = {
+  id: string;
+  agentId: number;
+} & ListingProps;
+
+export type ListingProps = {
+  title: string;
+  description: string;
+  furnishing: string;
+  position?: string;
+  miscellaneous?: string;
+  address: Address;
+  availableFrom: any;
+  cost: ListingCost;
+  details: string[];
+  facilityQuality: string;
+  petsAllowed: string;
+  apartmentInfo: ApartmentInfo;
+  applicationDocs: string[];
+  apartmentImages: string[];
+};
+
+export type ListingInfo = {
+  listing: ListingProps;
+};
+
+export type ListingResponse = {
+  status: string;
+  message: string;
+  data: ListingData;
+};
+
+type ListingWithAgentInfo = {
+  listing: ListingData;
+  agentInfo: ListingAgentInfo;
+};
+
+export interface ListingDetailResponse extends BaseResponse {
+  data: ListingWithAgentInfo;
+}
+
+type ListingSearchData = {
+  currentPage: number;
+  totalItems: number;
+  totalPages: number;
+  items: ListingData[];
+  hasNext: boolean;
+};
+
+export type ListingDetailProps = {
+  listingData: ListingData;
+  listingAgent: ListingAgentInfo;
+  isLoading: boolean;
+};
+
+export type UserListingDetailsProps = Omit<
+  ListingDetailProps,
+  "listingAgent"
+> & {
+  handleDeleteListing: () => void;
+  handleShowDialog: () => void;
+  handleCloseDialog: () => void;
+  showDialog: boolean;
+};
+
+export interface ListingSearchResponse extends BaseResponse {
+  data: ListingSearchData;
+}
+
+export type ListingAgentProps = {
+  agent: ListingAgentInfo;
+  handleListingEnquiryFormDialog(): void;
+};
+
+export type ListingAgentAndListingImagesProps = {
+  listingImages: string[];
+  agentInfo: ListingAgentInfo;
+  handleListingEnquiryFormDialog(): void;
+};
+
+export type ListingEnquiryData = {
+  commercialPurpose: string;
+  email: string;
+  employmentStatus: string;
+  firstName: string;
+  lastName: string;
+  location: string;
+  message: string;
+  pets: string;
+  phoneNumber: string;
+  salutation: string;
+};
+
+export type ListingEnquiryProps = {
+  listingId: string;
+  agentId: number;
+  handleListingEnquiryFormDialog: () => void;
+};
+
+export type ListingEnquiryFormData = ListingEnquiryData &
+  Omit<ListingEnquiryProps, "handleListingEnquiryFormDialog">;
+
+export type SelectOption = {
+  label: string;
+  value: string | number;
+};
+
+type ListingEnquiryResponseR = {
+  listingId: string;
+  createdAt: string;
+} & ListingEnquiryData;
+
+export interface ListingEnquiryResponse extends BaseResponse {
+  data: ListingEnquiryResponseR;
+}
+
+export type ListingEnquiryFormProps = {
+  listingEnquiryInitialValues: ListingEnquiryData;
+  listingId: string;
+  agentId: number;
+  handleSubmitEnquiryForm(enquiryData: ListingEnquiryFormData): void;
+  isLoading?: boolean;
+};

@@ -1,8 +1,8 @@
-import ControlButtons from "components/shared/ControlButtons";
-import ErrorMessage from "components/shared/ErrorMessage";
-
-import useGetUserListings from "hooks/useGetUserListings";
 import { useState } from "react";
+
+import ControlButtons from "shared/ControlButtons";
+import ErrorMessage from "shared/ErrorMessage";
+import useGetUserListings from "hooks/useGetUserListings";
 import UserListingsContainer from "./UserListingsContainer";
 
 export default function UserListings() {

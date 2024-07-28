@@ -2,9 +2,9 @@ import { authLinks, navList } from "constants/staticData";
 import { getCookie } from "cookies-next";
 import useLocalStorage from "hooks/useLocalStorage";
 import useWindowSize from "hooks/useWindowSize";
+import Logo from "shared/Logo";
 import { MappedSuccessLoginResponse } from "typedef";
 import { Button, ButtonSizes } from "../buttons/Button";
-import Logo from "../shared/Logo";
 
 export default function Header() {
   const token = getCookie("token");
