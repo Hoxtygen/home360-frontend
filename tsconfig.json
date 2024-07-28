@@ -19,7 +19,8 @@
       "@/lib": ["lib"],
       "@/middleware": ["middleware"],
       "@/clients": ["clients"],
-      "@/typedef": ["typedef"]
+      "@/typedef": ["typedef"],
+      "@/shared": ["shared"]
     },
     "plugins": [
       {
