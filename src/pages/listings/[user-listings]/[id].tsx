@@ -1,7 +1,6 @@
-import DashboardLayout from "components/dashboard/DashboardLayout";
+import { DashboardLayout } from "components/layouts";
 import UserListingDetailsContainer from "features/listings/userListings/UserListingDetailsContainer";
 import { GetServerSideProps } from "next";
-import React from "react";
 
 type ListingInfoProps = { id: string };
 

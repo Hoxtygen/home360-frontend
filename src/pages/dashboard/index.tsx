@@ -1,6 +1,5 @@
-import DashboardLayout from "components/dashboard/DashboardLayout";
+import { DashboardLayout } from "components/layouts";
 import { GetServerSideProps } from "next";
-import React from "react";
 import Dashboard from "views/dashboard/Dashboard";
 
 export default function dashboard() {

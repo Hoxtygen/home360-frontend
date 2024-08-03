@@ -1,5 +1,4 @@
-import DashboardLayout from "components/dashboard/DashboardLayout";
-import React from "react";
+import { DashboardLayout } from "components/layouts";
 import ListingForm from "./ListingForm";
 
 export default function CreateListing() {

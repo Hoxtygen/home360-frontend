@@ -1,7 +1,6 @@
-import DashboardLayout from "components/dashboard/DashboardLayout";
+import { DashboardLayout } from "components/layouts";
 import UserListings from "features/listings/userListings/UserListings";
 import { GetServerSideProps } from "next";
-import React from "react";
 
 export default function AgentListings() {
   return (
