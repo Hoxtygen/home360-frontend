@@ -1,4 +1,8 @@
-import { BaseResponse, NewUserSignup } from "@/typedef";
+import {
+  BaseResponse,
+  NewUserSignup,
+  PaginatedAPIResponseBase,
+} from "@/typedef";
 
 type Address = {
   streetName: string;
@@ -65,13 +69,13 @@ export interface ListingDetailResponse extends BaseResponse {
   data: ListingWithAgentInfo;
 }
 
-type ListingSearchData = {
-  currentPage: number;
-  totalItems: number;
-  totalPages: number;
-  items: ListingData[];
-  hasNext: boolean;
-};
+// type ListingSearchData = {
+//   currentPage: number;
+//   totalItems: number;
+//   totalPages: number;
+//   items: ListingData[];
+//   hasNext: boolean;
+// };
 
 export type ListingDetailProps = {
   listingData: ListingData;
@@ -90,7 +94,7 @@ export type UserListingDetailsProps = Omit<
 };
 
 export interface ListingSearchResponse extends BaseResponse {
-  data: ListingSearchData;
+  data: PaginatedAPIResponseBase<ListingData>;
 }
 
 export type ListingAgentProps = {

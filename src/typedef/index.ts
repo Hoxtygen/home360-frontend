@@ -117,6 +117,14 @@ export interface BaseResponse {
   message: string;
 }
 
+export interface PaginatedAPIResponseBase<T> {
+  currentPage: number;
+  totalItems: number;
+  totalPages: number;
+  items: T[];
+  hasNext: boolean;
+}
+
 export type ListingType =
   | "not-specified"
   | "apartment"

@@ -1,4 +1,5 @@
 import { Button } from "components/buttons/Button";
+import { mergeClass } from "lib/utils/utils";
 import React from "react";
 
 type ControlButtonProps = {
@@ -10,6 +11,7 @@ type ControlButtonProps = {
   rightButtonClassname?: string;
   leftButtonDisable?: boolean;
   rightButtonDisable?: boolean;
+  className?: string;
 };
 
 export default function ControlButtons({
@@ -21,9 +23,15 @@ export default function ControlButtons({
   rightButtonClassname,
   leftButtonDisable,
   rightButtonDisable,
+  className,
 }: ControlButtonProps) {
   return (
-    <div className="border border-black bg-slate-900 flex justify-center gap-5 mt-4 pt-3 pb-3">
+    <div
+      className={mergeClass(
+        "border border-black bg-slate-900 flex justify-center gap-5 mt-4 pt-3 pb-3",
+        className
+      )}
+    >
       <Button
         onClick={handleLeftButtonAction}
         size="lg"
