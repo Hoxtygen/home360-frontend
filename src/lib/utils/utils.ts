@@ -88,7 +88,7 @@ export function getRemainingCharacter(
   return maxCharacter - typedCharacter;
 }
 
-export function formatDate(selectedDate: Date) {
+export function formatDate(selectedDate: Date | string) {
   const date = new Date(selectedDate);
   const formattedDay =
     date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
