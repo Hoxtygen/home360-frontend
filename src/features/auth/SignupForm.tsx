@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 import BackButton from "components/buttons/BackButton";
 import { Button } from "components/buttons/Button";
-import { Input } from "components/inputs/Input";
+import { Input } from "components/input";
 import Spinner from "components/loaders/Spinner";
 import useSignup from "hooks/useSignup";
 import { userSignupValidationSchema, userSignupValues } from "lib/validations";

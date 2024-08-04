@@ -1,12 +1,7 @@
-import React, { InputHTMLAttributes } from "react";
+import React from "react";
 import { mergeClass } from "lib/utils/utils";
+import { CheckboxProps } from "./types";
 
-interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  classname?: string;
-  id: string;
-  labelClassName?: string;
-}
 export default function Checkbox({
   label,
   className,

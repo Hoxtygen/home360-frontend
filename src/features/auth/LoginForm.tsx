@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 import BackButton from "components/buttons/BackButton";
 import { Button } from "components/buttons/Button";
-import { Input } from "components/inputs/Input";
+import { Input } from "components/input";
 import useLocalStorage from "hooks/useLocalStorage";
 import { useLogin } from "hooks/useLogin";
 import { mapLoginResponse } from "lib/utils/utils";

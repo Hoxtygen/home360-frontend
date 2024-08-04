@@ -1,13 +1,8 @@
 import * as React from "react";
-import { mergeClass } from "../../lib/utils/utils";
-import InputLabel from "./InputLabel";
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  handleIncreaseValue?: () => void;
-  handleDecreaseValue?: () => void;
-}
+import { mergeClass } from "../../lib/utils/utils";
+import { InputProps } from "./types";
+import { InputLabel } from "components/inputLabel";
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, ...props }, ref) => {
@@ -37,4 +32,4 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
-export { Input };
+export default Input;

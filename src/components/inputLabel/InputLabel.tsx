@@ -1,9 +1,8 @@
-import { mergeClass } from "lib/utils/utils";
-import React, { LabelHTMLAttributes } from "react";
+import React from "react";
 
-interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
-  label: string;
-}
+import { mergeClass } from "lib/utils/utils";
+import { LabelProps } from "./types";
+
 export default function InputLabel({ label, ...props }: LabelProps) {
   return (
     <label

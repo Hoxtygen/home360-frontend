@@ -24,7 +24,7 @@ export const states = [
 
   { label: "Delta", value: "Delta" },
 
-  { label: "Ebonyi ", value: "Ebonyi " },
+  { label: "Ebonyi", value: "Ebonyi" },
 
   { label: "Edo", value: "Edo" },
 

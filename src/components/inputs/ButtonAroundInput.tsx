@@ -1,8 +1,8 @@
 import { Button } from "components/buttons/Button";
 import { mergeClass } from "lib/utils/utils";
-import React, { forwardRef } from "react";
-import { InputProps } from "./Input";
-import InputLabel from "./InputLabel";
+import { forwardRef } from "react";
+import { InputProps } from "components/input/types";
+import { InputLabel } from "components/inputLabel";
 
 const ButtonAroundInput = forwardRef<HTMLInputElement, InputProps>(
   (

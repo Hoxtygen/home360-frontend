@@ -415,3 +415,14 @@ export const employmentType = [
 ];
 
 export const maxCharacter = 2000;
+
+export const yesNo = [
+  {
+    label: "Yes",
+    value: "yes",
+  },
+  {
+    label: "No",
+    value: "no",
+  },
+];

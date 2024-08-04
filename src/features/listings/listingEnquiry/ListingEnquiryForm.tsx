@@ -1,13 +1,18 @@
 import { useFormik } from "formik";
 
+import { AutoTextArea } from "components/autotextArea";
 import { Button } from "components/buttons/Button";
-import Dropdown from "components/dropdown/Dropdown";
-import AutoTextArea from "components/inputs/AutoTextArea";
-import { Input } from "components/inputs/Input";
-import InputLabel from "components/inputs/InputLabel";
+import { Input } from "components/input";
+import { InputLabel } from "components/inputLabel";
+import { Select } from "components/select";
 import { states } from "constants/states";
-import { employmentType, maxCharacter, salutation } from "constants/staticData";
-import { formatString, getRemainingCharacter } from "lib/utils/utils";
+import {
+  employmentType,
+  maxCharacter,
+  salutation,
+  yesNo,
+} from "constants/staticData";
+import { getRemainingCharacter } from "lib/utils/utils";
 import { listingEnquiryValidationSchema } from "lib/validations/listingValidation";
 import ErrorMessage from "shared/ErrorMessage";
 import { ListingEnquiryFormProps } from "../types";
@@ -33,7 +38,6 @@ export default function ListingEnquiryForm({
     handleChange,
     values,
     handleSubmit,
-    setFieldValue,
     isValid,
     dirty,
   } = formik;
@@ -70,12 +74,15 @@ export default function ListingEnquiryForm({
         </div>
         <div className="mb-4">
           <InputLabel label="Salutation" htmlFor="salutation" />
-          <Dropdown
+          <Select
             name="salutation"
-            data={salutation}
+            options={salutation}
             id="salutation"
             title="Select Salutation"
-            onSelect={(data) => setFieldValue("salutation", data)}
+            onChange={handleChange}
+            value={values.salutation}
+            onBlur={handleBlur}
+            className="border-black"
           />
           {touched.salutation && errors.salutation && (
             <ErrorMessage className="text-red-500" error={errors.salutation} />
@@ -153,12 +160,15 @@ export default function ListingEnquiryForm({
 
         <div className="mb-4">
           <InputLabel label="Location" htmlFor="location" />
-          <Dropdown
-            data={states}
+          <Select
+            options={states}
             name="location"
             id="location"
             title="Select your location"
-            onSelect={(item) => setFieldValue("location", item)}
+            onChange={handleChange}
+            value={values.location}
+            onBlur={handleBlur}
+            className="border-black"
           />
           {touched.location && errors.location && (
             <ErrorMessage className="text-red-500" error={errors.location} />
@@ -166,14 +176,16 @@ export default function ListingEnquiryForm({
         </div>
         <div className="mb-4">
           <InputLabel label="Employment Status" htmlFor="employmentStatus" />
-          <Dropdown
-            data={employmentType}
+          <Select
+            options={employmentType}
             name="employmentStatus"
             id="employmentStatus"
             title="Select Employment Type"
-            onSelect={(event) => {
-              setFieldValue("employmentStatus", formatString(event as string));
-            }}
+            onChange={handleChange}
+            value={values.employmentStatus}
+            onBlur={handleBlur}
+            className="border-black py-2"
+            format={true}
           />
           {touched.employmentStatus && errors.employmentStatus && (
             <ErrorMessage
@@ -184,14 +196,15 @@ export default function ListingEnquiryForm({
         </div>
         <div className="mb-4">
           <InputLabel label="Pets" htmlFor="pets" />
-          <Dropdown
-            data={yesNo}
+          <Select
+            options={yesNo}
             name="pets"
             id="pets"
             title="Do you have pets?"
-            onSelect={(data) => {
-              setFieldValue("pets", data);
-            }}
+            onChange={handleChange}
+            value={values.pets}
+            onBlur={handleBlur}
+            className="border-black py-2"
           />
           {touched.pets && errors.pets && (
             <ErrorMessage className="text-red-500" error={errors.pets} />
@@ -200,14 +213,15 @@ export default function ListingEnquiryForm({
 
         <div className="mb-4">
           <InputLabel label="Commercial Purpose" htmlFor="commercialPurpose" />
-          <Dropdown
-            data={yesNo}
+          <Select
+            options={yesNo}
             name="commercialPurpose"
             id="commercialPurpose"
             title="For commercial purpose?"
-            onSelect={(data) => {
-              setFieldValue("commercialPurpose", data);
-            }}
+            onChange={handleChange}
+            value={values.commercialPurpose}
+            onBlur={handleBlur}
+            className="border-black py-2"
           />
           {touched.commercialPurpose && errors.commercialPurpose && (
             <ErrorMessage
@@ -220,7 +234,7 @@ export default function ListingEnquiryForm({
           <Button
             className="w-full dark:text-white"
             type="submit"
-            disabled={!(formik.isValid && formik.dirty)}
+            disabled={!(isValid && dirty)}
             isLoading={isLoading}
           >
             Submit
@@ -230,14 +244,3 @@ export default function ListingEnquiryForm({
     </div>
   );
 }
-
-const yesNo = [
-  {
-    label: "Yes",
-    value: "yes",
-  },
-  {
-    label: "No",
-    value: "no",
-  },
-];

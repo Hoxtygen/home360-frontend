@@ -2,14 +2,15 @@ import { Formik } from "formik";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
+import { AutoTextArea } from "components/autotextArea";
 import { Button } from "components/buttons/Button";
-import AutoTextArea from "components/inputs/AutoTextArea";
+import { CheckboxGroup } from "components/checkbox";
+import { Input } from "components/input";
+import { InputLabel } from "components/inputLabel";
 import { ButtonAroundInput } from "components/inputs/ButtonAroundInput";
-import CheckboxGroup from "components/inputs/CheckboxGroup";
-import { CustomSelect } from "components/inputs/CustomSelect";
-import InputLabel from "components/inputs/InputLabel";
-import RadioGroup from "components/inputs/RadioGroup";
 import UploadComponent from "components/inputs/UploadComponent";
+import { RadioGroup } from "components/radio";
+import { Select } from "components/select";
 import NigerianStates from "constants/nigeria-states";
 import {
   apartmentDetails,
@@ -30,8 +31,7 @@ import {
   newListingValidationSchema,
 } from "lib/validations/listingValidation";
 import ErrorMessage from "shared/ErrorMessage";
-import { Input } from "../../../components/inputs/Input";
-import LoadingScreen from "../../../shared/LoadingScreen";
+import LoadingScreen from "shared/LoadingScreen";
 
 export default function ListingForm() {
   const [lgas, setLgas] = useState<string[] | undefined>([]);
@@ -271,6 +271,7 @@ export default function ListingForm() {
                       <ErrorMessage error={errors.address.state} />
                     )}
                   </div>
+
                   <div className="lg:w-5/12 mb-4">
                     <InputLabel label="Local government" htmlFor="lga" />
                     <select
@@ -506,8 +507,8 @@ export default function ListingForm() {
               )}
               <div className="sm:flex flex-wrap justify-between">
                 <div className="basis-5/12 mb-4">
-                  <CustomSelect
-                    className="rounded-r-md dark:text-black w-full"
+                  <Select
+                    className="dark:text-black py-2 border-black"
                     id="apartmentType"
                     label="Apartment Type"
                     name="apartmentInfo.apartmentType"
@@ -515,6 +516,7 @@ export default function ListingForm() {
                     onChange={handleChange}
                     options={apartmentType}
                     value={values.apartmentInfo.apartmentType}
+                    title="Select apartment type"
                   />
                   {touched.apartmentInfo?.apartmentType &&
                     errors.apartmentInfo?.apartmentType && (
