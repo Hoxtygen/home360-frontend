@@ -1,6 +1,6 @@
 import { mergeClass } from "lib/utils/utils";
-import React, { SelectHTMLAttributes } from "react";
-import InputLabel from "./InputLabel";
+import { SelectHTMLAttributes } from "react";
+import InputLabel from "../inputLabel/InputLabel";
 
 interface SelectProps<T extends string | number>
   extends SelectHTMLAttributes<HTMLSelectElement> {

@@ -1,7 +1,7 @@
+import { SelectOption } from "features/listings/types";
 import { SelectHTMLAttributes } from "react";
 import { formatString, mergeClass } from "../../lib/utils/utils";
-import InputLabel from "./InputLabel";
-import { SelectOption } from "features/listings/types";
+import { InputLabel } from "components/inputLabel";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: SelectOption[];

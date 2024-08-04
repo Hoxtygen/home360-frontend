@@ -1,7 +1,6 @@
 import { mergeClass } from "lib/utils/utils";
-import React from "react";
 import Checkbox from "./Checkbox";
-import { IOptionGroup, IOption } from "./RadioGroup";
+import { IOptionGroup, IOption } from "components/radio/types";
 
 export default function CheckboxGroup({
   label,
