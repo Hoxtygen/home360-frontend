@@ -1,10 +1,10 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { Search } from "components/searchResult/SearchResult";
+import { Select } from "components/select";
 import { ChangeEvent, FormEvent } from "react";
 import { apartmentType } from "../../constants";
 import { Button } from "../buttons/Button";
-import { CustomSelect } from "../inputs/CustomSelect";
-import { Input } from "../inputs/Input";
+import { Input } from "../input";
 
 export type SearchFormProps = {
   searchData: Search;
@@ -18,7 +18,10 @@ export default function SearchForm({
 }: SearchFormProps) {
   return (
     <div className="max-w-4xl rounded-md container mx-auto p-10 border shadow-lg mt-5">
-      <form className="" onSubmit={handleSubmit}>
+      <form
+        className="font-hanken-medium text-[1.15rem]"
+        onSubmit={handleSubmit}
+      >
         <div className="form-inner flex w-full flex-col sm:flex-row rounded-md content-center">
           <div className="grow sm:w-2/4">
             <Input
@@ -33,12 +36,12 @@ export default function SearchForm({
           </div>
           <div className="flex grow sm:w-2/4 sm:mt-0 mt-4">
             <div className="grow w-2/4">
-              <CustomSelect
-                name="apartmentType"
+              <Select
                 value={searchData["apartmentType"]}
                 options={apartmentType}
                 onChange={handleChange}
-                className="w-full rounded-md dark:text-black sm:rounded-none"
+                name="apartmentType"
+                className="rounded-none py-[0.57rem] border-black"
               />
             </div>
             <div className="grow sm:w-2/4">

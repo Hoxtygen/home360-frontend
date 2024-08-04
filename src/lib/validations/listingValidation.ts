@@ -83,7 +83,7 @@ export const listingEnquiryValidationSchema: Schema<ListingEnquiryData> =
     message: string()
       .required("Message is required")
       .max(maxCharacter, `Maximum of ${maxCharacter} characters allowed`),
-    salutation: string().required("Salutation is required").min(2),
+    salutation: string().trim().required("Salutation is required"),
     firstName: string()
       .required("First name is required")
       .min(2, "First name must be a least 2 characters in length"),
@@ -103,8 +103,8 @@ export const listingEnquiryValidationSchema: Schema<ListingEnquiryData> =
         /^([0]{1})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7,8})$/,
         "Phone number must be a valid Nigerian number. E.g 09023456789"
       ),
-    location: string().required("location is required"),
-    pets: string().required("Indicate if you  have pet"),
+    location: string().required("Location is required"),
+    pets: string().required("Indicate if you  have pets"),
     commercialPurpose: string().required(
       "Indicate if you  want to use this apartment for commercial purposes"
     ),
