@@ -1,16 +1,7 @@
 import { mergeClass } from "lib/utils/utils";
-import React, { InputHTMLAttributes } from "react";
-import InputLabel from "./InputLabel";
+import InputLabel from "../inputLabel/InputLabel";
+import { RadioInputElementProps } from "./types";
 
-export interface RadioInputElementProps
-  extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  id: string;
-  key?: string;
-  disabled?: boolean;
-  className?: string;
-  labelClassName?: string;
-}
 export default function Radio({
   label,
   id,

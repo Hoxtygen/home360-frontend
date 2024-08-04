@@ -1,22 +1,9 @@
+import React from "react";
+
+import { Radio } from "components/radio";
 import { formatString, mergeClass } from "lib/utils/utils";
-import React, { ChangeEvent } from "react";
-import Radio from "./Radio";
+import { IOption, IOptionGroup } from "./types";
 
-export interface IOption {
-  label: string;
-  name?: string;
-  disabled?: boolean;
-  className?: string;
-  labelClassName?: string;
-}
-
-export interface IOptionGroup {
-  label: string;
-  options: IOption[];
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  className?: string;
-  name?: string;
-}
 export default function RadioGroup({
   label,
   options,
