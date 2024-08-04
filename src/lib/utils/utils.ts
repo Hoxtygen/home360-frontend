@@ -59,8 +59,11 @@ export function isFilesTooBig(files?: File[]): boolean {
   return valid;
 }
 
-export function formatString(str: string): string {
+export function formatString(str: string, formatString?: boolean): string {
   const regex = /\s|-/g;
+  if (!formatString || formatString === undefined) {
+    return str;
+  }
   return str.replace(regex, "_").toUpperCase();
 }
 

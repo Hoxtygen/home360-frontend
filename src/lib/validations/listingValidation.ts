@@ -1,6 +1,5 @@
-import { employmentType, maxCharacter } from "constants/staticData";
+import { maxCharacter } from "constants/staticData";
 import { ListingEnquiryData, ListingProps } from "features/listings/types";
-import { formatString } from "lib/utils/utils";
 import { array, date, number, object, Schema, string } from "yup";
 
 export const initialValues: ListingProps = {
@@ -108,10 +107,5 @@ export const listingEnquiryValidationSchema: Schema<ListingEnquiryData> =
     commercialPurpose: string().required(
       "Indicate if you  want to use this apartment for commercial purposes"
     ),
-    employmentStatus: string()
-      .required("Employment type is required")
-      .oneOf(
-        employmentType.map((option) => formatString(option.value).toUpperCase())
-      )
-      .label("Employment Type"),
+    employmentStatus: string().required("Employment type is required"),
   });

@@ -6,7 +6,12 @@ import { Input } from "components/input";
 import { InputLabel } from "components/inputLabel";
 import { Select } from "components/select";
 import { states } from "constants/states";
-import { employmentType, maxCharacter, salutation } from "constants/staticData";
+import {
+  employmentType,
+  maxCharacter,
+  salutation,
+  yesNo,
+} from "constants/staticData";
 import { getRemainingCharacter } from "lib/utils/utils";
 import { listingEnquiryValidationSchema } from "lib/validations/listingValidation";
 import ErrorMessage from "shared/ErrorMessage";
@@ -180,6 +185,7 @@ export default function ListingEnquiryForm({
             value={values.employmentStatus}
             onBlur={handleBlur}
             className="border-black py-2"
+            format={true}
           />
           {touched.employmentStatus && errors.employmentStatus && (
             <ErrorMessage
@@ -238,14 +244,3 @@ export default function ListingEnquiryForm({
     </div>
   );
 }
-
-const yesNo = [
-  {
-    label: "Yes",
-    value: "yes",
-  },
-  {
-    label: "No",
-    value: "no",
-  },
-];

@@ -1,6 +1,6 @@
 import InputLabel from "components/inputLabel/InputLabel";
 import { formatString, mergeClass } from "lib/utils/utils";
-import { NewSelectProps } from "./types";
+import { SelectProps } from "./types";
 
 export default function Select({
   value,
@@ -10,8 +10,9 @@ export default function Select({
   label,
   id,
   className,
+  format,
   ...props
-}: NewSelectProps) {
+}: SelectProps) {
   return (
     <div className=" relative before:content-[''] before:absolute before:right-4 before:pointer-events-none after:content-[''] after:absolute after:right-4 after:pointer-events-none before:border-x-[0.3rem] before:border-x-transparent before:border-b-[0.3rem] border-b-black before:top-[40%] after:border-x-[0.3rem] after:border-x-transparent after:border-t-[0.3rem] border-t-black after:top-[55%] text-black">
       {label && (
@@ -34,7 +35,7 @@ export default function Select({
         {options.map((option) => (
           <option
             key={option.value}
-            value={formatString(option.value as string)}
+            value={formatString(option.value as string, format)}
           >
             {option.label}
           </option>

@@ -38,7 +38,7 @@ export function CustomSelect({
         {options.map((option) => (
           <option
             key={option.value}
-            value={formatString(option.value as string)}
+            value={formatString(option.value as string, true)}
           >
             {option.label}
           </option>

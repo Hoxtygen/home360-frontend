@@ -20,7 +20,7 @@ export default function RadioGroup({
         const optionId = `radio-option-${shortenedOptionLabel}`;
         return (
           <Radio
-            value={formatString(label)}
+            value={formatString(label, true)}
             label={label}
             key={optionId}
             id={optionId}
