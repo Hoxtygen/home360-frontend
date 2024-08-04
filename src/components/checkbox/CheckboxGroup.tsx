@@ -1,6 +1,6 @@
+import { IOption, IOptionGroup } from "components/radio/types";
 import { mergeClass } from "lib/utils/utils";
 import Checkbox from "./Checkbox";
-import { IOptionGroup, IOption } from "components/radio/types";
 
 export default function CheckboxGroup({
   label,
