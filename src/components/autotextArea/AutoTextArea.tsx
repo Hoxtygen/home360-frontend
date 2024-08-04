@@ -1,12 +1,7 @@
 import { mergeClass } from "lib/utils/utils";
-import React, { ChangeEvent, TextareaHTMLAttributes, useState } from "react";
-import InputLabel from "./InputLabel";
-
-interface AutoTextAreaProps
-  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-  className?: string;
-}
+import { ChangeEvent, useState } from "react";
+import InputLabel from "../inputLabel/InputLabel";
+import { AutoTextAreaProps } from "./types";
 
 export default function AutoTextArea({
   label,
