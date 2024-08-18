@@ -11,14 +11,14 @@ import { ButtonAroundInput } from "components/inputs/ButtonAroundInput";
 import UploadComponent from "components/inputs/UploadComponent";
 import { RadioGroup } from "components/radio";
 import { Select } from "components/select";
-import NigerianStates from "constants/nigeria-states";
+import NigerianStates from "constant-data/nigeria-states";
 import {
   apartmentDetails,
   apartmentType,
   applicationDocs,
   facilityQuality,
   petsAllowed,
-} from "constants/staticData";
+} from "constant-data/staticData";
 import { displayError } from "features/auth/SignupForm";
 import useCreateListing from "hooks/useCreateListing";
 import {
