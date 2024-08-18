@@ -1,12 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-// components/Carousel.tsx
-
 import React, { useEffect, useState } from "react";
-
-interface CarouselProps {
-  images: string[];
-  autoPlayInterval?: number;
-}
+import { CarouselProps } from "./types";
 
 const Carousel: React.FC<CarouselProps> = ({
   images,
@@ -14,8 +8,8 @@ const Carousel: React.FC<CarouselProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const numImages = images.length;
-  const numVisible = 3; // Number of images shown at once
-  const imageHeight = "h-64"; // Set your desired height here, e.g., h-64 for 16rem
+  const numVisible = 3;
+  const imageHeight = "h-64";
 
   const totalPages = Math.ceil(numImages / numVisible);
 
