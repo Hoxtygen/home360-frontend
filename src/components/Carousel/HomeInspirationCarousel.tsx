@@ -1,17 +1,16 @@
-import homeInspirationData from "constants/homeInspData.json";
+import GenericCarousel from "components/Carousel/GenericCarousel";
+import homeInspirationData from "constant-data/homeInspData.json";
 import HouseCard from "../landing-page/HouseCard";
-import Carousel from "./Carousel";
 
 export default function HomeInspirationCarousel() {
   return (
     <div>
-      <Carousel
-        items={homeInspirationData}
+      <GenericCarousel
+        carouselItems={homeInspirationData}
+        numOfItemsToShow={4}
+        renderItem={(carouselItem) => <HouseCard data={carouselItem} />}
         title="Inspiration"
         subtitle="Houses in Abuja"
-        renderItems={(homeInspirationData) => (
-          <HouseCard data={homeInspirationData} />
-        )}
       />
     </div>
   );

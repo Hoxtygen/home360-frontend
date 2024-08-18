@@ -1,15 +1,18 @@
-import { advice } from "constants/staticData";
-import AdviceCard from "../landing-page/AdviceCard";
-import Carousel from "./Carousel";
+import React from "react";
+
+import AdviceCard from "components/landing-page/AdviceCard";
+import GenericCarousel from "./GenericCarousel";
+import { advice } from "constant-data/staticData";
 
 export default function AdviceCarousel() {
   return (
     <div>
-      <Carousel
-        items={advice}
+      <GenericCarousel
+        carouselItems={advice}
+        numOfItemsToShow={4}
         title="Advice and Tips"
         subtitle="checklists,templates, and much more"
-        renderItems={(advice) => <AdviceCard data={advice} />}
+        renderItem={(adviceItem) => <AdviceCard data={adviceItem} />}
       />
     </div>
   );
