@@ -1,4 +1,4 @@
-import { authLinks, navList } from "constants/staticData";
+import { authLinks, navList } from "constant-data/staticData";
 import { getCookie } from "cookies-next";
 import useLocalStorage from "hooks/useLocalStorage";
 import useWindowSize from "hooks/useWindowSize";
