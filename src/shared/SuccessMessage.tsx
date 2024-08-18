@@ -8,7 +8,7 @@ export default function SuccessMessage({ className, message }: MessageProps) {
       <p
         aria-label="success message"
         className={mergeClass(
-          "font-hanken-medium text-14 text-green-800 p-2",
+          "font-hanken-regular text-14 p-2 mb-3 rounded-sm",
           className
         )}
       >

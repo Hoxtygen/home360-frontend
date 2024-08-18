@@ -1,5 +1,5 @@
 import { Button } from "components/buttons/Button";
-import { Input } from "components/inputs/Input";
+import { Input } from "components/input";
 import AuthLayout from "features/auth/AuthLayout";
 import { useFormik } from "formik";
 import { usePasswordResetRequest } from "hooks/usePasswordResetRequest";
@@ -41,19 +41,22 @@ export default function PasswordResetRequest() {
       <div className="">
         {passwordResetRequestError && (
           <ErrorMessage
-            className="text-center text-18 bg-white p-2"
+            className="text-center text-18  p-2 text-red-600 rounded-sm"
             error={passwordResetRequestError.message}
           />
         )}
 
         {passwordResetRequestData && (
           <SuccessMessage
-            className="text-center text-18"
+            className="text-center text-green-900 text-18 bg-green-300"
             message={passwordResetRequestData.data}
           />
         )}
       </div>
-      <form onSubmit={handleSubmit} className="border p-4">
+      <form
+        onSubmit={handleSubmit}
+        className="border border-gray-200 rounded-md p-4"
+      >
         <div className="">
           <h1 className="text-center text-24 font-hanken-semibold mb-4 text-white">
             Password Reset Request
