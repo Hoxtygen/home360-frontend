@@ -1,5 +1,5 @@
 import { Button } from "components/buttons/Button";
-import { authFooterLinks } from "constants/staticData";
+import { authFooterLinks } from "constant-data/staticData";
 import useWindowSize from "hooks/useWindowSize";
 import { ReactNode } from "react";
 import Logo from "shared/Logo";
@@ -14,8 +14,8 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   const date = new Date();
 
   return (
-    <div>
-      <header>
+    <div className="flex flex-col min-h-[100dvh]">
+      <header className="flex-[0_0_auto]">
         <div className="container mx-auto max-w-5xl p-3">
           <Button href="/" variant="link" className="dark:hover:bg-transparent">
             <Logo size={width > 800 ? "md" : "sm"} />
@@ -23,14 +23,14 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         </div>
       </header>
       <main
-        className="bg-center bg-no-repeat bg-cover"
+        className="bg-center bg-no-repeat bg-cover flex-auto"
         style={{ backgroundImage: `url(${SignupBg.src})` }}
       >
-        <div className="main-inner min-h-[calc(100vh-163px)]  justify-center">
+        <div className="main-inner   justify-center">
           <div className="max-w-md mx-auto my-auto pt-[60px]">{children}</div>
         </div>
       </main>
-      <footer className="py-10 px-8">
+      <footer className="py-10 px-8 flex-[0_0_auto]">
         <div className="max-w-5xl  mx-auto text-center">
           {authFooterLinks.map((link, index) => (
             <Button
