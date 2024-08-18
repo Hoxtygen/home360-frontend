@@ -1,5 +1,6 @@
+import { useEffect } from "react";
+
 import { Button } from "components/buttons/Button";
-import { Input } from "components/inputs/Input";
 import { setCookie } from "cookies-next";
 import { useFormik } from "formik";
 import { useResetPassword } from "hooks/useResetPassword";
@@ -7,10 +8,10 @@ import {
   resetPasswordValidationSchema,
   resetPasswordValues,
 } from "lib/validations/authValidation";
-import { useEffect } from "react";
 import ErrorMessage from "shared/ErrorMessage";
 import SuccessMessage from "shared/SuccessMessage";
 import AuthLayout from "../AuthLayout";
+import { Input } from "components/input";
 
 export default function ResetPassword({ token }: { token: string }) {
   const {

@@ -1,16 +1,9 @@
-/* eslint-disable unused-imports/no-unused-vars */
-import { Search } from "components/searchResult/SearchResult";
 import { Select } from "components/select";
-import { ChangeEvent, FormEvent } from "react";
-import { apartmentType } from "../../constants";
+import { apartmentType } from "constant-data";
 import { Button } from "../buttons/Button";
 import { Input } from "../input";
+import { SearchFormProps } from "@/typedef";
 
-export type SearchFormProps = {
-  searchData: Search;
-  handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void;
-  handleSubmit(event: FormEvent<HTMLFormElement>): void;
-};
 export default function SearchForm({
   searchData,
   handleChange,
@@ -27,7 +20,9 @@ export default function SearchForm({
             <Input
               type="text"
               name="location"
-              id=""
+              pattern="^[a-zA-Z\s]+$"
+              title="Only English alphabets allowed"
+              id="location"
               placeholder="Where:town,city"
               onChange={handleChange}
               className="w-full rounded-md sm:rounded-r-none dark:text-black text-base"
@@ -38,6 +33,7 @@ export default function SearchForm({
             <div className="grow w-2/4">
               <Select
                 value={searchData["apartmentType"]}
+                title="Select apartment type"
                 options={apartmentType}
                 onChange={handleChange}
                 name="apartmentType"

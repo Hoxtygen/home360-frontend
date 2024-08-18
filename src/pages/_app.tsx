@@ -8,6 +8,8 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
 import { useIdleTimer } from "react-idle-timer";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";

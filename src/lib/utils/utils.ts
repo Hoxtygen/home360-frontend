@@ -1,12 +1,12 @@
-import clsx, { ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
 import {
   AuthenticationSuccessResponse,
   MappedSuccessLoginResponse,
   Nigeria,
 } from "@/typedef";
-import { SUPPORTED_FILE_FORMATS } from "constants/staticData";
+import clsx, { ClassValue } from "clsx";
+import { SUPPORTED_FILE_FORMATS } from "constant-data/staticData";
 import { SelectOption } from "features/listings/types";
+import { twMerge } from "tailwind-merge";
 
 export function mergeClass(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

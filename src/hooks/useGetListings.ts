@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import { ListingResponse } from "features/listings/types";
 
-import { ListingResponse } from "@/typedef";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 

@@ -1,16 +1,9 @@
-import { ApartmentInfo } from "@/typedef";
 import {
   capitalizeFirstCharacter,
   formatDate,
   replaceSpecialCharactersWithSpace,
 } from "lib/utils/utils";
-
-type ApartmentInfoProps = {
-  petsAllowed: string;
-  facilityQuality: string;
-  availableFrom: Date;
-  apartmentInfo: ApartmentInfo;
-};
+import { ApartmentInfoProps } from "./types";
 
 export default function ApartmentDescription({
   availableFrom,

@@ -5,13 +5,13 @@ import { Button } from "components/buttons/Button";
 import { Input } from "components/input";
 import { InputLabel } from "components/inputLabel";
 import { Select } from "components/select";
-import { states } from "constants/states";
+import { states } from "constant-data/states";
 import {
   employmentType,
   maxCharacter,
   salutation,
   yesNo,
-} from "constants/staticData";
+} from "constant-data/staticData";
 import { getRemainingCharacter } from "lib/utils/utils";
 import { listingEnquiryValidationSchema } from "lib/validations/listingValidation";
 import ErrorMessage from "shared/ErrorMessage";

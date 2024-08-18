@@ -42,7 +42,11 @@ export default function LoginForm() {
 
   return (
     <div>
-      <form action="" className="border p-4 bg-white" onSubmit={handleSubmit}>
+      <form
+        action=""
+        className="border p-4 bg-white rounded-md"
+        onSubmit={handleSubmit}
+      >
         <div className="flex items-center mb-8">
           <BackButton
             className="pr-14"
@@ -85,14 +89,15 @@ export default function LoginForm() {
           )}
           <p>
             <small>
-              Forgot Password?click{" "}
+              Forgot Password?click
               <Button
                 variant="link"
-                className="dark:bg-transparent dark:hover:underline dark:hover:bg-transparent p-0 dark:hover:text-black"
+                className="dark:bg-transparent dark:hover:underline dark:hover:bg-transparent p-0 dark:hover:text-black mx-1"
                 href="/auth/password-reset-request"
               >
-                here to reset
+                here
               </Button>
+              to reset
             </small>
           </p>
         </div>

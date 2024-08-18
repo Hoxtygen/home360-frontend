@@ -1,4 +1,4 @@
-import { footerNavList } from "constants/staticData";
+import { footerNavList } from "constant-data/staticData";
 import { Button } from "../buttons/Button";
 import Slogan from "./Slogan";
 

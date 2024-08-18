@@ -5,7 +5,7 @@ type AdviceData = { data: AdviceProps };
 export default function AdviceCard({ data }: AdviceData) {
   return (
     <div
-      className="bg-[length:250px_300px] min-h-[300px] w-64 border bg-center"
+      className="bg-[length:250px_300px] min-h-[300px] w-full border bg-center"
       style={{ backgroundImage: `url(${data.backgroundImage})` }}
     >
       <Link href={data.href} className="h-32 text-center block">

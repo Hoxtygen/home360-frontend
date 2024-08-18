@@ -1,4 +1,4 @@
-import { maxCharacter } from "constants/staticData";
+import { maxCharacter } from "constant-data/staticData";
 import { ListingEnquiryData, ListingProps } from "features/listings/types";
 import { array, date, number, object, Schema, string } from "yup";
 

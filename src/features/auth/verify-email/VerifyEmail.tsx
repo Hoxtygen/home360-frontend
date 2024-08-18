@@ -8,12 +8,8 @@ import AuthLayout from "../AuthLayout";
 export default function VerifyEmail({ token }: { token: string }) {
   const { emailVerificationError, emailVerificationResponse } =
     useVerifyEmail(token);
-  const {
-    isLoadingresendVerificationToken,
-    refetchVerificationToken,
-    resendVerificationTokenData,
-    resendVerificationTokenError,
-  } = useResendVerificationToken(token);
+  const { isLoadingresendVerificationToken, refetchVerificationToken } =
+    useResendVerificationToken(token);
 
   function handleFetchVerificationToken() {
     refetchVerificationToken();

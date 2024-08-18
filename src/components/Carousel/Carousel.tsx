@@ -1,123 +1,87 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
-import Dot from "./Dot";
+/* eslint-disable @next/next/no-img-element */
+import React, { useEffect, useState } from "react";
+import { CarouselProps } from "./types";
 
-interface CarouselProps<T> {
-  items: T[];
-  renderItems: (item: T) => ReactNode;
-  title?: string;
-  subtitle?: string;
-}
-const Carousel = <T extends unknown>({
-  items,
-  title,
-  subtitle,
-  renderItems,
-}: CarouselProps<T>) => {
-  const maxScrollWidth = useRef<HTMLElement | number>(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const carousel = useRef<HTMLDivElement | null>(null);
-  const movePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prevState) => prevState - 1);
-    }
+const Carousel: React.FC<CarouselProps> = ({
+  images,
+  autoPlayInterval = 3000,
+}) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const numImages = images.length;
+  const numVisible = 3;
+  const imageHeight = "h-64";
+
+  const totalPages = Math.ceil(numImages / numVisible);
+
+  const handleDotClick = (index: number) => {
+    setCurrentIndex(index);
   };
-  const moveNext = () => {
-    if (
-      carousel.current !== null &&
-      carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current
-    ) {
-      setCurrentIndex((prevState) => prevState + 1);
-    }
-  };
-
-  const isDisabled = (direction: string) => {
-    if (direction === "prev") {
-      return currentIndex <= 0;
-    }
-
-    if (direction === "next" && carousel.current !== null) {
-      return (
-        carousel.current.offsetWidth * currentIndex >= maxScrollWidth.current
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex < totalPages - 1 ? prevIndex + 1 : 0
       );
-    }
+    }, autoPlayInterval);
 
-    return false;
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, [autoPlayInterval, totalPages]);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : totalPages - 1
+    );
   };
 
-  useEffect(() => {
-    if (carousel !== null && carousel.current !== null) {
-      carousel.current.scrollLeft = carousel.current.offsetWidth * currentIndex;
-    }
-  }, [currentIndex]);
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex < totalPages - 1 ? prevIndex + 1 : 0
+    );
+  };
 
-  useEffect(() => {
-    maxScrollWidth.current = carousel.current
-      ? carousel.current.scrollWidth - carousel.current.offsetWidth
-      : 0;
-  }, []);
   return (
-    <div className="carousel my-12 mx-auto max-w-5xl">
-      <div className="py-5">
-        <h2 className="text-center text-[32px]">{title}</h2>
-        <p className="text-center text-xl">{subtitle}</p>
+    <div className="relative overflow-hidden">
+      <div
+        className="flex transition-transform duration-500"
+        style={{
+          transform: `translateX(-${(currentIndex * 100) / numVisible}%)`,
+        }}
+      >
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`flex-none ${imageHeight} w-1/${numVisible} border border-red-500`}
+          >
+            <img
+              src={image}
+              alt={`Slide ${index}`}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
       </div>
-      <div className="relative overflow-hidden">
-        <div className="flex justify-between absolute top left w-full h-full">
+      <button
+        onClick={handlePrevious}
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded z-10"
+      >
+        Prev
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded z-10"
+      >
+        Next
+      </button>
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {Array.from({ length: totalPages }).map((_, index) => (
           <button
-            onClick={movePrev}
-            className=" text-black w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
-            disabled={isDisabled("prev")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-20 -ml-5 hover:bg-blue-900/75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            <span className="sr-only">Prev</span>
-          </button>
-          <button
-            onClick={moveNext}
-            className="text-black w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
-            disabled={isDisabled("next")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-20 -ml-5 hover:bg-blue-900/75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-            <span className="sr-only">Next</span>
-          </button>
-        </div>
-        <div
-          className="carousel-container relative flex gap-3 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0"
-          ref={carousel}
-        >
-          {items.map((item, index) => (
-            <div key={index}>{renderItems(item)}</div>
-          ))}
-        </div>
-        <Dot
-          activeIndex={currentIndex}
-          handleClick={(activeIndex: number) => setCurrentIndex(activeIndex)}
-        />
+            key={index}
+            onClick={() => handleDotClick(index)}
+            className={`w-3 h-3 rounded-full ${
+              index === currentIndex ? "bg-gray-800" : "bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
     </div>
   );
