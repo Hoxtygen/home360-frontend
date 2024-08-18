@@ -1,24 +1,15 @@
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
-
-import { ListingType } from "@/typedef";
+import { Search } from "@/typedef";
 import SearchForm from "components/landing-page/SearchForm";
 import Layout from "components/layouts/Layout";
 import { useDebounce } from "hooks/useDebounce";
 import { useSearch } from "hooks/useSearch";
 import { QueryParams } from "pages/search";
 import ErrorMessage from "shared/ErrorMessage";
-import SkeletonCard from "shared/SkeletonCard";
-import Listings from "../../features/listings/Listings";
+import { Listings } from "features/listings";
 
-export type Search = {
-  apartmentType: ListingType;
-  location: string;
-  price: string;
-};
 export default function SearchResult({ searchQueryParams }: QueryParams) {
   const router = useRouter();
 
@@ -59,22 +50,29 @@ export default function SearchResult({ searchQueryParams }: QueryParams) {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
-        <div className="max-w-4xl rounded-md container mx-auto p-10 border mt-5 bg-[#F7F7F7] min-h-[600px]">
-          {isListingSearchLoading && <SkeletonCard />}
+        <div className="max-w-4xl rounded-md container mx-auto  my-7">
+          {/* {isListingSearchLoading && <SkeletonCard />} */}
           {listingSearchError && (
-            <ErrorMessage error={listingSearchError.message} />
+            <div className="border bg-red-100 py-2 px-3">
+              <ErrorMessage
+                error={listingSearchError.message}
+                className="text-red-500"
+              />
+            </div>
           )}
           {listingSearchResult?.data &&
             listingSearchResult?.data.items.length > 0 && (
-              <Listings
-                listings={listingSearchResult?.data.items}
-                isLoading={isListingSearchLoading}
-              />
+              <div className="p-10 border bg-[#F7F7F7]">
+                <Listings
+                  listings={listingSearchResult?.data.items}
+                  isLoading={isListingSearchLoading}
+                />
+              </div>
             )}
           {listingSearchResult?.data &&
             listingSearchResult?.data.items.length <= 0 && (
               <div>
-                <h1 className="font-hanken-semibold text-24">
+                <h1 className="font-hanken-semibold text-24 p-4">
                   No result found
                 </h1>
               </div>

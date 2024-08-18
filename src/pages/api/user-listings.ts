@@ -1,6 +1,7 @@
-import { ListingSearchResponse } from "@/typedef";
-import requestHandler from "lib/utils/requestHandler";
 import { NextApiRequest, NextApiResponse } from "next";
+
+import requestHandler from "lib/utils/requestHandler";
+import { ListingSearchResponse } from "features/listings/types";
 
 export default async function userListingsHandler(
   req: NextApiRequest,

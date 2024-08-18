@@ -1,6 +1,6 @@
-import { ListingSearchResponse } from "@/typedef";
+import { Search } from "@/typedef";
 import { useQuery } from "@tanstack/react-query";
-import { Search } from "components/searchResult/SearchResult";
+import { ListingSearchResponse } from "features/listings/types";
 import { HOME_360_SEARCH_LISTINGS_API } from "lib/endpoints";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";

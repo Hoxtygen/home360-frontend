@@ -1,9 +1,9 @@
-import { ApartmentInfo } from "@/typedef";
 import {
   capitalizeFirstCharacter,
   formatDate,
   replaceSpecialCharactersWithSpace,
 } from "lib/utils/utils";
+import { ApartmentInfo } from "./types";
 
 type ApartmentInfoProps = {
   petsAllowed: string;

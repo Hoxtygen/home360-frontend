@@ -1,3 +1,6 @@
+/* eslint-disable unused-imports/no-unused-vars */
+import { ChangeEvent, FormEvent } from "react";
+
 export type AuthPayload = {
   status: number;
   message: string;
@@ -42,6 +45,7 @@ type LocalStorageUserData = {
   id: string;
   name: string;
 };
+
 export type LocalStorageUserInfo = {
   token: string;
   user: LocalStorageUserData;
@@ -126,7 +130,7 @@ export interface PaginatedAPIResponseBase<T> {
 }
 
 export type ListingType =
-  | "not-specified"
+  | ""
   | "apartment"
   | "attic"
   | "basement"
@@ -137,6 +141,7 @@ export type ListingType =
   | "penthouse"
   | "terrace-apartment"
   | "other";
+
 export type TokenResponse = {
   status: string;
   message: string;
@@ -147,6 +152,7 @@ export type MessageProps = {
   error?: string;
   message?: string;
   className?: string;
+  hideWarningIcon?: boolean;
 };
 
 export type PasswordResetRequest = Omit<LoginData, "password">;
@@ -174,4 +180,16 @@ export type Nigeria = {
   code: string;
   capital: string;
   lgs: string[];
+};
+
+export type Search = {
+  apartmentType: ListingType;
+  location: string;
+  price: string;
+};
+
+export type SearchFormProps = {
+  searchData: Search;
+  handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void;
+  handleSubmit(event: FormEvent<HTMLFormElement>): void;
 };

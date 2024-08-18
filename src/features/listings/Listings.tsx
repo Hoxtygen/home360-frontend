@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SkeletonCard from "shared/SkeletonCard";
+import { randomImages } from "../../constant-data";
 import ListingItem from "./ListingItem";
 import { ListingData } from "./types";
 
@@ -15,7 +16,7 @@ export default function Listings({ listings, isLoading }: UserListingProps) {
       {listings &&
         listings.map((listing) => {
           return (
-            <div className="mb-4 bg-[white]" key={listing.id}>
+            <div className="mb-4 bg-[white] rounded-md" key={listing.id}>
               <Link href={`/search-result/listings/${listing.id}`}>
                 <ListingItem
                   imagesUrl={listing.apartmentImages || randomImages}
@@ -34,10 +35,3 @@ export default function Listings({ listings, isLoading }: UserListingProps) {
     </>
   );
 }
-
-const randomImages = [
-  "https://source.unsplash.com/random/300x200?sig=1",
-  "https://source.unsplash.com/random/300x200?sig=4",
-  "https://source.unsplash.com/random/300x200?sig=2",
-  "https://source.unsplash.com/random/300x200?sig=3",
-];

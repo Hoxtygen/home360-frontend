@@ -12,7 +12,7 @@ interface HouseCardProps {
 type Data = { data: HouseCardProps };
 export default function HouseCard({ data }: Data) {
   return (
-    <div className="carousel-item text-center relative w-64 snap-start border">
+    <div className="carousel-item text-center relative w-full snap-start border">
       <Image
         src={data.imgSrc}
         alt="house"

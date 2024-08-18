@@ -1,6 +1,6 @@
-import mockData from "constants/MOCK_DATA.json";
+import mockData from "constant-data/MOCK_DATA.json";
 import { useEffect, useRef, useState } from "react";
-import Dot from "../Carousel/Dot";
+import Dot from "../../../recycle-bin/carousel/Dot";
 import HouseCard from "./HouseCard";
 
 export default function HomeInspiration() {
