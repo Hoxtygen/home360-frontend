@@ -3,14 +3,7 @@ import {
   formatDate,
   replaceSpecialCharactersWithSpace,
 } from "lib/utils/utils";
-import { ApartmentInfo } from "./types";
-
-type ApartmentInfoProps = {
-  petsAllowed: string;
-  facilityQuality: string;
-  availableFrom: Date;
-  apartmentInfo: ApartmentInfo;
-};
+import { ApartmentInfoProps } from "./types";
 
 export default function ApartmentDescription({
   availableFrom,

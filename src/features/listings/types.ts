@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import {
   BaseResponse,
   NewUserSignup,
@@ -150,4 +151,11 @@ export type ListingEnquiryFormProps = {
   agentId: number;
   handleSubmitEnquiryForm(enquiryData: ListingEnquiryFormData): void;
   isLoading?: boolean;
+};
+
+export type ApartmentInfoProps = {
+  petsAllowed: string;
+  facilityQuality: string;
+  availableFrom: Date;
+  apartmentInfo: ApartmentInfo;
 };
