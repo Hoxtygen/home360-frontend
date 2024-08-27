@@ -1,3 +1,5 @@
+import { getEnvironment } from "lib/utils/utils";
+
 const SERVER_BASE_URL = "http://localhost:8080/api/v1";
 
 export const HOME_360_LOGIN_API = `${SERVER_BASE_URL}/auth/login`;
@@ -12,9 +14,18 @@ export const HOME_360_VERIFY_EMAIL = `${SERVER_BASE_URL}/auth/verifyEmail`;
 export const HOME_360_RESEND_VERIFICATION_TOKEN = `${SERVER_BASE_URL}/auth/resend-verification-token`;
 export const HOME_360_FETCH_USERLISTINGS = `${SERVER_BASE_URL}/userListings`;
 export const HOME_360__DELETE_LISTING = `${SERVER_BASE_URL}/listings`;
-export const HOME_360_LISTING_ENQUIRY = `${SERVER_BASE_URL}/listing-enquiry`;
 
 //================================INTERNALL ENDPOINTS================
 export const INTERNAL_LOGIN_API = "/api/auth/login";
 export const INTERNAL_LOGOUT_API = "/api/auth/logout";
 export const INTERNAL_DELETE_LISTING = "/api/deleteListing";
+
+export const siteUrl =
+  getEnvironment() === "Development"
+    ? process.env.NEXT_PUBLIC_DEV_URL
+    : process.env.NEXT_PUBLIC_PROD_URL;
+
+export const serverUrl =
+  getEnvironment() === "Development"
+    ? process.env.NEXT_PUBLIC_BACKEND_DEV_URL
+    : process.env.NEXT_PUBLIC_BACKEND_PROD_URL;
