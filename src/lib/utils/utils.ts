@@ -67,6 +67,11 @@ export function formatString(str: string, formatString?: boolean): string {
   return str.replace(regex, "_").toUpperCase();
 }
 
+export function reFormatString(str: string): string {
+  const formattedStr = str.replace(/_/g, " ").toLowerCase();
+  return formattedStr.charAt(0).toUpperCase() + formattedStr.slice(1);
+}
+
 export function formatCurrency(value?: number | string) {
   return new Intl.NumberFormat("en-NG", {
     style: "currency",
@@ -163,4 +168,8 @@ export function getStateNames(country: Nigeria[]): SelectOption[] {
     label: state.name,
     value: state.name,
   }));
+}
+
+export function getEnvironment(): string {
+  return process.env.NODE_ENV === "production" ? "Production" : "Development";
 }
