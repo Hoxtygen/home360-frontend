@@ -33,6 +33,17 @@ export default function VerifyEmail({ token }: { token: string }) {
             error={emailVerificationError.message}
           />
         )}
+        <div className="flex justify-center text-white">
+          <Button
+            size="xl"
+            variant="link"
+            href="/auth/login"
+            className="dark:text-white dark:bg-black hover:no-underline font-hanken-medium uppercase"
+            title="Login page"
+          >
+            Login
+          </Button>
+        </div>
         {emailVerificationError?.status === 401 && (
           <div className="px-2">
             <Button
