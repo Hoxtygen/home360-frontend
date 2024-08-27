@@ -1,12 +1,13 @@
-import { ApiErrorResponse } from "@/typedef";
 import { useMutation } from "@tanstack/react-query";
-import { AxiosResponse, AxiosError } from "axios";
+
+import { ApiErrorResponse } from "@/typedef";
+import { AxiosError, AxiosResponse } from "axios";
 import {
   ListingEnquiryFormData,
   ListingEnquiryResponse,
 } from "features/listings/types";
 
-import { HOME_360_LISTING_ENQUIRY } from "lib/endpoints";
+import { HOME_360_CREATE_LISTING_ENQUIRY } from "lib/endpoints";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 
@@ -19,7 +20,7 @@ export function useSubmitEnquiryForm() {
     mutationKey: ["enquiry form"],
     networkMode: "always",
     mutationFn: (enquiryData) =>
-      requestHandler(HOME_360_LISTING_ENQUIRY, {
+      requestHandler(HOME_360_CREATE_LISTING_ENQUIRY, {
         method: "POST",
         data: enquiryData,
         headers: {

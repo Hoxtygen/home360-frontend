@@ -5,6 +5,7 @@ import useGetListingEnquiries from "hooks/useGetListingEnquiries";
 import ControlButtons from "shared/ControlButtons";
 import LoadingScreen from "shared/LoadingScreen";
 import ErrorMessage from "shared/ErrorMessage";
+import Link from "next/link";
 
 export default function Messages() {
   const [page, setPage] = useState(1);
@@ -40,16 +41,20 @@ export default function Messages() {
       />
       {listingEnquiriesStatus === "loading" && <LoadingScreen />}
       {listingEnquiriesError && (
-        <ErrorMessage error={listingEnquiriesError.message} />
+        <div className="">
+          <ErrorMessage error={listingEnquiriesError.message} />
+        </div>
       )}
       <div className="pb-10">
         {messages?.map((message, index) => (
-          <EnquiryMessageItem
-            key={index}
-            date={message.createdAt}
-            messageString={message.message.substring(0, 150)}
-            senderEmail={message.email}
-          />
+          <Link href={`/messages/${message.id}`} key={message.id}>
+            <EnquiryMessageItem
+              key={index}
+              date={message.createdAt}
+              messageString={message.message.substring(0, 150)}
+              senderEmail={message.email}
+            />
+          </Link>
         ))}
       </div>
     </div>

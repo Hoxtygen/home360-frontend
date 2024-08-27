@@ -6,6 +6,7 @@ import {
 import clsx, { ClassValue } from "clsx";
 import { SUPPORTED_FILE_FORMATS } from "constant-data/staticData";
 import { SelectOption } from "features/listings/types";
+import { EnquiryMessageDetailResponse } from "features/messages/types";
 import { twMerge } from "tailwind-merge";
 
 export function mergeClass(...inputs: ClassValue[]) {
@@ -168,6 +169,12 @@ export function getStateNames(country: Nigeria[]): SelectOption[] {
     label: state.name,
     value: state.name,
   }));
+}
+
+export function isEnquiryMessageDetailResponse(
+  result: any
+): result is EnquiryMessageDetailResponse {
+  return result !== null && typeof result === "object" && "data" in result;
 }
 
 export function getEnvironment(): string {
