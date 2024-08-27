@@ -5,6 +5,7 @@ import { MappedSuccessLoginResponse, RefreshTokenTokenResponse } from "typedef";
 import { GetServerSidePropsContext } from "next";
 import { parseCookies } from "nookies";
 import { parseJSON } from "hooks/useLocalStorage";
+import { serverUrl } from "lib/endpoints";
 
 const axiosClient = axios.create({
   headers: {
@@ -41,18 +42,21 @@ axiosClient.interceptors.response.use(
   },
   async (err) => {
     const originalConfig = err.config;
-    if (
-      originalConfig.url !== "http://localhost:8080/api/v1/auth/login" &&
-      err.response
-    ) {
+    if (originalConfig.url !== `${serverUrl}/auth/login` && err.response) {
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         try {
           const user = parseJSON<MappedSuccessLoginResponse>(
             localStorage.getItem("user")
           );
+
+          if (!user?.refreshToken) {
+            throw new Error("No refresh token available");
+          }
+
+          console.log("user: ", user);
           const result = await axios.post<RefreshTokenTokenResponse>(
-            "http://localhost:8080/api/v1/auth/refreshToken",
+            `${serverUrl}/auth/refreshToken`,
             {
               token: user?.refreshToken,
             }
@@ -69,7 +73,7 @@ axiosClient.interceptors.response.use(
           });
           deleteCookie("token");
           const logout = async () => await axios("/api/auth/logout");
-          logout();
+          await logout();
           window.localStorage.clear();
           window.location.href = window.location.origin;
           return Promise.reject(error);
