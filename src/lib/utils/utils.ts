@@ -6,6 +6,7 @@ import {
 import clsx, { ClassValue } from "clsx";
 import { SUPPORTED_FILE_FORMATS } from "constant-data/staticData";
 import { SelectOption } from "features/listings/types";
+import { EnquiryMessageDetailResponse } from "features/messages/types";
 import { twMerge } from "tailwind-merge";
 
 export function mergeClass(...inputs: ClassValue[]) {
@@ -65,6 +66,11 @@ export function formatString(str: string, formatString?: boolean): string {
     return str;
   }
   return str.replace(regex, "_").toUpperCase();
+}
+
+export function reFormatString(str: string): string {
+  const formattedStr = str.replace(/_/g, " ").toLowerCase();
+  return formattedStr.charAt(0).toUpperCase() + formattedStr.slice(1);
 }
 
 export function formatCurrency(value?: number | string) {
@@ -163,4 +169,14 @@ export function getStateNames(country: Nigeria[]): SelectOption[] {
     label: state.name,
     value: state.name,
   }));
+}
+
+export function isEnquiryMessageDetailResponse(
+  result: any
+): result is EnquiryMessageDetailResponse {
+  return result !== null && typeof result === "object" && "data" in result;
+}
+
+export function getEnvironment(): string {
+  return process.env.NODE_ENV === "production" ? "Production" : "Development";
 }

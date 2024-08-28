@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Hanken Grotesk", sans-serif;
-}
-
 @layer base {
   @font-face {
     font-family: "hanken-black";
@@ -36,8 +32,16 @@ body {
   }
 }
 
+body {
+  font-family: "Hanken Grotesk", sans-serif;
+}
 header {
   background-color: hsl(0, 0%, 100%);
+}
+
+p {
+  font-family: "hanken-regular";
+  line-height: 1.7;
 }
 
 input[type="number"] {

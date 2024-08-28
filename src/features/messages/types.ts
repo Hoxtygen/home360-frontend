@@ -15,6 +15,7 @@ export interface ListingEnquiryMessageResponse extends BaseResponse {
 }
 
 export type EnquiryData = {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -29,6 +30,10 @@ export type EnquiryData = {
   agentId: string;
   createdAt: string;
 };
+
+export interface EnquiryMessageDetailResponse extends BaseResponse {
+  data: EnquiryData;
+}
 
 type EmploymentStatus =
   | "EMPLOYEE"
