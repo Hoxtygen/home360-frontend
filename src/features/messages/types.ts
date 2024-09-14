@@ -31,6 +31,8 @@ export type EnquiryData = {
   agentId: string;
   createdAt: string;
   read: boolean;
+  userId?: number;
+  replies: EnquiryMessageReplyItemProps[];
 };
 
 export interface EnquiryMessageDetailResponse extends BaseResponse {
@@ -47,3 +49,19 @@ type EmploymentStatus =
   | "JOB_SEEKER"
   | "PENSIONER"
   | "OTHERS";
+
+export type EnquiryMessageInfoProps = {
+  enquiryData: EnquiryData;
+};
+
+export type EnquiryMessageReplyItemProps = {
+  id: string;
+  senderId: number;
+  receiverId: number;
+  createdAt: string;
+  content: string;
+};
+
+export type EnquiryMessageRepliesProps = {
+  replies: EnquiryMessageReplyItemProps[];
+};

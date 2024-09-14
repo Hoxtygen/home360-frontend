@@ -155,6 +155,7 @@ export function mapLoginResponse(
   loginResponse: AuthenticationSuccessResponse
 ): MappedSuccessLoginResponse {
   return {
+    id: loginResponse.id,
     email: loginResponse.email,
     firstName: loginResponse.firstName,
     lastName: loginResponse.lastName,
@@ -179,4 +180,16 @@ export function isEnquiryMessageDetailResponse(
 
 export function getEnvironment(): string {
   return process.env.NODE_ENV === "production" ? "Production" : "Development";
+}
+
+export function formatNDate(dateString: string) {
+  const newDate = new Date(dateString);
+  if (isNaN(newDate.getTime())) {
+    throw new Error("dateString must be a type of date");
+  }
+  const formattedDate = new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "short",
+    timeStyle: "short",
+  }).format(newDate);
+  return formattedDate;
 }
