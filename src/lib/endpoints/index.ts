@@ -1,6 +1,6 @@
 import { getEnvironment } from "lib/utils/utils";
 
-export const siteUrl =
+export const clientUrl =
   getEnvironment() === "Development"
     ? process.env.NEXT_PUBLIC_DEV_URL
     : process.env.NEXT_PUBLIC_PROD_URL;
@@ -24,8 +24,9 @@ export const HOME_360_RESEND_VERIFICATION_TOKEN = `${serverUrl}/auth/resend-veri
 
 export const HOME_360_FETCH_USERLISTINGS = `${serverUrl}/userListings`;
 export const HOME_360__DELETE_LISTING = `${serverUrl}/listings`;
-export const HOME_360_CREATE_LISTING_ENQUIRY = `${serverUrl}/listing-enquiry`;
+export const HOME_360_LISTING_ENQUIRY_BASE = `${serverUrl}/listing-enquiry`;
 export const HOME_360_GET_LISTING_ENQUIRIES = `${serverUrl}/listing-enquiries`;
+
 //================================INTERNALL ENDPOINTS================
 export const INTERNAL_LOGIN_API = "/api/auth/login";
 export const INTERNAL_LOGOUT_API = "/api/auth/logout";
