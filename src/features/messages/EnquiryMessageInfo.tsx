@@ -1,8 +1,7 @@
-import React from "react";
-import { EnquiryData } from "./types";
-import Link from "next/link";
+import { clientUrl } from "lib/endpoints";
 import { reFormatString } from "lib/utils/utils";
-import { siteUrl } from "lib/endpoints";
+import Link from "next/link";
+import { EnquiryData } from "./types";
 
 type EnquiryMessageInfoProps = {
   enquiryData: EnquiryData;
@@ -73,7 +72,7 @@ export default function EnquiryMessageInfo({
               href={`/listings/user-listings/${enquiryData.listingId}`}
               className="text-blue-600 underline"
             >
-              {`${siteUrl}/listings/user-listings/${enquiryData.listingId}`}
+              {`${clientUrl}/listings/user-listings/${enquiryData.listingId}`}
             </Link>
           </h2>
         </div>
