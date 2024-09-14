@@ -4,6 +4,7 @@ export type EnquiryMessageItemProps = {
   date: string;
   messageString: string;
   senderEmail: string;
+  isRead: boolean;
 };
 
 export type EnquiryMessageProps = {
@@ -29,6 +30,7 @@ export type EnquiryData = {
   listingId: string;
   agentId: string;
   createdAt: string;
+  read: boolean;
 };
 
 export interface EnquiryMessageDetailResponse extends BaseResponse {

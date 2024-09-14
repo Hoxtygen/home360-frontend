@@ -6,15 +6,19 @@ import ControlButtons from "shared/ControlButtons";
 import LoadingScreen from "shared/LoadingScreen";
 import ErrorMessage from "shared/ErrorMessage";
 import Link from "next/link";
+import useMarkAsRead from "hooks/useMarkAsRead";
 
 export default function Messages() {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
+
   const {
     listingEnquiriesData,
     listingEnquiriesStatus,
     listingEnquiriesError,
   } = useGetListingEnquiries(page, size);
+
+  const { mutateMarkAsRead } = useMarkAsRead();
 
   const messages = listingEnquiriesData?.data.items;
 
@@ -26,6 +30,11 @@ export default function Messages() {
 
   function handleFetchPreviousData() {
     setPage((prevPage) => Math.max(prevPage - 1, 0));
+  }
+
+  function handleMarkAsRead(enquiryMessageId: string, isRead: boolean) {
+    if (isRead) return;
+    mutateMarkAsRead(enquiryMessageId);
   }
   return (
     <div>
@@ -47,12 +56,17 @@ export default function Messages() {
       )}
       <div className="pb-10">
         {messages?.map((message, index) => (
-          <Link href={`/messages/${message.id}`} key={message.id}>
+          <Link
+            href={`/messages/${message.id}`}
+            key={message.id}
+            onClick={() => handleMarkAsRead(message.id, message.read)}
+          >
             <EnquiryMessageItem
               key={index}
               date={message.createdAt}
               messageString={message.message.substring(0, 150)}
               senderEmail={message.email}
+              isRead={message.read}
             />
           </Link>
         ))}
