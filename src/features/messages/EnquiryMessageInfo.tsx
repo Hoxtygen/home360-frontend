@@ -1,11 +1,7 @@
 import { clientUrl } from "lib/endpoints";
 import { reFormatString } from "lib/utils/utils";
 import Link from "next/link";
-import { EnquiryData } from "./types";
-
-type EnquiryMessageInfoProps = {
-  enquiryData: EnquiryData;
-};
+import { EnquiryMessageInfoProps } from "./types";
 
 export default function EnquiryMessageInfo({
   enquiryData,

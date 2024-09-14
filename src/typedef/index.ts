@@ -70,6 +70,7 @@ export type AdviceProps = {
 };
 
 export type AuthenticationSuccessResponse = {
+  id: number;
   status: number;
   token: Token;
   email: string;
@@ -89,6 +90,7 @@ export type MappedSuccessLoginResponse = {
   lastName: string;
   refreshToken: string;
   status: number;
+  id: number;
 };
 
 type Token = {
