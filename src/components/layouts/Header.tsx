@@ -42,11 +42,11 @@ export default function Header() {
             </ul>
           </nav>
           <div className="">
-            {token && token ? (
+            {token ? (
               <div className="flex items-center">
                 <div className="flex items-center">
                   <p className="text-black pr-5 font-semibold">
-                    {user && user.firstName}
+                    {user ? user.firstName : "Guest"}
                   </p>
                   <div className="">
                     <Button
@@ -80,7 +80,7 @@ export default function Header() {
               {navList.map((list) => (
                 <li key={list.title}>
                   <Button
-                    href="/"
+                    href={list.href}
                     variant="link"
                     className="text-sm dark:hover:bg-transparent dark:hover:text-neutral-500"
                   >

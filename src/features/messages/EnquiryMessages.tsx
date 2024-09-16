@@ -7,16 +7,22 @@ import LoadingScreen from "shared/LoadingScreen";
 import ErrorMessage from "shared/ErrorMessage";
 import Link from "next/link";
 import useMarkAsRead from "hooks/useMarkAsRead";
+import { MappedSuccessLoginResponse } from "@/typedef";
+import useLocalStorage from "hooks/useLocalStorage";
 
 export default function Messages() {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
+  const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
+    "user",
+    null
+  );
 
   const {
     listingEnquiriesData,
     listingEnquiriesStatus,
     listingEnquiriesError,
-  } = useGetListingEnquiries(page, size);
+  } = useGetListingEnquiries({ page, size, senderId: user?.id });
 
   const { mutateMarkAsRead } = useMarkAsRead();
 
