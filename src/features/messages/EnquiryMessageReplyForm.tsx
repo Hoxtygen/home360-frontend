@@ -16,9 +16,7 @@ export default function EnquiryMessageReplyForm({
 }: EnquiryMessageReplyFormProps<EnquiryMessageReplyFormData>) {
   const formik = useFormik({
     initialValues: replyInitialValues,
-    onSubmit: (values, { resetForm }) => {
-      handleSubmitReply(values, resetForm);
-    },
+    onSubmit: (values, { resetForm }) => handleSubmitReply(values, resetForm),
   });
 
   const { handleBlur, handleChange, values, handleSubmit, isValid, dirty } =

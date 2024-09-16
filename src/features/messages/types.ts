@@ -86,3 +86,15 @@ export type EnquiryMessageInfoContainerProps = EnquiryMessageInfoProps & {
   ): void;
   messageStatus: MutationStatus;
 };
+
+type EnquiryMessageReplyData = {
+  id: string;
+  senderId: number;
+  receiverId: number;
+  content: string;
+  createdAt: string;
+};
+
+export interface EnquiryReplyMessageResponse extends BaseResponse {
+  data: EnquiryMessageReplyData;
+}

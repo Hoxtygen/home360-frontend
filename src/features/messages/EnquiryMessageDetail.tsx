@@ -14,8 +14,13 @@ type EnquiryMessageDetailProps = {
 export default function EnquiryMessageDetail({
   enquiryId,
 }: EnquiryMessageDetailProps) {
-  const { listingEnquiryData, listingEnquiryError, listingEnquiryStatus } =
-    useGetListingEnquiry(enquiryId);
+  const {
+    listingEnquiryData,
+    listingEnquiryError,
+    listingEnquiryStatus,
+    refetchListingEnquiry,
+  } = useGetListingEnquiry(enquiryId);
+
   const { replyData, replyError, mutateReply, replyStatus } =
     usePostReply(enquiryId);
 
@@ -26,7 +31,14 @@ export default function EnquiryMessageDetail({
     mutateReply(replyRequestData, {
       onSuccess: () => callback(),
     });
+    callback();
   }
+
+  useEffect(() => {
+    if (replyData?.status === "CREATED") {
+      refetchListingEnquiry();
+    }
+  }, [refetchListingEnquiry, replyData?.status]);
 
   useEffect(() => {
     if (replyError) {
