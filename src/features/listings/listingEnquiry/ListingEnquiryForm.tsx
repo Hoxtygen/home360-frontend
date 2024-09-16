@@ -16,6 +16,8 @@ import { getRemainingCharacter } from "lib/utils/utils";
 import { listingEnquiryValidationSchema } from "lib/validations/listingValidation";
 import ErrorMessage from "shared/ErrorMessage";
 import { ListingEnquiryFormProps } from "../types";
+import useLocalStorage from "hooks/useLocalStorage";
+import { MappedSuccessLoginResponse } from "@/typedef";
 
 export default function ListingEnquiryForm({
   listingEnquiryInitialValues,
@@ -24,10 +26,16 @@ export default function ListingEnquiryForm({
   isLoading,
   handleSubmitEnquiryForm,
 }: ListingEnquiryFormProps) {
+  const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
+    "user",
+    null
+  );
+  const userId = user !== null ? user.id : undefined;
   const formik = useFormik({
     validationSchema: listingEnquiryValidationSchema,
-    onSubmit: (values) =>
-      handleSubmitEnquiryForm({ ...values, listingId, agentId }),
+    onSubmit: (values) => {
+      handleSubmitEnquiryForm({ ...values, listingId, agentId, userId });
+    },
     initialValues: listingEnquiryInitialValues,
   });
 

@@ -120,6 +120,7 @@ export type ListingEnquiryData = {
   pets: string;
   phoneNumber: string;
   salutation: string;
+  userId?: number;
 };
 
 export type ListingEnquiryProps = {
