@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { EnquiryMessageDetailResponse } from "features/messages/types";
-import { HOME_360_GET_LISTING_ENQUIRIES } from "lib/endpoints";
+import { HOME_360_LISTING_ENQUIRY_BASE } from "lib/endpoints";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 
@@ -9,7 +9,7 @@ export function useGetListingEnquiry(listingEnquiryId: string) {
     queryKey: ["listing_enquiry"],
     queryFn: () =>
       requestHandler<EnquiryMessageDetailResponse>(
-        `${HOME_360_GET_LISTING_ENQUIRIES}/${listingEnquiryId}`,
+        `${HOME_360_LISTING_ENQUIRY_BASE}/${listingEnquiryId}`,
         {
           method: "GET",
         }

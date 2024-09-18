@@ -1,5 +1,5 @@
 import { ListingDetailResponse } from "features/listings/types";
-import { HOME_360_LISTING_DETAIL_API } from "lib/endpoints";
+import { HOME_360_LISTING_BASE_API } from "lib/endpoints";
 import requestHandler from "lib/utils/requestHandler";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -10,7 +10,7 @@ export default async function ListingDetailHandler(
   const { id } = query;
   try {
     const result = await requestHandler<ListingDetailResponse>(
-      `${HOME_360_LISTING_DETAIL_API}/${id}`,
+      `${HOME_360_LISTING_BASE_API}/${id}`,
       {
         method: "GET",
       }
