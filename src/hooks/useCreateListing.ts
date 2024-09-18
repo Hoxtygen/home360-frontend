@@ -3,10 +3,10 @@ import { AxiosResponse } from "axios";
 import { getCookie } from "cookies-next";
 
 import { ApiErrorResponse } from "@/typedef";
-import { HOME_360_CREATE_LISTING_API } from "lib/endpoints";
+import { ListingProps, ListingResponse } from "features/listings/types";
+import { HOME_360_LISTING_BASE_API } from "lib/endpoints";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
-import { ListingResponse, ListingProps } from "features/listings/types";
 
 export default function useCreateListing() {
   const token = getCookie("token");
@@ -17,7 +17,7 @@ export default function useCreateListing() {
   >({
     mutationKey: ["create listing"],
     mutationFn: (listingData: ListingProps) =>
-      requestHandler<any>(HOME_360_CREATE_LISTING_API, {
+      requestHandler<any>(HOME_360_LISTING_BASE_API, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

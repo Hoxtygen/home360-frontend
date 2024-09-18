@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCookie } from "cookies-next";
 
 import { ListingEnquiryMessageResponse } from "features/messages/types";
-import { HOME_360_GET_LISTING_ENQUIRIES } from "lib/endpoints";
+import { HOME_360_LISTING_ENQUIRY_BASE } from "lib/endpoints";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 
@@ -21,7 +21,7 @@ export default function useGetListingEnquiries(
     networkMode: "always",
     queryFn: () =>
       requestHandler<ListingEnquiryMessageResponse>(
-        `${HOME_360_GET_LISTING_ENQUIRIES}?senderId=${listingEnqData.senderId}&page=${listingEnqData.page}&size=${listingEnqData.size}`,
+        `${HOME_360_LISTING_ENQUIRY_BASE}?senderId=${listingEnqData.senderId}&page=${listingEnqData.page}&size=${listingEnqData.size}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },

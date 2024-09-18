@@ -1,7 +1,7 @@
 import { DeleteListingResponse } from "@/typedef";
 import { useMutation } from "@tanstack/react-query";
 
-import { HOME_360__DELETE_LISTING } from "lib/endpoints";
+import { HOME_360_LISTING_BASE_API } from "lib/endpoints";
 import requestHandler from "lib/utils/requestHandler";
 
 export default function useDeleteListing(listingId: string) {
@@ -9,7 +9,7 @@ export default function useDeleteListing(listingId: string) {
     mutationKey: ["delete listing"],
     mutationFn: () =>
       requestHandler<DeleteListingResponse>(
-        `${HOME_360__DELETE_LISTING}/${listingId}`,
+        `${HOME_360_LISTING_BASE_API}/${listingId}`,
         {
           method: "DELETE",
         }
