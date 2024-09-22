@@ -321,9 +321,8 @@ export default function ListingForm() {
               <div className=" flex justify-between flex-wrap mb-4">
                 <div className="basis-5/12">
                   <Input
-                    type="date"
+                    type="datetime-local"
                     name="availableFrom"
-                    pattern="\d{4}-\d{2}-\d{2}"
                     placeholder="date when apartment will be available"
                     className="rounded-md dark:text-black text-base w-full"
                     label="Available from"
