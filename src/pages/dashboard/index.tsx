@@ -1,12 +1,11 @@
-import { DashboardLayout } from "components/layouts";
 import { GetServerSideProps } from "next";
-import Dashboard from "views/dashboard/Dashboard";
+import Dashboard from "features/dashboard/Dashboard";
 
 export default function dashboard() {
   return (
-    <DashboardLayout title="Dashboard" isLoading={false}>
+    <>
       <Dashboard />
-    </DashboardLayout>
+    </>
   );
 }
 
