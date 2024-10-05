@@ -15,6 +15,7 @@ import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 import "../styles/globals.css";
 import { ErrorBoundary } from "components/error-boundary";
+import { ThemeProvider } from "next-themes";
 
 const client = new QueryClient({
   queryCache: new QueryCache({
@@ -44,25 +45,27 @@ export default function App({ Component, pageProps }: AppProps) {
   });
   return (
     <QueryClientProvider client={client}>
-      <ErrorBoundary>
-        <Component {...pageProps} />
-      </ErrorBoundary>
-      <Toaster
-        toastOptions={{
-          success: {
-            style: {
-              background: "#4BB543",
-              color: "white",
+      <ThemeProvider enableSystem={true} attribute="class">
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
+        <Toaster
+          toastOptions={{
+            success: {
+              style: {
+                background: "#4BB543",
+                color: "white",
+              },
             },
-          },
-          error: {
-            style: {
-              background: "#CC0000",
-              color: "white",
+            error: {
+              style: {
+                background: "#CC0000",
+                color: "white",
+              },
             },
-          },
-        }}
-      />
+          }}
+        />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
