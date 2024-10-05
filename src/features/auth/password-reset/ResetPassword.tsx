@@ -47,7 +47,7 @@ export default function ResetPassword({ token }: { token: string }) {
       <div className="">
         {resetPasswordError && (
           <ErrorMessage
-            className="text-18 bg-white"
+            className="text-18 bg-red-200"
             error={resetPasswordError.message}
           />
         )}
