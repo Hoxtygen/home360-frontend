@@ -195,3 +195,20 @@ export type SearchFormProps = {
   handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void;
   handleSubmit(event: FormEvent<HTMLFormElement>): void;
 };
+
+export interface UserDetailSuccessResponse extends BaseResponse {
+  data: UserDetails;
+}
+
+type UserDetails = {
+  address: string;
+  createdAt: string;
+  email: string;
+  enabled: string;
+  firstName: string;
+  id: number;
+  lastName: string;
+  phoneNumber: string;
+  role: string;
+  updatedAt: string;
+};

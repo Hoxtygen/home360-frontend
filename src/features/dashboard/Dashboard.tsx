@@ -1,14 +1,21 @@
+import { MappedSuccessLoginResponse } from "@/typedef";
 import { DashboardLayout } from "components/layouts";
-import useGetUserDetails from "hooks/useGetUserDetails";
+import useLocalStorage from "hooks/useLocalStorage";
+import { timeOfDayGreeting } from "lib/utils/utils";
 import React from "react";
 
 export default function Dashboard() {
-  const { userDetailsData, userDetailStatus, userDetailError } =
-    useGetUserDetails();
-  console.log("userDetailsData:", userDetailsData);
+  const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
+    "user",
+    null
+  );
+  const timeOfDay = timeOfDayGreeting();
   return (
     <DashboardLayout title="Dashboard" isLoading={false}>
-      <h2>Good day {userDetailsData?.data.firstName}</h2>
+      <h2 className="text-24">
+        {timeOfDay},{" "}
+        <span className="font-hanken-semibold">{user?.firstName}</span>
+      </h2>
     </DashboardLayout>
   );
 }
