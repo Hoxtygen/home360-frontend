@@ -23,7 +23,6 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
 
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
-  console.log("currentTheme: ", currentTheme);
 
   return (
     <>

@@ -8,7 +8,6 @@ import ErrorMessage from "shared/ErrorMessage";
 export default function ContactDetails() {
   const { userDetailsData, userDetailStatus, userDetailError } =
     useGetUserDetails();
-  console.log("userDetailsData:", userDetailsData);
 
   return (
     <>
