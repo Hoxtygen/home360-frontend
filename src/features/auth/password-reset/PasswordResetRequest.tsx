@@ -41,14 +41,14 @@ export default function PasswordResetRequest() {
       <div className="">
         {passwordResetRequestError && (
           <ErrorMessage
-            className="text-center text-18  p-2 text-red-600 rounded-sm"
+            className="text-center text-sm  p-2 text-red-600 rounded-sm"
             error={passwordResetRequestError.message}
           />
         )}
 
         {passwordResetRequestData && (
           <SuccessMessage
-            className="text-center text-green-900 text-18 bg-green-300"
+            className="text-center text-green-900 text-sm bg-green-300"
             message={passwordResetRequestData.data}
           />
         )}

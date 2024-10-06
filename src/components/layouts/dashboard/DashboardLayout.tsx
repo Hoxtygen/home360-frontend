@@ -47,7 +47,7 @@ export default function DashboardLayout({
           <div className="">
             <DashboardHeader title={title} />
           </div>
-          <div className="max-h-full px-5 sm:px-10 pt-[25%] sm:pt-28">
+          <div className="min-h-full px-5 sm:px-10 pt-[25%] sm:pt-28 dark:bg-slate-800">
             {isLoading ? (
               <div>
                 <LoadingScreen />

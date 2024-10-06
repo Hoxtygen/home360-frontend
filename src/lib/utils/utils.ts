@@ -193,3 +193,15 @@ export function formatNDate(dateString: string) {
   }).format(newDate);
   return formattedDate;
 }
+
+export function timeOfDayGreeting() {
+  const today = new Date();
+  const hour = today.getHours();
+  if (hour < 12) {
+    return "Good morning";
+  } else if (hour < 17) {
+    return "Good day";
+  } else {
+    return "Good evening";
+  }
+}

@@ -1,9 +1,9 @@
 import { FC, ReactNode } from "react";
 import Image from "next/image";
-
 import { useRouter } from "next/router";
-// import Tooltip from "react-tooltip";
+import { useTheme } from "next-themes";
 import clsx from "clsx";
+import { Button } from "components/buttons/Button";
 
 export interface DashboardHeaderProps {
   backTitle?: ReactNode;
@@ -21,9 +21,12 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
 }) => {
   const router = useRouter();
 
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
   return (
     <>
-      <div className="flex items-center justify-between bg-white fixed w-full z-50 md:w-[calc(100vw-276px)] h-[74px] pr-5 pl-5 sm:pl-6 sm:pr-10 py-[18px] shadow-landing-header">
+      <div className="flex items-center justify-between bg-white  dark:bg-slate-900 fixed w-full z-50 md:w-[calc(100vw-276px)] h-[74px] pr-5 pl-5 sm:pl-6 sm:pr-10 py-[18px] shadow-landing-header">
         <div
           className={clsx(
             "font-medium text-18 sm:text-24 leading-38",
@@ -90,22 +93,54 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
             </div>
           )}
           <div
-            className="flex items-center cursor-pointer"
+            className="flex items-center cursor-pointer justify-center"
             data-tip="My Profile"
-            onClick={() =>
-              router.push("/my-profile?selectedItem=basic-information")
-            }
           >
-            <Image
-              height={18}
-              width={18}
-              alt="profile icon"
-              src="/icons/header-icon-avatar.svg"
-            />
+            {currentTheme === "dark" ? (
+              <Button
+                className="border-none dark:hover:bg-transparent dark:bg-transparent p-0 px-4"
+                onClick={() => setTheme("light")}
+              >
+                <Image
+                  height={30}
+                  width={30}
+                  alt="profile icon"
+                  src="/icons/sun.svg"
+                />
+              </Button>
+            ) : (
+              <Button
+                className="border-none hover:bg-transparent dark:bg-transparent bg-transparent p-0 px-4"
+                onClick={() => setTheme("dark")}
+              >
+                <Image
+                  height={30}
+                  width={30}
+                  alt="profile icon"
+                  src="/icons/moon.svg"
+                />
+              </Button>
+            )}
+            <div className="px-4">
+              <Image
+                height={30}
+                width={30}
+                alt="profile icon"
+                src="/icons/bell.svg"
+                // className="px-4"
+              />
+            </div>
+            <div className="px-4">
+              <Image
+                height={30}
+                width={30}
+                alt="profile icon"
+                src="/icons/header-icon-avatar.svg"
+              />
+            </div>
           </div>
         </div>
       </div>
-      {/* {isWindowLoaded && (<Tooltip />)} */}
     </>
   );
 };

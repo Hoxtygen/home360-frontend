@@ -9,7 +9,9 @@ export default function ErrorMessage({
   hideWarningIcon,
 }: MessageProps) {
   return (
-    <div className="flex items-start mb-4 bg-red-200 px-4">
+    <div
+      className={mergeClass("flex items-start mb-4 bg-red-200 px-4", className)}
+    >
       {!hideWarningIcon && (
         <div className="flex mr-1 min-w-[15px]">
           <Image
@@ -22,10 +24,7 @@ export default function ErrorMessage({
       )}
       <p
         aria-label="error message"
-        className={mergeClass(
-          "font-hanken-regular text-14 text-red-600 p-2",
-          className
-        )}
+        className="font-hanken-regular text-14 text-red-600 p-2"
       >
         {error}
       </p>

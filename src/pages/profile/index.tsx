@@ -1,11 +1,13 @@
 import { GetServerSideProps } from "next";
-import Dashboard from "features/dashboard/Dashboard";
+import React from "react";
 
-export default function dashboard() {
+import { Profile } from "features/profile";
+
+export default function profileIndex() {
   return (
-    <>
-      <Dashboard />
-    </>
+    <div>
+      <Profile />
+    </div>
   );
 }
 
