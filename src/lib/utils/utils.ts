@@ -199,9 +199,9 @@ export function timeOfDayGreeting() {
   const hour = today.getHours();
   if (hour < 12) {
     return "Good morning";
-  } else if (hour >= 12) {
+  } else if (hour < 17) {
     return "Good day";
-  } else if (hour >= 17) {
+  } else {
     return "Good evening";
   }
 }
