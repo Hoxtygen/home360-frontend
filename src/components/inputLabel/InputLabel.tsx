@@ -6,7 +6,7 @@ import { LabelProps } from "./types";
 export default function InputLabel({ label, ...props }: LabelProps) {
   return (
     <label
-      className={mergeClass("block", `${props.className}`)}
+      className={mergeClass("block dark:text-white", `${props.className}`)}
       htmlFor={props.htmlFor}
     >
       {label}

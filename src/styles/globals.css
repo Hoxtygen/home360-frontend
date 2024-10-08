@@ -40,7 +40,6 @@ header {
 }
 
 p {
-  font-family: "hanken-regular";
   line-height: 1.7;
 }
 
@@ -130,4 +129,14 @@ input:checked ~ label.checkbox-label {
 .option-badge:hover > .remove-btn,
 .option-badge:focus > .remove-btn {
   color: hsl(0, 100%, 50%);
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+  input:checked ~ label.radio-label,
+  input:checked ~ label.checkbox-label {
+    background-color: #2e3b4e;
+    border: 1px solid #00d9b1;
+    color: #e7fdf1;
+  }
 }

@@ -208,63 +208,63 @@ export const apartmentDetails = [
     label: "Equipped kitchen",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border px-4 py-2 rounded-[50px] inline-block w-full",
+      "checkbox-label border-slate-300 border px-4 py-2 rounded-[50px] inline-block w-full dark:text-white",
   },
   {
     name: "details",
     label: "balcony/Terrace",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full ",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "details",
     label: "Guest Toilet",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "details",
     label: "Garden/Joint use",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "details",
     label: "Basement/Cellar",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "details",
     label: "Suitable for shared flats",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "details",
     label: "Stepless access",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "details",
     label: "Elevator",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "details",
     label: "Reading room",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
 ];
 
@@ -322,7 +322,7 @@ export const applicationDocs = [
     value: "rentPaymentConfirmation",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "applicationDocs",
@@ -330,7 +330,7 @@ export const applicationDocs = [
     value: "proofOfIdentity",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "applicationDocs",
@@ -338,7 +338,7 @@ export const applicationDocs = [
     value: "proofOfIncome",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
   {
     name: "applicationDocs",
@@ -346,7 +346,7 @@ export const applicationDocs = [
     value: "credit score",
     className: "hidden",
     labelClassName:
-      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full",
+      "checkbox-label border-slate-300 border rounded-[20px] px-4 py-2 w-full dark:text-white",
   },
 ];
 export const SUPPORTED_FILE_FORMATS = [

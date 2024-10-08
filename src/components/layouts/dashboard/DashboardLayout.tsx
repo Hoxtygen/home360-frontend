@@ -31,7 +31,7 @@ export default function DashboardLayout({
           handleTourStart={handleTourStart}
         />
       </div>
-      <div className="flex font-Open-Sans">
+      <div className="flex">
         <div
           className={mergeClass(
             "md:ml-0",
@@ -51,7 +51,7 @@ export default function DashboardLayout({
             {isLoading ? (
               <div>
                 <LoadingScreen />
-                <span className="block text-center font-Open-Sans">
+                <span className="block text-center font-hanken-medium">
                   Getting your information, please wait...
                 </span>
               </div>

@@ -53,7 +53,7 @@ export default function AutoTextArea({
         onBlur={props.onBlur}
         value={state.value}
         className={mergeClass(
-          "textarea leading-6 p-3 box-border border rounded text-[1rem] resize-none overflow-auto h-auto shadow-[0px 4px 10px -8px black] outline-none border-black",
+          "textarea leading-6 p-3 box-border border dark:border-gray-200 rounded text-[1rem] resize-none overflow-auto h-auto shadow-[0px 4px 10px -8px black] outline-none border-black",
           className
         )}
         onChange={handleChange}
