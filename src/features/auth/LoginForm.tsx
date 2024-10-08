@@ -44,7 +44,7 @@ export default function LoginForm() {
     <div>
       <form
         action=""
-        className="border p-4 bg-white rounded-md"
+        className="border p-4 bg-white dark:bg-slate-900 text-18 rounded-md"
         onSubmit={handleSubmit}
       >
         <div className="flex items-center mb-8">

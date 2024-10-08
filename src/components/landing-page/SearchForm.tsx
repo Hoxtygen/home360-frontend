@@ -25,7 +25,7 @@ export default function SearchForm({
               id="location"
               placeholder="Where:town,city"
               onChange={handleChange}
-              className="w-full rounded-md sm:rounded-r-none dark:text-black text-base"
+              className="w-full rounded-md sm:rounded-r-none text-base"
               value={searchData.location}
             />
           </div>
@@ -48,7 +48,7 @@ export default function SearchForm({
                 placeholder="Price from"
                 onChange={handleChange}
                 onWheel={(e) => e.currentTarget.blur()}
-                className="w-full rounded-md sm:rounded-l-none dark:text-black text-base"
+                className="w-full rounded-md sm:rounded-l-none text-base"
                 value={searchData.price}
               />
             </div>

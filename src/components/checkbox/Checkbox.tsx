@@ -20,7 +20,7 @@ export default function Checkbox({
         onChange={props.onChange}
         className={mergeClass(
           "accent-[#A41857] h-4 w-4 border-2 border-primary-active rounded-sm focus:outline-[#A41857] transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer",
-          `${className}`
+          className
         )}
       />
       <label

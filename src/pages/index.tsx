@@ -8,7 +8,6 @@ import { AdviceCarousel, HomeInspirationCarousel } from "components/Carousel";
 import AdBanner from "../components/landing-page/AdBanner";
 import PropertyAssessment from "../components/landing-page/PropertyAssessment";
 import SearchForm from "components/landing-page/SearchForm";
-import styles from "../styles/Home.module.css";
 import { Search } from "@/typedef";
 
 export default function Home() {
@@ -37,7 +36,7 @@ export default function Home() {
     );
   }
   return (
-    <main className={styles.main}>
+    <main className="font-hanken-regular">
       <Layout>
         <SearchForm
           searchData={searchData}

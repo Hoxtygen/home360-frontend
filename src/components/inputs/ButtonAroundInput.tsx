@@ -19,7 +19,7 @@ const ButtonAroundInput = forwardRef<HTMLInputElement, InputProps>(
         <div className="flex">
           <Button
             type="button"
-            className="dark:bg-transparent h-12 rounded-none border-black text-yellow-500 rounded-tl-md rounded-bl-md dark:hover:bg-transparent dark:hover:text-black border text-base font-semibold"
+            className="dark:bg-transparent h-12 rounded-none border-black text-yellow-500 rounded-tl-md rounded-bl-md dark:hover:bg-transparent dark:hover:text-gray-400 border text-base font-semibold dark:text-white dark:border-gray-200"
             onClick={handleDecreaseValue}
           >
             -
@@ -27,7 +27,7 @@ const ButtonAroundInput = forwardRef<HTMLInputElement, InputProps>(
           <input
             type="number"
             className={mergeClass(
-              "flex h-12  border border-slate-300 py-2 px-3 text-sm placeholder:text-slate-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:focus:ring-slate-400 text-black font-semibold",
+              "flex h-12  border border-slate-300 py-2 px-3 text-sm placeholder:text-slate-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:focus:ring-slate-400 text-black font-semibold dark:border-gray-200 dark:text-white",
               className
             )}
             ref={ref}
@@ -36,7 +36,7 @@ const ButtonAroundInput = forwardRef<HTMLInputElement, InputProps>(
             onWheel={(e) => e.currentTarget.blur()}
           />
           <Button
-            className="dark:bg-transparent h-12 rounded-none border-black rounded-br-md rounded-tr-md dark:hover:bg-transparent dark:hover:text-black border text-base font-semibold"
+            className="dark:bg-transparent h-12 rounded-none border-black rounded-br-md rounded-tr-md dark:hover:bg-transparent dark:hover:text-gray-400 border text-base font-semibold dark:text-white dark:border-gray-200"
             type="button"
             onClick={handleIncreaseValue}
           >

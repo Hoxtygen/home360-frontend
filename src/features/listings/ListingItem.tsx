@@ -27,7 +27,7 @@ export default function ListingItem({
     slidesToScroll: 1,
   };
   return (
-    <div className="flex p-3">
+    <div className="flex p-3 border dark:border-gray-400 dark:text-white dark:bg-slate-900">
       <div className="w-2/5 relative">
         {/* <Slider {...slickSettings}>
           {imagesUrl?.map((image, index) => (
@@ -57,6 +57,7 @@ export default function ListingItem({
             alt="location icon"
             width={20}
             height={20}
+            className="dark:bg-white"
           />
           {location}
         </h3>
@@ -74,7 +75,7 @@ export default function ListingItem({
           {details &&
             details.map((detail, index) => (
               <p
-                className="bg-[#EAEAEA] p-[6px] text-xs mr-1 rounded mb-[3px]"
+                className="bg-[#EAEAEA] p-[6px] text-xs mr-1 rounded mb-[3px] dark: text-black"
                 key={`${detail}-${index}`}
               >
                 {detail}

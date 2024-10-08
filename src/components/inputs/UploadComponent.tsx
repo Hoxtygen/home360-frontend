@@ -48,7 +48,11 @@ export default function UploadComponent(props: Props) {
   });
   return (
     <div className="">
-      <div {...getRootProps({ className: "dropzone border border-slate-300" })}>
+      <div
+        {...getRootProps({
+          className: "dropzone border border-slate-300 cursor-pointer",
+        })}
+      >
         <input {...getInputProps({ name: name })} />
         {isDragActive ? (
           <p>Drop the files here ...</p>
