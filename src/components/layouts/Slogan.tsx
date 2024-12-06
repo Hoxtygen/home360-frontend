@@ -6,9 +6,9 @@ import { Button } from "../buttons/Button";
 
 export default function Slogan() {
   return (
-    <div className="mb-5">
+    <div className="mb-5 p-4">
       <Image src={Home365} alt="Logo" />
-      <div className="mt-4 text-xl">
+      <div className="mt-4 text-xl text-[#737373]">
         <p>Flexible Living</p>
         <p>Monthly and Yearly stays</p>
         <p>Anywhere</p>

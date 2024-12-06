@@ -35,7 +35,10 @@ export default function SignupForm() {
   const { errors, touched, handleBlur, handleSubmit } = formik;
 
   return (
-    <form onSubmit={handleSubmit} className="border p-4 bg-white">
+    <form
+      onSubmit={handleSubmit}
+      className="border p-4 bg-white dark:text-black"
+    >
       <div className="flex items-center mb-8">
         <BackButton
           className="pr-14"
