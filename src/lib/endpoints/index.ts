@@ -20,6 +20,7 @@ export const HOME_360_RESEND_VERIFICATION_TOKEN = `${serverUrl}/auth/resend-veri
 export const HOME_360_LISTING_BASE_API = `${serverUrl}/listings`;
 export const HOME_360_SEARCH_LISTINGS_API = `${serverUrl}/listings/search`;
 export const HOME_360_FETCH_USERLISTINGS = `${serverUrl}/listings/userListings`;
+export const HOME_360_FETCH_LISTING_STATS = `${serverUrl}/listings/listing-statistics`;
 
 export const HOME_360_LISTING_ENQUIRY_BASE = `${serverUrl}/listing-enquiries`;
 export const HOME_360_GET_LISTING_ENQUIRIES = `${serverUrl}/listing-enquiries`;

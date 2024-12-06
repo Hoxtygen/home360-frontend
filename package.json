@@ -15,9 +15,9 @@
     "docker-run": "docker run -p 3000:3000 home360-client"
   },
   "dependencies": {
-    "-": "^0.0.1",
     "@changesets/cli": "^2.26.0",
     "@tanstack/react-query": "^4.33.0",
+    "@types/d3": "^7.4.3",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/react-slick": "^0.23.10",
@@ -26,6 +26,7 @@
     "clsx": "^1.2.1",
     "cookie": "^0.5.0",
     "cookies-next": "^2.1.1",
+    "d3": "^7.9.0",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.1",
     "formik": "^2.2.9",
