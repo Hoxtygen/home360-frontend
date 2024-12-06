@@ -41,10 +41,10 @@ export default function LoginForm() {
   const { errors, touched, handleBlur, values, handleSubmit } = formik;
 
   return (
-    <div>
+    <div className="dark: text-black">
       <form
         action=""
-        className="border p-4 bg-white dark:bg-slate-900 text-18 rounded-md"
+        className="border p-4 bg-white dark:bg-[#F7F7F7] text-18 rounded-md"
         onSubmit={handleSubmit}
       >
         <div className="flex items-center mb-8">

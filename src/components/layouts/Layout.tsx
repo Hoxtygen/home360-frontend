@@ -9,7 +9,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto]">
       <Header />
-      <div>{children}</div>
+      <div className="dark:bg-white dark: text-black">{children}</div>
       <Footer />
     </div>
   );

@@ -22,7 +22,7 @@ export default function Select({
       )}
       <select
         className={mergeClass(
-          "appearance-none w-full text-[1.15rem] py-[0.675em] pl-3 bg-white dark:bg-[#121212] dark:text-white border dark:border-gray-200 border-[#caced1] focus:border-black focus:outline-none rounded-[0.25rem] text-black cursor-pointer",
+          "appearance-none w-full text-[1.15rem] py-[0.675em] pl-3 bg-white dark:bg-[#F5F5F5] dark:text-black border dark:border-gray-200 border-[#caced1] focus:border-black focus:outline-none rounded-[0.25rem] text-black cursor-pointer",
           className
         )}
         value={value}

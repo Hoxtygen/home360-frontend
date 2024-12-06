@@ -10,7 +10,7 @@ export default function SearchForm({
   handleSubmit,
 }: SearchFormProps) {
   return (
-    <div className="max-w-4xl rounded-md container mx-auto p-10 border shadow-lg mt-5">
+    <div className="max-w-4xl rounded-md container mx-auto p-10 border shadow-lg mt-5 dark:bg-white">
       <form
         className="font-hanken-medium text-[1.15rem]"
         onSubmit={handleSubmit}

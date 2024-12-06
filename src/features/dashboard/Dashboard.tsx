@@ -1,8 +1,12 @@
 import { MappedSuccessLoginResponse } from "@/typedef";
 import { DashboardLayout } from "components/layouts";
+import useGetDashboardStats from "hooks/useGetDashboardStats";
 import useLocalStorage from "hooks/useLocalStorage";
 import { timeOfDayGreeting } from "lib/utils/utils";
-import React from "react";
+import ErrorMessage from "shared/ErrorMessage";
+import LoadingScreen from "shared/LoadingScreen";
+import ListingStatsContainer from "./ListingStatsContainer";
+import { ListingIncomeChart, ListingsChart } from "features/listings/charts";
 
 export default function Dashboard() {
   const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
@@ -10,12 +14,37 @@ export default function Dashboard() {
     null
   );
   const timeOfDay = timeOfDayGreeting();
+
+  const { listingStatData, listingStatError, listingStatStatus } =
+    useGetDashboardStats();
+
   return (
     <DashboardLayout title="Dashboard" isLoading={false}>
       <h2 className="text-24">
         {timeOfDay},{" "}
         <span className="font-hanken-semibold">{user?.firstName}</span>
       </h2>
+
+      {listingStatStatus === "loading" && <LoadingScreen />}
+
+      {listingStatError && <ErrorMessage error={listingStatError.message} />}
+      {listingStatData && (
+        <>
+          <ListingStatsContainer
+            totalListings={listingStatData?.data?.total_listings}
+            rentedListings={listingStatData?.data?.rented_listings}
+            totalIncome={listingStatData?.data?.total_income}
+          />
+          <div className="lg:flex justify-between mt-10 flex-wrap">
+            <div className="lg:w-5/12 p-4  rounded-md">
+              <ListingsChart listingsData={listingStatData?.data.listings} />
+            </div>
+            <div className="lg:w-5/12  rounded-md">
+              <ListingIncomeChart listingsData={listingStatData.data.income} />
+            </div>
+          </div>
+        </>
+      )}
     </DashboardLayout>
   );
 }

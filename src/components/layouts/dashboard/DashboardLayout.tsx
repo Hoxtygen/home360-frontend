@@ -23,7 +23,7 @@ export default function DashboardLayout({
   const { width } = useWindowSize();
   const [showMobileNav, setShowMobileNav] = useState(false);
   return (
-    <div>
+    <>
       <div className="md:hidden w-screen z-[9999] left-0 fixed">
         <MobileHeader
           setShowMobileNav={setShowMobileNav}
@@ -49,18 +49,18 @@ export default function DashboardLayout({
           </div>
           <div className="min-h-full px-5 sm:px-10 pt-[25%] sm:pt-28 dark:bg-slate-800">
             {isLoading ? (
-              <div>
+              <>
                 <LoadingScreen />
                 <span className="block text-center font-hanken-medium">
                   Getting your information, please wait...
                 </span>
-              </div>
+              </>
             ) : (
               children
             )}
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

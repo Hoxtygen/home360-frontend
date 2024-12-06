@@ -70,14 +70,6 @@ export interface ListingDetailResponse extends BaseResponse {
   data: ListingWithAgentInfo;
 }
 
-// type ListingSearchData = {
-//   currentPage: number;
-//   totalItems: number;
-//   totalPages: number;
-//   items: ListingData[];
-//   hasNext: boolean;
-// };
-
 export type ListingDetailProps = {
   listingData: ListingData;
   listingAgent: ListingAgentInfo;
@@ -159,4 +151,44 @@ export type ApartmentInfoProps = {
   facilityQuality: string;
   availableFrom: Date;
   apartmentInfo: ApartmentInfo;
+};
+
+export interface ListingStatistics extends BaseResponse {
+  data: ListingStatisticsData;
+}
+
+export type ListingStatisticsData = {
+  total_listings: number;
+  rented_listings: number;
+  total_income: number;
+  income: ListingStatYearlyGrouping[];
+  listings: ListingStatYearlyGrouping[];
+};
+
+export type Month =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December";
+
+export type ListingStatYearlyGrouping = {
+  year: number;
+  months: ListingStatMonthlyGroupingItem[];
+};
+
+export type ListingStatMonthlyGroupingItem = {
+  name: Month;
+  amount: number;
+};
+
+export type ListingsDataChart = {
+  listingsData: ListingStatYearlyGrouping[];
 };
