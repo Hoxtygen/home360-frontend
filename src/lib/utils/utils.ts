@@ -155,12 +155,8 @@ export function mapLoginResponse(
   loginResponse: AuthenticationSuccessResponse
 ): MappedSuccessLoginResponse {
   return {
-    id: loginResponse.id,
-    email: loginResponse.email,
-    firstName: loginResponse.firstName,
-    lastName: loginResponse.lastName,
-    refreshToken: loginResponse.token.refreshToken,
-    status: loginResponse.status,
+    firstName: loginResponse.data.firstName,
+    lastName: loginResponse.data.lastName,
   };
 }
 

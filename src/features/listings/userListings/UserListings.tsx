@@ -33,7 +33,7 @@ export default function UserListings() {
           <ErrorMessage error={userListingsError.message} />
         )}
       </>
-      <div className="border border-red-500 flex justify-end py-4">
+      <div className="flex justify-end py-4">
         <Button
           variant="link"
           href="/listings/new-listing"

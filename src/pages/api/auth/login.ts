@@ -18,7 +18,7 @@ export default async function loginHandler(
       }
     );
     if (result.data && result.status === 200) {
-      const accessToken = result.data.token.accessToken;
+      const accessToken = result.data.data.token.accessToken;
       return res
         .status(200)
         .setHeader(

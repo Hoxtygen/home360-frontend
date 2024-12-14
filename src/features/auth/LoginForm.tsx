@@ -22,7 +22,7 @@ export default function LoginForm() {
   );
 
   useEffect(() => {
-    if (userData && userData.status === 200) {
+    if (userData && userData.status === "OK") {
       setUser(mapLoginResponse(userData));
       toast.success(userData.message);
       router.push("/dashboard");
