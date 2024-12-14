@@ -1,10 +1,9 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { deleteCookie, setCookie } from "cookies-next";
-import { MappedSuccessLoginResponse, RefreshTokenTokenResponse } from "typedef";
+import { deleteCookie } from "cookies-next";
+import { RefreshTokenTokenResponse } from "typedef";
 import { GetServerSidePropsContext } from "next";
-import { parseCookies } from "nookies";
-import { parseJSON } from "hooks/useLocalStorage";
+import { parseCookies, setCookie } from "nookies";
 import { serverUrl } from "lib/endpoints";
 
 const axiosClient = axios.create({
@@ -12,6 +11,7 @@ const axiosClient = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
+  withCredentials: true,
 });
 let context: GetServerSidePropsContext | null = null;
 export const setContext = (_context: GetServerSidePropsContext) => {
@@ -31,9 +31,7 @@ axiosClient.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 axiosClient.interceptors.response.use(
@@ -46,24 +44,15 @@ axiosClient.interceptors.response.use(
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         try {
-          const user = parseJSON<MappedSuccessLoginResponse>(
-            localStorage.getItem("user")
-          );
-
-          if (!user?.refreshToken) {
-            throw new Error("No refresh token available");
-          }
-
           const result = await axios.post<RefreshTokenTokenResponse>(
             `${serverUrl}/auth/refreshToken`,
-            {
-              token: user?.refreshToken,
-            }
+            {},
+            { withCredentials: true }
           );
 
           const accessToken = result.data?.data.accessToken;
 
-          setCookie("token", accessToken);
+          setCookie(null, "token", accessToken, { path: "/" });
 
           return axiosClient(originalConfig);
         } catch (error) {

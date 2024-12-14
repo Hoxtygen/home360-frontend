@@ -28,9 +28,8 @@ export function useLogin() {
         },
       }),
     onSuccess: (data) => {
-      setCookie("token", data?.data.token.accessToken, {
+      setCookie("token", data.data.data.token.accessToken, {
         path: "/",
-        httpOnly: false,
       });
     },
   });

@@ -69,14 +69,14 @@ export type AdviceProps = {
   backgroundImage: string;
 };
 
-export type AuthenticationSuccessResponse = {
-  id: number;
-  status: number;
-  token: Token;
-  email: string;
+export interface AuthenticationSuccessResponse extends BaseResponse {
+  data: AuthenticationSuccessData;
+}
+
+export type AuthenticationSuccessData = {
   firstName: string;
   lastName: string;
-  message: string;
+  token: Token;
 };
 
 export type RegisterSuccessResponse = {
@@ -85,12 +85,9 @@ export type RegisterSuccessResponse = {
   data: string;
 };
 export type MappedSuccessLoginResponse = {
-  email: string;
   firstName: string;
   lastName: string;
-  refreshToken: string;
-  status: number;
-  id: number;
+  refreshToken?: string;
 };
 
 type Token = {
