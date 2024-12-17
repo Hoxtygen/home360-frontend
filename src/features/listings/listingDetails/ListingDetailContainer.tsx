@@ -1,32 +1,48 @@
 import useGetListingDetail from "hooks/useGetListingDetail";
 import ErrorMessage from "shared/ErrorMessage";
 import ListingDetail from "./ListingDetail";
+import { useEffect } from "react";
+import usePostListingView from "hooks/usePostListingView";
+import LoadingScreen from "shared/LoadingScreen";
 
 export type ListingInfoProps = { listingId: string };
 
 export default function ListingDetailContainer({
   listingId,
-}: {
-  listingId: string;
-}) {
+}: ListingInfoProps) {
   const { listingDetailData, listingDetailError, isLoadingListingDetail } =
     useGetListingDetail(listingId);
+  const { mutateListingView } = usePostListingView();
 
-  if (listingDetailError) {
-    return <ErrorMessage error={listingDetailError.message} />;
-  }
+  useEffect(() => {
+    const now = new Date();
+    const localISOString = now.toISOString().slice(0, -1);
+    const storedListings = sessionStorage.getItem("viewed-listings");
+    const viewedListings: string[] = storedListings
+      ? JSON.parse(storedListings)
+      : [];
 
-  if (isLoadingListingDetail) {
-    return <h1>Loading.......</h1>;
-  }
+    if (!viewedListings.includes(listingId)) {
+      mutateListingView({ listingId, timestamp: localISOString });
+      viewedListings.push(listingId);
+      sessionStorage.setItem("viewed-listings", JSON.stringify(viewedListings));
+    }
+  }, [listingId, mutateListingView]);
+
   return (
     <div className="">
       <div className="basis-2/3">
-        <ListingDetail
-          listingData={listingDetailData?.data.listing!}
-          listingAgent={listingDetailData?.data.agentInfo!}
-          isLoading={isLoadingListingDetail}
-        />
+        {isLoadingListingDetail && <LoadingScreen />}
+        {listingDetailError && (
+          <ErrorMessage error={listingDetailError.message} />
+        )}
+        {listingDetailData?.status === "OK" && (
+          <ListingDetail
+            listingData={listingDetailData?.data.listing!}
+            listingAgent={listingDetailData?.data.agentInfo!}
+            isLoading={isLoadingListingDetail}
+          />
+        )}
       </div>
     </div>
   );
