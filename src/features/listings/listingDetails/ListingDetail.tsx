@@ -67,7 +67,7 @@ export default function ListingDetail({
               </div>
               <div className="mr-6">
                 <p className="font-hanken-black text-24">
-                  {listingData?.apartmentInfo?.roomNums}
+                  {listingData.apartment_info.roomNums}
                 </p>
                 <p className="text-[#747474]">Rooms</p>
               </div>
@@ -93,10 +93,10 @@ export default function ListingDetail({
             </div>
             <div className="pt-3">
               <ApartmentDescription
-                petsAllowed={listingData.petsAllowed}
-                facilityQuality={listingData.facilityQuality}
-                availableFrom={listingData.availableFrom}
-                apartmentInfo={listingData.apartmentInfo}
+                petsAllowed={listingData.pets_allowed}
+                facilityQuality={listingData.facility_quality}
+                availableFrom={listingData.available_from}
+                apartmentInfo={listingData.apartment_info}
               />
             </div>
           </div>

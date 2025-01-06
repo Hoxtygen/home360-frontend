@@ -1,14 +1,8 @@
 import { mergeClass } from "lib/utils/utils";
 import Image from "next/image";
 import React from "react";
+import { StatCardProps } from "./types";
 
-type StatCardProps = {
-  title: string;
-  amount: number | string;
-  icon: string;
-  percentageChange: number;
-  classname?: string;
-};
 export default function StatCard({
   title,
   amount,

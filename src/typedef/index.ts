@@ -74,6 +74,7 @@ export interface AuthenticationSuccessResponse extends BaseResponse {
 }
 
 export type AuthenticationSuccessData = {
+  id: number;
   firstName: string;
   lastName: string;
   token: Token;
@@ -85,6 +86,7 @@ export type RegisterSuccessResponse = {
   data: string;
 };
 export type MappedSuccessLoginResponse = {
+  id: number;
   firstName: string;
   lastName: string;
   refreshToken?: string;

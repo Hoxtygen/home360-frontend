@@ -8,7 +8,7 @@ type ListingViewParams = {
 };
 
 export default function usePostListingView() {
-  const { data, status, error, mutate } = useMutation({
+  const { mutate } = useMutation({
     mutationKey: ["post_listing_view"],
     mutationFn: ({ listingId, timestamp }: ListingViewParams) =>
       requestHandler(HOME_360_POST_LISTING_VIEW, {

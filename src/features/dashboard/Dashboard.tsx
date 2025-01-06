@@ -7,6 +7,7 @@ import ErrorMessage from "shared/ErrorMessage";
 import LoadingScreen from "shared/LoadingScreen";
 import ListingStatsContainer from "./ListingStatsContainer";
 import { ListingIncomeChart, ListingsChart } from "features/listings/charts";
+import ListingViewChart from "features/listings/charts/ListingViewChart";
 
 export default function Dashboard() {
   const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
@@ -34,6 +35,7 @@ export default function Dashboard() {
             totalListings={listingStatData?.data?.total_listings}
             rentedListings={listingStatData?.data?.rented_listings}
             totalIncome={listingStatData?.data?.total_income}
+            totalViews={listingStatData.data.total_views}
           />
           <div className="lg:flex justify-between mt-10 flex-wrap">
             <div className="lg:w-5/12 p-4  rounded-md">
@@ -41,6 +43,13 @@ export default function Dashboard() {
             </div>
             <div className="lg:w-5/12  rounded-md">
               <ListingIncomeChart listingsData={listingStatData.data.income} />
+            </div>
+          </div>
+          <div className="lg:flex justify-between mt-10 flex-wrap">
+            <div className="lg:w-5/12 p-4  rounded-md">
+              <ListingViewChart
+                listingsData={listingStatData.data.views_by_year_and_month}
+              />
             </div>
           </div>
         </>
