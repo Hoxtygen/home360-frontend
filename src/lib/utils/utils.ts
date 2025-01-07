@@ -155,6 +155,7 @@ export function mapLoginResponse(
   loginResponse: AuthenticationSuccessResponse
 ): MappedSuccessLoginResponse {
   return {
+    id: loginResponse.data.id,
     firstName: loginResponse.data.firstName,
     lastName: loginResponse.data.lastName,
   };

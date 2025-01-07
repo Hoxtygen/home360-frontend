@@ -41,12 +41,12 @@ export type ListingProps = {
   position?: string;
   miscellaneous?: string;
   address: Address;
-  availableFrom: any;
+  available_from: string;
   cost: ListingCost;
   details: string[];
-  facilityQuality: string;
-  petsAllowed: string;
-  apartmentInfo: ApartmentInfo;
+  facility_quality: string;
+  pets_allowed: string;
+  apartment_info: ApartmentInfo;
   applicationDocs: string[];
   apartmentImages: string[];
 };
@@ -149,7 +149,7 @@ export type ListingEnquiryFormProps = {
 export type ApartmentInfoProps = {
   petsAllowed: string;
   facilityQuality: string;
-  availableFrom: Date;
+  availableFrom: string;
   apartmentInfo: ApartmentInfo;
 };
 
@@ -163,6 +163,8 @@ export type ListingStatisticsData = {
   total_income: number;
   income: ListingStatYearlyGrouping[];
   listings: ListingStatYearlyGrouping[];
+  total_views: number;
+  views_by_year_and_month: ListingViewStatYearlyGrouping[];
 };
 
 export type Month =
@@ -189,6 +191,20 @@ export type ListingStatMonthlyGroupingItem = {
   amount: number;
 };
 
+export type ListingViewStatMonthlyGroupingItem = Omit<
+  ListingStatMonthlyGroupingItem,
+  "amount"
+> & { views: number };
+
+export type ListingViewStatYearlyGrouping = {
+  year: number;
+  months: ListingViewStatMonthlyGroupingItem[];
+};
+
 export type ListingsDataChart = {
   listingsData: ListingStatYearlyGrouping[];
+};
+
+export type ListingsViewDataChart = {
+  listingsData: ListingViewStatYearlyGrouping[];
 };

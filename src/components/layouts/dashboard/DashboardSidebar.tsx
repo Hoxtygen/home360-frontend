@@ -197,7 +197,7 @@ export default function DashboardSidebar({
       <div
         className={mergeClass(
           showMobileNav ? "left-0 right-0" : "-left-full",
-          "transition-all flex flex-col justify-between w-screen sm:w-[276px] sm:left-0 sm:right-0  sm:relative  z-[9999] md:z-0 bg-primary-active overflow-hidden fixed mt-[15%] sm:mt-0 pb-20 sm:pb-0 h-screen sm:min-h-screen sm:max-h-screen pt-5 px-6"
+          "transition-all flex flex-col justify-between w-screen sm:w-[276px] sm:left-0 sm:right-0  sm:relative  z-[9999] md:z-0 bg-primary-active overflow-hidden fixed mt-[15%] sm:mt-0 pb-20 sm:pb-0 min-h-full sm:min-h-screen sm:max-h-screen pt-5 px-6"
         )}
       >
         <div className="">
@@ -215,7 +215,7 @@ export default function DashboardSidebar({
               />
             </Button>
           </div>
-          <div className="flex flex-col justify-between lg:mb-1 !h-[73vh] overflow-y-auto overflow-x-hidden sidebar-scrollbar">
+          <div className="flex flex-col justify-between lg:mb-1 min-h-full overflow-y-auto overflow-x-hidden sidebar-scrollbar">
             <div>
               {sidebarLinks.map((link, index) => (
                 <DashboardSidebarItem
