@@ -40,10 +40,7 @@ interface SidebarOptionProps {
   onOptionSelect: (value: string) => void;
 }
 
-export default function DashboardSidebar({
-  showMobileNav,
-  accounts,
-}: MobileHeaderProps) {
+export default function DashboardSidebar({ showMobileNav }: MobileHeaderProps) {
   const router = useRouter();
   const { mutateLogout } = useLogout();
   const listingOptions: OptionProps[] = [
@@ -197,7 +194,7 @@ export default function DashboardSidebar({
       <div
         className={mergeClass(
           showMobileNav ? "left-0 right-0" : "-left-full",
-          "transition-all flex flex-col justify-between w-screen sm:w-[276px] sm:left-0 sm:right-0  sm:relative  z-[9999] md:z-0 bg-primary-active overflow-hidden fixed mt-[15%] sm:mt-0 pb-20 sm:pb-0 min-h-full sm:min-h-screen sm:max-h-screen pt-5 px-6"
+          "transition-all flex flex-col w-screen sm:w-[276px] sm:left-0 sm:right-0  sm:relative  z-[9999] md:z-0 bg-primary-active overflow-hidden fixed mt-[15%] sm:mt-0 pb-20 sm:pb-0 min-h-full pt-5 px-6"
         )}
       >
         <div className="">
@@ -237,7 +234,7 @@ export default function DashboardSidebar({
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="mt-36">
           <Button
             variant="destructive"
             className="flex justify-start  w-full h-11 px-[18.5px] rounded-md mb-5 text-16 hover:bg-primary-disabled text-white font-semibold"
