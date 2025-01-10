@@ -16,7 +16,6 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({
   title,
   children,
-  backTitle,
   isLoading,
   handleTourStart,
 }: DashboardLayoutProps & DashboardHeaderProps) {
@@ -31,10 +30,10 @@ export default function DashboardLayout({
           handleTourStart={handleTourStart}
         />
       </div>
-      <div className="flex flex-shrink-0 h-full">
+      <div className="flex flex-shrink-0 h-full items-stretch">
         <div
           className={mergeClass(
-            "md:ml-0 h-[100%]",
+            "md:ml-0 min-h-full",
             width && width < 600 ? "" : "tour-guide-desktop-sidebar"
           )}
         >
@@ -43,7 +42,7 @@ export default function DashboardLayout({
             setShowMobileNav={setShowMobileNav}
           />
         </div>
-        <div className="bg-[#FBFBFB] h-screen lg:max-h-screen w-full overflow-y-aut pt-[15%] sm:pt-0 sm:mt-0">
+        <div className="bg-[#FBFBFB] min-h-screen lg:max-h-scree w-full overflow-y-auto pt-[15%] sm:pt-0 sm:mt-0">
           <div className="">
             <DashboardHeader title={title} />
           </div>
