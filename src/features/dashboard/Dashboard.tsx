@@ -4,10 +4,10 @@ import useGetDashboardStats from "hooks/useGetDashboardStats";
 import useLocalStorage from "hooks/useLocalStorage";
 import { timeOfDayGreeting } from "lib/utils/utils";
 import ErrorMessage from "shared/ErrorMessage";
-import LoadingScreen from "shared/LoadingScreen";
 import ListingStatsContainer from "./ListingStatsContainer";
 import { ListingIncomeChart, ListingsChart } from "features/listings/charts";
 import ListingViewChart from "features/listings/charts/ListingViewChart";
+import { BouncingLoader } from "components/loaders/BouncingLoader";
 
 export default function Dashboard() {
   const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
@@ -26,7 +26,7 @@ export default function Dashboard() {
         <span className="font-hanken-semibold">{user?.firstName}</span>
       </h2>
 
-      {listingStatStatus === "loading" && <LoadingScreen />}
+      {listingStatStatus === "loading" && <BouncingLoader />}
 
       {listingStatError && <ErrorMessage error={listingStatError.message} />}
       {listingStatData && (

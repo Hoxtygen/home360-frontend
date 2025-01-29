@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import EnquiryMessageItem from "./EnquiryMessageItem";
 import useGetListingEnquiries from "hooks/useGetListingEnquiries";
 import ControlButtons from "shared/ControlButtons";
-import LoadingScreen from "shared/LoadingScreen";
 import ErrorMessage from "shared/ErrorMessage";
 import Link from "next/link";
 import useMarkAsRead from "hooks/useMarkAsRead";
 import { MappedSuccessLoginResponse } from "@/typedef";
 import useLocalStorage from "hooks/useLocalStorage";
+import { BouncingLoader } from "components/loaders/BouncingLoader";
 
 export default function Messages() {
   const [page, setPage] = useState(1);
@@ -54,7 +54,7 @@ export default function Messages() {
         leftButtonDisable={page === 1}
         className="justify-end bg-transparent px-5 border-0"
       />
-      {listingEnquiriesStatus === "loading" && <LoadingScreen />}
+      {listingEnquiriesStatus === "loading" && <BouncingLoader />}
       {listingEnquiriesError && (
         <div className="">
           <ErrorMessage error={listingEnquiriesError.message} />

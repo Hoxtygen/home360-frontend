@@ -41,12 +41,12 @@ export type ListingProps = {
   position?: string;
   miscellaneous?: string;
   address: Address;
-  available_from: string;
+  availableFrom: string;
   cost: ListingCost;
   details: string[];
-  facility_quality: string;
-  pets_allowed: string;
-  apartment_info: ApartmentInfo;
+  facilityQuality: string;
+  petsAllowed: string;
+  apartmentInfo: ApartmentInfo;
   applicationDocs: string[];
   apartmentImages: string[];
 };
