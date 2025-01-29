@@ -2,6 +2,17 @@ import { maxCharacter } from "constant-data/staticData";
 import { ListingEnquiryData, ListingProps } from "features/listings/types";
 import { array, date, number, object, Schema, string } from "yup";
 
+const formatDateForInput = (date: Date | null): string => {
+  if (!date) return ""; // Handle null or undefined cases
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
 export const initialValues: ListingProps = {
   title: "",
   description: "",
@@ -15,7 +26,7 @@ export const initialValues: ListingProps = {
     state: "",
     lga: "",
   },
-  availableFrom: new Date(""),
+  availableFrom: "",
   cost: {
     annualRent: 0,
     agentFee: 0,
@@ -35,7 +46,7 @@ export const initialValues: ListingProps = {
   apartmentImages: [],
 };
 
-export const newListingValidationSchema: Schema<ListingProps> = object().shape({
+export const newListingValidationSchema = object().shape({
   title: string().required("Advert title is required"),
   description: string().required("description  is required").max(2000),
   furnishing: string().required("furnishing information is required").max(2000),

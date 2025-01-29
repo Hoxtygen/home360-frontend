@@ -35,7 +35,7 @@ export default function DetailsForm() {
         options={facilityQuality}
         label="Quality of facilites"
         onChange={handleChange}
-        name="facilityQuality"
+        name="facility_quality"
       />
       {touched.facilityQuality && errors.facilityQuality && (
         <ErrorMessage error={errors.facilityQuality} />

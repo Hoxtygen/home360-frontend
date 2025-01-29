@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-import LocationIcon from "../../../../public/icons/location-icon.svg";
+import LocationIcon from "/public/icons/location-icon.svg";
 import { addValues, formatCurrency } from "lib/utils/utils";
 import ListingImagesCarousel from "./ListingImagesCarousel";
 import ApartmentCost from "../ApartmentCost";
@@ -67,7 +67,7 @@ export default function ListingDetail({
               </div>
               <div className="mr-6">
                 <p className="font-hanken-black text-24">
-                  {listingData.apartment_info.roomNums}
+                  {listingData.apartmentInfo.roomNums}
                 </p>
                 <p className="text-[#747474]">Rooms</p>
               </div>
@@ -93,10 +93,10 @@ export default function ListingDetail({
             </div>
             <div className="pt-3">
               <ApartmentDescription
-                petsAllowed={listingData.pets_allowed}
-                facilityQuality={listingData.facility_quality}
-                availableFrom={listingData.available_from}
-                apartmentInfo={listingData.apartment_info}
+                petsAllowed={listingData.petsAllowed}
+                facilityQuality={listingData.facilityQuality}
+                availableFrom={listingData.availableFrom}
+                apartmentInfo={listingData.apartmentInfo}
               />
             </div>
           </div>
