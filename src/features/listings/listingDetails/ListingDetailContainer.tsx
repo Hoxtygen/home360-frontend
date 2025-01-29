@@ -3,7 +3,7 @@ import ErrorMessage from "shared/ErrorMessage";
 import ListingDetail from "./ListingDetail";
 import { useEffect } from "react";
 import usePostListingView from "hooks/usePostListingView";
-import LoadingScreen from "shared/LoadingScreen";
+import { BouncingLoader } from "components/loaders/BouncingLoader";
 
 export type ListingInfoProps = { listingId: string };
 
@@ -32,7 +32,7 @@ export default function ListingDetailContainer({
   return (
     <div className="">
       <div className="basis-2/3">
-        {isLoadingListingDetail && <LoadingScreen />}
+        {isLoadingListingDetail && <BouncingLoader />}
         {listingDetailError && (
           <ErrorMessage error={listingDetailError.message} />
         )}

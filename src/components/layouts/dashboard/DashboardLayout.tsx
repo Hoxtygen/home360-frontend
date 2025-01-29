@@ -1,10 +1,10 @@
 import useWindowSize from "hooks/useWindowSize";
 import { mergeClass } from "lib/utils/utils";
 import { ReactNode, useState } from "react";
-import LoadingScreen from "shared/LoadingScreen";
 import DashboardHeader, { DashboardHeaderProps } from "./DashboardHeader";
 import DashboardSidebar from "./DashboardSidebar";
 import MobileHeader from "./MobileHeader";
+import { BouncingLoader } from "components/loaders/BouncingLoader";
 
 interface DashboardLayoutProps {
   title: string;
@@ -49,7 +49,7 @@ export default function DashboardLayout({
           <div className="min-h-full px-5 sm:px-10 pt-[25%] sm:pt-28 dark:bg-slate-800">
             {isLoading ? (
               <>
-                <LoadingScreen />
+                <BouncingLoader />
                 <span className="block text-center font-hanken-medium">
                   Getting your information, please wait...
                 </span>

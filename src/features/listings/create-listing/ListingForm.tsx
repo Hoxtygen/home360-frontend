@@ -10,12 +10,12 @@ import {
   newListingValidationSchema,
 } from "lib/validations/listingValidation";
 import ErrorMessage from "shared/ErrorMessage";
-import LoadingScreen from "shared/LoadingScreen";
 import ListingDescriptionForm from "./ListingDescriptionForm";
 import ListingAddressForm from "./ListingAddressForm";
 import DetailsForm from "./DetailsForm";
 import ApplicationDocumentsForm from "./ApplicationDocumentsForm";
 import TenancyForm from "./TenancyForm";
+import { BouncingLoader } from "components/loaders/BouncingLoader";
 
 export default function ListingForm() {
   const {
@@ -33,7 +33,7 @@ export default function ListingForm() {
   if (isLoadingNewListing) {
     return (
       <div>
-        <LoadingScreen />
+        <BouncingLoader />
         <span className="block text-center font-Open-Sans">
           Submitting your new listing, please wait...
         </span>
