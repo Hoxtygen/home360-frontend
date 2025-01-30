@@ -88,6 +88,20 @@ export interface ListingDetailResponse extends BaseResponse {
   data: ListingWithAgentInfo;
 }
 
+export interface EnquirerResponse extends BaseResponse {
+  data: EnquirerItem[];
+}
+
+export type EnquirerItem = {
+  listingId: string;
+  read: boolean;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+};
+
 export type ListingDetailProps = {
   listingData: ListingData;
   listingAgent: ListingAgentInfo;
@@ -105,9 +119,16 @@ export type UserListingDetailsProps = Omit<
 };
 
 export interface ListingSearchResponse extends BaseResponse {
-  data: PaginatedAPIResponseBase<ListingData>;
+  data: PaginatedAPIResponseBase<ListingSearchResultDataItem>;
 }
 
+export type ListingSearchResultDataItem = ListingProps & {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  rented: boolean;
+  agentId: number;
+};
 export type ListingAgentProps = {
   agent: ListingAgentInfo;
   handleListingEnquiryFormDialog(): void;

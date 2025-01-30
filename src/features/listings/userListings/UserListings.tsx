@@ -37,7 +37,7 @@ export default function UserListings() {
         <Button
           variant="link"
           href="/listings/new-listing"
-          className="border border-blue-600 bg-primary-active text-white"
+          className="bg-primary-active text-white hover:bg-primary-active !no-underline"
         >
           <Image
             height={20}

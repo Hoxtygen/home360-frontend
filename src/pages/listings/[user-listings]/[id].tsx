@@ -7,9 +7,7 @@ type ListingInfoProps = { id: string };
 export default function UserListingInfo({ id }: ListingInfoProps) {
   return (
     <DashboardLayout title="Listing Details" isLoading={false}>
-      <div className="max-w-4xl rounded-md container mx-auto p-10 mt-5 bg-[#F7F7F7] min-h-[600px]">
-        <UserListingDetailsContainer listingId={id} />
-      </div>
+      <UserListingDetailsContainer listingId={id} />
     </DashboardLayout>
   );
 }

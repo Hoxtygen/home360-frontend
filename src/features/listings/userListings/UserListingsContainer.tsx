@@ -14,13 +14,13 @@ export default function UserListingsContainer({
         <div className="mb-4 bg-[white]" key={listing.id}>
           <Link href={`/listings/user-listings/${listing.id}`}>
             <ListingItem
-              imagesUrl={listing.apartment_images || randomImages}
+              imagesUrl={listing.apartmentImages || randomImages}
               title={listing.title}
               location={`${listing.address.houseNumber || ""} ${
                 listing.address.streetName
               } ${listing.address.city}`}
               annualRent={listing?.cost?.annualRent}
-              numberOfRooms={listing.apartment_info.roomNums}
+              numberOfRooms={listing.apartmentInfo.roomNums}
               details={listing.details}
             />
           </Link>
