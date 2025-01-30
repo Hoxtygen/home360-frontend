@@ -32,7 +32,7 @@ export default function ListingDetail({
     <>
       <div>
         <ListingAgentAndListingImages
-          listingImages={listingData.apartmentImages}
+          listingImages={listingData.apartment_images}
           agentInfo={listingAgent}
           handleListingEnquiryFormDialog={handleListingEnquiryFormDialog}
         />
@@ -67,7 +67,7 @@ export default function ListingDetail({
               </div>
               <div className="mr-6">
                 <p className="font-hanken-black text-24">
-                  {listingData.apartmentInfo.roomNums}
+                  {listingData.apartment_info.roomNums}
                 </p>
                 <p className="text-[#747474]">Rooms</p>
               </div>
@@ -93,10 +93,10 @@ export default function ListingDetail({
             </div>
             <div className="pt-3">
               <ApartmentDescription
-                petsAllowed={listingData.petsAllowed}
-                facilityQuality={listingData.facilityQuality}
-                availableFrom={listingData.availableFrom}
-                apartmentInfo={listingData.apartmentInfo}
+                petsAllowed={listingData.pets_allowed}
+                facilityQuality={listingData.facility_quality}
+                availableFrom={listingData.available_from}
+                apartmentInfo={listingData.apartment_info}
               />
             </div>
           </div>
@@ -108,9 +108,9 @@ export default function ListingDetail({
               Application Document
             </h3>
             <div>
-              {listingData?.applicationDocs && (
+              {listingData?.application_docs && (
                 <ApplicationDocument
-                  applicationDocs={listingData.applicationDocs}
+                  applicationDocs={listingData.application_docs}
                 />
               )}
             </div>
@@ -142,7 +142,7 @@ export default function ListingDetail({
             maxWidth={800}
             maxHeight="80vh"
           >
-            <ListingImagesCarousel imagesUrl={listingData.apartmentImages} />
+            <ListingImagesCarousel imagesUrl={listingData.apartment_images} />
           </Dialog>
         )}
 
@@ -155,7 +155,7 @@ export default function ListingDetail({
           >
             <ListingEnquiry
               listingId={listingData.id}
-              agentId={listingData.agentId}
+              agentId={listingData.agent_id}
               handleListingEnquiryFormDialog={handleListingEnquiryFormDialog}
             />
           </Dialog>

@@ -31,8 +31,26 @@ export type ListingAgentInfo = Omit<NewUserSignup, "address" | "password">;
 
 export type ListingData = {
   id: string;
-  agentId: number;
-} & ListingProps;
+  agent_id: number;
+  pets_allowed: string;
+  available_from: string;
+  facility_quality: string;
+  application_docs: string[];
+  apartment_images: string[];
+  created_at: string;
+  updated_at: string;
+  apartment_info: ApartmentInfo;
+} & IListingData;
+
+type IListingData = Omit<
+  ListingProps,
+  | "availableFrom"
+  | "facilityQuality"
+  | "petsAllowed"
+  | "apartmentInfo"
+  | "applicationDocs"
+  | "apartmentImages"
+>;
 
 export type ListingProps = {
   title: string;
