@@ -39,6 +39,8 @@ export default function ListingEnquiryForm({
     initialValues: listingEnquiryInitialValues,
   });
 
+  // Todo: Make firstname and lastname into a single input
+
   const {
     errors,
     touched,

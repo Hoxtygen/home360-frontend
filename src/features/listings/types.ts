@@ -40,6 +40,8 @@ export type ListingData = {
   created_at: string;
   updated_at: string;
   apartment_info: ApartmentInfo;
+  rented: boolean;
+  rentDate: string;
 } & IListingData;
 
 type IListingData = Omit<
@@ -88,6 +90,21 @@ export interface ListingDetailResponse extends BaseResponse {
   data: ListingWithAgentInfo;
 }
 
+export interface RentSuccessResponse extends BaseResponse {
+  data: RentData;
+}
+
+export type RentData = {
+  renterId: number;
+  rentDuration: string;
+  rentStartDate: string;
+  rentDueDate: string;
+  createdAt: string;
+  modifiedAt: string;
+  listingId: string;
+  agentId: number;
+};
+
 export interface EnquirerResponse extends BaseResponse {
   data: EnquirerItem[];
 }
@@ -110,7 +127,7 @@ export type ListingDetailProps = {
 
 export type UserListingDetailsProps = Omit<
   ListingDetailProps,
-  "listingAgent"
+  "listingAgent" | "isLoading"
 > & {
   handleDeleteListing: () => void;
   handleShowDialog: () => void;
@@ -246,4 +263,16 @@ export type ListingsDataChart = {
 
 export type ListingsViewDataChart = {
   listingsData: ListingViewStatYearlyGrouping[];
+};
+
+export type RentFormValues = {
+  listingId: string;
+  rentStartDate: string;
+  rentDueDate: string;
+  renterEmail: string;
+};
+
+export type RentFormProps = {
+  listingId: string;
+  parentCallback(): void;
 };

@@ -1,17 +1,6 @@
 import { maxCharacter } from "constant-data/staticData";
 import { ListingEnquiryData, ListingProps } from "features/listings/types";
-import { array, date, number, object, Schema, string } from "yup";
-
-const formatDateForInput = (date: Date | null): string => {
-  if (!date) return ""; // Handle null or undefined cases
-
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  return `${year}-${month}-${day}T${hours}:${minutes}`;
-};
+import { array, date, number, object, ref, Schema, string } from "yup";
 
 export const initialValues: ListingProps = {
   title: "",
@@ -120,3 +109,43 @@ export const listingEnquiryValidationSchema: Schema<ListingEnquiryData> =
     ),
     employmentStatus: string().required("Employment type is required"),
   });
+
+export const rentValidationSchema = object().shape({
+  renterEmail: string()
+    .email("Enter a valid email address")
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "Enter a valid email address")
+    .required("Renter email is required"),
+  rentStartDate: date()
+    .min(
+      new Date(new Date().setDate(new Date().getDate() - 1)),
+      "Rent cannot start earlier than today"
+    )
+    .required("Date apartment will be available is required"),
+  rentDueDate: date()
+    .required("Rent due date is required")
+    .min(
+      ref("rentStartDate"),
+      "Rent due date cannot be earlier than rent start date"
+    )
+    .test(
+      "is-after-start-date",
+      "Rent due date cannot be the same as rent start date",
+      (value, context) => {
+        const rentStartDate = context.parent.rentStartDate;
+        return value > rentStartDate;
+      }
+    )
+    .test(
+      "is-one-year-later",
+      "Rent due date must be exactly one year after rent start date",
+      (value, context) => {
+        const rentStartDate = context.parent.rentStartDate;
+        if (!rentStartDate || !value) return false;
+
+        const diffInMilliseconds = value.getTime() - rentStartDate.getTime();
+        const diffInYears = diffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+
+        return Math.abs(diffInYears - 1) < 0.01;
+      }
+    ),
+});

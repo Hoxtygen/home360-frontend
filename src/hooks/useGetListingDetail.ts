@@ -5,7 +5,7 @@ import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 
 export default function useGetListingDetail(listingId: string) {
-  const { data, error, isLoading } = useQuery({
+  const { data, error, status, refetch } = useQuery({
     queryKey: ["listing details"],
     networkMode: "always",
     refetchOnWindowFocus: false,
@@ -20,6 +20,7 @@ export default function useGetListingDetail(listingId: string) {
   return {
     listingDetailData: data?.data,
     listingDetailError: errorHandler(error),
-    isLoadingListingDetail: isLoading,
+    listingDetailStatus: status,
+    refetchListingDetails: refetch,
   };
 }

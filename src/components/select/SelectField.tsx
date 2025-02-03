@@ -30,6 +30,7 @@ export default function SelectField<T>({
             "h-12  border border-slate-300 dark:border-gray-200 py-2 px-3 text-sm placeholder:text-slate-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50  dark:focus:ring-slate-400 text-black dark:bg-[#F5F5F5] w-full rounded-md",
             otherProps.className
           )}
+          title="Select a renter"
         >
           <option value="">Select an option</option>
           {data.map((item, index) => {
