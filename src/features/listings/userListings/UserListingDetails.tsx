@@ -19,7 +19,7 @@ export default function UserListingDetails({
   return (
     <div>
       <div className="mb-3">
-        <Slider imagesUrl={listingData.apartmentImages} />
+        <Slider imagesUrl={listingData.apartment_images} />
       </div>
       <div className="">
         <div className="">
@@ -74,7 +74,7 @@ export default function UserListingDetails({
       <div className="mb-3">
         <h4 className="text-18 font-hanken-semibold">Facility Quality:</h4>
         <p className="text-secondary-light-gray text-18">
-          {capitalizeFirstCharacter(listingData.facilityQuality)}
+          {capitalizeFirstCharacter(listingData.facility_quality)}
         </p>
       </div>
       <div className="mb-3">
@@ -83,10 +83,10 @@ export default function UserListingDetails({
       </div>
       <div className="mb-3">
         <ApartmentDescription
-          petsAllowed={listingData.petsAllowed}
-          facilityQuality={listingData.facilityQuality}
-          availableFrom={listingData.availableFrom}
-          apartmentInfo={listingData.apartmentInfo}
+          petsAllowed={listingData.pets_allowed}
+          facilityQuality={listingData.facility_quality}
+          availableFrom={listingData.available_from}
+          apartmentInfo={listingData.apartment_info}
         />
       </div>
       <div className="mb-3">
@@ -94,8 +94,8 @@ export default function UserListingDetails({
       </div>
       <div className="mb-3">
         <h4 className="font-hanken-semibold text-18">Application Document</h4>
-        {listingData?.applicationDocs && (
-          <ApplicationDocument applicationDocs={listingData.applicationDocs} />
+        {listingData?.application_docs && (
+          <ApplicationDocument applicationDocs={listingData.application_docs} />
         )}
       </div>
       <div className="border border-black bg-slate-900 flex justify-center gap-5 mt-4 pt-3 pb-3">

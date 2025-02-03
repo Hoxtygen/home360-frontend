@@ -2,6 +2,7 @@ import { DeleteListingResponse } from "@/typedef";
 import { useMutation } from "@tanstack/react-query";
 
 import { HOME_360_LISTING_BASE_API } from "lib/endpoints";
+import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 
 export default function useDeleteListing(listingId: string) {
@@ -17,7 +18,7 @@ export default function useDeleteListing(listingId: string) {
   });
   return {
     deleteListingData: data?.data,
-    deleteListingError: error,
+    deleteListingError: errorHandler(error),
     mutateDeleteListing: mutate,
     deleteListingStatus: status,
   };

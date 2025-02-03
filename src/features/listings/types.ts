@@ -31,8 +31,28 @@ export type ListingAgentInfo = Omit<NewUserSignup, "address" | "password">;
 
 export type ListingData = {
   id: string;
-  agentId: number;
-} & ListingProps;
+  agent_id: number;
+  pets_allowed: string;
+  available_from: string;
+  facility_quality: string;
+  application_docs: string[];
+  apartment_images: string[];
+  created_at: string;
+  updated_at: string;
+  apartment_info: ApartmentInfo;
+  rented: boolean;
+  rentDate: string;
+} & IListingData;
+
+type IListingData = Omit<
+  ListingProps,
+  | "availableFrom"
+  | "facilityQuality"
+  | "petsAllowed"
+  | "apartmentInfo"
+  | "applicationDocs"
+  | "apartmentImages"
+>;
 
 export type ListingProps = {
   title: string;
@@ -70,6 +90,35 @@ export interface ListingDetailResponse extends BaseResponse {
   data: ListingWithAgentInfo;
 }
 
+export interface RentSuccessResponse extends BaseResponse {
+  data: RentData;
+}
+
+export type RentData = {
+  renterId: number;
+  rentDuration: string;
+  rentStartDate: string;
+  rentDueDate: string;
+  createdAt: string;
+  modifiedAt: string;
+  listingId: string;
+  agentId: number;
+};
+
+export interface EnquirerResponse extends BaseResponse {
+  data: EnquirerItem[];
+}
+
+export type EnquirerItem = {
+  listingId: string;
+  read: boolean;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+};
+
 export type ListingDetailProps = {
   listingData: ListingData;
   listingAgent: ListingAgentInfo;
@@ -78,7 +127,7 @@ export type ListingDetailProps = {
 
 export type UserListingDetailsProps = Omit<
   ListingDetailProps,
-  "listingAgent"
+  "listingAgent" | "isLoading"
 > & {
   handleDeleteListing: () => void;
   handleShowDialog: () => void;
@@ -87,9 +136,16 @@ export type UserListingDetailsProps = Omit<
 };
 
 export interface ListingSearchResponse extends BaseResponse {
-  data: PaginatedAPIResponseBase<ListingData>;
+  data: PaginatedAPIResponseBase<ListingSearchResultDataItem>;
 }
 
+export type ListingSearchResultDataItem = ListingProps & {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  rented: boolean;
+  agentId: number;
+};
 export type ListingAgentProps = {
   agent: ListingAgentInfo;
   handleListingEnquiryFormDialog(): void;
@@ -207,4 +263,16 @@ export type ListingsDataChart = {
 
 export type ListingsViewDataChart = {
   listingsData: ListingViewStatYearlyGrouping[];
+};
+
+export type RentFormValues = {
+  listingId: string;
+  rentStartDate: string;
+  rentDueDate: string;
+  renterEmail: string;
+};
+
+export type RentFormProps = {
+  listingId: string;
+  parentCallback(): void;
 };

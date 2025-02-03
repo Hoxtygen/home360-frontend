@@ -28,6 +28,10 @@ export const HOME_360_GET_LISTING_ENQUIRIES = `${serverUrl}/listing-enquiries`;
 
 export const HOME_360_GET_USER_DETAILS = `${serverUrl}/user/user-details`;
 
+export const HOME_360_GET_ENQUIRERS = `${serverUrl}/listing-enquiries/listing`;
+
+export const HOME_360_GIVE_LISTING_OUT_FOR_RENT = `${serverUrl}/rentals`;
+
 //================================INTERNALL ENDPOINTS================
 export const INTERNAL_LOGIN_API = "/api/auth/login";
 export const INTERNAL_LOGOUT_API = "/api/auth/logout";

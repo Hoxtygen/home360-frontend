@@ -2,10 +2,10 @@ import Link from "next/link";
 import SkeletonCard from "shared/SkeletonCard";
 import { randomImages } from "../../constant-data";
 import ListingItem from "./ListingItem";
-import { ListingData } from "./types";
+import { ListingSearchResultDataItem } from "./types";
 
 export type UserListingProps = {
-  listings: ListingData[];
+  listings: ListingSearchResultDataItem[];
   isLoading: boolean;
 };
 
