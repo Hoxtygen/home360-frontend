@@ -11,11 +11,13 @@ export default function EnquiryMessageInfoContainer({
   enquiryData,
   handleSubmitReply,
   messageStatus,
+  enquiryId,
 }: EnquiryMessageInfoContainerProps) {
   const replyInitialValues: EnquiryMessageReplyFormData = {
     content: "",
     receiverId: enquiryData.userId!,
     senderId: enquiryData.agentId,
+    enquiryId: enquiryId,
   };
   return (
     <div className="pb-20">

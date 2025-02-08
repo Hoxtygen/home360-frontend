@@ -5,15 +5,26 @@ import Spinner from "components/loaders/Spinner";
 import ErrorMessage from "shared/ErrorMessage";
 import usePostReply from "hooks/usePostReply";
 import { EnquiryMessageReplyFormData } from "./types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 type EnquiryMessageDetailProps = {
   enquiryId: string;
 };
+
+export type ListingEnquiryMessageReply = {
+  id: string;
+  senderId: number;
+  receiverId: number;
+  createdAt: string;
+  content: string;
+  enquiryId: string;
+};
 export default function EnquiryMessageDetail({
   enquiryId,
 }: EnquiryMessageDetailProps) {
+  const [messages, setMessages] = useState<ListingEnquiryMessageReply[]>([]);
+  const [messageContent, setMessageContent] = useState<string>("");
   const {
     listingEnquiryData,
     listingEnquiryError,
@@ -58,6 +69,7 @@ export default function EnquiryMessageDetail({
           enquiryData={listingEnquiryData?.data}
           handleSubmitReply={handleSubmitReply}
           messageStatus={replyStatus}
+          enquiryId={enquiryId}
         />
       )}
     </div>

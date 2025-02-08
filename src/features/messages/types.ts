@@ -64,10 +64,9 @@ export type EnquiryMessageReplyItemProps = {
   content: string;
 };
 
-export type EnquiryMessageReplyFormData = Omit<
-  EnquiryMessageReplyItemProps,
-  "id" | "createdAt"
->;
+export type EnquiryMessageReplyFormData = {
+  enquiryId: string;
+} & Omit<EnquiryMessageReplyItemProps, "id" | "createdAt">;
 
 export type EnquiryMessageRepliesProps = {
   replies: EnquiryMessageReplyItemProps[];
@@ -85,6 +84,7 @@ export type EnquiryMessageInfoContainerProps = EnquiryMessageInfoProps & {
     callback?: () => void
   ): void;
   messageStatus: MutationStatus;
+  enquiryId: string;
 };
 
 type EnquiryMessageReplyData = {
