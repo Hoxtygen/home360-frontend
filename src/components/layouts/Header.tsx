@@ -45,9 +45,9 @@ export default function Header() {
             {token ? (
               <div className="flex items-center">
                 <div className="flex items-center">
-                  {/* <p className="text-black pr-5 font-semibold">
-                    {user ? user.firstName : "Guest"}
-                  </p> */}
+                  <p className="text-black pr-5 font-semibold">
+                    {user ? user.firstName : ""}
+                  </p>
                   <div className="">
                     <Button
                       className="dark:hover:bg-transparent dark:hover:text-black"
