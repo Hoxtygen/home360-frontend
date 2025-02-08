@@ -1,10 +1,13 @@
 import useWindowSize from "hooks/useWindowSize";
 import { mergeClass } from "lib/utils/utils";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import DashboardHeader, { DashboardHeaderProps } from "./DashboardHeader";
 import DashboardSidebar from "./DashboardSidebar";
 import MobileHeader from "./MobileHeader";
 import { BouncingLoader } from "components/loaders/BouncingLoader";
+import { useLogout } from "hooks/useLogout";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 interface DashboardLayoutProps {
   title: string;
@@ -19,8 +22,23 @@ export default function DashboardLayout({
   isLoading,
   handleTourStart,
 }: DashboardLayoutProps & DashboardHeaderProps) {
+  const router = useRouter();
   const { width } = useWindowSize();
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const { mutateLogout, logoutData, logoutStatus } = useLogout();
+  const handleLogout = () => {
+    mutateLogout();
+  };
+
+  useEffect(() => {
+    if (logoutData?.status === "OK") {
+      toast.success(logoutData.data, {
+        duration: 5000,
+      });
+      localStorage.clear();
+      router.push("/");
+    }
+  }, [logoutData, router]);
   return (
     <>
       <div className="md:hidden w-screen z-[9999] left-0 fixed">
@@ -30,6 +48,7 @@ export default function DashboardLayout({
           handleTourStart={handleTourStart}
         />
       </div>
+      {logoutStatus === "loading" && <BouncingLoader />}
       <div className="flex flex-shrink-0 h-full items-stretch">
         <div
           className={mergeClass(
@@ -40,6 +59,7 @@ export default function DashboardLayout({
           <DashboardSidebar
             showMobileNav={showMobileNav}
             setShowMobileNav={setShowMobileNav}
+            handleLogout={handleLogout}
           />
         </div>
         <div className="bg-[#FBFBFB] min-h-screen lg:max-h-scree w-full overflow-y-auto pt-[15%] sm:pt-0 sm:mt-0">

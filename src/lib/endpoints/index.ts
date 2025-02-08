@@ -13,6 +13,8 @@ export const serverUrl =
 export const HOME_360_LOGIN_API = `${serverUrl}/auth/login`;
 export const HOME_360_SIGNUP_API = `${serverUrl}/auth/register`;
 export const HOME_360_PASSWORD_RESET_REQUEST = `${serverUrl}/auth/password-reset-request`;
+export const HOME_360_USER_LOGOUT = `${serverUrl}/auth/logout`;
+
 export const HOME_360__RESET_PASSWORD = `${serverUrl}/auth/reset-password`;
 export const HOME_360_VERIFY_EMAIL = `${serverUrl}/auth/verifyEmail`;
 export const HOME_360_RESEND_VERIFICATION_TOKEN = `${serverUrl}/auth/resend-verification-token`;

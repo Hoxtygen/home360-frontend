@@ -1,16 +1,33 @@
+import { LogoutResponse } from "@/typedef";
 import { useMutation } from "@tanstack/react-query";
-import { INTERNAL_LOGOUT_API } from "lib/endpoints";
+import { deleteCookie } from "cookies-next";
+import { HOME_360_USER_LOGOUT } from "lib/endpoints";
+import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 
 export function useLogout() {
-  const { mutate } = useMutation({
+  const { mutate, data, error, status } = useMutation({
     mutationKey: ["logout"],
     mutationFn: () =>
-      requestHandler(INTERNAL_LOGOUT_API, {
+      requestHandler<LogoutResponse>(HOME_360_USER_LOGOUT, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }),
+    onSuccess: () => {
+      deleteCookie("token", {
+        path: "/",
+      });
+      deleteCookie("refreshToken", {
+        path: "/",
+      });
+    },
   });
   return {
     mutateLogout: mutate,
+    logoutData: data?.data,
+    logoutError: errorHandler(error),
+    logoutStatus: status,
   };
 }

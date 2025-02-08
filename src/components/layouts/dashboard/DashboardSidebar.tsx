@@ -1,71 +1,18 @@
-/* eslint-disable unused-imports/no-unused-vars */
 import { Button } from "components/buttons/Button";
-import { useLogout } from "hooks/useLogout";
 import { mergeClass } from "lib/utils/utils";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import DashboardSidebarItem from "./DashboardSidebarItem";
+import {
+  DashboardSidebarProps,
+  SidebarLinkProps,
+  SidebarOptionProps,
+} from "./type";
 
-export interface MobileHeaderProps {
-  setShowMobileNav: Dispatch<SetStateAction<boolean>>;
-  showMobileNav: boolean;
-  handleTourStart?: (e: React.MouseEvent<HTMLElement>) => void;
-  accounts?: any[];
-}
-
-interface SidebarLinkProps {
-  name: string;
-  icon: JSX.Element;
-}
-interface SidebarOptionProps {
-  name: string;
-  icon: JSX.Element;
-  tooltipText: string;
-  options: OptionProps[];
-  activeOption: string;
-  onOptionSelect: (value: string) => void;
-}
-export interface OptionProps {
-  label: string;
-  value: string;
-}
-
-interface SidebarOptionProps {
-  name: string;
-  icon: JSX.Element;
-  tooltipText: string;
-  options: OptionProps[];
-  activeOption: string;
-  onOptionSelect: (value: string) => void;
-}
-
-export default function DashboardSidebar({ showMobileNav }: MobileHeaderProps) {
-  const router = useRouter();
-  const { mutateLogout } = useLogout();
-  const listingOptions: OptionProps[] = [
-    {
-      label: "Published Listings",
-      value: "published",
-    },
-    {
-      label: "Draft Listings",
-      value: "draft",
-    },
-    {
-      label: "New Listing",
-      value: "new",
-    },
-  ];
-
-  const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      window.location.replace("/");
-      localStorage.clear();
-    }
-    mutateLogout();
-    router.replace("/");
-  };
+export default function DashboardSidebar({
+  showMobileNav,
+  handleLogout,
+}: DashboardSidebarProps) {
   const sidebarLinks: Array<SidebarLinkProps | SidebarOptionProps> = [
     {
       name: "Dashboard",
