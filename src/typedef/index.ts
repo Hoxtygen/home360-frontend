@@ -211,3 +211,7 @@ type UserDetails = {
   role: string;
   updatedAt: string;
 };
+
+export interface LogoutResponse extends BaseResponse {
+  data: string;
+}

@@ -46,7 +46,7 @@ export default function Header() {
               <div className="flex items-center">
                 <div className="flex items-center">
                   <p className="text-black pr-5 font-semibold">
-                    {user ? user.firstName : "Guest"}
+                    {user ? user.firstName : ""}
                   </p>
                   <div className="">
                     <Button
