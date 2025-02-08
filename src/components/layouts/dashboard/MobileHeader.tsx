@@ -1,9 +1,9 @@
 import { FC } from "react";
 import Image from "next/image";
 import router from "next/router";
-import { MobileHeaderProps } from "./DashboardSidebar";
 import clsx from "clsx";
 import useWindowSize from "hooks/useWindowSize";
+import { MobileHeaderProps } from "./type";
 
 const MobileHeader: FC<MobileHeaderProps> = ({
   setShowMobileNav,
