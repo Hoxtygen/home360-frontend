@@ -32,25 +32,46 @@ export default function Dashboard() {
       {listingStatData && (
         <>
           <ListingStatsContainer
-            totalListings={listingStatData?.data?.total_listings}
-            rentedListings={listingStatData?.data?.rented_listings}
-            totalIncome={listingStatData?.data?.total_income}
-            totalViews={listingStatData.data.total_views}
+            totalListings={listingStatData?.data?.total_listings ?? 0}
+            rentedListings={listingStatData?.data?.rented_listings ?? 0}
+            totalIncome={listingStatData?.data?.total_income ?? 0}
+            totalViews={listingStatData.data.total_views ?? 0}
           />
           <div className="lg:flex justify-between mt-10 flex-wrap">
-            <div className="lg:w-5/12 p-4  rounded-md">
-              <ListingsChart listingsData={listingStatData?.data.listings} />
-            </div>
-            <div className="lg:w-5/12  rounded-md">
-              <ListingIncomeChart listingsData={listingStatData.data.income} />
-            </div>
+            {listingStatData?.data.listings.length > 0 ? (
+              <div className="lg:w-5/12 p-4  rounded-md border">
+                <ListingsChart listingsData={listingStatData?.data.listings} />
+              </div>
+            ) : (
+              <div className="lg:w-5/12 p-4  rounded-md shadow-md">
+                <p>You have no listings</p>
+              </div>
+            )}
+
+            {listingStatData.data.income.length > 0 ? (
+              <div className="lg:w-5/12  rounded-md border">
+                <ListingIncomeChart
+                  listingsData={listingStatData.data.income}
+                />
+              </div>
+            ) : (
+              <div className="lg:w-5/12 p-4  rounded-md shadow-md">
+                <p>You have no earnings</p>
+              </div>
+            )}
           </div>
           <div className="lg:flex justify-between mt-10 flex-wrap">
-            <div className="lg:w-5/12 p-4  rounded-md">
-              <ListingViewChart
-                listingsData={listingStatData.data.views_by_year_and_month}
-              />
-            </div>
+            {listingStatData.data.views_by_year_and_month.length > 0 ? (
+              <div className="lg:w-5/12 p-4  rounded-md shadow-md">
+                <ListingViewChart
+                  listingsData={listingStatData.data.views_by_year_and_month}
+                />
+              </div>
+            ) : (
+              <div className="lg:w-5/12 p-4 shadow-md  rounded-md ">
+                <p>You have no views</p>
+              </div>
+            )}
           </div>
         </>
       )}

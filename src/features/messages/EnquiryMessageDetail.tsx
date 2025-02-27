@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+// import toast from "react-hot-toast";
+
 import { useGetListingEnquiry } from "hooks/useGetListingEnquiry";
 import { isEnquiryMessageDetailResponse } from "lib/utils/utils";
 import EnquiryMessageInfoContainer from "./EnquiryMessageInfoContainer";
@@ -5,8 +8,7 @@ import Spinner from "components/loaders/Spinner";
 import ErrorMessage from "shared/ErrorMessage";
 import usePostReply from "hooks/usePostReply";
 import { EnquiryMessageReplyFormData } from "./types";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { connect, sendMessage } from "lib/services/websocket.service";
 
 type EnquiryMessageDetailProps = {
   enquiryId: string;
@@ -35,27 +37,34 @@ export default function EnquiryMessageDetail({
   const { replyData, replyError, mutateReply, replyStatus } =
     usePostReply(enquiryId);
 
+  useEffect(() => {
+    connect(enquiryId, (message: ListingEnquiryMessageReply) => {
+      console.log("Message:", message);
+    });
+  }, [enquiryId]);
+
   function handleSubmitReply(
     replyRequestData: EnquiryMessageReplyFormData,
     callback: () => void
   ) {
-    mutateReply(replyRequestData, {
-      onSuccess: () => callback(),
-    });
+    // mutateReply(replyRequestData, {
+    //   onSuccess: () => callback(),
+    // });
+    sendMessage(enquiryId, replyRequestData);
     callback();
   }
 
-  useEffect(() => {
-    if (replyData?.status === "CREATED") {
-      refetchListingEnquiry();
-    }
-  }, [refetchListingEnquiry, replyData?.status]);
+  // useEffect(() => {
+  //   if (replyData?.status === "CREATED") {
+  //     refetchListingEnquiry();
+  //   }
+  // }, [refetchListingEnquiry, replyData?.status]);
 
-  useEffect(() => {
-    if (replyError) {
-      toast.error(replyError.message, { duration: 3000 });
-    }
-  }, [replyError]);
+  // useEffect(() => {
+  //   if (replyError) {
+  //     toast.error(replyError.message, { duration: 3000 });
+  //   }
+  // }, [replyError]);
 
   return (
     <div>

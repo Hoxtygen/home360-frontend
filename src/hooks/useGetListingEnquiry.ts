@@ -14,8 +14,8 @@ export function useGetListingEnquiry(listingEnquiryId: string) {
           method: "GET",
         }
       ),
-    refetchInterval: 5000,
-    refetchIntervalInBackground: true,
+    // refetchInterval: 5000,
+    // refetchIntervalInBackground: true,
   });
 
   return {

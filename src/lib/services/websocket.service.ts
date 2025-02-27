@@ -1,20 +1,27 @@
-// import { useState, useEffect } from 'react';
-// import { Client } from "@stomp/stompjs";
-// import { clientUrl } from 'lib/endpoints';
+import { io, Socket } from "socket.io-client";
 
-// export default function ConnectionPage() {
-//   const [stompClient, setStompClient] = useState<Client | undefined>(undefined)
+let socket: Socket | null = null;
 
-//   useEffect(() => {
-//     console.log("creating STOMP client")
-//     const stompClient = new Client({
-//       brokerURL: `${clientUrl}/websocket/enquiryMessages`
-//     })
-//     console.log("Activation STOMP connection...")
-//     stompClient.activate();
-//     stompClient.onConnect = function () {
-//       console.log("Successfully connected to STOMP client");
-//       setStompClient(stompClient)
-//     }
-//   }, [stompClient])
-// }
+const connect = (enquiryId: string, callback: (message: any) => void) => {
+  socket = io("http://localhost:8080/ws", {
+    extraHeaders: {},
+  });
+  socket.on("connect", () => {
+    console.log("connected to Websocket server");
+    socket?.on(`/topic/public/${enquiryId}`, (message) => {
+      callback(message);
+    });
+  });
+  socket.on("disconnect", () => {
+    console.log("Disconnected from Websocket server");
+  });
+};
+
+const sendMessage = (enquiryId: string, message: any) => {
+  if (socket) {
+    console.log("socket connected!");
+    socket.emit("/app/chat/" + enquiryId + "/sendMessage", message);
+  }
+};
+
+export { connect, sendMessage };
