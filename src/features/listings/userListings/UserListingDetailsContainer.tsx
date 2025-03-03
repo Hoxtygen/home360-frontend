@@ -10,10 +10,16 @@ import { Button } from "components/buttons/Button";
 import { Dialog } from "components/Dialog";
 import RentForm from "./RentForm";
 import { BouncingLoader } from "components/loaders/BouncingLoader";
+import useLocalStorage from "hooks/useLocalStorage";
+import { MappedSuccessLoginResponse } from "@/typedef";
 
 export default function UserListingDetailsContainer({
   listingId,
 }: ListingInfoProps) {
+  const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
+    "user",
+    null
+  );
   const {
     listingDetailData,
     listingDetailError,
@@ -65,16 +71,17 @@ export default function UserListingDetailsContainer({
 
   return (
     <div className="">
-      {!listingDetailData?.data.listing.rented && (
-        <div className=" flex justify-end mb-10 py-4 px-2">
-          <Button
-            className="py-6 px-16 !text-white text-24"
-            onClick={() => setShowRentDialog(true)}
-          >
-            Rent out
-          </Button>
-        </div>
-      )}
+      {!listingDetailData?.data.listing.rented &&
+        user?.id === listingDetailData?.data.listing.agent_id && (
+          <div className=" flex justify-end mb-10 py-4 px-2">
+            <Button
+              className="py-6 px-16 !text-white text-24"
+              onClick={() => setShowRentDialog(true)}
+            >
+              Rent out
+            </Button>
+          </div>
+        )}
       {listingDetailData?.data.listing.rented && (
         <div className="flex justify-end items-center font-hanken-semibold">
           <p className="bg-green-800 px-10 py-[6px]  rounded-md mr-2 text-white">

@@ -6,10 +6,10 @@ import { AutoTextAreaProps } from "./types";
 export default function AutoTextArea({
   label,
   className,
+  value,
   ...props
 }: AutoTextAreaProps) {
   const [state, setState] = useState({
-    value: "",
     rows: props.rows || 7,
     minRows: 7,
     maxRows: 10,
@@ -19,7 +19,7 @@ export default function AutoTextArea({
     const textareaLineHeight = 24;
     const { minRows, maxRows } = state;
     const previousRows = event.target.rows;
-    event.target.rows = minRows; // reset number of rows in textarea
+    event.target.rows = minRows;
     const currentRows = ~~(event.target.scrollHeight / textareaLineHeight);
 
     if (currentRows === previousRows) {
@@ -32,7 +32,6 @@ export default function AutoTextArea({
     }
     setState({
       ...state,
-      value: event.target.value,
       rows: currentRows < maxRows ? currentRows : maxRows,
     });
     if (props.onChange) {
@@ -51,7 +50,7 @@ export default function AutoTextArea({
         cols={props.cols}
         rows={state.rows || props.rows}
         onBlur={props.onBlur}
-        value={state.value}
+        value={value}
         className={mergeClass(
           "textarea leading-6 p-3 box-border border dark:border-gray-200 rounded text-[1rem] resize-none overflow-auto h-auto shadow-[0px 4px 10px -8px black] outline-none border-black",
           className

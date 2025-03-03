@@ -1,6 +1,5 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { BaseResponse, PaginatedAPIResponseBase } from "@/typedef";
-import { MutationStatus } from "@tanstack/react-query";
 
 export type EnquiryMessageItemProps = {
   date: string;
@@ -58,15 +57,19 @@ export type EnquiryMessageInfoProps = {
 
 export type EnquiryMessageReplyItemProps = {
   id: string;
-  senderId: number;
-  receiverId: number;
+  agentId: number;
+  enquirerId: number;
   createdAt: string;
   content: string;
+  senderId: number;
 };
 
 export type EnquiryMessageReplyFormData = {
   enquiryId: string;
-} & Omit<EnquiryMessageReplyItemProps, "id" | "createdAt">;
+  agentId: number;
+  enquirerId: number;
+  content: string;
+};
 
 export type EnquiryMessageRepliesProps = {
   replies: EnquiryMessageReplyItemProps[];
@@ -74,16 +77,16 @@ export type EnquiryMessageRepliesProps = {
 
 export type EnquiryMessageReplyFormProps<T> = {
   replyInitialValues: T;
-  handleSubmitReply: (data: T, callback?: () => void) => void;
-  messageStatus: MutationStatus;
+  messageStatuses: {
+    [messageId: string]: {
+      success?: boolean;
+      error?: any;
+    };
+  };
+  handleSubmitReply(replyRequestData: EnquiryMessageReplyFormData): void;
 };
 
 export type EnquiryMessageInfoContainerProps = EnquiryMessageInfoProps & {
-  handleSubmitReply(
-    data: EnquiryMessageReplyFormData,
-    callback?: () => void
-  ): void;
-  messageStatus: MutationStatus;
   enquiryId: string;
 };
 
@@ -98,3 +101,26 @@ type EnquiryMessageReplyData = {
 export interface EnquiryReplyMessageResponse extends BaseResponse {
   data: EnquiryMessageReplyData;
 }
+
+export interface ListingEnquiryMessageReply {
+  headers: any;
+  body: {
+    data: {
+      id: string;
+      agentId: number;
+      enquirerId: number;
+      content: string;
+      createdAt: string;
+      senderId: number;
+    };
+  };
+  message: string;
+  status: string;
+  statusCode: string;
+  statusCodeValue: number;
+  localMessageId?: string;
+}
+
+export type EnquiryMessageDetailProps = {
+  enquiryId: string;
+};

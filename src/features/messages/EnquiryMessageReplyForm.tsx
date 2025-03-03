@@ -1,9 +1,10 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Formik } from "formik";
 
-import { maxCharacter } from "constant-data/staticData";
 import { AutoTextArea } from "components/autotextArea";
 import { Button } from "components/buttons/Button";
+import { maxCharacter } from "constant-data/staticData";
+import { replyFormValidationSchema } from "./validationSchema";
 import {
   EnquiryMessageReplyFormData,
   EnquiryMessageReplyFormProps,
@@ -12,42 +13,59 @@ import {
 export default function EnquiryMessageReplyForm({
   replyInitialValues,
   handleSubmitReply,
-  messageStatus,
+  messageStatuses,
 }: EnquiryMessageReplyFormProps<EnquiryMessageReplyFormData>) {
-  const formik = useFormik({
-    initialValues: replyInitialValues,
-    onSubmit: (values, { resetForm }) => handleSubmitReply(values, resetForm),
-  });
-
-  const { handleBlur, handleChange, values, handleSubmit, isValid, dirty } =
-    formik;
+  const initialValues = {
+    enquiryId: replyInitialValues.enquiryId,
+    agentId: replyInitialValues.agentId,
+    enquirerId: replyInitialValues.enquirerId,
+    content: "",
+  };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <AutoTextArea
-          cols={30}
-          maxLength={maxCharacter}
-          name="content"
-          placeholder="message content"
-          id="content"
-          value={values.content}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          className="w-1/2"
-          autoComplete="on"
-        />
-        <Button
-          className="bg-primary-active dark:hover:bg-rose-900"
-          variant="outline"
-          size="xl"
-          disabled={!(isValid && dirty)}
-          type="submit"
-          isLoading={messageStatus === "loading"}
-        >
-          Send
-        </Button>
-      </form>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={replyFormValidationSchema}
+        onSubmit={(values, actions) => {
+          handleSubmitReply(values);
+
+          actions.resetForm();
+        }}
+      >
+        {({
+          handleBlur,
+          handleChange,
+          values,
+          handleSubmit,
+          isValid,
+          dirty,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <AutoTextArea
+              cols={30}
+              maxLength={maxCharacter}
+              name="content"
+              placeholder="message content"
+              id="content"
+              value={values.content}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="w-1/2"
+              autoComplete="on"
+            />
+            <Button
+              className="bg-primary-active dark:hover:bg-primary-disabled disabled:bg-slate-500 disabled:cursor-not-allowed"
+              variant="outline"
+              size="xl"
+              disabled={!(isValid && dirty)}
+              type="submit"
+            >
+              Send
+            </Button>
+          </form>
+        )}
+      </Formik>
     </div>
   );
 }

@@ -1,12 +1,16 @@
 import {
   AuthenticationSuccessResponse,
+  DetermineSenderResult,
   MappedSuccessLoginResponse,
   Nigeria,
 } from "@/typedef";
 import clsx, { ClassValue } from "clsx";
 import { SUPPORTED_FILE_FORMATS } from "constant-data/staticData";
 import { SelectOption } from "features/listings/types";
-import { EnquiryMessageDetailResponse } from "features/messages/types";
+import {
+  EnquiryMessageDetailResponse,
+  EnquiryMessageReplyItemProps,
+} from "features/messages/types";
 import { twMerge } from "tailwind-merge";
 
 export function mergeClass(...inputs: ClassValue[]) {
@@ -180,7 +184,9 @@ export function getEnvironment(): string {
 }
 
 export function formatNDate(dateString: string) {
-  const newDate = new Date(dateString);
+  // Remove fractional seconds
+  const cleanedDateString = dateString.replace(/\.\d+/, "");
+  const newDate = new Date(cleanedDateString);
   if (isNaN(newDate.getTime())) {
     throw new Error("dateString must be a type of date");
   }
@@ -201,4 +207,51 @@ export function timeOfDayGreeting() {
   } else {
     return "Good evening";
   }
+}
+
+/**
+ * This function is used to determine the sender of a chat message,
+ * the sender name and the current user for appropriate styling
+ *
+ * @export
+ * @param {(MappedSuccessLoginResponse | null)} user
+ * @param {EnquiryMessageReplyItemProps} message
+ * @return {*}  {DetermineSenderResult}
+ */
+export function determineSender(
+  user: MappedSuccessLoginResponse | null,
+  message: EnquiryMessageReplyItemProps
+): DetermineSenderResult {
+  let isSenderAgent = false;
+  let senderName = "Unknown";
+  let isCurrentUserSender = false;
+
+  if (user) {
+    if (user.id === message.senderId) {
+      senderName = "You";
+      isCurrentUserSender = true;
+    } else {
+      if (message.senderId === message.agentId) {
+        senderName = "Agent";
+      } else if (message.senderId === message.enquirerId) {
+        senderName = "Enquirer";
+      }
+    }
+
+    if (user.id === message.agentId) {
+      if (message.senderId === message.agentId) {
+        isSenderAgent = true;
+      } else {
+        isSenderAgent = false;
+      }
+    } else if (user.id === message.enquirerId) {
+      if (message.senderId === message.agentId) {
+        isSenderAgent = true;
+      } else {
+        isSenderAgent = false;
+      }
+    }
+  }
+
+  return { isSenderAgent, senderName, isCurrentUserSender };
 }

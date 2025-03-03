@@ -41,6 +41,8 @@ module.exports = {
         "primary-background": "#F5F5F5",
         "primary-disabled": "#D391AF",
         "secondary-light-gray": "#747474",
+        "sender-bg": "#A41857",
+        "receiver-bg": "#a0a3bd40",
       },
     },
   },

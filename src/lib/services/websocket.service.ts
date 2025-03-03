@@ -1,26 +1,104 @@
-import { io, Socket } from "socket.io-client";
+import { getCookie } from "cookies-next";
+import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
+import { ListingEnquiryMessageReply } from "features/messages/types";
 
-let socket: Socket | null = null;
+let client: Client | null = null;
 
 const connect = (enquiryId: string, callback: (message: any) => void) => {
-  socket = io("http://localhost:8080/ws", {
-    extraHeaders: {},
+  const token = getCookie("token");
+  client = new Client({
+    brokerURL: "http://localhost:8080/ws",
+    connectHeaders: {
+      Authorization: `Bearer ${token}`,
+    },
+    reconnectDelay: 5000,
+    heartbeatIncoming: 4000,
+    heartbeatOutgoing: 4000,
+    webSocketFactory: () => new SockJS("http://localhost:8080/ws"),
   });
-  socket.on("connect", () => {
-    console.log("connected to Websocket server");
-    socket?.on(`/topic/public/${enquiryId}`, (message) => {
-      callback(message);
+  client.onConnect = () => {
+    console.log("Connected to Websocket server");
+    client?.subscribe(`/topic/public/${enquiryId}`, (message) => {
+      callback(JSON.parse(message.body));
     });
-  });
-  socket.on("disconnect", () => {
+  };
+  client.onDisconnect = () => {
     console.log("Disconnected from Websocket server");
-  });
+  };
+  client.activate();
 };
 
-const sendMessage = (enquiryId: string, message: any) => {
-  if (socket) {
-    console.log("socket connected!");
-    socket.emit("/app/chat/" + enquiryId + "/sendMessage", message);
+const sendMessage = (
+  enquiryId: string,
+  message: any,
+  localMessageId: string,
+  callback: (result: ListingEnquiryMessageReply) => void,
+  maxRetries = 3,
+  retryDelay = 5000,
+  retryCount = 0
+): void => {
+  if (client && client.connected) {
+    try {
+      client.publish({
+        destination: `/app/chat/${enquiryId}/sendMessage`,
+        body: JSON.stringify({ ...message, localMessageId }),
+      });
+      // Resolve will happen in the websocket message listener.
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      if (retryCount < maxRetries) {
+        setTimeout(() => {
+          sendMessage(
+            enquiryId,
+            message,
+            localMessageId,
+            callback,
+            maxRetries,
+            retryDelay * 2,
+            retryCount + 1
+          );
+        }, retryDelay);
+      } else {
+        callback({
+          headers: {},
+          body: {
+            data: {
+              id: localMessageId,
+              agentId: 0,
+              enquirerId: 0,
+              content: "",
+              createdAt: "",
+              senderId: 0,
+            },
+          }, //create a dummy message.
+          message: "Failed to send message after retries.",
+          status: "ERROR",
+          statusCode: "ERROR",
+          statusCodeValue: 500,
+          localMessageId: localMessageId,
+        }); // Send error to callback
+      }
+    }
+  } else {
+    callback({
+      headers: {},
+      body: {
+        data: {
+          id: localMessageId,
+          agentId: 0,
+          enquirerId: 0,
+          content: "",
+          createdAt: "",
+          senderId: 0,
+        },
+      }, //create a dummy message.
+      message: "WebSocket client not connected.",
+      status: "ERROR",
+      statusCode: "ERROR",
+      statusCodeValue: 500,
+      localMessageId: localMessageId,
+    }); // Send error to callback
   }
 };
 
