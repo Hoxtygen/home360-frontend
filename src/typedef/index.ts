@@ -215,3 +215,9 @@ type UserDetails = {
 export interface LogoutResponse extends BaseResponse {
   data: string;
 }
+
+export type DetermineSenderResult = {
+  isSenderAgent: boolean;
+  senderName: string;
+  isCurrentUserSender: boolean;
+};

@@ -49,21 +49,27 @@ export default function UserListings() {
           Create New
         </Button>
       </div>
-      <div className="">
-        <UserListingsContainer
-          listings={userListings?.data.items!}
-          isLoading={isUserListingsLoading}
-        />
-        <ControlButtons
-          leftButtonTitle="Previous"
-          rightButtonTitle="Next"
-          handleLeftButtonAction={() => handleFetchPreviousData()}
-          handleRightButtonAction={() => handleFetchNextData()}
-          rightButtonClassname="dark:bg-green-500 dark:hover:bg-green-800 dark:text-white"
-          rightButtonDisable={isPreviousData || !userListings?.data.hasNext}
-          leftButtonDisable={page === 1}
-        />
-      </div>
+      {userListings && userListings.data.items.length > 0 ? (
+        <div className="">
+          <UserListingsContainer
+            listings={userListings?.data.items!}
+            isLoading={isUserListingsLoading}
+          />
+          <ControlButtons
+            leftButtonTitle="Previous"
+            rightButtonTitle="Next"
+            handleLeftButtonAction={() => handleFetchPreviousData()}
+            handleRightButtonAction={() => handleFetchNextData()}
+            rightButtonClassname="dark:bg-green-500 dark:hover:bg-green-800 dark:text-white"
+            rightButtonDisable={isPreviousData || !userListings?.data.hasNext}
+            leftButtonDisable={page === 1}
+          />
+        </div>
+      ) : (
+        <div className=" p-4  rounded-md shadow-md text-center text-20">
+          <p>You have no listings</p>
+        </div>
+      )}
     </>
   );
 }

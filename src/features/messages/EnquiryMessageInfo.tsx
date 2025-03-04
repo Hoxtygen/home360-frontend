@@ -2,10 +2,16 @@ import { clientUrl } from "lib/endpoints";
 import { reFormatString } from "lib/utils/utils";
 import Link from "next/link";
 import { EnquiryMessageInfoProps } from "./types";
+import useLocalStorage from "hooks/useLocalStorage";
+import { MappedSuccessLoginResponse } from "@/typedef";
 
 export default function EnquiryMessageInfo({
   enquiryData,
 }: EnquiryMessageInfoProps) {
+  const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
+    "user",
+    null
+  );
   return (
     <div>
       <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-b-slate-300 p-8">
@@ -64,12 +70,23 @@ export default function EnquiryMessageInfo({
         <div className="">
           <h2>
             <span className="font-hanken-black text-18">Listing Url: </span>
-            <Link
-              href={`/listings/user-listings/${enquiryData.listingId}`}
-              className="text-blue-600 underline"
-            >
-              {`${clientUrl}/listings/user-listings/${enquiryData.listingId}`}
-            </Link>
+            {enquiryData.agentId === user?.id ? (
+              <Link
+                href={`/listings/user-listings/${enquiryData.listingId}`}
+                className="text-blue-600 underline"
+              >
+                {`${clientUrl}/listings/user-listings/${enquiryData.listingId}`}
+              </Link>
+            ) : (
+              <Link
+                href={`/enquire/listings/${enquiryData.listingId}`}
+                className="text-blue-600 underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {`${clientUrl}/enquire/listings/${enquiryData.listingId}`}
+              </Link>
+            )}
           </h2>
         </div>
       </div>
