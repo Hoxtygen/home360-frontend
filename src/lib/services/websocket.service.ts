@@ -1,3 +1,4 @@
+import { webSocketUrl } from "./../endpoints/index";
 import { getCookie } from "cookies-next";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
@@ -8,20 +9,23 @@ let client: Client | null = null;
 const connect = (enquiryId: string, callback: (message: any) => void) => {
   const token = getCookie("token");
   client = new Client({
-    brokerURL: "http://localhost:8080/ws",
+    brokerURL: `${webSocketUrl}`,
     connectHeaders: {
       Authorization: `Bearer ${token}`,
     },
     reconnectDelay: 5000,
     heartbeatIncoming: 4000,
     heartbeatOutgoing: 4000,
-    webSocketFactory: () => new SockJS("http://localhost:8080/ws"),
+    webSocketFactory: () => new SockJS(`${webSocketUrl}`),
   });
   client.onConnect = () => {
     console.log("Connected to Websocket server");
     client?.subscribe(`/topic/public/${enquiryId}`, (message) => {
       callback(JSON.parse(message.body));
     });
+  };
+  client.onStompError = (frame) => {
+    console.log("stomp error:", frame);
   };
   client.onDisconnect = () => {
     console.log("Disconnected from Websocket server");

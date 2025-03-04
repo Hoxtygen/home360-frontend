@@ -10,10 +10,17 @@ export const serverUrl =
     ? process.env.NEXT_PUBLIC_BACKEND_DEV_URL
     : process.env.NEXT_PUBLIC_BACKEND_PROD_URL;
 
+export const webSocketUrl =
+  getEnvironment() === "Development"
+    ? process.env.NEXT_WEBSOCKET_URL_DEV ?? "http://localhost:8080/ws"
+    : process.env.NEXT_WEBSOCKET_URL_PROD ??
+      "http://default-production-websocket-url.com";
+
 export const HOME_360_LOGIN_API = `${serverUrl}/auth/login`;
 export const HOME_360_SIGNUP_API = `${serverUrl}/auth/register`;
 export const HOME_360_PASSWORD_RESET_REQUEST = `${serverUrl}/auth/password-reset-request`;
 export const HOME_360_USER_LOGOUT = `${serverUrl}/auth/logout`;
+export const HOME_360_REFRESH_TOKEN = `${serverUrl}/auth/refreshToken`;
 
 export const HOME_360__RESET_PASSWORD = `${serverUrl}/auth/reset-password`;
 export const HOME_360_VERIFY_EMAIL = `${serverUrl}/auth/verifyEmail`;
