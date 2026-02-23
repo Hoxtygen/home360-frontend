@@ -12,7 +12,9 @@ export default function EnquiryMessageReply({
   agentId,
   senderId,
   id,
-}: EnquiryMessageReplyItemProps) {
+  agentName,
+  enquirerName,
+}: Readonly<EnquiryMessageReplyItemProps>) {
   const [user, _] = useLocalStorage<MappedSuccessLoginResponse | null>(
     "user",
     null
@@ -27,7 +29,8 @@ export default function EnquiryMessageReply({
   };
   const { isSenderAgent, senderName, isCurrentUserSender } = determineSender(
     user,
-    message
+    message,
+    { agentName, enquirerName }
   );
 
   const messageClass = clsx(

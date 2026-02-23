@@ -5,7 +5,11 @@ import { sortByProperty } from "lib/utils/utils";
 
 export default function EnquiryMessageReplies({
   replies = [],
-}: EnquiryMessageRepliesProps) {
+  agentId,
+  enquirerId,
+  agentName,
+  enquirerName,
+}: Readonly<EnquiryMessageRepliesProps>) {
   return (
     <div>
       <h1 className="p-4 font-hanken-black text-24">Conversations</h1>
@@ -14,11 +18,13 @@ export default function EnquiryMessageReplies({
           <div key={reply.id}>
             <EnquiryMessageReply
               id={reply.id}
-              agentId={reply.agentId}
-              enquirerId={reply.enquirerId}
+              agentId={reply.agentId || agentId!}
+              enquirerId={reply.enquirerId || enquirerId!}
               createdAt={reply.createdAt}
               content={reply.content}
               senderId={reply.senderId}
+              agentName={agentName}
+              enquirerName={enquirerName}
             />
           </div>
         );

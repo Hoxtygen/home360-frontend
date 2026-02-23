@@ -5,16 +5,18 @@ import { HOME_360_USER_LOGOUT } from "lib/endpoints";
 import errorHandler from "lib/utils/errorHandler";
 import requestHandler from "lib/utils/requestHandler";
 
+export const logoutUser = () =>
+  requestHandler<LogoutResponse>(HOME_360_USER_LOGOUT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
 export function useLogout() {
   const { mutate, data, error, status } = useMutation({
     mutationKey: ["logout"],
-    mutationFn: () =>
-      requestHandler<LogoutResponse>(HOME_360_USER_LOGOUT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }),
+    mutationFn: logoutUser,
     onSuccess: () => {
       deleteCookie("token", {
         path: "/",

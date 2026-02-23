@@ -7,20 +7,24 @@ import { ListingEnquiryMessageReply } from "features/messages/types";
 let client: Client | null = null;
 
 const connect = (enquiryId: string, callback: (message: any) => void) => {
-  const token = getCookie("token");
+  if (client?.active) return;
   client = new Client({
-    brokerURL: `${webSocketUrl}`,
-    connectHeaders: {
-      Authorization: `Bearer ${token}`,
-    },
     reconnectDelay: 5000,
     heartbeatIncoming: 4000,
     heartbeatOutgoing: 4000,
     webSocketFactory: () => new SockJS(`${webSocketUrl}`),
   });
+  client.beforeConnect = () => {
+    const token = getCookie("token");
+    client!.connectHeaders = {
+      Authorization: `Bearer ${token}`,
+    };
+  };
   client.onConnect = () => {
-    console.log("Connected to Websocket server");
-    client?.subscribe(`/topic/public/${enquiryId}`, (message) => {
+    console.info("Connected to Websocket server");
+
+    client?.subscribe(`/topic/public.${enquiryId}`, (message) => {
+      console.log("parsed message:", JSON.parse(message.body));
       callback(JSON.parse(message.body));
     });
   };
@@ -32,7 +36,6 @@ const connect = (enquiryId: string, callback: (message: any) => void) => {
   };
   client.activate();
 };
-
 const sendMessage = (
   enquiryId: string,
   message: any,
@@ -42,13 +45,12 @@ const sendMessage = (
   retryDelay = 5000,
   retryCount = 0
 ): void => {
-  if (client && client.connected) {
+  if (client?.active && client?.connected) {
     try {
       client.publish({
         destination: `/app/chat/${enquiryId}/sendMessage`,
         body: JSON.stringify({ ...message, localMessageId }),
       });
-      // Resolve will happen in the websocket message listener.
     } catch (error) {
       console.error("Failed to send message:", error);
       if (retryCount < maxRetries) {
@@ -64,46 +66,51 @@ const sendMessage = (
           );
         }, retryDelay);
       } else {
-        callback({
-          headers: {},
-          body: {
-            data: {
-              id: localMessageId,
-              agentId: 0,
-              enquirerId: 0,
-              content: "",
-              createdAt: "",
-              senderId: 0,
-            },
-          }, //create a dummy message.
-          message: "Failed to send message after retries.",
-          status: "ERROR",
-          statusCode: "ERROR",
-          statusCodeValue: 500,
-          localMessageId: localMessageId,
-        }); // Send error to callback
+        callback(
+          createDummyErrorMessage(
+            localMessageId,
+            "Failed to send message after retries."
+          )
+        );
       }
     }
   } else {
-    callback({
-      headers: {},
-      body: {
-        data: {
-          id: localMessageId,
-          agentId: 0,
-          enquirerId: 0,
-          content: "",
-          createdAt: "",
-          senderId: 0,
-        },
-      }, //create a dummy message.
-      message: "WebSocket client not connected.",
-      status: "ERROR",
-      statusCode: "ERROR",
-      statusCodeValue: 500,
-      localMessageId: localMessageId,
-    }); // Send error to callback
+    callback(
+      createDummyErrorMessage(localMessageId, "WebSocket client not connected.")
+    );
   }
 };
 
-export { connect, sendMessage };
+const disconnect = () => {
+  if (client) {
+    client.deactivate();
+    client = null;
+    console.log("WebSocket client disconnected.");
+  }
+};
+
+function createDummyErrorMessage(
+  localMessageId: string,
+  errorMsg: string
+): ListingEnquiryMessageReply {
+  return {
+    headers: {},
+    body: {
+      data: {
+        id: localMessageId,
+        agentId: 0,
+        enquirerId: 0,
+        content: "",
+        createdAt: "",
+        senderId: 0,
+      },
+    },
+    message: errorMsg,
+    status: "ERROR",
+    statusCode: "ERROR",
+    statusCodeValue: 500,
+    localMessageId: localMessageId,
+  };
+}
+
+export { connect, sendMessage, disconnect };

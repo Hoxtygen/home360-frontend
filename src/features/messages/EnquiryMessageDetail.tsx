@@ -7,7 +7,7 @@ import { EnquiryMessageDetailProps } from "./types";
 
 export default function EnquiryMessageDetail({
   enquiryId,
-}: EnquiryMessageDetailProps) {
+}: Readonly<EnquiryMessageDetailProps>) {
   const { listingEnquiryData, listingEnquiryError, listingEnquiryStatus } =
     useGetListingEnquiry(enquiryId);
 

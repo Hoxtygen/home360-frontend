@@ -156,7 +156,9 @@ export type MessageProps = {
   hideWarningIcon?: boolean;
 };
 
-export type PasswordResetRequest = Omit<LoginData, "password">;
+export type PasswordResetRequest = {
+  userEmail: string;
+};
 
 export type ResetPassword = {
   newPassword: string;

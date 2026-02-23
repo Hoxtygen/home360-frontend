@@ -14,7 +14,7 @@ export default function EnquiryMessageReplyForm({
   replyInitialValues,
   handleSubmitReply,
   messageStatuses,
-}: EnquiryMessageReplyFormProps<EnquiryMessageReplyFormData>) {
+}: Readonly<EnquiryMessageReplyFormProps<EnquiryMessageReplyFormData>>) {
   const initialValues = {
     enquiryId: replyInitialValues.enquiryId,
     agentId: replyInitialValues.agentId,

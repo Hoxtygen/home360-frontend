@@ -62,6 +62,8 @@ export type EnquiryMessageReplyItemProps = {
   createdAt: string;
   content: string;
   senderId: number;
+  agentName?: string;
+  enquirerName?: string;
 };
 
 export type EnquiryMessageReplyFormData = {
@@ -73,6 +75,10 @@ export type EnquiryMessageReplyFormData = {
 
 export type EnquiryMessageRepliesProps = {
   replies: EnquiryMessageReplyItemProps[];
+  agentId?: number;
+  enquirerId?: number;
+  agentName?: string;
+  enquirerName?: string;
 };
 
 export type EnquiryMessageReplyFormProps<T> = {

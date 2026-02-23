@@ -5,7 +5,7 @@ import ErrorMessage from "shared/ErrorMessage";
 import SuccessMessage from "shared/SuccessMessage";
 import AuthLayout from "../AuthLayout";
 
-export default function VerifyEmail({ token }: { token: string }) {
+export default function VerifyEmail({ token }: Readonly<{ token: string }>) {
   const { emailVerificationError, emailVerificationResponse } =
     useVerifyEmail(token);
   const { isLoadingresendVerificationToken, refetchVerificationToken } =

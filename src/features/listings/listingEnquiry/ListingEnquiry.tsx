@@ -12,7 +12,7 @@ export default function ListingEnquiry({
   listingId,
   agentId,
   handleListingEnquiryFormDialog,
-}: ListingEnquiryProps) {
+}: Readonly<ListingEnquiryProps>) {
   const listingEnquiryInitialValues: ListingEnquiryData = {
     message: "",
     salutation: "",

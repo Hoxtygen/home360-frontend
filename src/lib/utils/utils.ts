@@ -220,38 +220,42 @@ export function timeOfDayGreeting() {
  */
 export function determineSender(
   user: MappedSuccessLoginResponse | null,
-  message: EnquiryMessageReplyItemProps
+  message: EnquiryMessageReplyItemProps,
+  names?: { enquirerName?: string; agentName?: string }
 ): DetermineSenderResult {
-  let isSenderAgent = false;
-  let senderName = "Unknown";
-  let isCurrentUserSender = false;
-
-  if (user) {
-    if (user.id === message.senderId) {
-      senderName = "You";
-      isCurrentUserSender = true;
-    } else {
-      if (message.senderId === message.agentId) {
-        senderName = "Agent";
-      } else if (message.senderId === message.enquirerId) {
-        senderName = "Enquirer";
-      }
-    }
-
-    if (user.id === message.agentId) {
-      if (message.senderId === message.agentId) {
-        isSenderAgent = true;
-      } else {
-        isSenderAgent = false;
-      }
-    } else if (user.id === message.enquirerId) {
-      if (message.senderId === message.agentId) {
-        isSenderAgent = true;
-      } else {
-        isSenderAgent = false;
-      }
-    }
+  if (!user) {
+    return {
+      isSenderAgent: false,
+      senderName: "Unknown",
+      isCurrentUserSender: false,
+    };
   }
 
-  return { isSenderAgent, senderName, isCurrentUserSender };
+  const { senderId, agentId, enquirerId } = message;
+
+  const userIdStr = String(user.id);
+  const senderIdStr = String(senderId);
+  const agentIdStr = String(agentId);
+  const enquirerIdStr = String(enquirerId);
+
+  const isCurrentUserSender = userIdStr === senderIdStr;
+  const isSenderAgent = senderIdStr === agentIdStr;
+  const isUserParticipant =
+    userIdStr === agentIdStr || userIdStr === enquirerIdStr;
+
+  let senderName = "Unknown";
+
+  if (isCurrentUserSender) {
+    senderName = "You";
+  } else if (isSenderAgent) {
+    senderName = names?.agentName || "Agent";
+  } else if (senderIdStr === enquirerIdStr) {
+    senderName = names?.enquirerName || "Enquirer";
+  }
+
+  return {
+    isSenderAgent: isUserParticipant && isSenderAgent,
+    senderName,
+    isCurrentUserSender,
+  };
 }
