@@ -20,6 +20,7 @@ export default function EnquiryMessageReplyForm({
     agentId: replyInitialValues.agentId,
     enquirerId: replyInitialValues.enquirerId,
     content: "",
+    senderId: replyInitialValues.senderId,
   };
 
   return (

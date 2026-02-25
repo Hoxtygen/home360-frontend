@@ -12,19 +12,30 @@ import requestHandler from "lib/utils/requestHandler";
 type UseGetListingEnq = {
   page: number;
   size?: number;
-  senderId?: number;
+  otherPartyId?: number;
 };
 
 export default function useGetListingEnquiries(
   listingEnqData: UseGetListingEnq
 ) {
   const token = getCookie("token");
+  const params = new URLSearchParams();
+  if (listingEnqData.otherPartyId) {
+    params.append("otherPartyId", String(listingEnqData.otherPartyId));
+  }
+  if (listingEnqData.size) {
+    params.append("size", String(listingEnqData.size));
+  }
+  if (listingEnqData.page) {
+    params.append("page", String(listingEnqData.page));
+  }
+
   const { data, error, status } = useQuery({
     queryKey: ["listing_enquiries", listingEnqData.page, listingEnqData.size],
     networkMode: "always",
     queryFn: () =>
       requestHandler<ListingEnquiryMessageResponse>(
-        `${HOME_360_LISTING_ENQUIRY_BASE}?senderId=${listingEnqData.senderId}&page=${listingEnqData.page}&size=${listingEnqData.size}`,
+        `${HOME_360_LISTING_ENQUIRY_BASE}?${params.toString()}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },

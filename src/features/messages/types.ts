@@ -32,7 +32,7 @@ export type EnquiryData = {
   agentId: number;
   createdAt: string;
   read: boolean;
-  userId?: number;
+  userId: number;
   replies: EnquiryMessageReplyItemProps[];
 };
 
@@ -64,6 +64,10 @@ export type EnquiryMessageReplyItemProps = {
   senderId: number;
   agentName?: string;
   enquirerName?: string;
+  status?: {
+    success?: boolean;
+    error?: any;
+  };
 };
 
 export type EnquiryMessageReplyFormData = {
@@ -71,12 +75,13 @@ export type EnquiryMessageReplyFormData = {
   agentId: number;
   enquirerId: number;
   content: string;
+  senderId?: number;
 };
 
 export type EnquiryMessageRepliesProps = {
   replies: EnquiryMessageReplyItemProps[];
-  agentId?: number;
-  enquirerId?: number;
+  agentId: number;
+  enquirerId: number;
   agentName?: string;
   enquirerName?: string;
 };
@@ -106,6 +111,15 @@ type EnquiryMessageReplyData = {
 
 export interface EnquiryReplyMessageResponse extends BaseResponse {
   data: EnquiryMessageReplyData;
+}
+
+export interface RealTimeMessage {
+  id: string;
+  enquiryId: string;
+  senderId: number;
+  receiverId: number;
+  content: string;
+  createdAt: string;
 }
 
 export interface ListingEnquiryMessageReply {

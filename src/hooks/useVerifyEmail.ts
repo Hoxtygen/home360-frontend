@@ -5,7 +5,6 @@ import { HOME_360_VERIFY_EMAIL } from "lib/endpoints";
 import { TokenResponse } from "@/typedef";
 
 export function useVerifyEmail(token: string) {
-  console.log("HOME_360_VERIFY_EMAIL:", HOME_360_VERIFY_EMAIL);
   const { data, error } = useQuery({
     queryKey: ["verify email"],
     networkMode: "always",

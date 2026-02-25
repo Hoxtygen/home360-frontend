@@ -21,7 +21,7 @@ export default function Messages() {
     listingEnquiriesData,
     listingEnquiriesStatus,
     listingEnquiriesError,
-  } = useGetListingEnquiries({ page, size, senderId: user?.id });
+  } = useGetListingEnquiries({ page, size });
 
   const { mutateMarkAsRead } = useMarkAsRead();
 

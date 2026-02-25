@@ -1,116 +1,171 @@
-import { webSocketUrl } from "./../endpoints/index";
-import { getCookie } from "cookies-next";
-import { Client } from "@stomp/stompjs";
+import { Client, IMessage, StompSubscription } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
-import { ListingEnquiryMessageReply } from "features/messages/types";
+import { getCookie } from "cookies-next";
+import { webSocketUrl } from "../endpoints";
+import {
+  EnquiryMessageReplyFormData,
+  ListingEnquiryMessageReply,
+} from "features/messages/types";
 
-let client: Client | null = null;
+class WebSocketService {
+  private readonly client: Client;
+  private connectionQueue: Array<() => void> = [];
 
-const connect = (enquiryId: string, callback: (message: any) => void) => {
-  if (client?.active) return;
-  client = new Client({
-    reconnectDelay: 5000,
-    heartbeatIncoming: 4000,
-    heartbeatOutgoing: 4000,
-    webSocketFactory: () => new SockJS(`${webSocketUrl}`),
-  });
-  client.beforeConnect = () => {
+  constructor() {
+    this.client = new Client({
+      webSocketFactory: () => new SockJS(webSocketUrl),
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+    });
+
+    this.client.onConnect = () => {
+      console.info("WebSocket Connected");
+      this.connectionQueue.forEach((task) => task());
+      this.connectionQueue = [];
+    };
+
+    this.client.onDisconnect = () => {
+      console.info("WebSocket Disconnected");
+    };
+
+    this.client.onStompError = (frame) => {
+      console.error("Broker reported error: " + frame.headers["message"]);
+      console.error("Additional details: " + frame.body);
+    };
+  }
+
+  private static instance: WebSocketService;
+  public static getInstance(): WebSocketService {
+    if (!WebSocketService.instance) {
+      WebSocketService.instance = new WebSocketService();
+    }
+    return WebSocketService.instance;
+  }
+
+  public connect() {
+    if (this.client.active) return;
+
     const token = getCookie("token");
-    client!.connectHeaders = {
+    this.client.connectHeaders = {
       Authorization: `Bearer ${token}`,
     };
-  };
-  client.onConnect = () => {
-    console.info("Connected to Websocket server");
 
-    client?.subscribe(`/topic/public.${enquiryId}`, (message) => {
-      console.log("parsed message:", JSON.parse(message.body));
-      callback(JSON.parse(message.body));
-    });
-  };
-  client.onStompError = (frame) => {
-    console.log("stomp error:", frame);
-  };
-  client.onDisconnect = () => {
-    console.log("Disconnected from Websocket server");
-  };
-  client.activate();
-};
-const sendMessage = (
-  enquiryId: string,
-  message: any,
-  localMessageId: string,
-  callback: (result: ListingEnquiryMessageReply) => void,
-  maxRetries = 3,
-  retryDelay = 5000,
-  retryCount = 0
-): void => {
-  if (client?.active && client?.connected) {
+    this.client.activate();
+  }
+
+  public disconnect() {
+    if (this.client.active) {
+      this.client.deactivate();
+    }
+  }
+
+  public subscribe(topic: string, callback: (msg: any) => void): () => void {
+    let subscription: StompSubscription | null = null;
+
+    const doSub = () => {
+      if (!this.client.connected) {
+        if (!this.connectionQueue.includes(doSub)) {
+          this.connectionQueue.push(doSub);
+        }
+        return;
+      }
+      try {
+        subscription = this.client.subscribe(topic, (message: IMessage) => {
+          try {
+            const body = JSON.parse(message.body);
+            callback(body);
+          } catch (err) {
+            console.error("JSON Parse error", err);
+          }
+        });
+      } catch (error) {
+        console.error("Subscription failed", error);
+        if (!this.connectionQueue.includes(doSub)) {
+          this.connectionQueue.push(doSub);
+        }
+      }
+    };
+
+    if (this.client.connected) {
+      doSub();
+    } else {
+      this.connectionQueue.push(doSub);
+      this.connect();
+    }
+
+    return () => {
+      if (subscription) {
+        try {
+          subscription.unsubscribe();
+        } catch (e) {
+          console.error("Unsubscribe error", e);
+        }
+      } else {
+        this.connectionQueue = this.connectionQueue.filter((t) => t !== doSub);
+      }
+    };
+  }
+
+  public sendMessage(
+    enquiryId: string,
+    message: EnquiryMessageReplyFormData,
+    localMessageId: string,
+    callback: (result: ListingEnquiryMessageReply) => void,
+    retryCount = 0
+  ) {
+    if (!this.client.connected) {
+      callback(this.createError(localMessageId, "WebSocket not connected"));
+      return;
+    }
+
     try {
-      client.publish({
+      this.client.publish({
         destination: `/app/chat/${enquiryId}/sendMessage`,
         body: JSON.stringify({ ...message, localMessageId }),
       });
+
+      callback({
+        status: "SUCCESS",
+        statusCode: "OK",
+        statusCodeValue: 200,
+        message: "Sent",
+        body: { data: { ...message, id: localMessageId } as any },
+        headers: {},
+        localMessageId,
+      });
     } catch (error) {
-      console.error("Failed to send message:", error);
-      if (retryCount < maxRetries) {
+      console.error("Send error", error);
+      if (retryCount < 3) {
         setTimeout(() => {
-          sendMessage(
+          this.sendMessage(
             enquiryId,
             message,
             localMessageId,
             callback,
-            maxRetries,
-            retryDelay * 2,
             retryCount + 1
           );
-        }, retryDelay);
+        }, 5000);
       } else {
-        callback(
-          createDummyErrorMessage(
-            localMessageId,
-            "Failed to send message after retries."
-          )
-        );
+        callback(this.createError(localMessageId, "Failed to send message"));
       }
     }
-  } else {
-    callback(
-      createDummyErrorMessage(localMessageId, "WebSocket client not connected.")
-    );
   }
-};
 
-const disconnect = () => {
-  if (client) {
-    client.deactivate();
-    client = null;
-    console.log("WebSocket client disconnected.");
+  private createError(
+    localId: string,
+    msg: string
+  ): ListingEnquiryMessageReply {
+    return {
+      status: "ERROR",
+      statusCode: "ERROR",
+      statusCodeValue: 500,
+      message: msg,
+      body: { data: null as any },
+      headers: {},
+      localMessageId: localId,
+    };
   }
-};
-
-function createDummyErrorMessage(
-  localMessageId: string,
-  errorMsg: string
-): ListingEnquiryMessageReply {
-  return {
-    headers: {},
-    body: {
-      data: {
-        id: localMessageId,
-        agentId: 0,
-        enquirerId: 0,
-        content: "",
-        createdAt: "",
-        senderId: 0,
-      },
-    },
-    message: errorMsg,
-    status: "ERROR",
-    statusCode: "ERROR",
-    statusCodeValue: 500,
-    localMessageId: localMessageId,
-  };
 }
 
-export { connect, sendMessage, disconnect };
+export const webSocketService = WebSocketService.getInstance();

@@ -1,4 +1,6 @@
+import useLocalStorage from "hooks/useLocalStorage";
 import { useGetListingEnquiryMessages } from "hooks/useGetListingEnquiries";
+import { MappedSuccessLoginResponse } from "typedef";
 import EnquiryMessageInfo from "./EnquiryMessageInfo";
 import EnquiryMessageReplies from "./EnquiryMessageReplies";
 import EnquiryMessageReplyForm from "./EnquiryMessageReplyForm";
@@ -12,6 +14,10 @@ export default function EnquiryMessageInfoContainer({
   enquiryData,
   enquiryId,
 }: EnquiryMessageInfoContainerProps) {
+  const [user] = useLocalStorage<MappedSuccessLoginResponse | null>(
+    "user",
+    null
+  );
   const {
     listingEnquiryMessagesData: fetchedMessages,
     listingEnquiryMessagesStatus,
@@ -21,19 +27,29 @@ export default function EnquiryMessageInfoContainer({
   const { messages, messageStatuses, handleSubmitReply } = useEnquiryWebSocket({
     enquiryId,
     externalMessages: fetchedMessages?.data.items || [],
+    agentId: enquiryData.agentId,
+    enquirerId: enquiryData.userId,
   });
+
+  const handleFormSubmit = (values: EnquiryMessageReplyFormData) => {
+    handleSubmitReply({
+      ...values,
+      senderId: user?.id,
+    });
+  };
 
   const replyInitialValues: EnquiryMessageReplyFormData = {
     content: "",
-    enquirerId: enquiryData.userId!,
+    enquirerId: enquiryData.userId,
     agentId: enquiryData.agentId,
     enquiryId: enquiryId,
+    senderId: user?.id,
   };
 
   return (
     <div className="pb-20">
       <EnquiryMessageInfo enquiryData={enquiryData} />
-      {enquiryData?.userId && (
+      {!!enquiryData?.userId && (
         <>
           <div className="mb-10">
             {listingEnquiryMessagesStatus === "loading" && (
@@ -48,12 +64,13 @@ export default function EnquiryMessageInfoContainer({
                 agentId={enquiryData.agentId}
                 enquirerId={enquiryData.userId}
                 enquirerName={`${enquiryData.firstName} ${enquiryData.lastName}`}
+                messageStatuses={messageStatuses}
               />
             }
           </div>
           <EnquiryMessageReplyForm
             replyInitialValues={replyInitialValues}
-            handleSubmitReply={handleSubmitReply}
+            handleSubmitReply={handleFormSubmit}
             messageStatuses={messageStatuses}
           />
         </>

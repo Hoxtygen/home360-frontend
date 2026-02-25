@@ -7,7 +7,6 @@ import { deleteCookie, hasCookie } from "cookies-next";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
-import { useIdleTimer } from "react-idle-timer";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
@@ -49,10 +48,10 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   };
 
-  useIdleTimer({
-    onIdle,
-    timeout: 1000 * 60 * 5,
-  });
+  // useIdleTimer({
+  //   onIdle,
+  //   timeout: 1000 * 60 * 5,
+  // });
   return (
     <QueryClientProvider client={client}>
       <ThemeProvider enableSystem={true} attribute="class">
