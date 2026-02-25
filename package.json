@@ -117,6 +117,26 @@
             {
               "type": "chore",
               "section": "Chore"
+            },
+            {
+              "type": "setup",
+              "section": "Setup"
+            },
+            {
+              "type": "docs",
+              "section": "Documentation"
+            },
+            {
+              "type": "style",
+              "section": "Style"
+            },
+            {
+              "type": "perf",
+              "section": "Performance"
+            },
+            {
+              "type": "ci",
+              "section": "CI/CD"
             }
           ]
         }

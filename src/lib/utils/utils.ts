@@ -184,9 +184,10 @@ export function getEnvironment(): string {
 }
 
 export function formatNDate(dateString: string) {
-  // Remove fractional seconds
   const cleanedDateString = dateString.replace(/\.\d+/, "");
+
   const newDate = new Date(cleanedDateString);
+
   if (isNaN(newDate.getTime())) {
     throw new TypeError("dateString must be a type of date");
   }
