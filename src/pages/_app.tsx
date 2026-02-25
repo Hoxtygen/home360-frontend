@@ -7,15 +7,14 @@ import { deleteCookie, hasCookie } from "cookies-next";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
-import { useIdleTimer } from "react-idle-timer";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
 import errorHandler from "lib/utils/errorHandler";
-import requestHandler from "lib/utils/requestHandler";
 import "../styles/globals.css";
 import { ErrorBoundary } from "components/error-boundary";
 import { ThemeProvider } from "next-themes";
+import { logoutUser } from "hooks/useLogout";
 
 const client = new QueryClient({
   queryCache: new QueryCache({
@@ -28,21 +27,31 @@ const client = new QueryClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
-  const onIdle = () => {
+  const onIdle = async () => {
     if (hasCookie("token")) {
-      deleteCookie("token");
-      const logout = async () => await requestHandler("/api/auth/logout");
-      logout();
+      deleteCookie("token", { path: "/" });
+      deleteCookie("refreshToken", { path: "/" });
+
+      // Fallback: manually expire cookies to ensure they are removed
+      document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+      document.cookie =
+        "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+
+      try {
+        await logoutUser();
+      } catch (error) {
+        console.error("Auto-logout error:", error);
+      }
+
       localStorage.clear();
       router.push("/");
     }
   };
 
-  useIdleTimer({
-    onIdle,
-    timeout: 1000 * 60 * 5,
-  });
+  // useIdleTimer({
+  //   onIdle,
+  //   timeout: 1000 * 60 * 5,
+  // });
   return (
     <QueryClientProvider client={client}>
       <ThemeProvider enableSystem={true} attribute="class">

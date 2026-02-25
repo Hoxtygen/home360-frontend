@@ -22,7 +22,7 @@ export default function PasswordResetRequest() {
     initialValues: passwordResetValues,
     validationSchema: passwordResetValidationSchema,
     onSubmit: (values) => {
-      mutateResetRequest(values);
+      mutateResetRequest({ userEmail: values.email });
     },
   });
 

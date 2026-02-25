@@ -9,7 +9,7 @@ export default function MessageItem({
   messageString,
   senderEmail,
   isRead,
-}: EnquiryMessageItemProps) {
+}: Readonly<EnquiryMessageItemProps>) {
   return (
     <div
       className={clsx(

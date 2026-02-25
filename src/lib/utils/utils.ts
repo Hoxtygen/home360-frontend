@@ -30,7 +30,7 @@ export function checkSingleFileSize(imgFile: File) {
 export function isFilesCorrectType(files: File[]) {
   let valid = true;
   if (files) {
-    files.map((file) => {
+    files.forEach((file) => {
       if (!SUPPORTED_FILE_FORMATS.includes(file.type)) {
         valid = false;
       }
@@ -42,7 +42,7 @@ export function isFilesCorrectType(files: File[]) {
 export function isValidFileFormat(files: FileList) {
   let valid = true;
   if (files) {
-    Array.from(files).map((file) => {
+    Array.from(files).forEach((file) => {
       if (!SUPPORTED_FILE_FORMATS.includes(file.type)) {
         valid = false;
       }
@@ -54,7 +54,7 @@ export function isValidFileFormat(files: FileList) {
 export function isFilesTooBig(files?: File[]): boolean {
   let valid = true;
   if (files) {
-    files.map((file) => {
+    files.forEach((file) => {
       const size = file.size / 1024 / 1024;
       if (size > 10) {
         valid = false;
@@ -69,11 +69,11 @@ export function formatString(str: string, formatString?: boolean): string {
   if (!formatString || formatString === undefined) {
     return str;
   }
-  return str.replace(regex, "_").toUpperCase();
+  return str.replaceAll(regex, "_").toUpperCase();
 }
 
 export function reFormatString(str: string): string {
-  const formattedStr = str.replace(/_/g, " ").toLowerCase();
+  const formattedStr = str.replaceAll("_", " ").toLowerCase();
   return formattedStr.charAt(0).toUpperCase() + formattedStr.slice(1);
 }
 
@@ -140,7 +140,7 @@ export function sortByProperty<T>(array: T[], property: string): T[] {
 function getProperty(obj: any, path: string): any {
   const keys = path.split(".");
   return keys.reduce(
-    (o, key) => (o && o[key] !== undefined ? o[key] : undefined),
+    (o, key) => (o?.[key] !== undefined ? o[key] : undefined),
     obj
   );
 }
@@ -152,7 +152,7 @@ export function capitalizeFirstCharacter(str: string) {
 
 export function replaceSpecialCharactersWithSpace(str: string): string {
   const specialChars = /[`~!@#$%^&*()_+-=\{\}\|:;"'<>,.?\/\\ ]/g;
-  return str.replace(specialChars, " ");
+  return str.replaceAll(specialChars, " ");
 }
 
 export function mapLoginResponse(
@@ -188,7 +188,7 @@ export function formatNDate(dateString: string) {
   const cleanedDateString = dateString.replace(/\.\d+/, "");
   const newDate = new Date(cleanedDateString);
   if (isNaN(newDate.getTime())) {
-    throw new Error("dateString must be a type of date");
+    throw new TypeError("dateString must be a type of date");
   }
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "short",
@@ -220,38 +220,42 @@ export function timeOfDayGreeting() {
  */
 export function determineSender(
   user: MappedSuccessLoginResponse | null,
-  message: EnquiryMessageReplyItemProps
+  message: EnquiryMessageReplyItemProps,
+  names?: { enquirerName?: string; agentName?: string }
 ): DetermineSenderResult {
-  let isSenderAgent = false;
-  let senderName = "Unknown";
-  let isCurrentUserSender = false;
-
-  if (user) {
-    if (user.id === message.senderId) {
-      senderName = "You";
-      isCurrentUserSender = true;
-    } else {
-      if (message.senderId === message.agentId) {
-        senderName = "Agent";
-      } else if (message.senderId === message.enquirerId) {
-        senderName = "Enquirer";
-      }
-    }
-
-    if (user.id === message.agentId) {
-      if (message.senderId === message.agentId) {
-        isSenderAgent = true;
-      } else {
-        isSenderAgent = false;
-      }
-    } else if (user.id === message.enquirerId) {
-      if (message.senderId === message.agentId) {
-        isSenderAgent = true;
-      } else {
-        isSenderAgent = false;
-      }
-    }
+  if (!user) {
+    return {
+      isSenderAgent: false,
+      senderName: "Unknown",
+      isCurrentUserSender: false,
+    };
   }
 
-  return { isSenderAgent, senderName, isCurrentUserSender };
+  const { senderId, agentId, enquirerId } = message;
+
+  const userIdStr = String(user.id);
+  const senderIdStr = String(senderId);
+  const agentIdStr = String(agentId);
+  const enquirerIdStr = String(enquirerId);
+
+  const isCurrentUserSender = userIdStr === senderIdStr;
+  const isSenderAgent = senderIdStr === agentIdStr;
+  const isUserParticipant =
+    userIdStr === agentIdStr || userIdStr === enquirerIdStr;
+
+  let senderName = "Unknown";
+
+  if (isCurrentUserSender) {
+    senderName = "You";
+  } else if (isSenderAgent) {
+    senderName = names?.agentName || "Agent";
+  } else if (senderIdStr === enquirerIdStr) {
+    senderName = names?.enquirerName || "Enquirer";
+  }
+
+  return {
+    isSenderAgent: isUserParticipant && isSenderAgent,
+    senderName,
+    isCurrentUserSender,
+  };
 }

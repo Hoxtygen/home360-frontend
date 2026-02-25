@@ -21,7 +21,7 @@ export default function Messages() {
     listingEnquiriesData,
     listingEnquiriesStatus,
     listingEnquiriesError,
-  } = useGetListingEnquiries({ page, size, senderId: user?.id });
+  } = useGetListingEnquiries({ page, size });
 
   const { mutateMarkAsRead } = useMarkAsRead();
 
@@ -63,14 +63,14 @@ export default function Messages() {
             className="justify-end bg-transparent px-5 border-0"
           />
           <div className="pb-10">
-            {messages?.map((message, index) => (
+            {messages?.map((message) => (
               <Link
                 href={`/messages/${message.id}`}
                 key={message.id}
                 onClick={() => handleMarkAsRead(message.id, message.read)}
               >
                 <EnquiryMessageItem
-                  key={index}
+                  key={message.id}
                   date={message.createdAt}
                   messageString={message.message.substring(0, 150)}
                   senderEmail={message.email}

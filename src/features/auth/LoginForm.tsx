@@ -22,11 +22,10 @@ export default function LoginForm() {
   );
 
   useEffect(() => {
-    if (userData && userData.status === "OK") {
+    if (userData?.status === "OK") {
       setUser(mapLoginResponse(userData));
       toast.success(userData.message);
       router.push("/dashboard");
-      return;
     }
   }, [router, setUser, userData]);
 
@@ -71,7 +70,7 @@ export default function LoginForm() {
             onBlur={handleBlur}
           />
           {touched.email && errors.email && (
-            <ErrorMessage error={errors.email!} />
+            <ErrorMessage error={errors.email} />
           )}
         </div>
         <div className="mb-5">
@@ -85,7 +84,7 @@ export default function LoginForm() {
             onBlur={handleBlur}
           />
           {touched.password && errors.password && (
-            <ErrorMessage error={errors.password!} />
+            <ErrorMessage error={errors.password} />
           )}
           <p>
             <small>
