@@ -2,49 +2,78 @@ import axios from "axios";
 import fs from "fs";
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_API_URL =
+  "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent";
 const DIFF_PATH = process.argv[2];
 const TEMPLATE_PATH = ".github/pull_request_template.md";
 
 const PR_TITLE = process.env.PR_TITLE || "N/A";
 const COMMITS = process.env.COMMITS || "N/A";
 
+// function renderTemplate(template, sections) {
+//   let result = template;
+
+//   result = result.replace(
+//     /## What does this PR do\?\s*([\s\S]*?)(?=\n## |\n?$)/,
+//     `## What does this PR do?\n${sections.what}\n`
+//   );
+
+//   result = result.replace(
+//     /## Description of Task to be completed\?\s*([\s\S]*?)(?=\n## |\n?$)/,
+//     `## Description of Task to be completed?\n${sections.task}\n`
+//   );
+
+//   result = result.replace(
+//     /## How should this be manually tested\?\s*([\s\S]*?)(?=\n## |\n?$)/,
+//     `## How should this be manually tested?\n${sections.manualTest}\n`
+//   );
+
+//   result = result.replace(
+//     /## Any background context you want to provide\?\s*([\s\S]*?)(?=\n## |\n?$)/,
+//     `## Any background context you want to provide?\n${sections.background}\n`
+//   );
+
+//   result = result.replace(
+//     /## What are the relevant Jira board stories\?\s*([\s\S]*?)(?=\n## |\n?$)/,
+//     `## What are the relevant Jira board stories?\n${sections.jira}\n`
+//   );
+
+//   result = result.replace(
+//     /## Screenshots \(if appropriate\)\s*([\s\S]*?)(?=\n## |\n?$)/,
+//     `## Screenshots (if appropriate)\n${sections.screenshots}\n`
+//   );
+
+//   result = result.replace(
+//     /## Questions:\s*([\s\S]*?)(?=\n## |\n?$)/,
+//     `## Questions:\n${sections.questions}\n`
+//   );
+
+//   return result.trim() + "\n";
+// }
 function renderTemplate(template, sections) {
   let result = template;
 
-  result = result.replace(
-    /## What does this PR do\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-    `## What does this PR do?\n${sections.what}\n`
-  );
+  const sectionMap = [
+    { header: "What does this PR do?", key: "what" },
+    { header: "Description of Task to be completed?", key: "task" },
+    { header: "How should this be manually tested?", key: "manualTest" },
+    {
+      header: "Any background context you want to provide?",
+      key: "background",
+    },
+    { header: "What are the relevant Jira board stories?", key: "jira" },
+    { header: "Screenshots (if appropriate)", key: "screenshots" },
+    { header: "Questions:", key: "questions" },
+  ];
 
-  result = result.replace(
-    /## Description of Task to be completed\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-    `## Description of Task to be completed?\n${sections.task}\n`
-  );
-
-  result = result.replace(
-    /## How should this be manually tested\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-    `## How should this be manually tested?\n${sections.manualTest}\n`
-  );
-
-  result = result.replace(
-    /## Any background context you want to provide\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-    `## Any background context you want to provide?\n${sections.background}\n`
-  );
-
-  result = result.replace(
-    /## What are the relevant Jira board stories\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-    `## What are the relevant Jira board stories?\n${sections.jira}\n`
-  );
-
-  result = result.replace(
-    /## Screenshots \(if appropriate\)\s*([\s\S]*?)(?=\n## |\n?$)/,
-    `## Screenshots (if appropriate)\n${sections.screenshots}\n`
-  );
-
-  result = result.replace(
-    /## Questions:\s*([\s\S]*?)(?=\n## |\n?$)/,
-    `## Questions:\n${sections.questions}\n`
-  );
+  for (const { header, key } of sectionMap) {
+    // Escape special characters in header for use in regex
+    const escapedHeader = header.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(
+      `## ${escapedHeader}\\s*([\\s\\S]*?)(?=\\n## |\\n?$)`
+    );
+    result = result.replace(regex, `## ${header}\n${sections[key]}\n`);
+  }
 
   return result.trim() + "\n";
 }
@@ -115,7 +144,7 @@ ${diff}
 
   try {
     const response = await axios.post(
-      "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent",
+      GEMINI_API_URL,
       {
         contents: [
           {
