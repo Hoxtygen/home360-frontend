@@ -10,46 +10,24 @@ const TEMPLATE_PATH = ".github/pull_request_template.md";
 const PR_TITLE = process.env.PR_TITLE || "N/A";
 const COMMITS = process.env.COMMITS || "N/A";
 
-// function renderTemplate(template, sections) {
-//   let result = template;
+function normalizeSteps(text) {
+  if (!text || typeof text !== "string") return text;
 
-//   result = result.replace(
-//     /## What does this PR do\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-//     `## What does this PR do?\n${sections.what}\n`
-//   );
+  const trimmed = text.trim();
 
-//   result = result.replace(
-//     /## Description of Task to be completed\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-//     `## Description of Task to be completed?\n${sections.task}\n`
-//   );
+  if (!trimmed) return trimmed;
 
-//   result = result.replace(
-//     /## How should this be manually tested\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-//     `## How should this be manually tested?\n${sections.manualTest}\n`
-//   );
+  // already multiline
+  if (trimmed.includes("\n")) return trimmed;
 
-//   result = result.replace(
-//     /## Any background context you want to provide\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-//     `## Any background context you want to provide?\n${sections.background}\n`
-//   );
+  // split "1. a 2. b 3. c"
+  const parts = trimmed.split(/\s(?=\d+\.)/g);
 
-//   result = result.replace(
-//     /## What are the relevant Jira board stories\?\s*([\s\S]*?)(?=\n## |\n?$)/,
-//     `## What are the relevant Jira board stories?\n${sections.jira}\n`
-//   );
+  if (parts.length === 1) return trimmed;
 
-//   result = result.replace(
-//     /## Screenshots \(if appropriate\)\s*([\s\S]*?)(?=\n## |\n?$)/,
-//     `## Screenshots (if appropriate)\n${sections.screenshots}\n`
-//   );
+  return parts.map((p) => p.trim()).join("\n");
+}
 
-//   result = result.replace(
-//     /## Questions:\s*([\s\S]*?)(?=\n## |\n?$)/,
-//     `## Questions:\n${sections.questions}\n`
-//   );
-
-//   return result.trim() + "\n";
-// }
 function renderTemplate(template, sections) {
   let result = template;
 
@@ -67,12 +45,16 @@ function renderTemplate(template, sections) {
   ];
 
   for (const { header, key } of sectionMap) {
-    // Escape special characters in header for use in regex
     const escapedHeader = header.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(
       `## ${escapedHeader}\\s*([\\s\\S]*?)(?=\\n## |\\n?$)`
     );
-    result = result.replace(regex, `## ${header}\n${sections[key]}\n`);
+
+    const rawValue = sections[key] ?? "N/A";
+
+    const value = key === "manualTest" ? normalizeSteps(rawValue) : rawValue;
+
+    result = result.replace(regex, `## ${header}\n${value}\n`);
   }
 
   return result.trim() + "\n";
