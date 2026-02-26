@@ -30,7 +30,7 @@ jobs:
           # Fetch the base branch so we can diff against it
           git fetch origin ${{ github.base_ref }} --depth=1
 
-          # Get optimized diff: 
+          # Get optimized diff:
           # -U1: Minimal context
           # --stat: High level summary at the top
           # Exclude common noisy files
@@ -58,6 +58,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          COMMITS=$(git log origin/${{ github.base_ref }}..HEAD --pretty=format:%s)
+          export COMMITS
           # Use node to run the script, and capture output to a file
           node scripts/ai-pr-filler.mjs pr.diff > pr_body.txt
 
