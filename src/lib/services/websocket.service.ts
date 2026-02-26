@@ -60,7 +60,7 @@ class WebSocketService {
     }
   }
 
-  public subscribe(topic: string, callback: (msg: any) => void): () => void {
+  public subscribe(topic: string, callback: (_msg: any) => void): () => void {
     let subscription: StompSubscription | null = null;
 
     const doSub = () => {
