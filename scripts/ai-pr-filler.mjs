@@ -5,6 +5,9 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const DIFF_PATH = process.argv[2];
 const TEMPLATE_PATH = ".github/pull_request_template.md";
 
+const PR_TITLE = process.env.PR_TITLE || "N/A";
+const COMMITS = process.env.COMMITS || "N/A";
+
 function renderTemplate(template, sections) {
   let result = template;
 
