@@ -1,0 +1,73 @@
+name: AI PR Filler
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  fill-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install axios
+
+      - name: Get PR Diff
+        run: |
+          # Fetch the base branch so we can diff against it
+          git fetch origin ${{ github.base_ref }} --depth=1
+
+          # Get optimized diff: 
+          # -U1: Minimal context
+          # --stat: High level summary at the top
+          # Exclude common noisy files
+          (git diff origin/${{ github.base_ref }}...HEAD --stat && \
+           git diff -U1 origin/${{ github.base_ref }}...HEAD \
+           -- . \
+           ':(exclude)package-lock.json' \
+           ':(exclude)yarn.lock' \
+           ':(exclude)pnpm-lock.yaml' \
+           ':(exclude)node_modules' \
+           ':(exclude).next' \
+           ':(exclude)dist' \
+           ':(exclude)build' \
+           ':(exclude)*.svg' \
+           ':(exclude)*.png' \
+           ':(exclude)*.jpg' \
+           ':(exclude)*.jpeg' \
+           ':(exclude)*.gif' \
+           ':(exclude)*.ico' \
+           ':(exclude)public/fonts' \
+          ) > pr.diff
+
+      - name: Generate PR Body
+        id: generate-body
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          # Use node to run the script, and capture output to a file
+          node scripts/ai-pr-filler.mjs pr.diff > pr_body.txt
+
+      - name: Update PR Description
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Only update if the body isn't empty (sanity check)
+          if [ -s pr_body.txt ]; then
+            gh pr edit ${{ github.event.pull_request.number }} --body-file pr_body.txt
+          else
+            echo "Generated PR body is empty, skipping update."
+          fi

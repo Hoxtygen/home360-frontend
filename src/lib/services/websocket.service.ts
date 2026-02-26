@@ -60,7 +60,7 @@ class WebSocketService {
     }
   }
 
-  public subscribe(topic: string, callback: (msg: any) => void): () => void {
+  public subscribe(topic: string, callback: (_msg: any) => void): () => void {
     let subscription: StompSubscription | null = null;
 
     const doSub = () => {
@@ -73,6 +73,7 @@ class WebSocketService {
       try {
         subscription = this.client.subscribe(topic, (message: IMessage) => {
           try {
+            if (!message.body) return;
             const body = JSON.parse(message.body);
             callback(body);
           } catch (err) {
@@ -81,6 +82,7 @@ class WebSocketService {
         });
       } catch (error) {
         console.error("Subscription failed", error);
+
         if (!this.connectionQueue.includes(doSub)) {
           this.connectionQueue.push(doSub);
         }
@@ -111,7 +113,7 @@ class WebSocketService {
     enquiryId: string,
     message: EnquiryMessageReplyFormData,
     localMessageId: string,
-    callback: (result: ListingEnquiryMessageReply) => void,
+    callback: (_result: ListingEnquiryMessageReply) => void,
     retryCount = 0
   ) {
     if (!this.client.connected) {
