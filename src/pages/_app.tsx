@@ -16,6 +16,7 @@ import { ErrorBoundary } from "components/error-boundary";
 import { ThemeProvider } from "next-themes";
 import { logoutUser } from "hooks/useLogout";
 import { useIdleTimer } from "react-idle-timer";
+import { IDLE_TIMEOUT_MS } from "constant-data";
 
 const client = new QueryClient({
   queryCache: new QueryCache({
@@ -51,7 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useIdleTimer({
     onIdle,
-    timeout: 1000 * 60 * 5,
+    timeout: IDLE_TIMEOUT_MS,
   });
   return (
     <QueryClientProvider client={client}>

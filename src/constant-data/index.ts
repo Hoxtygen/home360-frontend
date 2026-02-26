@@ -17,3 +17,5 @@ export const randomImages = [
   "https://res.cloudinary.com/dh3jxarvg/image/upload/v1693683559/home360/zomkajforqzizn5eda1f.webp",
   "https://res.cloudinary.com/dh3jxarvg/image/upload/v1551327496/vlcsnap-2013-04-25-21h12m16s151_hljygd.png",
 ];
+
+export const IDLE_TIMEOUT_MS = 5 * 60 * 1000;
