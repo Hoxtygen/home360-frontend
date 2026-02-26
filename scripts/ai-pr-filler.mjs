@@ -41,20 +41,21 @@ function renderTemplate(template, sections) {
     },
     { header: "What are the relevant Jira board stories?", key: "jira" },
     { header: "Screenshots (if appropriate)", key: "screenshots" },
-    { header: "Questions:", key: "questions" },
+    { header: "Questions", key: "questions" },
   ];
 
   for (const { header, key } of sectionMap) {
     const escapedHeader = header.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(
-      `## ${escapedHeader}\\s*([\\s\\S]*?)(?=\\n## |\\n?$)`
+      `##\\s*${escapedHeader}[\\s\\S]*?(?=\\r?\\n## |$)`
     );
 
     const rawValue = sections[key] ?? "N/A";
 
     const value = key === "manualTest" ? normalizeSteps(rawValue) : rawValue;
 
-    result = result.replace(regex, `## ${header}\n${value}\n`);
+    // result = result.replace(regex, `## ${header}\n${value}\n`);
+    result = result.replace(regex, `## ${header}\n${sections[key]}\n`);
   }
 
   return result.trim() + "\n";
