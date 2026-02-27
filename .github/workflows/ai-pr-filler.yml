@@ -116,6 +116,21 @@ jobs:
 
           node scripts/ai-pr-filler.mjs pr.diff pr.stat > pr_body.txt
 
+      - name: Compute AI input hash
+        if: env.SKIP_AI != 'true'
+        run: |
+          {
+            echo "${{ github.event.pull_request.title }}"
+            echo ""
+            git log origin/${{ github.base_ref }}..HEAD --pretty=format:"- %s"
+            echo ""
+            cat pr.stat
+            echo ""
+            cat pr.diff
+          } | sha256sum | awk '{print $1}' > ai_input.hash
+
+          echo "AI_INPUT_HASH=$(cat ai_input.hash)" >> $GITHUB_ENV
+
       - name: Post PR description suggestion
         if: env.SKIP_AI != 'true'
         env:
@@ -126,7 +141,16 @@ jobs:
             exit 0
           fi
 
+          gh pr view ${{ github.event.pull_request.number }} \
+            --json comments -q '.comments[].body' > existing_comments.txt
+
+          if grep -q "<!-- ai-pr-filler-hash:${AI_INPUT_HASH} -->" existing_comments.txt; then
+            echo "Same AI suggestion already posted. Skipping comment."
+            exit 0
+          fi
+
           {
+            echo "<!-- ai-pr-filler-hash:${AI_INPUT_HASH} -->"
             echo "🤖 **Suggested PR description**"
             echo ""
             echo "_You can copy and paste this into the PR description if it looks good._"
