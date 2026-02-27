@@ -27,31 +27,60 @@ jobs:
 
       - name: Get PR Diff
         run: |
-          # Fetch the base branch so we can diff against it
           git fetch origin ${{ github.base_ref }} --depth=1
 
-          # Get optimized diff:
-          # -U1: Minimal context
-          # --stat: High level summary at the top
-          # Exclude common noisy files
-          (git diff origin/${{ github.base_ref }}...HEAD --stat && \
-           git diff -U1 origin/${{ github.base_ref }}...HEAD \
-           -- . \
-           ':(exclude)package-lock.json' \
-           ':(exclude)yarn.lock' \
-           ':(exclude)pnpm-lock.yaml' \
-           ':(exclude)node_modules' \
-           ':(exclude).next' \
-           ':(exclude)dist' \
-           ':(exclude)build' \
-           ':(exclude)*.svg' \
-           ':(exclude)*.png' \
-           ':(exclude)*.jpg' \
-           ':(exclude)*.jpeg' \
-           ':(exclude)*.gif' \
-           ':(exclude)*.ico' \
-           ':(exclude)public/fonts' \
-          ) > pr.diff
+          git diff origin/${{ github.base_ref }}...HEAD --stat \
+            -- . \
+            ':(exclude)package-lock.json' \
+            ':(exclude)yarn.lock' \
+            ':(exclude)pnpm-lock.yaml' \
+            ':(exclude)node_modules' \
+            ':(exclude).next' \
+            ':(exclude)dist' \
+            ':(exclude)build' \
+            ':(exclude)*.svg' \
+            ':(exclude)*.png' \
+            ':(exclude)*.jpg' \
+            ':(exclude)*.jpeg' \
+            ':(exclude)*.gif' \
+            ':(exclude)*.ico' \
+            ':(exclude)public/fonts' \
+            > pr.stat
+
+          git diff -U1 origin/${{ github.base_ref }}...HEAD \
+            -- . \
+            ':(exclude)package-lock.json' \
+            ':(exclude)yarn.lock' \
+            ':(exclude)pnpm-lock.yaml' \
+            ':(exclude)node_modules' \
+            ':(exclude).next' \
+            ':(exclude)dist' \
+            ':(exclude)build' \
+            ':(exclude)*.svg' \
+            ':(exclude)*.png' \
+            ':(exclude)*.jpg' \
+            ':(exclude)*.jpeg' \
+            ':(exclude)*.gif' \
+            ':(exclude)*.ico' \
+            ':(exclude)public/fonts' \
+            > pr.diff
+
+      - name: Skip AI if only docs / config / formatting changed
+        id: skip-check
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD > changed_files.txt
+
+          echo "Changed files:"
+          cat changed_files.txt
+
+          # If there are NO files outside the allowed non-code patterns → skip
+          if grep -Ev '(^\.github/|\.md$|\.txt$|\.ya?ml$|\.json$|\.env|\.prettierrc|\.editorconfig|\.eslintrc)' changed_files.txt >/dev/null; then
+            echo "Code changes detected – AI will run."
+            echo "SKIP_AI=false" >> $GITHUB_ENV
+          else
+            echo "Only docs / config / formatting files changed – skipping AI."
+            echo "SKIP_AI=true" >> $GITHUB_ENV
+          fi
 
       - name: Skip if PR already edited by humans
         env:
@@ -71,13 +100,12 @@ jobs:
 
       - name: Generate PR Body
         id: generate-body
+        if: env.SKIP_AI != 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          # collect commits
-          COMMITS=$(git log origin/${{ github.base_ref }}..HEAD --pretty=format:%s)
+          COMMITS=$(git log origin/${{ github.base_ref }}..HEAD --pretty=format:"- %s")
 
-          # persist env for node
           echo "COMMITS<<EOF" >> $GITHUB_ENV
           echo "$COMMITS" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -86,10 +114,25 @@ jobs:
           echo "${{ github.event.pull_request.title }}" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-          # Use node to run the script, and capture output to a file
-          node scripts/ai-pr-filler.mjs pr.diff > pr_body.txt
+          node scripts/ai-pr-filler.mjs pr.diff pr.stat > pr_body.txt
+
+      - name: Compute AI input hash
+        if: env.SKIP_AI != 'true'
+        run: |
+          {
+            echo "${{ github.event.pull_request.title }}"
+            echo ""
+            git log origin/${{ github.base_ref }}..HEAD --pretty=format:"- %s"
+            echo ""
+            cat pr.stat
+            echo ""
+            cat pr.diff
+          } | sha256sum | awk '{print $1}' > ai_input.hash
+
+          echo "AI_INPUT_HASH=$(cat ai_input.hash)" >> $GITHUB_ENV
 
       - name: Post PR description suggestion
+        if: env.SKIP_AI != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -98,7 +141,16 @@ jobs:
             exit 0
           fi
 
+          gh pr view ${{ github.event.pull_request.number }} \
+            --json comments -q '.comments[].body' > existing_comments.txt
+
+          if grep -q "<!-- ai-pr-filler-hash:${AI_INPUT_HASH} -->" existing_comments.txt; then
+            echo "Same AI suggestion already posted. Skipping comment."
+            exit 0
+          fi
+
           {
+            echo "<!-- ai-pr-filler-hash:${AI_INPUT_HASH} -->"
             echo "🤖 **Suggested PR description**"
             echo ""
             echo "_You can copy and paste this into the PR description if it looks good._"
