@@ -66,13 +66,8 @@ async function main() {
     process.exit(1);
   }
 
-  if (!DIFF_PATH) {
-    console.error("Error: DIFF_PATH (first argument) is not provided");
-    process.exit(1);
-  }
-
-  if (!STAT_PATH) {
-    console.error("Error: STAT_PATH (third argument) is not provided");
+  if (!DIFF_PATH || !STAT_PATH) {
+    console.error("Usage: node ai-pr-filler.mjs <diff_path> <stat_path>");
     process.exit(1);
   }
 
@@ -141,15 +136,9 @@ ${diff}
     const response = await axios.post(
       GEMINI_API_URL,
       {
-        systemInstruction: {
-          role: "system",
-          parts: [{ text: "..." }],
-        },
         contents: [
-          {
-            role: "user",
-            parts: [{ text: prompt }],
-          },
+          { role: "system", parts: [{ text: systemInstruction }] },
+          { role: "user", parts: [{ text: prompt }] },
         ],
       },
       {
