@@ -138,7 +138,7 @@ ${diff}
       {
         contents: [
           {
-            role: "system",
+            role: "user",
             parts: [{ text: systemInstruction.parts[0].text }],
           },
           { role: "user", parts: [{ text: prompt }] },
