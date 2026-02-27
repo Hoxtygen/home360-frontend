@@ -35,7 +35,7 @@ function renderTemplate(template, sections) {
 
     const value = safe(sections[key]);
 
-    result = result.replace(regex, `## ${header}\n${value}\n`);
+    result = result.replace(regex, () => `## ${header}\n${value}\n`);
   }
 
   return result.trim() + "\n";
@@ -140,7 +140,7 @@ ${diff}
     }
 
     const finalBody = renderTemplate(template, sections);
-    if (finalBody.trim() === template.trim()) {
+    if (finalBody.trim() === renderTemplate(template, {}).trim()) {
       process.exit(0);
     }
 
