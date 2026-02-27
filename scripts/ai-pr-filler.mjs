@@ -137,7 +137,10 @@ ${diff}
       GEMINI_API_URL,
       {
         contents: [
-          { role: "system", parts: [{ text: systemInstruction }] },
+          {
+            role: "system",
+            parts: [{ text: systemInstruction.parts[0].text }],
+          },
           { role: "user", parts: [{ text: prompt }] },
         ],
       },
