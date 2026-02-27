@@ -6,6 +6,7 @@ const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent";
 const DIFF_PATH = process.argv[2];
 const TEMPLATE_PATH = ".github/pull_request_template.md";
+const STAT_PATH = process.argv[3];
 
 const PR_TITLE = process.env.PR_TITLE || "N/A";
 const COMMITS = process.env.COMMITS || "N/A";
@@ -53,11 +54,12 @@ async function main() {
   }
 
   const MAX_DIFF_LENGTH = 30000;
-  let diff, template;
+  let diff, template, stat;
 
   try {
     diff = fs.readFileSync(DIFF_PATH, "utf8");
     template = fs.readFileSync(TEMPLATE_PATH, "utf8");
+    stat = fs.readFileSync(STAT_PATH, "utf8");
   } catch (error) {
     console.error("Error reading input files:", error.message);
     process.exit(1);
@@ -86,11 +88,15 @@ Return ONLY valid JSON in the following shape:
 }
 
 Rules:
-- Use only information that can be inferred from the diff.
+- Use only information that can be inferred from the inputs.
 - If a field cannot be inferred, return "N/A".
 - "manualTest" must be a short step-by-step list when possible.
 - Do NOT include markdown headings.
 - Do NOT wrap the JSON in code fences.
+
+IMPORTANT:
+- Prefer the diff stat and commit messages to infer intent.
+- Use the full diff only when necessary to understand behaviour changes.
 
 <pr_title>
 ${PR_TITLE}
@@ -99,6 +105,10 @@ ${PR_TITLE}
 <commit_messages>
 ${COMMITS}
 </commit_messages>
+
+<diff_stat>
+${stat || "N/A"}
+</diff_stat>
 
 <git_diff>
 ${diff}

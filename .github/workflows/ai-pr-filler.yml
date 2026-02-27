@@ -27,31 +27,43 @@ jobs:
 
       - name: Get PR Diff
         run: |
-          # Fetch the base branch so we can diff against it
           git fetch origin ${{ github.base_ref }} --depth=1
 
-          # Get optimized diff:
-          # -U1: Minimal context
-          # --stat: High level summary at the top
-          # Exclude common noisy files
-          (git diff origin/${{ github.base_ref }}...HEAD --stat && \
-           git diff -U1 origin/${{ github.base_ref }}...HEAD \
-           -- . \
-           ':(exclude)package-lock.json' \
-           ':(exclude)yarn.lock' \
-           ':(exclude)pnpm-lock.yaml' \
-           ':(exclude)node_modules' \
-           ':(exclude).next' \
-           ':(exclude)dist' \
-           ':(exclude)build' \
-           ':(exclude)*.svg' \
-           ':(exclude)*.png' \
-           ':(exclude)*.jpg' \
-           ':(exclude)*.jpeg' \
-           ':(exclude)*.gif' \
-           ':(exclude)*.ico' \
-           ':(exclude)public/fonts' \
-          ) > pr.diff
+          git diff origin/${{ github.base_ref }}...HEAD --stat \
+            -- . \
+            ':(exclude)package-lock.json' \
+            ':(exclude)yarn.lock' \
+            ':(exclude)pnpm-lock.yaml' \
+            ':(exclude)node_modules' \
+            ':(exclude).next' \
+            ':(exclude)dist' \
+            ':(exclude)build' \
+            ':(exclude)*.svg' \
+            ':(exclude)*.png' \
+            ':(exclude)*.jpg' \
+            ':(exclude)*.jpeg' \
+            ':(exclude)*.gif' \
+            ':(exclude)*.ico' \
+            ':(exclude)public/fonts' \
+            > pr.stat
+
+          git diff -U1 origin/${{ github.base_ref }}...HEAD \
+            -- . \
+            ':(exclude)package-lock.json' \
+            ':(exclude)yarn.lock' \
+            ':(exclude)pnpm-lock.yaml' \
+            ':(exclude)node_modules' \
+            ':(exclude).next' \
+            ':(exclude)dist' \
+            ':(exclude)build' \
+            ':(exclude)*.svg' \
+            ':(exclude)*.png' \
+            ':(exclude)*.jpg' \
+            ':(exclude)*.jpeg' \
+            ':(exclude)*.gif' \
+            ':(exclude)*.ico' \
+            ':(exclude)public/fonts' \
+            > pr.diff
 
       - name: Skip if PR already edited by humans
         env:
@@ -87,7 +99,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
           # Use node to run the script, and capture output to a file
-          node scripts/ai-pr-filler.mjs pr.diff > pr_body.txt
+          node scripts/ai-pr-filler.mjs pr.diff pr.stat > pr_body.txt
 
       - name: Post PR description suggestion
         env:
