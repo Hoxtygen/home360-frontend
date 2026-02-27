@@ -53,23 +53,64 @@ jobs:
            ':(exclude)public/fonts' \
           ) > pr.diff
 
+      - name: Skip if PR already edited by humans
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr view ${{ github.event.pull_request.number }} \
+            --json body -q .body > current_body.txt
+
+          # Normalize line endings
+          tr -d '\r' < current_body.txt > current_body.norm.txt
+          tr -d '\r' < .github/pull_request_template.md > template.norm.txt
+
+          if ! diff -q current_body.norm.txt template.norm.txt >/dev/null; then
+            echo "PR body was already edited by a human. Skipping AI update."
+            exit 0
+          fi
+
       - name: Generate PR Body
         id: generate-body
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          # collect commits
           COMMITS=$(git log origin/${{ github.base_ref }}..HEAD --pretty=format:%s)
-          export COMMITS
+
+          # persist env for node
+          echo "COMMITS<<EOF" >> $GITHUB_ENV
+          echo "$COMMITS" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+          echo "PR_TITLE<<EOF" >> $GITHUB_ENV
+          echo "${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
           # Use node to run the script, and capture output to a file
           node scripts/ai-pr-filler.mjs pr.diff > pr_body.txt
 
-      - name: Update PR Description
+      - name: Post PR description suggestion
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # Only update if the body isn't empty (sanity check)
-          if [ -s pr_body.txt ]; then
-            gh pr edit ${{ github.event.pull_request.number }} --body-file pr_body.txt
-          else
-            echo "Generated PR body is empty, skipping update."
+          if [ ! -s pr_body.txt ]; then
+            echo "Generated PR body is empty, skipping comment."
+            exit 0
           fi
+
+          {
+            echo "🤖 **Suggested PR description**"
+            echo ""
+            echo "_You can copy and paste this into the PR description if it looks good._"
+            echo ""
+            echo "<details>"
+            echo "<summary>Show suggested description</summary>"
+            echo ""
+            echo '```markdown'
+            cat pr_body.txt
+            echo '```'
+            echo ""
+            echo "</details>"
+          } > pr_comment.txt
+
+          gh pr comment ${{ github.event.pull_request.number }} --body-file pr_comment.txt

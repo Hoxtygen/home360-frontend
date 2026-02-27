@@ -10,24 +10,7 @@ const TEMPLATE_PATH = ".github/pull_request_template.md";
 const PR_TITLE = process.env.PR_TITLE || "N/A";
 const COMMITS = process.env.COMMITS || "N/A";
 
-function normalizeSteps(text) {
-  if (!text || typeof text !== "string") return text;
-
-  const trimmed = text.trim();
-
-  if (!trimmed) return trimmed;
-
-  // already multiline
-  if (trimmed.includes("\n")) return trimmed;
-
-  // split "1. a 2. b 3. c"
-  const parts = trimmed.split(/\s(?=\d+\.)/g);
-
-  if (parts.length === 1) return trimmed;
-
-  return parts.map((p) => p.trim()).join("\n");
-}
-
+const safe = (v) => (typeof v === "string" && v.trim() ? v.trim() : "N/A");
 function renderTemplate(template, sections) {
   let result = template;
 
@@ -50,12 +33,9 @@ function renderTemplate(template, sections) {
       `##\\s*${escapedHeader}[\\s\\S]*?(?=\\r?\\n## |$)`
     );
 
-    const rawValue = sections[key] ?? "N/A";
+    const value = safe(sections[key]);
 
-    const value = key === "manualTest" ? normalizeSteps(rawValue) : rawValue;
-
-    // result = result.replace(regex, `## ${header}\n${value}\n`);
-    result = result.replace(regex, `## ${header}\n${sections[key]}\n`);
+    result = result.replace(regex, () => `## ${header}\n${value}\n`);
   }
 
   return result.trim() + "\n";
@@ -160,6 +140,9 @@ ${diff}
     }
 
     const finalBody = renderTemplate(template, sections);
+    if (finalBody.trim() === renderTemplate(template, {}).trim()) {
+      process.exit(0);
+    }
 
     console.log(finalBody);
   } catch (error) {
